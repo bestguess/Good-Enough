@@ -7,7 +7,6 @@ because friend finding is not an exact science
 ## Installation
     npm start
 
-## NERM Stack
-Frontend: React/Redux
-Backend: Node/Express
+## Stack
+![alt tag](http://joshuagish.com/other/dev/stacks/renm.png)
 
