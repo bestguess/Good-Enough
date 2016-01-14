@@ -7,6 +7,7 @@ because friend finding is not an exact science
 ## Installation
     npm start
 
-## Stack
-Frontend: ???
+## NERM Stack
+Frontend: React/Redux
 Backend: Node/Express
+
