@@ -1,10 +1,12 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function(req, res){
-  res.send('Good Enough');
-});
+var port = process.env.PORT || 4000;
 
-app.listen(4000, function(){
-  console.log('Listening on port 4000');
+
+// Server configuration in db_interface
+require('./db_interface');
+
+app.listen(port, function(){
+  console.log('Listening on port %s', port);
 });
