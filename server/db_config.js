@@ -8,7 +8,8 @@ db.once('open', function(callback){
 });
 
 var usersSchema = new Schema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: String,
   password: String,
   age: Number,
