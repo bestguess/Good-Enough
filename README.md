@@ -8,5 +8,5 @@ because friend finding is not an exact science
     npm start
 
 ## Stack
-![alt tag](http://joshuagish.com/other/dev/stacks/renm.png)
+![alt tag](http://joshuagish.com/other/dev/stacks/mern.png)
 
