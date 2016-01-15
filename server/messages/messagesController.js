@@ -11,8 +11,8 @@ module.exports = {
 
   },
   getMessages : function(req, res, next){
-    // console.log("hi");
-    // res.status(200).send("Hi");
+    console.log("hi");
+    res.status(200).send("Hi");
   },
   reply : function(req, res, next){
 
