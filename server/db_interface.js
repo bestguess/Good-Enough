@@ -19,7 +19,7 @@ module.exports = function(app, express){
   //require('./users/usersRoutes.js')(usersRouter);
   require('./messages/messagesRoutes.js')(messagesRouter);
 
-  app.use('/app/messages')(messagesRouter);
+  //app.use('/app/messages')(messagesRouter);
   //app.use('/app/users')(userRoutes);
 
   app.get('/*', function(req, res){
