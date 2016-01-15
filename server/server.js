@@ -7,8 +7,8 @@ var compiler = webpack(config)
 var express = require('express');
 var app = express();
 
-app.use(webpackHotMiddleware(compiler))
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
+//app.use(webpackHotMiddleware(compiler))
+//app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 
 var port = process.env.PORT || 4000;
 
