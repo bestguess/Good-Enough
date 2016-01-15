@@ -4,8 +4,8 @@ var Messages = db.Messages;
 
 module.exports = {
   startConvo : function(req, res, next){
-    // var to = req.body.to;
-    // var from = req.body.from;
+    var to = req.body.to;
+    var from = req.body.from;
   },
   getConvo : function(req, res, next){
 
