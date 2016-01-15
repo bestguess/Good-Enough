@@ -1,8 +1,8 @@
-var messagesController = require('./messages/messagesController');
+var messagesController = require('./messagesController.js');
 
 module.exports = function(app) {
-  app.post('/new', messageController.startConvo);
-  app.get('/list', messageController.getConvo);
-  app.post('/reply', messageController.reply);
-  app.get('/messages', messageController.getMessages)
+  // app.post('/new', messagesController.startConvo);
+  // app.get('/list', messagesController.getConvo);
+  // app.post('/reply', messagesController.reply);
+  // app.get('/messages', messagesController.getMessages)
 };

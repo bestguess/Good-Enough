@@ -9,7 +9,6 @@ module.exports = function(app, express){
   app.use(express.static('../client/index.html'));
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
-  console.log("his");
   require('./users/usersRoutes.js');
   require('./messages/messagesRoutes.js');
 
