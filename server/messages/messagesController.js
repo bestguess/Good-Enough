@@ -1,6 +1,6 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
-//var Messages = db.Messages;
+var Messages = db.Messages;
 
 module.exports = {
   startConvo : function(req, res, next){
