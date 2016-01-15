@@ -94,6 +94,7 @@ class QuestionForm extends Component {
         {title.map(question =>
             <QuestionBox key={question.id} data={question} state={this.props.state} actions={this.props.actions} />
         )}
+        <button onClick={this.props.actions.submitSurvey} >Submit</button>
       </div>
     )
   }
