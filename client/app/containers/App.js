@@ -44,7 +44,7 @@ class QuestionForm extends Component {
     return (
       <div>
         {title.map(question =>
-            <div key={question.id} style={{width:'800px', height:'30px'}}>
+            <div key={question.id} style={{width:'1000px', height:'30px'}}>
               <span style={{float:'left'}}>{question.option1}</span>
               <span style={{float:'right'}}>{question.option2}</span>
             </div>
@@ -56,11 +56,11 @@ class QuestionForm extends Component {
 
 class App extends Component {
   render() {
-    const { questions, actions } = this.props
+    const { state, actions } = this.props
     return (
       <div>
         <h1>Good Enough</h1>
-        <QuestionForm questions={this.props.questions} />
+        <QuestionForm state={this.props.state} />
       </div>
     );
   }
@@ -73,7 +73,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    questions: state.questions
+    state: state
   }
 }
 
