@@ -28,6 +28,7 @@ var usersSchema = new Schema({
 });
 
 var messagesSchema = new Schema({
+  users: [],
   messages: []
 });
 

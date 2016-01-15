@@ -4,7 +4,7 @@
   "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "start": "npm install && nodemon server/server.js"
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
