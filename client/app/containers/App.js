@@ -100,7 +100,7 @@ class App extends Component {
     const { state, actions } = this.props
     return (
       <div>
-        <h1 className="logo" onClick={actions.answerQuestion} >Good Enough</h1>
+        <h1 className="logo" onClick={actions.answerQuestion} ><img src="../client/img/logo.png" style={{width: 450 + "px"}}/></h1>
         <QuestionForm state={this.props} />
       </div>
     );
