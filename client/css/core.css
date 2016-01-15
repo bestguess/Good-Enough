@@ -68,7 +68,9 @@ h1 {
 
 .question-buttons input[type="radio"]:checked + label,
 .Checked + label {
-  background: #e0e0e0;
+  background: #25b79a;
+  color: #fff;
+  border: 1px solid #25b79a;
 }
 
 .question-buttons label {
@@ -77,6 +79,7 @@ h1 {
   cursor:pointer;
 }
 
-.question-buttons label:hover {
-  background: #e0e0e0;
-}
+/*.question-buttons label:hover {
+  background: #25b79a;
+  color: #fff;
+}*/
