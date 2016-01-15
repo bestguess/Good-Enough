@@ -4,13 +4,13 @@
   "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "npm install && nodemon server/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bestguess/Good-Enough.git"
   },
-  "author": "John Wilkes Booth",
+  "author": "Best Guess",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bestguess/Good-Enough/issues"
