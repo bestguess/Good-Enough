@@ -18,11 +18,12 @@
   "homepage": "https://github.com/bestguess/Good-Enough#readme",
   "dependencies": {
     "body-parser": "^1.14.2",
+    "classnames": "^2.1.2",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.3",
     "mongoose": "^4.3.5",
     "morgan": "^1.6.1",
-    "classnames": "^2.1.2",
+    "path": "^0.12.7",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
