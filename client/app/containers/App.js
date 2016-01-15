@@ -43,7 +43,30 @@ class QuestionBox extends Component {
     return (
       <div className="question">
         <span className="question-option" style={{float:'left', textAlign:'right'}}>{this.props.data.option1}</span>
-        <span style={{float:'left', textAlign:'center', width:'20%'}}>1 2 3 4 5</span>
+        <span style={{float:'left', textAlign:'center', width:'20%'}}>
+          <ul className="question-buttons">
+            <li>
+              <input id="1" type='radio' value='1' />
+              <label>1</label> 
+            </li>
+            <li>
+              <input id="2" type='radio' value='2' />
+              <label>2</label>
+            </li>
+            <li>
+              <input id="2" type='radio' value='3' />
+              <label>3</label>
+            </li>
+            <li>
+              <input id="2" type='radio' value='4' />
+              <label>4</label>
+            </li>
+            <li>
+              <input id="2" type='radio' value='5' />
+              <label>5</label>
+            </li>
+          </ul>
+        </span>
         <span className="question-option" style={{float:'right', textAlign:'left'}}>{this.props.data.option2}</span>
       </div>
     )
