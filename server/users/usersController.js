@@ -2,9 +2,11 @@ var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
 
+console.log('in usersController')
+
 module.exports = {
 
-  getEmails: function(res){
+  getEmails: function(req, res){
     User.find({}, function(err, people){
       if(err) throw err;
 
@@ -14,6 +16,7 @@ module.exports = {
       }
       res.status(302).send(emails);
     })
+
   },
 
   signUp: function(req, res){
