@@ -11,10 +11,6 @@ module.exports = {
       if(err){
         res.status(404).send(err);
       }else{
-        // var emails = [];
-        // for(var i = 0; i < people.length; i++){
-        //   emails.push(people[i].email);
-        // }
         res.status(302).send(emails);
       }
     })
@@ -63,20 +59,28 @@ module.exports = {
   },
 
   signIn: function(req, res){
-    var user = req.data;
+    var user = req.body;
     // Requires that a user provides an email and password
-    if(!user.email || !user.password) res.status(400).send();
-    User.findOne({email: user.email, password: user.password}, function(err, user){
-      if(err) throw err;
-      var userInfo = {}
-      userInfo.firstName = user.firstName;
-      userInfo.lastName = user.lastName;
-      userInfo.picture = user.picture;
-      userInfo.meet = user.meet;
+    if(!user.email || !user.password){
+      res.status(400).send();
+    }else{
+      User.findOne({email: user.email, password: user.password}, function(err, user){
+        if(err){
+          res.status(400).send(err);
+        }else if(user === null){
+          res.status(400).send(err);
+        }else{
+          var userInfo = {}
+          userInfo.firstName = user.firstName;
+          userInfo.lastName = user.lastName;
+          userInfo.picture = user.picture;
+          userInfo.meet = user.meet;
 
-      // Send back info needed for home page
-      res.status(200).send(userInfo);
-    })
+          // Send back info needed for home page
+          res.status(200).send(userInfo);
+        }
+      })
+    };
   }
 
   // ToDo: changePicture function
