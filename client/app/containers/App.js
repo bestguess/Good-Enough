@@ -44,23 +44,23 @@ class QuestionButtons extends Component {
       <span style={{float:'left', textAlign:'center', width:'20%'}}>
         <ul className="question-buttons">
           <li>
-            <input id="1" type='radio' value='1' />
+            <input id="1" onClick={() => this.props.answer(this.props.choices[0])} type='radio' value='1' />
             <label>1</label> 
           </li>
           <li>
-            <input id="2" type='radio' value='2' />
+            <input id="2" onClick={() => this.props.answer(this.props.choices[1])} type='radio' value='2' />
             <label>2</label>
           </li>
           <li>
-            <input id="2" type='radio' value='3' />
+            <input id="2" onClick={() => this.props.answer(this.props.choices[2])} type='radio' value='3' />
             <label>3</label>
           </li>
           <li>
-            <input id="2" type='radio' value='4' />
+            <input id="2" onClick={() => this.props.answer(this.props.choices[3])} type='radio' value='4' />
             <label>4</label>
           </li>
           <li>
-            <input id="2" type='radio' value='5' />
+            <input id="2" onClick={() => this.props.answer(this.props.choices[4])} type='radio' value='5' />
             <label>5</label>
           </li>
         </ul>
@@ -70,11 +70,16 @@ class QuestionButtons extends Component {
 };
 
 class QuestionBox extends Component {
+
+  testFunction(choice) {
+    this.props.actions.answerQuestion(this.props.data.id, choice)
+  }
+
   render() {
     return (
       <div className="question">
         <span className="question-option" style={{float:'left', textAlign:'right'}}>{this.props.data.option1}</span>
-        <QuestionButtons />
+        <QuestionButtons state={this.props.state} actions={this.props.actions} choices={[1, 2, 3, 4, 5]} answer={this.testFunction.bind(this)}/>
         <span className="question-option" style={{float:'right', textAlign:'left'}}>{this.props.data.option2}</span>
       </div>
     )
@@ -84,11 +89,10 @@ class QuestionBox extends Component {
 class QuestionForm extends Component {
   render() {
     const title = QUESTIONS
-    const { state, actions } = this.props
     return (
       <div className="question-form">
         {title.map(question =>
-            <QuestionBox key={question.id} data={question}/>
+            <QuestionBox key={question.id} data={question} state={this.props.state} actions={this.props.actions} />
         )}
       </div>
     )
@@ -100,8 +104,8 @@ class App extends Component {
     const { state, actions } = this.props
     return (
       <div>
-        <h1 className="logo" onClick={actions.answerQuestion} >Good Enough</h1>
-        <QuestionForm state={this.props} />
+        <h1 className="logo">Good Enough</h1>
+        <QuestionForm state={state} actions={actions} />
       </div>
     );
   }
