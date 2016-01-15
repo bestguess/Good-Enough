@@ -8,18 +8,19 @@ module.exports = function(app, express){
   app.use(bodyParser.json());
   app.use(cookieParser());
   app.use(express.static('../client/index.html'));
-  var usersRouter = express.Router();
+
+  //var usersRouter = express.Router();
   var messagesRouter = express.Router();
 
   app.get('/',function(req,res,next){
     res.sendFile(path.join(__dirname + '/../client/index.html'));
   })
 
-  //require('./users/usersRoutes.js');
-  require('./messages/messagesRoutes.js');
+  //require('./users/usersRoutes.js')(usersRouter);
+  require('./messages/messagesRoutes.js')(messagesRouter);
 
+  app.use('/app/messages')(messagesRouter);
   //app.use('/app/users')(userRoutes);
-  //app.use('/app/messages')(messagesRoutes);
 
   app.get('/*', function(req, res){
     res.sendFile(path.join(__dirname + '/../' + req.url));
