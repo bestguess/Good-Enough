@@ -1,17 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 
-var QuestionForm = React.createClass({
+
+class QuestionForm extends Component {
   render: function() {
     return (
       <div>
-        <p>{this.props.questions.question}</p>
+        {this.props.questions.map(question =>
+          <p>{question.question}</p>
+        )}
       </div>
     );
   }
-});
+};
 
-
-var App = React.createClass({
+class App extends Component {
   render: function() {
     return (
       <div>
@@ -20,15 +22,15 @@ var App = React.createClass({
       </div>
     );
   }
-});
+};
 
 
 var QUESTIONS = [
-  {question: 'Do you like Hank?'},
-  {question: 'Do you hate Josh?'},
+  {question: 'Do you like Hank?', answered: false },
+  {question: 'Do you hate Josh?', answered: false },
 ];
  
 ReactDOM.render(
   <App questions={QUESTIONS} />,
-  document.getElementById('container')
+  document.getElementById('root')
 );
