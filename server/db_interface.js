@@ -10,12 +10,19 @@ module.exports = function(app, express){
   app.use(express.static('../client/index.html'));
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
-  //require('./users/usersRoutes.js');
-  //require('./messages/messagesRoutes.js');
 
-  //app.use('/app/users')(userRoutes);
-  //app.use('/app/messages')(messagesRoutes);
   app.get('/',function(req,res,next){
     res.sendFile(path.join(__dirname + '/../client/index.html'));
   })
+
+  //require('./users/usersRoutes.js');
+  require('./messages/messagesRoutes.js');
+
+  //app.use('/app/users')(userRoutes);
+  //app.use('/app/messages')(messagesRoutes);
+
+  app.get('/*', function(req, res){
+    res.sendFile(path.join(__dirname + '/../' + req.url));
+  });
+
 };
