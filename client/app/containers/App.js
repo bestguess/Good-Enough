@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react'
-
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as QuestionActions from '../actions/questions'
 
 class QuestionForm extends Component {
-  render: function() {
+  render() {
     return (
       <div>
-        {this.props.questions.map(question =>
-          <p>{question.question}</p>
-        )}
+        <p>This is where the question would go</p>
       </div>
-    );
+    )
   }
 };
 
 class App extends Component {
-  render: function() {
+  render() {
+    const { questions, actions } = this.props
     return (
       <div>
         <h1>Good Enough</h1>
@@ -29,8 +30,25 @@ var QUESTIONS = [
   {question: 'Do you like Hank?', answered: false },
   {question: 'Do you hate Josh?', answered: false },
 ];
- 
-ReactDOM.render(
-  <App questions={QUESTIONS} />,
-  document.getElementById('root')
-);
+
+App.propTypes = {
+  todos: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+}
+
+function mapStateToProps(state) {
+  return {
+    todos: state.questions
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(QuestionActions, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
