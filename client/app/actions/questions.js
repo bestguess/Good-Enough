@@ -1,5 +1,6 @@
-// import * as types from '../constants/ActionTypes'
+import * as types from '../constants/ActionTypes'
 
-export function answerQuestion(text) {
-  return { type: types.ADD_TODO, text }
+export function answerQuestion(answer) {
+	if (answer !== undefined) answer = "MakerSquare"
+	return { type: types.ANSWER_QUESTION, answer }
 }
