@@ -18,7 +18,7 @@ var port = process.env.PORT || 4000;
   app.use(morgan('dev'));
   app.use(bodyParser.json());
   app.use(cookieParser());
-  app.use(express.static(__dirname + "/../"));
+  app.use(express.static(__dirname + '/client/index.html'));
 
   app.use(webpackHotMiddleware(compiler))
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
