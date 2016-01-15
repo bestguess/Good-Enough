@@ -76,6 +76,7 @@ class QuestionBox extends Component {
 class QuestionForm extends Component {
   render() {
     const title = QUESTIONS
+    const { state, actions } = this.props
     return (
       <div className="question-form">
         {title.map(question =>
@@ -91,8 +92,8 @@ class App extends Component {
     const { state, actions } = this.props
     return (
       <div>
-        <h1 className="logo">Good Enough</h1>
-        <QuestionForm state={this.props.state} />
+        <h1 className="logo" onClick={actions.answerQuestion} >Good Enough</h1>
+        <QuestionForm state={this.props} />
       </div>
     );
   }
