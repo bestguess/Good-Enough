@@ -3,11 +3,21 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as QuestionActions from '../actions/questions'
 
+const QUESTIONS = [
+  {id: 1, question: 'Do you like Hank?', answered: false },
+  {id: 2, question: 'Do you hate Josh?', answered: false },
+  {id: 3, question: 'Does Ivan smell?', answered: false },
+  {id: 4, question: 'Does Paolinni like ghosts?', answered: false },
+];
+
 class QuestionForm extends Component {
   render() {
+    const title = QUESTIONS
     return (
       <div>
-        <p>This is where the question would go</p>
+        {title.map(question =>
+            <p key={question.id}>{question.question}</p>
+        )}
       </div>
     )
   }
@@ -25,20 +35,14 @@ class App extends Component {
   }
 };
 
-
-var QUESTIONS = [
-  {question: 'Do you like Hank?', answered: false },
-  {question: 'Do you hate Josh?', answered: false },
-];
-
 App.propTypes = {
-  todos: PropTypes.array.isRequired,
+  questions: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    todos: state.questions
+    questions: state.questions
   }
 }
 
