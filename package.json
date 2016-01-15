@@ -1,17 +1,17 @@
 {
   "name": "good-enough",
   "version": "1.0.0",
-  "description": "",
+  "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bestguess/Good-Enough.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "John Wilkes Booth",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bestguess/Good-Enough/issues"
   },
@@ -21,6 +21,25 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.13.3",
     "mongoose": "^4.3.5",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "classnames": "^2.1.2",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^5.6.18",
+    "babel-loader": "^5.1.4",
+    "babel-plugin-react-transform": "^1.1.0",
+    "jsdom": "^5.6.1",
+    "node-libs-browser": "^0.5.2",
+    "raw-loader": "^0.5.1",
+    "react-addons-test-utils": "^0.14.0",
+    "react-transform-hmr": "^1.0.0",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0"
   }
 }
