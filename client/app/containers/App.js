@@ -38,16 +38,25 @@ const QUESTIONS = [
   {id: 32, option1: 'likes to know "who?", "what?", "when?"', option2: 'likes to know "why?"', answered: false }
 ];
 
+class QuestionBox extends Component {
+  render() {
+    return (
+      <div className="question">
+        <span className="question-option" style={{float:'left', textAlign:'right'}}>{this.props.data.option1}</span>
+        <span style={{float:'left', textAlign:'center', width:'20%'}}>1 2 3 4 5</span>
+        <span className="question-option" style={{float:'right', textAlign:'left'}}>{this.props.data.option2}</span>
+      </div>
+    )
+  }  
+};
+
 class QuestionForm extends Component {
   render() {
     const title = QUESTIONS
     return (
-      <div>
+      <div className="question-form">
         {title.map(question =>
-            <div key={question.id} style={{width:'800px', height:'30px'}}>
-              <span style={{float:'left'}}>{question.option1}</span>
-              <span style={{float:'right'}}>{question.option2}</span>
-            </div>
+            <QuestionBox key={question.id} data={question}/>
         )}
       </div>
     )
@@ -56,24 +65,24 @@ class QuestionForm extends Component {
 
 class App extends Component {
   render() {
-    const { questions, actions } = this.props
+    const { state, actions } = this.props
     return (
       <div>
-        <h1>Good Enough</h1>
-        <QuestionForm questions={this.props.questions} />
+        <h1 className="logo">Good Enough</h1>
+        <QuestionForm state={this.props.state} />
       </div>
     );
   }
 };
 
 App.propTypes = {
-  questions: PropTypes.array.isRequired,
+  state: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    questions: state.questions
+    state: state
   }
 }
 
