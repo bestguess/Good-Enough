@@ -18,18 +18,19 @@ var port = process.env.PORT || 4000;
   app.use(morgan('dev'));
   app.use(bodyParser.json());
   app.use(cookieParser());
-  app.use(express.static('../client/index.html'));
+  app.use(express.static(__dirname + "/../"));
 
   app.use(webpackHotMiddleware(compiler))
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
+
   require('./users/usersRoutes.js')(usersRouter);
   require('./messages/messagesRoutes.js')(messagesRouter);
 
-  // app.use('/app/users')(usersRouter);
-  // app.use('/app/messages')(messagesRouter);
+  app.use('/app/users', usersRouter);
+  app.use('/app/messages', messagesRouter);
 
   app.get('/',function(req,res,next){
     res.sendFile(path.join(__dirname + '/../client/index.html'));
