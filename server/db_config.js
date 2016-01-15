@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var db = mongoose.connect(***REMOVED***);
+mongoose.connect(***REMOVED***);
+
+var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(callback){
   console.log('Connected to MongoDB');
