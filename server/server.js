@@ -44,8 +44,10 @@ var port = process.env.PORT || 4000;
     res.sendFile(path.join(__dirname + '/../client/index.html'));
   });
 
-  app.get('/test',function(req,res,next){
-    res.status(200).send("Got it! :)");
+  app.post('/test',function(req,res,next){
+    console.log(req.body)
+    var text = { hello: 'hank' }
+    res.status(200).send(text);
   });
 
 app.listen(port, function(error){

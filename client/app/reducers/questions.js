@@ -11,7 +11,15 @@ export default function questions(state = initialState, action) {
   		state.answers[action.id] = action.answer;
   		return state
     case SUBMIT_SURVEY:
-      fetch('https://api.github.com/users/hankcouture')
+
+      var message = { hello: 'festus'}
+      fetch('http://localhost:4000/test', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message }) })
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             console.log('original: ', res)
@@ -38,6 +46,7 @@ export default function questions(state = initialState, action) {
       console.log('submitting survey')
       return state
     default:
+      console.log('hey')
     	return state
   }
 }
