@@ -11,7 +11,7 @@ module.exports = {
     User.find({}, 'email', function(err, emails){
       if(err) res.status(404).send(err);
       else res.status(302).send(emails);
-    })
+    });
   },
 
   signUp: function(req, res, next){
@@ -50,7 +50,7 @@ module.exports = {
           res.status(201).send(user._id);
           next();
         }
-      })
+      });
     }
 
   },
@@ -67,7 +67,7 @@ module.exports = {
         }else if(!user){
           res.status(400).send(err);
         }else{
-          var userInfo = {}
+          var userInfo = {};
           userInfo.firstName = user.firstName;
           userInfo.lastName = user.lastName;
           userInfo.picture = user.picture;
@@ -76,8 +76,8 @@ module.exports = {
           // Send back info needed for home page
           res.status(200).send(userInfo);
         }
-      })
-    };
+      });
+    }
   }
 
   // ToDo: changePicture function
