@@ -18,7 +18,6 @@ var port = process.env.PORT || 4000;
 
 // require('./config/passport')(passport);
 
-
   app.use(morgan('dev'));
   app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
@@ -45,8 +44,8 @@ var port = process.env.PORT || 4000;
   });
 
   app.post('/test',function(req,res,next){
-    console.log(req.body)
-    var text = { hello: 'hank' }
+    console.log(req.body);
+    var text = { hello: 'hank' };
     res.status(200).send(text);
   });
 
