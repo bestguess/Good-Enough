@@ -2,23 +2,19 @@ var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
 
-console.log('in usersController')
 
 module.exports = {
 
   getEmails: function(req, res){
     User.find({}, 'email', function(err, emails){
-      if(err){
-        res.status(404).send(err);
-      }else{
-        res.status(302).send(emails);
+      if(err) res.status(404).send(err);
+      else res.status(302).send(emails);
       }
     })
 
   },
 
   signUp: function(req, res, next){
-    console.log(req.body);
     var user = req.body;
     // To be populated and submitted as a new user
     var userObject = {};
@@ -67,7 +63,7 @@ module.exports = {
       User.findOne({email: user.email, password: user.password}, function(err, user){
         if(err){
           res.status(400).send(err);
-        }else if(user === null){
+        }else if(!user){
           res.status(400).send(err);
         }else{
           var userInfo = {}
