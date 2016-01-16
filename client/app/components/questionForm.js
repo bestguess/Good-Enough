@@ -40,16 +40,16 @@ const questions = [
 class UserInfo extends Component {
 
   handleKeyUp(input) {
-    console.log('updating input value: ', this.refs[input].value)
     this.props.actions.saveInput(input, this.refs[input].value)
   }
 
   render() {
     return (
         <div className="user-info-form">
-          <input placeholder="Email" ref="email" defaultValue={this.props.value} onKeyUp={() => this.handleKeyUp('email')} />/>
-          <input placeholder="First Name" ref="firstname" defaultValue={this.props.value} onKeyUp={() => this.handleKeyUp('firstname')} />/>
-          <input placeholder="Last Name" ref="lastname" defaultValue={this.props.value} onKeyUp={() => this.handleKeyUp('lastname')} />/>
+          <input placeholder="Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} />/>
+          <input placeholder="Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} />/>
+          <input placeholder="First Name" ref="firstname" onKeyUp={() => this.handleKeyUp('firstname')} />/>
+          <input placeholder="Last Name" ref="lastname" onKeyUp={() => this.handleKeyUp('lastname')} />/>
         </div>
       )
   }
