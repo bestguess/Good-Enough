@@ -1,7 +1,7 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
-var photo = require('../helpers/picture_conversion.js');
+var photo = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 
 
@@ -39,7 +39,7 @@ module.exports = {
       res.status(400).send(failings);
       next();
     }else{
-      userObject.picture = photo.convert(userObject.picture, userObject.email);
+      userObject.picture = photo.convertPhoto(userObject.picture, userObject.email);
       var newUser = User(userObject);
       newUser.save(function(err, user){
         if(err){
