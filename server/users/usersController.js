@@ -9,7 +9,6 @@ module.exports = {
     User.find({}, 'email', function(err, emails){
       if(err) res.status(404).send(err);
       else res.status(302).send(emails);
-      }
     })
 
   },
