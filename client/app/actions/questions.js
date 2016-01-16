@@ -11,17 +11,24 @@ function fetchUser(login) {
   return {
     [CALL_API]: {
       types: [ USER_REQUEST, USER_SUCCESS, USER_FAILURE ],
-      endpoint: `users/${login}`,
+      endpoint: `users/hankcouture`,
       schema: Schemas.USER
     }
   }
 }
 
-
 export function answerQuestion(id, answer) {
 	return { type: types.ANSWER_QUESTION, id, answer }
 }
 
-export function submitSurvey() {
-	return { type: types.SUBMIT_SURVEY }
+export function submitSurvey(login, requiredFields = []) {
+  return (dispatch, getState) => {
+    const user = getState().entities.users[login]
+    if (user && requiredFields.every(key => user.hasOwnProperty(key))) {
+      return null
+    }
+
+    return dispatch(fetchUser(login))
+  }
+	// return { type: types.SUBMIT_SURVEY }
 }
