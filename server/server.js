@@ -45,6 +45,7 @@ var port = process.env.PORT || 4000;
   });
 
   app.post('/test',function(req,res,next){
+    console.log(req.body)
     var text = { hello: 'hank' }
     res.status(200).send(text);
   });
