@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt');
 
 mongoose.connect(***REMOVED***);
 
@@ -32,9 +33,47 @@ var messagesSchema = new Schema({
   messages: []
 });
 
+var authSchema = new Schema({
+  user_id: String,
+  local: {
+    email: String,
+    password: String
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+  },
+  twitter: {
+    id: String,
+    token: String,
+    displayName: String,
+    username: String
+  },
+  google: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+  }
+});
+
+// Generates a hash
+authSchema.methods.generateHash = function(password){
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// Checks to see if the password is valid
+authSchema.methods.validPassword = function(password){
+  return bcrypt.compareSync(password, this.local.password);
+};
+
 var Users = mongoose.model('User', usersSchema);
 var Messages = mongoose.model('Message', messagesSchema);
+var Auth = mongoose.model('Auth', authSchema);
 
 module.exports.Users = Users;
 module.exports.Messages = Messages;
+module.exports.Auth = Auth;
 module.exports.db = db;
