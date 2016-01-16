@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 module.exports = {
-  convert : function(photo,email){
+  convertPhoto : function(photo,email){
     var decodedImage = new Buffer(photo
     .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
     var fileLocation = "./server/uploads/" + email.replace("@","").replace(".","") + ".jpeg";
@@ -11,5 +11,12 @@ module.exports = {
     });
 
     return fileLocation;
+  },
+
+  // Authentication check
+  isLoggedIn : function(req, res, next) {
+    if(req.isAuthenticated()) return next();
+    // If not authenticated then redirect to home
+    res.status(401).redirect('/');
   }
 };
