@@ -16,7 +16,7 @@ var port = process.env.PORT || 4000;
 
 
   app.use(morgan('dev'));
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
   app.use(express.static(__dirname + '/../'));
 
