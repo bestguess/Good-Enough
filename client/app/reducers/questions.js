@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SUBMIT_SURVEY, USER_REQUEST, USER_SUCCESS, USER_FAILURE } from '../constants/ActionTypes'
+import { ANSWER_QUESTION, SUBMIT_SURVEY } from '../constants/ActionTypes'
 
 const initialState = {
 	answers: []
@@ -11,6 +11,19 @@ export default function questions(state = initialState, action) {
   		state.answers[action.id] = action.answer;
   		return state
     case SUBMIT_SURVEY:
+      fetch('https://api.github.com/users/hankcouture')
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            console.log('original: ', res)
+            res.json().then(data => console.log('jsoned: ', data));
+          } else {
+            const error = new Error(res.statusText);
+            error.res = res;
+            throw error;
+          }
+        })
+        .catch(error => { console.log('request failed', error); });
+      
       const newObj = {};
       var type = "";
       newObj.IE = 30 - state.answers[3] - state.answers[7] - state.answers[11] + state.answers[15] - state.answers[19] + state.answers[23] + state.answers[27] - state.answers[31];
@@ -23,15 +36,6 @@ export default function questions(state = initialState, action) {
       type += newObj.JP<24 ? "J" : "P";
       console.log('type: ', type)
       console.log('submitting survey')
-      return state
-    case USER_REQUEST:
-      console.log('USER_REQUEST')
-      return state
-    case USER_SUCCESS:
-      console.log('USER_SUCCESS')
-      return state
-    case USER_FAILURE:
-      console.log('USER_FAILURE')
       return state
     default:
     	return state
