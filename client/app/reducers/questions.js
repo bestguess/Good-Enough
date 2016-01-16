@@ -2,15 +2,18 @@ import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY } from '../constants/ActionT
 
 const initialState = {
   email: undefined,
+  password: undefined,
   firstname: undefined,
   lastname: undefined,
 	answers: []
 }
 
+/////////////
+// Need to fix: Currently mutating state (BAD PRACTICE)
+/////////////
 export default function questions(state = initialState, action) {
   switch (action.type) {
-  	case ANSWER_QUESTION:
-  		// Need to fix: Currently mutating state (BAD)
+    case ANSWER_QUESTION:
   		state.answers[action.id] = action.answer;
   		return state
     case SAVE_INPUT:
@@ -31,20 +34,30 @@ export default function questions(state = initialState, action) {
       type += newObj.FT<24 ? "F" : "T";
       type += newObj.JP<24 ? "J" : "P";
       console.log('type: ', type)
-
-      var message = {firstName:"Festus",
-                      lastName:"Bestus",
-                      type: type,
-                      personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
-                    }
-      fetch('http://localhost:4000/test', {
+      var message = {
+        email: state.email,
+        password: state.password,
+        firstName: state.firstname,
+        lastName: state.lastname,
+        age: 27,
+        gender: 'male',
+        city: 'austin',
+        interests: {discussion:["philosophy","psycology","programming"], activity:["beer","programming","coffee"]},
+        type: type,
+        personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
+        picture: "https://lh3.googleusercontent.com/-jiPsSN-8cQ8/AAAAAAAAAAI/AAAAAAAAACY/lIAUQ3k6w6A/s120-p-rw-no/photo.jpg",
+        places: ["bangers","makersquare","pinthouse pizza","cherrywood coffeehouse","thunderbird coffee","cheer up charlies"],
+        matches: []
+      }
+      fetch('http://localhost:4000/app/users/signup', {
         method: 'post',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message }) })
+        body: JSON.stringify(message) })
         .then(res => {
+          console.log(res)
           if (res.status >= 200 && res.status < 300) {
             console.log('original: ', res)
             res.json().then(data => console.log('jsoned: ', data));
