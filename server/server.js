@@ -41,5 +41,5 @@ var port = process.env.PORT || 4000;
   });
 
 app.listen(port, function(error){
-  (error) ? console.error(error) : console.log('Listening on port %s', port);
+  return (error) ? console.error(error) : console.log('Listening on port %s', port);
 });
