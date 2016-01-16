@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SUBMIT_SURVEY } from '../constants/ActionTypes'
+import { ANSWER_QUESTION, SUBMIT_SURVEY, USER_REQUEST, USER_SUCCESS, USER_FAILURE } from '../constants/ActionTypes'
 
 const initialState = {
 	answers: []
@@ -23,6 +23,15 @@ export default function questions(state = initialState, action) {
       type += newObj.JP<24 ? "J" : "P";
       console.log('type: ', type)
       console.log('submitting survey')
+      return state
+    case USER_REQUEST:
+      console.log('USER_REQUEST')
+      return state
+    case USER_SUCCESS:
+      console.log('USER_SUCCESS')
+      return state
+    case USER_FAILURE:
+      console.log('USER_FAILURE')
       return state
     default:
     	return state
