@@ -101,3 +101,19 @@ h1 {
   background: #25b79a;
   color: #fff;
 }*/
+
+.user-info-form {
+  margin: 0px auto;
+}
+
+.user-info-form input {
+  clear: both;
+  font-size: 14px;
+  margin: 5px auto;
+  display: block;
+  padding: 5px 8px;
+  outline: none;
+  width: 230px;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
