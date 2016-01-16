@@ -11,7 +11,7 @@ export default function questions(state = initialState, action) {
   		state.answers[action.id] = action.answer;
   		return state
     case SUBMIT_SURVEY:
-      fetch('https://api.github.com/users/hankcouture')
+      fetch('http://localhost:4000/test')
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             console.log('original: ', res)
