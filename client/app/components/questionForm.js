@@ -36,6 +36,25 @@ const questions = [
   {id: 32, option1: 'likes to know "who?", "what?", "when?"', option2: 'likes to know "why?"', answered: false }
 ];
 
+
+class UserInfo extends Component {
+
+  handleKeyUp(input) {
+    console.log('updating input value: ', this.refs[input].value)
+    this.props.actions.saveInput(input, this.refs[input].value)
+  }
+
+  render() {
+    return (
+        <div className="user-info-form">
+          <input placeholder="Email" ref="email" defaultValue={this.props.value} onKeyUp={() => this.handleKeyUp('email')} />/>
+          <input placeholder="First Name" ref="firstname" defaultValue={this.props.value} onKeyUp={() => this.handleKeyUp('firstname')} />/>
+          <input placeholder="Last Name" ref="lastname" defaultValue={this.props.value} onKeyUp={() => this.handleKeyUp('lastname')} />/>
+        </div>
+      )
+  }
+}
+
 class QuestionForm extends Component {
   render() {
     const title = questions
@@ -44,6 +63,7 @@ class QuestionForm extends Component {
         {title.map(question =>
             <QuestionBox key={question.id} data={question} state={this.props.state} actions={this.props.actions} />
         )}
+        <UserInfo state={this.props.state} actions={this.props.actions} />
         <div className="question-form-submit-button">
           <button onClick={this.props.actions.submitSurvey} >Submit</button>
         </div>
