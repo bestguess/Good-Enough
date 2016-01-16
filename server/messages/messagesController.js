@@ -16,24 +16,24 @@ module.exports = {
     newConvo.users.push( req.body.to , req.body.from );
     newConvo.messages.push(text);
     newConvo.save(function(err, text){
-      if(err) throw err;
-      res.status(201).send(text);
+      if(err) res.status(400).send(err);
+      else res.status(201).send(text);
     })
   },
 
 
   getConvo : function(req, res, next){
     Messages.find({users: req.body.user}, function(err, list){
-      if(err) throw err;
-      res.status(200).send(list);
+      if(err) res.status(404).send(err);
+      else res.status(200).send(list);
    });
   },
 
 
   getMessages : function(req, res, next){
     Messages.findOne({_id: req.body.id}, function(err, messages){
-      if(err) throw err;
-      res.status(200).send(messages);
+      if(err) res.status(404).send(err);
+      else res.status(200).send(messages);
    });
   },
 
@@ -48,8 +48,8 @@ module.exports = {
     Messages.update({_id: req.body.id}, {
       $push: { messages : text}
     }, function(err) { 
-      if(err) throw err;
-      res.status(201).send(text);
+      if(err) res.status(400).send(err);
+      else res.status(201).send(text);
     })
   }
 };
