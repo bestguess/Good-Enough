@@ -4,7 +4,8 @@
   "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "test": "./node_modules/jshint/bin/jshint server/*.js  && ./node_modules/mocha/bin/mocha server/test/serverAPI.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,8 @@
     "babel-loader": "^5.1.4",
     "babel-plugin-react-transform": "^1.1.0",
     "jsdom": "^5.6.1",
+    "jshint": "^2.6.0",
+    "mocha": "^2.3.4",
     "node-libs-browser": "^0.5.2",
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^0.14.0",
