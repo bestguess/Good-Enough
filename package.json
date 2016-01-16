@@ -4,7 +4,8 @@
   "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "test": "./node_modules/jshint/bin/jshint server/test/serverAPI.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
     "style-loader": "^0.12.3",
     "webpack": "^1.9.11",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.2.0"
+    "webpack-hot-middleware": "^2.2.0",
+    "jshint": "^2.6.0"
   }
 }
