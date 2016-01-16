@@ -1,6 +1,9 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
+var fs = require('fs');
+var photo = require('../helpers/picture_conversion.js');
+var match = require('../helpers/matching_algo.js');
 
 console.log('in usersController')
 
@@ -14,7 +17,6 @@ module.exports = {
         res.status(302).send(emails);
       }
     })
-
   },
 
   signUp: function(req, res, next){
