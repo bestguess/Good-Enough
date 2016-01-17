@@ -14,8 +14,8 @@ class App extends Component {
       </div>
     );
   }
-};
 
+};
 App.propTypes = {
   state: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import questions from './questions'
+import survey from './survey'
 
 const rootReducer = combineReducers({
-  questions
+  questions,
+  survey
 })
 
 export default rootReducer

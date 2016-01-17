@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import QuestionBox from './QuestionBox'
+import { submitSurvey } from '../actions/questions'
 
 const questions = [
   {id: 1, option1: 'makes lists', option2: 'relies on memory', answered: false },
@@ -37,6 +38,22 @@ const questions = [
 ];
 
 class QuestionForm extends Component {
+  handleSurveySubmit(event) {
+    event.preventDefault()
+    const newObj = {};
+      var type = "";
+      newObj.IE = 30 - state.answers[3] - state.answers[7] - state.answers[11] + state.answers[15] - state.answers[19] + state.answers[23] + state.answers[27] - state.answers[31];
+      newObj.SN = 12 + state.answers[4] + state.answers[8] + state.answers[12] + state.answers[16] + state.answers[20] - state.answers[24] - state.answers[28] + state.answers[32];
+      newObj.FT = 30 - state.answers[2] + state.answers[6] + state.answers[10] - state.answers[14] - state.answers[18] + state.answers[22] - state.answers[26] - state.answers[30];
+      newObj.JP = 18 + state.answers[1] + state.answers[5] - state.answers[9] + state.answers[13] - state.answers[17] + state.answers[21] - state.answers[25] + state.answers[29];
+      type += newObj.IE<24 ? "I" : "E";
+      type += newObj.SN<24 ? "S" : "N";
+      type += newObj.FT<24 ? "F" : "T";
+      type += newObj.JP<24 ? "J" : "P";
+      console.log('type: ', type)
+      console.log('submitting survey')
+      this.props.actions.submitSurvey(type)
+  }
   render() {
     const title = questions
     return (
@@ -45,7 +62,7 @@ class QuestionForm extends Component {
             <QuestionBox key={question.id} data={question} state={this.props.state} actions={this.props.actions} />
         )}
         <div className="question-form-submit-button">
-          <button onClick={this.props.actions.submitSurvey} >Submit</button>
+          <button onClick={this.handleSurveySubmit} >Submit</button>
         </div>
       </div>
     )
@@ -57,5 +74,7 @@ QuestionForm.PropTypes = {
   actions: PropTypes.object.isRequired
 
 }
+
+
 
 export default QuestionForm
