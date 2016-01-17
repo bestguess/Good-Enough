@@ -39,6 +39,8 @@ const questions = [
 
 class QuestionForm extends Component {
   handleSurveySubmit(event) {
+    console.log('STATE TEST: ', this.props.state)
+    let state = this.props.state.questions
     event.preventDefault()
     const newObj = {};
       var type = "";
@@ -62,7 +64,7 @@ class QuestionForm extends Component {
             <QuestionBox key={question.id} data={question} state={this.props.state} actions={this.props.actions} />
         )}
         <div className="question-form-submit-button">
-          <button onClick={this.handleSurveySubmit} >Submit</button>
+          <button onClick={this.handleSurveySubmit.bind(this)} >Submit</button>
         </div>
       </div>
     )

@@ -1,5 +1,4 @@
 import * as types from '../constants/ActionTypes'
-import { checkStatus, parseJSON } from './utils'
 
 export function answerQuestion(id, answer) {
 	return { type: types.ANSWER_QUESTION, id, answer }
@@ -32,7 +31,7 @@ export function submitSurvey(survey) {
     dispatch(submitSurveyRequest(survey))
     console.log('Suvery submitted!: ', survey)
 
-    return fetch('/api/survey', {
+    return fetch('/signin', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -59,3 +58,17 @@ export function submitSurvey(survey) {
     })
   }
 }
+
+function checkStatus(response) {
+  if (!response.ok) {   // (response.status < 200 || response.status > 300)
+    const error = new Error(response.statusText);
+    error.response = response;
+    throw error;
+  }
+  return response;
+}
+
+function parseJSON(response) {
+  return response.json();
+}
+
