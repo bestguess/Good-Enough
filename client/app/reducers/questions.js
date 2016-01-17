@@ -20,7 +20,6 @@ export default function questions(state = initialState, action) {
       return state
     case SUBMIT_SURVEY:
 
-      
       const newObj = {};
       var type = "";
       newObj.IE = 30 - state.answers[3] - state.answers[7] - state.answers[11] + state.answers[15] - state.answers[19] + state.answers[23] + state.answers[27] - state.answers[31];
@@ -32,7 +31,7 @@ export default function questions(state = initialState, action) {
       type += newObj.FT<24 ? "F" : "T";
       type += newObj.JP<24 ? "J" : "P";
       console.log('type: ', type)
-      
+
       var message = {firstName:"Festus",
                       lastName:"Bestus",
                       type: type,
