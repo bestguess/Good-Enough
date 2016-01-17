@@ -1,11 +1,22 @@
-import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY } from '../constants/ActionTypes'
+import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/ActionTypes'
 
 const initialState = {
-  email: undefined,
-  password: undefined,
-  firstname: undefined,
-  lastname: undefined,
-	answers: []
+  viewData: {
+    signup: {
+      stage1: true,
+      stage2: false,
+      stage3: false,
+      stage4: false,
+      stage5: false
+    }
+  },
+  userData: {
+    email: undefined,
+    password: undefined,
+    firstname: undefined,
+    lastname: undefined,
+  	answers: []
+  }
 }
 
 /////////////
@@ -14,31 +25,30 @@ const initialState = {
 export default function questions(state = initialState, action) {
   switch (action.type) {
     case ANSWER_QUESTION:
-  		state.answers[action.id] = action.answer;
-  		return state
+      var newState = Object.assign({}, state)
+      newState.userData.answers[action.id] = action.answer
+  		return newState
     case SAVE_INPUT:
       console.log('in save input reducer: ', action.input + ' = ' + action.value)
-      state[action.input] = action.value
-      console.log(state)
+      state.userData[action.input] = action.value
       return state
     case SUBMIT_SURVEY:
-
       const newObj = {};
       var type = "";
-      newObj.IE = 30 - state.answers[3] - state.answers[7] - state.answers[11] + state.answers[15] - state.answers[19] + state.answers[23] + state.answers[27] - state.answers[31];
-      newObj.SN = 12 + state.answers[4] + state.answers[8] + state.answers[12] + state.answers[16] + state.answers[20] - state.answers[24] - state.answers[28] + state.answers[32];
-      newObj.FT = 30 - state.answers[2] + state.answers[6] + state.answers[10] - state.answers[14] - state.answers[18] + state.answers[22] - state.answers[26] - state.answers[30];
-      newObj.JP = 18 + state.answers[1] + state.answers[5] - state.answers[9] + state.answers[13] - state.answers[17] + state.answers[21] - state.answers[25] + state.answers[29];
+      newObj.IE = 30 - state.userData.answers[3] - state.userData.answers[7] - state.userData.answers[11] + state.userData.answers[15] - state.userData.answers[19] + state.answers[23] + state.answers[27] - state.answers[31];
+      newObj.SN = 12 + state.userData.answers[4] + state.userData.answers[8] + state.userData.answers[12] + state.userData.answers[16] + state.userData.answers[20] - state.answers[24] - state.answers[28] + state.answers[32];
+      newObj.FT = 30 - state.userData.answers[2] + state.userData.answers[6] + state.userData.answers[10] - state.userData.answers[14] - state.userData.answers[18] + state.answers[22] - state.answers[26] - state.answers[30];
+      newObj.JP = 18 + state.userData.answers[1] + state.userData.answers[5] - state.userData.answers[9] + state.userData.answers[13] - state.userData.answers[17] + state.answers[21] - state.answers[25] + state.answers[29];
       type += newObj.IE<24 ? "I" : "E";
       type += newObj.SN<24 ? "S" : "N";
       type += newObj.FT<24 ? "F" : "T";
       type += newObj.JP<24 ? "J" : "P";
       console.log('type: ', type)
       var message = {
-        email: state.email,
-        password: state.password,
-        firstName: state.firstname,
-        lastName: state.lastname,
+        email: state.userData.email,
+        password: state.userData.password,
+        firstName: state.UserData.firstname,
+        lastName: state.UserData.lastname,
         age: 27,
         gender: 'male',
         city: 'austin',
@@ -70,8 +80,23 @@ export default function questions(state = initialState, action) {
         .catch(error => { console.log('request failed', error); });
       console.log('submitting survey')
       return state
+    case CONTINUE_SURVEY:
+      if (state.viewData.signup.stage1) {
+        state.viewData.signup.stage1 = false;
+        state.viewData.signup.stage2 = true;
+      } else if (state.viewData.signup.stage2) {
+        state.viewData.signup.stage2 = false;
+        state.viewData.signup.stage3 = true;
+      } else if (state.viewData.signup.stage3) {
+        state.viewData.signup.stage3 = false;
+        state.viewData.signup.stage4 = true;
+      } else if (state.viewData.signup.stage4) {
+        state.viewData.signup.stage4 = false;
+        state.viewData.signup.stage5 = true;
+      }
+      return state
     default:
-      console.log('hey')
+      console.log('returned default state')
     	return state
   }
 }

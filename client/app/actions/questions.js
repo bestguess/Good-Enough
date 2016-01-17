@@ -11,3 +11,7 @@ export function saveInput(input, value) {
 export function submitSurvey() {
 	return { type: types.SUBMIT_SURVEY };
 }
+
+export function continueSurvey() {
+	return { type: types.CONTINUE_SURVEY };
+}
