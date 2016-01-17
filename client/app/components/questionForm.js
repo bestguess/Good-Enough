@@ -61,18 +61,9 @@ class UserInfo extends Component {
   }
 }
 
-class QuestionForm extends Component {
-
-  moveForward() {
-    this.props.actions.continueSurvey()
-    this.forceUpdate()
-  }
-
+class PersonalityTest extends Component {
   render() {
     var title;
-    var formButton = <button onClick={() => this.moveForward()} >Continue</button>
-    console.log('here: ', this.props)
-
     if (this.props.state.questions.viewData.signup.stage1) {
       title = stage1
     } else if (this.props.state.questions.viewData.signup.stage2) {
@@ -81,16 +72,41 @@ class QuestionForm extends Component {
       title = stage3
     } else if (this.props.state.questions.viewData.signup.stage4) {
       title = stage4
-      formButton = <button onClick={this.props.actions.submitSurvey} >Submit</button>
-    } else if (this.props.state.questions.viewData.signup.stage5) {
-      console.log("now show personal questions")
     }
     return (
-      <div className="question-form">
-          {title.map(question =>
+      <div>
+        {title.map(question =>
               <QuestionBox key={question.id} data={question} state={this.props.state} actions={this.props.actions} />
           )}
-          <UserInfo state={this.props.state} actions={this.props.actions} />
+      </div>
+    )
+  }
+}
+
+
+class QuestionForm extends Component {
+
+  moveForward() {
+    this.props.actions.continueSurvey()
+    this.forceUpdate()
+  }
+
+  render() {
+    var content;
+    var formButton = <button onClick={() => this.moveForward()} >Continue</button>
+    console.log('this: ', this)
+    if (!this.props.state.questions.viewData.signup.stage5) {
+      console.log("show PersonalityTest")
+      content = <PersonalityTest state={this.props.state} actions={this.props.actions} />
+    } else {
+      console.log("show UserInfo")
+      content = <UserInfo state={this.props.state} actions={this.props.actions} />
+      formButton = <button onClick={this.props.actions.submitSurvey} >Submit</button>
+    }
+
+    return (
+      <div className="question-form">
+          {content}
         <div className="question-form-submit-button">
           {formButton}
         </div>
