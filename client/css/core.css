@@ -190,6 +190,8 @@ h1 {
   border-radius: 3px;
 }
 
+
+/*** Progress Bar for SignUp ***/
 .progress-bar-container {
   text-align: center;
   padding: 10px;
@@ -211,3 +213,19 @@ progress::-webkit-progress-value {
     background-color: #25b79a;
     border-radius: 9px;
 }
+
+
+.birthday-dropdown {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.birthday-dropdown select {
+  background-color: #eef3f4;
+  border: 1px solid #e0e0e0;
+  font-size: 13px;
+  height: 30px;
+  margin: 0px 4px;
+}
+
+
