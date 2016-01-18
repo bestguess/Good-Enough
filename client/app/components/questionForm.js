@@ -74,7 +74,7 @@ class PersonalityTest extends Component {
       title = stage4
     }
     return (
-      <div>
+      <div className="question-form">
         {title.map(question =>
               <QuestionBox key={question.id} data={question} state={this.props.state} actions={this.props.actions} />
           )}
@@ -85,19 +85,17 @@ class PersonalityTest extends Component {
 
 
 class QuestionForm extends Component {
-
-  moveForward() {
-    this.props.actions.continueSurvey()
-    this.forceUpdate()
-  }
-
   render() {
     var content;
-    var formButton = <button onClick={() => this.moveForward()} >Continue</button>
+    var formButton;
     console.log('this: ', this)
-    if (!this.props.state.questions.viewData.signup.stage5) {
+    if (this.props.state.questions.viewData.signup.stage0) {
+      console.log("show HomePage")
+      formButton = <button onClick={this.props.actions.continueSurvey} >Start Test</button>
+    } else if (!this.props.state.questions.viewData.signup.stage5) {
       console.log("show PersonalityTest")
       content = <PersonalityTest state={this.props.state} actions={this.props.actions} />
+      formButton = <button onClick={this.props.actions.continueSurvey} >Continue</button>
     } else {
       console.log("show UserInfo")
       content = <UserInfo state={this.props.state} actions={this.props.actions} />
@@ -105,7 +103,7 @@ class QuestionForm extends Component {
     }
 
     return (
-      <div className="question-form">
+      <div >
           {content}
         <div className="question-form-submit-button">
           {formButton}
