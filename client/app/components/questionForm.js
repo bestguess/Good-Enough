@@ -9,9 +9,9 @@ class QuestionForm extends Component {
     var formButton;
     var progressBar;
     console.log('this: ', this)
-    if (this.props.state.questions.viewData.signup.stage0) {
+    if (this.props.state.signup.viewData.signup.stage0) {
       formButton = <button onClick={this.props.actions.continueSurvey} className="start-test">Start Test</button>
-    } else if (!this.props.state.questions.viewData.signup.stage5) {
+    } else if (!this.props.state.signup.viewData.signup.stage5) {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalityTest state={this.props.state} actions={this.props.actions} />
       formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button">Continue</button>

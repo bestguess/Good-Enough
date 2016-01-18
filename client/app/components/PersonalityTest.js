@@ -46,13 +46,13 @@ const stage4 = [
 class PersonalityTest extends Component {
   render() {
     var title;
-    if (this.props.state.questions.viewData.signup.stage1) {
+    if (this.props.state.signup.viewData.signup.stage1) {
       title = stage1
-    } else if (this.props.state.questions.viewData.signup.stage2) {
+    } else if (this.props.state.signup.viewData.signup.stage2) {
       title = stage2
-    } else if (this.props.state.questions.viewData.signup.stage3) {
+    } else if (this.props.state.signup.viewData.signup.stage3) {
       title = stage3
-    } else if (this.props.state.questions.viewData.signup.stage4) {
+    } else if (this.props.state.signup.viewData.signup.stage4) {
       title = stage4
     }
     return (
