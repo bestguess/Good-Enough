@@ -1,35 +1,40 @@
+// React & Redux Libraries
+import 'babel-core/polyfill'
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
+
+// React/Redux Router
+import { Router, Route, IndexRoute } from 'react-router'
+import { syncHistory, routeReducer } from 'redux-simple-router'
+import { createHistory } from 'history'
+
 // Redux DevTools
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 
 // Redux State Logger
-import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
+import thunkMiddleware from 'redux-thunk'
 
-import 'babel-core/polyfill'
-import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import App from './app/containers/App'
-import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
-import { Router, Route, IndexRoute } from 'react-router'
-import { createHistory } from 'history'
-import { syncHistory, routeReducer } from 'redux-simple-router'
+// Importing React Components
+import { SiteRouter, SignUp, LogIn } from './app/containers'
+
+// Importing Redux Reducer
 import rootReducer from './app/reducers'
-
-// import configureStore from './app/store/configureStore'
-// const store = configureStore()
 
 // Loading CSS Files
 import './css/core.css'
 
-import LogIn from './app/containers/LogIn'
-import SiteRouter from './app/containers/Router'
+// Commented out for a day when we will refactor
+// import configureStore from './app/store/configureStore'
+// const store = configureStore()
 
+// Middleware for Redux Router & Logger
 const history = createHistory();
 const routerMiddleware = syncHistory(history);
-
 const loggerMiddleware = createLogger()
 
 // Create Redux DevTools
@@ -40,6 +45,7 @@ const DevTools = createDevTools(
   </DockMonitor>
 );
 
+// Connecting all the dots...
 const finalCreateStore = compose(
   applyMiddleware(
   	routerMiddleware,
@@ -48,7 +54,10 @@ const finalCreateStore = compose(
   ),
   DevTools.instrument()
 )(createStore);
+
 const store = finalCreateStore(rootReducer);
+
+// Unsure if the importance of these
 if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./app/reducers', () => {
@@ -58,12 +67,15 @@ if (module.hot) {
   }
 routerMiddleware.listenForReplays(store);
 
+
+
+// React Render
 render(
   <Provider store={store}>
     <div>
     	<Router history={history}>
         	<Route path="/" component={SiteRouter}>
-        		<IndexRoute component={App}/>
+        		<IndexRoute component={SignUp}/>
           		<Route path="LogIn" component={LogIn}/>
         	</Route>
       </Router>

@@ -3,15 +3,15 @@ import React, { Component, PropTypes } from 'react'
 class ProgressBar extends Component {
   render() {
     var progressValue;
-    if (this.props.state.questions.viewData.signup.stage1) {
+    if (this.props.state.signup.viewData.signup.stage1) {
       progressValue = 0
-    } else if (this.props.state.questions.viewData.signup.stage2) {
+    } else if (this.props.state.signup.viewData.signup.stage2) {
       progressValue = 20
-    } else if (this.props.state.questions.viewData.signup.stage3) {
+    } else if (this.props.state.signup.viewData.signup.stage3) {
       progressValue = 40
-    } else if (this.props.state.questions.viewData.signup.stage4) {
+    } else if (this.props.state.signup.viewData.signup.stage4) {
       progressValue = 60
-    } else if (this.props.state.questions.viewData.signup.stage5) {
+    } else if (this.props.state.signup.viewData.signup.stage5) {
       progressValue = 80
     }
     return (

@@ -5,11 +5,11 @@ import QuestionForm from '../components/questionForm'
 import * as QuestionActions from '../actions/signup'
 const { Link } = require('react-router');
 
-class App extends Component {
+class SignUp extends Component {
   render() {
     const { state, actions } = this.props
     var h1Content;
-    if (this.props.state.questions.viewData.signup.stage0) {
+    if (this.props.state.signup.viewData.signup.stage0) {
       h1Content = <img src="../client/img/logo.png" style={{width: 450 + "px"}}/>
     } else {
       h1Content = "Good Enough"
@@ -25,7 +25,7 @@ class App extends Component {
   }
 };
 
-App.propTypes = {
+SignUp.propTypes = {
   state: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
@@ -45,5 +45,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(SignUp)
 
