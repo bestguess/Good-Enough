@@ -13,7 +13,6 @@ class App extends Component {
     } else {
       h1Content = "Good Enough"
     }
-
     return (
       <div>
         <h1 className="logo">{h1Content}</h1>
@@ -36,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(QuestionActions, dispatch)
+    actions: bindActionCreators(QuestionActions, dispatch),
   }
 }
 
@@ -44,3 +43,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App)
+
