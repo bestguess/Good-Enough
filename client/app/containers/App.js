@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import QuestionForm from '../components/questionForm'
-import * as QuestionActions from '../actions/questions'
+import * as QuestionActions from '../actions/signup'
+const { Link } = require('react-router');
 
 class App extends Component {
   render() {
@@ -15,7 +16,9 @@ class App extends Component {
     }
     return (
       <div>
+      <Link to="/login">
         <h1 className="logo">{h1Content}</h1>
+      </Link>
         <QuestionForm state={state} actions={actions} />
       </div>
     );
