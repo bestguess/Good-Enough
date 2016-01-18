@@ -13,9 +13,6 @@ function Test({ push, children }) {
         {' '}
         <Link to="/login">Login</Link>
       </header>
-      <div>
-        <button onClick={() => push('/login')}>Go to /login</button>
-      </div>
       <div style={{borderTop: '1px solid #e0e0e0'}}>{children}</div>
     </div>
   );
