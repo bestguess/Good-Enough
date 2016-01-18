@@ -30,7 +30,6 @@ export default function questions(state = initialState, action) {
       newState.userData.answers[action.id] = action.answer
   		return newState
     case SAVE_INPUT:
-      console.log('in save input reducer: ', action.input + ' = ' + action.value)
       state.userData[action.input] = action.value
       return state
     case SUBMIT_SURVEY:
@@ -44,8 +43,7 @@ export default function questions(state = initialState, action) {
       type += newObj.SN<24 ? "S" : "N";
       type += newObj.FT<24 ? "F" : "T";
       type += newObj.JP<24 ? "J" : "P";
-      console.log('type: ', type)
-      var message = {
+      var userData = {
         email: state.userData.email,
         password: state.userData.password,
         firstName: state.UserData.firstname,
@@ -66,7 +64,7 @@ export default function questions(state = initialState, action) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(message) })
+        body: JSON.stringify(userData) })
         .then(res => {
           console.log(res)
           if (res.status >= 200 && res.status < 300) {
@@ -101,7 +99,7 @@ export default function questions(state = initialState, action) {
       }
       return newState
     default:
-      console.log('returned default state')
+      console.log('hit default case: returning state')
     	return state
   }
 }
