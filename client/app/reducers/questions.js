@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/ActionTypes'
+import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/SignUp_ActionTypes'
 
 const initialState = {
   viewData: {
@@ -24,7 +24,7 @@ const initialState = {
 /////////////
 // Need to fix: Currently mutating state (BAD PRACTICE)
 /////////////
-export default function questions(state = initialState, action) {
+export default function SignUp(state = initialState, action) {
   switch (action.type) {
     case ANSWER_QUESTION:
       var newState = Object.assign({}, state)
