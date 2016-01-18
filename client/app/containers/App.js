@@ -7,9 +7,16 @@ import * as QuestionActions from '../actions/questions'
 class App extends Component {
   render() {
     const { state, actions } = this.props
+    var h1Content;
+    if (this.props.state.questions.viewData.signup.stage0) {
+      h1Content = <img src="../client/img/logo.png" style={{width: 450 + "px"}}/>
+    } else {
+      h1Content = "Good Enough"
+    }
+
     return (
       <div>
-        <h1 className="logo"><img src="../client/img/logo.png" style={{width: 450 + "px"}}/></h1>
+        <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} />
       </div>
     );

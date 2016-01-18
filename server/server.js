@@ -18,7 +18,6 @@ var port = process.env.PORT || 4000;
 
 // require('./config/passport')(passport);
 
-
   app.use(morgan('dev'));
   app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
@@ -44,10 +43,12 @@ var port = process.env.PORT || 4000;
     res.sendFile(path.join(__dirname + '/../client/index.html'));
   });
 
-  app.get('/test',function(req,res,next){
-    res.status(200).send("Got it! :)");
+  app.post('/test',function(req,res,next){
+    console.log(req.body);
+    var text = { hello: 'hank' };
+    res.status(200).send(text);
   });
 
 app.listen(port, function(error){
-  (error) ? console.error(error) : console.log('Listening on port %s', port);
+  return (error) ? console.error(error) : console.log('Listening on port %s', port);
 });
