@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import BirthdayDropdown from './BirthdayDropdown'
 
 class PersonalQuestions extends Component {
 
@@ -23,6 +24,7 @@ class PersonalQuestions extends Component {
               <label>Male</label>
             </li>
           </ul>
+          <BirthdayDropdown state={this.props.state} actions={this.props.actions} />
         </div>
       )
   }
