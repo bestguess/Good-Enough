@@ -13,6 +13,16 @@ class PersonalQuestions extends Component {
           <input placeholder="Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} />
           <input placeholder="First Name" ref="firstname" onKeyUp={() => this.handleKeyUp('firstname')} />
           <input placeholder="Last Name" ref="lastname" onKeyUp={() => this.handleKeyUp('lastname')} />
+          <ul className="gender-buttons">
+            <li>
+              <input onClick={() => this.props.actions.saveInput('gender', 'female')} type='radio' name='user-gender'/>
+              <label>Female</label>
+            </li>
+            <li>
+              <input onClick={() => this.props.actions.saveInput('gender', 'male')} type='radio' name='user-gender'/>
+              <label>Male</label>
+            </li>
+          </ul>
         </div>
       )
   }
