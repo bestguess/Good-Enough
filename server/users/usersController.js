@@ -39,7 +39,7 @@ module.exports = {
     // If any of the fields are not submitted then send 400 
     // and list of missing fields
     if(failed){
-      res.status(400).send(failings);
+      res.status(400).send(JSON.parse(failings));
       next();
     }else{
       userObject.picture = photo.convertPhoto(userObject.picture, userObject.email);

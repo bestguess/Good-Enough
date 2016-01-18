@@ -4,7 +4,7 @@
   "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "nodemon server/server.js && webpack --watch",
     "test": "./node_modules/jshint/bin/jshint server/*.js && ./node_modules/mocha/bin/mocha server/test/serverAPI.js"
   },
   "repository": {
@@ -35,10 +35,14 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.3",
     "path": "^0.12.7",
+    "history": "^1.17.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
+    "react-router": "^1.0.3",
     "redux": "^3.0.0",
+    "redux-logger": "^2.0.2",
+    "redux-simple-router": "^2.0.3",
     "redux-thunk": "^0.1.0"
   },
   "devDependencies": {
@@ -53,6 +57,9 @@
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^0.14.0",
     "react-transform-hmr": "^1.0.0",
+    "redux-devtools": "^3.0.0",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-devtools-log-monitor": "^1.0.1",
     "style-loader": "^0.12.3",
     "superagent": "^1.6.1",
     "webpack": "^1.9.11",

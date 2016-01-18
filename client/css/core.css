@@ -32,7 +32,7 @@ h1 {
   padding: 20px 0px;
 }
 
-.question-form-submit-button button {
+.question-form-button {
   font-size: 16px;
   width: 250px;
   color: #fff;
@@ -54,6 +54,24 @@ h1 {
 	padding-top: 8px;
 }
 
+
+.start-test {
+  font-size: 20px;
+  font-weight: 500;
+  width: 350px;
+  color: #25b79a;
+  padding: 14px 0px;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid #25b79a;
+  border-radius: 3px;
+  margin: 0px auto;
+}
+
+
+
+
+/*** Question Buttons for Personality Test ***/
 .question-buttons {
   list-style-type: none;
   padding: 0px;
@@ -97,10 +115,64 @@ h1 {
   cursor:pointer;
 }
 
-/*.question-buttons label:hover {
-  background: #25b79a;
-  color: #fff;
-}*/
+
+
+
+/*** Gender Buttons for Personal Questions (SignUp) ***/
+.gender-buttons {
+  list-style-type: none;
+  padding: 0px;
+  height: 29px;
+  margin: 5px auto;
+  font-size: 14px;
+  width: 246px;
+}
+
+.gender-buttons li {
+  float: left;
+  margin: 0px;
+  width: 121px;
+  height: 29px;
+  position: relative;
+  border: 1px solid #e0e0e0;
+  border-radius: 0px;
+  text-align: center
+}
+
+.gender-buttons label, .gender-buttons input {
+  display:block;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  padding-top: 4px;
+}
+
+.gender-buttons input[type="radio"] {
+  opacity:0;
+  height: 100%;
+  width: 100%;
+  z-index:1;
+  padding: 0px;
+  margin: 0px;
+}
+
+.gender-buttons input[type="radio"]:checked + label,
+.Checked + label {
+  background: #e0e0e0;
+  color: #25b79a;
+}
+
+.question-buttons label {
+  border: 1px solid #e0e0e0;
+  border-radius: 3px; 
+  cursor: pointer;
+}
+
+
+
 
 .user-info-form {
   margin: 0px auto;
@@ -117,3 +189,43 @@ h1 {
   border: 1px solid #e0e0e0;
   border-radius: 3px;
 }
+
+
+/*** Progress Bar for SignUp ***/
+.progress-bar-container {
+  text-align: center;
+  padding: 10px;
+}
+
+progress {
+    background-color: transparent;
+    border: none;
+    border-radius: 9px;
+    height: 18px;
+    width: 500px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 9px;
+}
+progress::-webkit-progress-value {
+    background-color: #25b79a;
+    border-radius: 9px;
+}
+
+
+.birthday-dropdown {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.birthday-dropdown select {
+  background-color: #eef3f4;
+  border: 1px solid #e0e0e0;
+  font-size: 13px;
+  height: 30px;
+  margin: 0px 4px;
+}
+
+
