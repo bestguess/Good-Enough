@@ -3,7 +3,8 @@ import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../
 const initialState = {
   viewData: {
     signup: {
-      stage1: true,
+      stage0: true,
+      stage1: false,
       stage2: false,
       stage3: false,
       stage4: false,
@@ -81,20 +82,24 @@ export default function questions(state = initialState, action) {
       console.log('submitting survey')
       return state
     case CONTINUE_SURVEY:
-      if (state.viewData.signup.stage1) {
-        state.viewData.signup.stage1 = false;
-        state.viewData.signup.stage2 = true;
+      var newState = Object.assign({}, state)
+      if (newState.viewData.signup.stage0) {
+        newState.viewData.signup.stage0 = false;
+        newState.viewData.signup.stage1 = true;
+      } else if (state.viewData.signup.stage1) {
+        newState.viewData.signup.stage1 = false;
+        newState.viewData.signup.stage2 = true;
       } else if (state.viewData.signup.stage2) {
-        state.viewData.signup.stage2 = false;
-        state.viewData.signup.stage3 = true;
+        newState.viewData.signup.stage2 = false;
+        newState.viewData.signup.stage3 = true;
       } else if (state.viewData.signup.stage3) {
-        state.viewData.signup.stage3 = false;
-        state.viewData.signup.stage4 = true;
+        newState.viewData.signup.stage3 = false;
+        newState.viewData.signup.stage4 = true;
       } else if (state.viewData.signup.stage4) {
-        state.viewData.signup.stage4 = false;
-        state.viewData.signup.stage5 = true;
+        newState.viewData.signup.stage4 = false;
+        newState.viewData.signup.stage5 = true;
       }
-      return state
+      return newState
     default:
       console.log('returned default state')
     	return state
