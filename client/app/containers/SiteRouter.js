@@ -3,7 +3,7 @@ const { Link } = require('react-router');
 const { connect } = require('react-redux');
 const { routeActions } = require('redux-simple-router');
 
-function Test({ push, children }) {
+function SiteRouter({ push, children }) {
   return (
     <div>
       <header>
@@ -24,4 +24,4 @@ function Test({ push, children }) {
 module.exports = connect(
   null,
   { push: routeActions.push }
-)(Test);
+)(SiteRouter);
