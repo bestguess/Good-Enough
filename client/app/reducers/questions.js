@@ -16,6 +16,7 @@ const initialState = {
     password: undefined,
     firstname: undefined,
     lastname: undefined,
+    gender: undefined,
   	answers: []
   }
 }
@@ -49,7 +50,7 @@ export default function questions(state = initialState, action) {
         firstName: state.UserData.firstname,
         lastName: state.UserData.lastname,
         age: 27,
-        gender: 'male',
+        gender: state.UserData.gender,
         city: 'austin',
         interests: {discussion:["philosophy","psycology","programming"], activity:["beer","programming","coffee"]},
         type: type,
