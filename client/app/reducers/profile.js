@@ -1,7 +1,8 @@
 import { PROFILE } from '../constants/Profile_ActionTypes'
 
 const initialState = {
-   data: undefined
+  serverCall: false,
+  data: {}
 }
 
 export default function Profile(state = initialState, action) {
@@ -22,7 +23,7 @@ export default function Profile(state = initialState, action) {
         console.log('res: ', res)
         if (res.status >= 200 && res.status < 300) {
           console.log('original: ', res)
-          res.json().then(data => {console.log('jsoned data: ', data); state.data = data});
+          res.json().then(data => {console.log('jsoned data: ', data); newState.data = data;});
         } else {
           const error = new Error(res.statusText);
           error.res = res;
@@ -31,7 +32,8 @@ export default function Profile(state = initialState, action) {
       })
       .catch(error => { console.log('request failed', error)});
       console.log('profile state: ', state)
-      return state
+      newState.serverCall = true;
+      return newState
     default:
       console.log('hit default case: returning state')
     	return state
