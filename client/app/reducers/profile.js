@@ -1,19 +1,35 @@
 import { PROFILE } from '../constants/Profile_ActionTypes'
 
 const initialState = {
-   userData: {
-    email: undefined,
-    password: undefined,
-    firstname: undefined,
-    lastname: undefined,
-    gender: undefined
-  }
+   data: {}
 }
 
 export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
-      console.log('hit the profile action')
+      var userData = window.localStorage.getItem('GoodEnough')
+      fetch('http://localhost:4000/app/users/info', {
+        method: 'post',
+        headers: {
+          'mode': 'no-cors',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(JSON.parse(userData))
+      })
+      .then(res => {
+        console.log('res: ', res)
+        if (res.status >= 200 && res.status < 300) {
+          console.log('original: ', res)
+          res.json().then(data => {console.log('jsoned data: ', data); state.data = data});
+        } else {
+          const error = new Error(res.statusText);
+          error.res = res;
+          throw error;
+        }
+      })
+      .catch(error => { console.log('request failed', error)});
+
       return state
     default:
       console.log('hit default case: returning state')
