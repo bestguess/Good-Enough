@@ -23,7 +23,7 @@ var usersSchema = new Schema({
   personality: String,
   picture: String,
   places: [String],
-  matches: [String],
+  matches: [Schema.Types.Mixed],
   conversations: [Schema.Types.ObjectId],
   meet: [String]
 });
