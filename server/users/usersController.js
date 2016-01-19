@@ -1,7 +1,7 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
-var photo = require('../helpers/helpers.js');
+var helper = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
 
@@ -17,6 +17,8 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
+
+    user.birthday = helper.splitDate(user.birthday);
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -46,7 +48,7 @@ module.exports = {
         res.status(400).send(JSON.parse(failings));
         next();
       }else{
-        userObject.picture = photo.convertPhoto(userObject.picture, userObject.email);
+        userObject.picture = helper.convertPhoto(userObject.picture, userObject.email);
 
         bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
           userObject.password = hash;
