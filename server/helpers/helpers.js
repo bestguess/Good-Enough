@@ -20,10 +20,11 @@ module.exports = {
       if(err){
         res.status(500).send();
       }else if(!token){
+        console.log('failed to find token during isLoggedIn');
         res.status(401).send();
       }else{
-        res.status(200).send();
-        return next(req);
+        // res.status(200).send();
+        return next();
       }
     })
   }

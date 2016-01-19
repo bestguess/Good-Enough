@@ -2,6 +2,8 @@ var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
 var Token = db.Token;
+var helpers = require("../helpers/helpers.js");
+
 var photo = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
@@ -9,7 +11,7 @@ var bcrypt = require('bcrypt');
 var rand = function() {
   return Math.random().toString(36).substr(2);
 };
-var token = function() {
+var genToken = function() {
   return rand() + rand();
 };
 
@@ -26,8 +28,13 @@ module.exports = {
 
   getUser: function(req, res, next){
     var user = req.body;
+    // if(!helpers.isLoggedIn(user)){
+    //   res.status(401).send();
+    //   return next();
+    // }
     User.findOne({_id: user.id}, function(err, user){
       if(err){
+        console.log("couldn't find user in getUser", req)
         res.status(404).send(err);
         return next();
       }
@@ -87,7 +94,7 @@ module.exports = {
             next();
           }else{
 
-            var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+            var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
             newToken.save(function(err, token){
               if(err){
                 console.log('error saving token');
@@ -124,7 +131,7 @@ module.exports = {
               if(err){
                 res.status(500).send(err);
               }else if(!token){
-                var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+                var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
                 newToken.save(function(err, token){
                   if(err){
                     res.status(500).send(err);
