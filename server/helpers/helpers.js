@@ -15,12 +15,14 @@ module.exports = {
 
   // Authentication check
   isLoggedIn : function(req, res, next) {
-    Token.findOne({token: userToken, user_id: userId}, function(err, token){
+    user = req.body;
+    Token.findOne({token: user.token, user_id: user.id}, function(err, token){
       if(err){
         res.status(500).send();
       }else if(!token){
-        res.status(401).send().redirect('/');
+        res.status(401).send();
       }else{
+        res.status(200).send();
         return next(req);
       }
     })

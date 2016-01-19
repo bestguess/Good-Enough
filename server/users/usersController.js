@@ -31,7 +31,7 @@ module.exports = {
         res.status(404).send(err);
         return next();
       }
-
+      // purge password info from user object before sending
       delete user.password;
       res.status(200).send(user);
       next();
@@ -105,7 +105,7 @@ module.exports = {
   }
   },
 
-  signIn: function(req, res){
+  signIn: function(req, res, next){
     console.log('req.body: ', req.body);
     var user = req.body;
     // Requires that a user provides an email and password
@@ -148,13 +148,18 @@ module.exports = {
   
   logout: function(req, res){
     user = req.body;
-    Token.findOneAndRemove({id: user._id, token: user.token}, function(err){
+    console.log("user for logout", user.id);
+    Token.findOne({token: user.token, user_id: user.id}, function(err, token){
       if(err){
-        res.status(404).send();
+        res.status(500).send();
+      }else if(!token){
+        res.status(401).send();
       }else{
-        res.status(200).send("user session has been removed");
+        token.remove();
+        res.status(200).send();
+        return
       }
-    });
+    })
   }
   // ToDo: changePicture function
 
