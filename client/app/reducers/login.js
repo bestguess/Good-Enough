@@ -22,6 +22,7 @@ export default function LogIn(state = initialState, action) {
       fetch('http://localhost:4000/app/users/signin', {
         method: 'post',
         headers: {
+          'mode': 'no-cors',
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
