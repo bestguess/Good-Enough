@@ -1,12 +1,13 @@
 import { PROFILE } from '../constants/Profile_ActionTypes'
 
 const initialState = {
-   data: {}
+   data: undefined
 }
 
 export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
+      var newState = Object.assign({}, state)
       var userData = window.localStorage.getItem('GoodEnough')
       fetch('http://localhost:4000/app/users/info', {
         method: 'post',
@@ -29,7 +30,7 @@ export default function Profile(state = initialState, action) {
         }
       })
       .catch(error => { console.log('request failed', error)});
-
+      console.log('profile state: ', state)
       return state
     default:
       console.log('hit default case: returning state')
