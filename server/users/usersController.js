@@ -26,7 +26,7 @@ module.exports = {
 
   getUser: function(req, res, next){
     var user = req.body;
-    User.findOne({email: user.email}, function(err, user){
+    User.findOne({_id: user.id}, function(err, user){
       if(err){
         res.status(404).send(err);
         return next();
