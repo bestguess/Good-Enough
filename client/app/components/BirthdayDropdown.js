@@ -9,20 +9,20 @@ class BirthdayDropdown extends Component {
   	render() {
     	return (
 	        <div className="birthday-dropdown">
-				<select id="DOBMonth" onChange={() => this.submitDate("DOBMonth")}>
+				<select style={{float: "left"}} id="DOBMonth" onChange={() => this.submitDate("DOBMonth")}>
 					<option>Month</option>
-					<option value="1">January</option>
-					<option value="2">Febuary</option>
-					<option value="3">March</option>
-					<option value="4">April</option>
-					<option value="5">May</option>
-					<option value="6">June</option>
-					<option value="7">July</option>
-					<option value="8">August</option>
-					<option value="9">September</option>
-					<option value="10">October</option>
-					<option value="11">November</option>
-					<option value="12">December</option>
+					<option value="0">January</option>
+					<option value="1">Febuary</option>
+					<option value="2">March</option>
+					<option value="3">April</option>
+					<option value="4">May</option>
+					<option value="5">June</option>
+					<option value="6">July</option>
+					<option value="7">August</option>
+					<option value="8">September</option>
+					<option value="9">October</option>
+					<option value="10">November</option>
+					<option value="11">December</option>
 				</select>
 
 				<select id="DOBDay" onChange={() => this.submitDate("DOBDay")}>
@@ -60,8 +60,17 @@ class BirthdayDropdown extends Component {
 					<option value="31">31</option>
 				</select>
 
-				<select id="DOBYear" onChange={() => this.submitDate("DOBYear")}>
+				<select style={{float: "right"}} id="DOBYear" onChange={() => this.submitDate("DOBYear")}>
 					<option>Year</option>
+					<option value="2002">1993</option>
+					<option value="2001">1993</option>
+					<option value="2000">1993</option>
+					<option value="1999">1993</option>
+					<option value="1998">1993</option>
+					<option value="1997">1993</option>
+					<option value="1996">1993</option>
+					<option value="1995">1993</option>
+					<option value="1994">1993</option>
 					<option value="1993">1993</option>
 					<option value="1992">1992</option>
 					<option value="1991">1991</option>
@@ -109,6 +118,13 @@ class BirthdayDropdown extends Component {
 					<option value="1949">1949</option>
 					<option value="1948">1948</option>
 					<option value="1947">1947</option>
+					<option value="1946">1947</option>
+					<option value="1945">1947</option>
+					<option value="1944">1947</option>
+					<option value="1943">1947</option>
+					<option value="1942">1947</option>
+					<option value="1941">1947</option>
+					<option value="1940">1947</option>
 				</select>
 	        </div>
     	)
