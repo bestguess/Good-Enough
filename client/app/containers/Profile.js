@@ -5,11 +5,13 @@ import * as ProfileActions from '../actions/profile'
 import LogInForm from '../components/LogInForm'
 
 class Profile extends Component {
+
   render() {
+  this.props.actions.profile()
     const { state, actions } = this.props
     return (
       <div>
-        <h1>Profile Page Here</h1>
+        <p>Profile Page Here</p>
       </div>
     );
   }
