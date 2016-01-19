@@ -24,5 +24,13 @@ module.exports = {
         return next(req);
       }
     })
+  },
+
+  splitDate : function(birthday){
+    var bday = new Date(birthday);
+    var month = bday.getMonth();
+    var year = bday.getFullYear();
+    var date = bday.getDate();
+    return [year,month,date];
   }
 };
