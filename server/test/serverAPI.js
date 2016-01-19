@@ -20,7 +20,7 @@ describe('Homepage', function(){
   });
 })
 
-describe('User', function(){
+describe('A lonely user', function(){
  
   var testUser = { 
     "firstName": "Test",
@@ -30,11 +30,11 @@ describe('User', function(){
     "age": 29,
     "gender": "mixed",
     "type": "ISTP",
-    "personality": "{\"ie\":24,\"sn\":24,\"ft\":24,\"jp\":24}",
+    "personality": {ie:24,sn:24,ft:24,jp:24},
     "picture": "testdata.jpeg",
-    "places": ["Test Facility"],
+    "places": [ "Test Facility" ],
     "matches": [],
-    "interests": ["{\"discussion\":[\"testing\"],\"activity\":[\"testing\"]}"]
+    "interests": [ { discussion:[ "testing" ],activity:[ "testing" ]}]
   };
 
   it("should be able to register", function(done){
