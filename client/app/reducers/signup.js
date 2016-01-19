@@ -58,7 +58,7 @@ export default function SignUp(state = initialState, action) {
         password: state.userData.password,
         firstName: state.userData.firstname,
         lastName: state.userData.lastname,
-        birthday: new Date(state.userData.birthday.year, state.userData.birthday.month, state.userData.birthday.day),
+        birthday: new Date(state.userData.birthday.year, state.userData.birthday.month, state.userData.birthday.day).getTime(),
         gender: state.userData.gender,
         city: 'Austin',
         interests: {discussion:[], activity:[]},
