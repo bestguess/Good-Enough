@@ -17,7 +17,7 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
-    
+
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -25,7 +25,7 @@ module.exports = {
       // To be populated and submitted as a new user
       var userObject = {};
       // Required fields with which to create user
-      var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', age:'age', gender:'gender', 
+      var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', age:'age', gender:'gender',
           interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
       var failings = [];
       var failed = false;
@@ -40,14 +40,14 @@ module.exports = {
         }
       }
 
-      // If any of the fields are not submitted then send 400 
+      // If any of the fields are not submitted then send 400
       // and list of missing fields
       if(failed){
         res.status(400).send(JSON.parse(failings));
         next();
       }else{
         userObject.picture = photo.convertPhoto(userObject.picture, userObject.email);
-        
+
         bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
           userObject.password = hash;
           var newUser = User(userObject);
@@ -67,6 +67,7 @@ module.exports = {
   },
 
   signIn: function(req, res){
+    console.log('req.body: ', req.body);
     var user = req.body;
     // Requires that a user provides an email and password
     if(!user.email || !user.password){
@@ -90,10 +91,10 @@ module.exports = {
             res.status(200).send(userInfo);
           }
         });
-      });  
+      });
     }
   }
-  
+
   // ToDo: changePicture function
 
 };
