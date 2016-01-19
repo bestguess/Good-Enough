@@ -1,12 +1,14 @@
 import { PROFILE } from '../constants/Profile_ActionTypes'
 
 const initialState = {
-   data: {}
+  serverCall: false,
+  data: {}
 }
 
 export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
+      var newState = Object.assign({}, state)
       var userData = window.localStorage.getItem('GoodEnough')
       fetch('http://localhost:4000/app/users/info', {
         method: 'post',
@@ -21,7 +23,7 @@ export default function Profile(state = initialState, action) {
         console.log('res: ', res)
         if (res.status >= 200 && res.status < 300) {
           console.log('original: ', res)
-          res.json().then(data => {console.log('jsoned data: ', data); state.data = data});
+          res.json().then(data => {console.log('jsoned data: ', data); newState.data = data;});
         } else {
           const error = new Error(res.statusText);
           error.res = res;
@@ -29,8 +31,9 @@ export default function Profile(state = initialState, action) {
         }
       })
       .catch(error => { console.log('request failed', error)});
-
-      return state
+      console.log('profile state: ', state)
+      newState.serverCall = true;
+      return newState
     default:
       console.log('hit default case: returning state')
     	return state
