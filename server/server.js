@@ -34,7 +34,13 @@ webpack({}).run(function (err, stats) {
   app.use(webpackHotMiddleware(compiler));
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 
-  app.use(session({secret: 'joshkeepstalkingaboutfood'}));
+  // app.use(session({
+  //   secret: 'joshkeepstalkingaboutfood',
+  //   resave: true,
+  //   saveUninitialized: false
+  // }));
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
