@@ -20,8 +20,7 @@ h1 {
 
 .question-form {
 	width: 1100px;
-	background-color: #fff;
-	border: 1px solid #e0e0e0;
+  height: 340px;
 	border-radius: 3px;
 	padding: 10px;
 }
@@ -111,6 +110,7 @@ h1 {
 
 .question-buttons label {
   border:1px solid #e0e0e0;
+  background-color: #fff;
   border-radius: 3px; 
   cursor:pointer;
 }
@@ -122,17 +122,17 @@ h1 {
 .gender-buttons {
   list-style-type: none;
   padding: 0px;
-  height: 29px;
-  margin: 5px auto;
-  font-size: 14px;
-  width: 246px;
+  height: 30px;
+  margin: 15px auto;
+  font-size: 16px;
+  width: 250px;
 }
 
 .gender-buttons li {
   float: left;
   margin: 0px;
-  width: 121px;
-  height: 29px;
+  width: 123px;
+  height: 30px;
   position: relative;
   border: 1px solid #e0e0e0;
   border-radius: 0px;
@@ -176,18 +176,23 @@ h1 {
 
 .user-info-form {
   margin: 0px auto;
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px;
+  height: 340px;
 }
 
 .user-info-form input {
   clear: both;
-  font-size: 14px;
-  margin: 5px auto;
+  font-size: 16px;
+  margin: 15px auto;
   display: block;
-  padding: 5px 8px;
+  padding: 5px 3%;
+  width: 94%;
   outline: none;
-  width: 230px;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 
@@ -198,34 +203,43 @@ h1 {
 }
 
 progress {
-    background-color: transparent;
-    border: none;
-    border-radius: 9px;
-    height: 18px;
-    width: 500px;
+  background-color: transparent;
+  border: none;
+  border-radius: 9px;
+  height: 18px;
+  width: 500px;
 }
 
 progress::-webkit-progress-bar {
-    background-color: #e0e0e0;
-    border-radius: 9px;
+  background-color: #e0e0e0;
+  border-radius: 9px;
 }
 progress::-webkit-progress-value {
-    background-color: #25b79a;
-    border-radius: 9px;
+  background-color: #25b79a;
+  border-radius: 9px;
 }
 
 
 .birthday-dropdown {
   text-align: center;
-  margin-top: 8px;
+  margin: 15px auto;
+  border-bottom: 2px solid #e0e0e0;
+  height: 30px;
 }
 
-.birthday-dropdown select {
-  background-color: #eef3f4;
-  border: 1px solid #e0e0e0;
-  font-size: 13px;
-  height: 30px;
-  margin: 0px 4px;
+.birthday-dropdown select{
+  color: #7f8d8e;
+  font-size: 16px;
+  padding: .5em;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
+
+
+
 
 
