@@ -48,7 +48,6 @@ module.exports = {
         }
       }
 
-<<<<<<< HEAD
     // If any of the fields are not submitted then send 400 
     // and list of missing fields
     if(failed){
