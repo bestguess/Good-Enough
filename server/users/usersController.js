@@ -1,8 +1,8 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
+var helper = require('../helpers/helpers.js');
 var Token = db.Token;
-var photo = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
 
@@ -40,6 +40,7 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
+    
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
@@ -47,6 +48,8 @@ module.exports = {
         return next();
       }
     });
+
+    user.birthday = helper.splitDate(user.birthday);
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -69,43 +72,43 @@ module.exports = {
         }
       }
 
-    // If any of the fields are not submitted then send 400 
-    // and list of missing fields
-    if(failed){
-      res.status(400).send(JSON.stringify(failings));
-      next();
-    }else{
-      userObject.picture = photo.convertPhoto(userObject.picture, userObject.email);
-      
-      bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
-        userObject.password = hash;
-        var newUser = User(userObject);
-        newUser.save(function(err, user){
-          if(err){
-            console.log('err saving user')
-            res.status(500).send(err);
-            next();
-          }else{
+      // If any of the fields are not submitted then send 400
+      // and list of missing fields
+      if(failed){
+        res.status(400).send(JSON.parse(failings));
+        next();
+      }else{
+        userObject.picture = helper.convertPhoto(userObject.picture, userObject.email);
 
-            var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
-            newToken.save(function(err, token){
-              if(err){
-                console.log('error saving token');
-                res.status(500).send(err);
-                return next();
-              }
-              // If no save error then send the user's new id and token
-              res.status(201).send({id: user._id, token: token.token});
+        bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
+          userObject.password = hash;
+          var newUser = User(userObject);
+          newUser.save(function(err, user){
+            if(err){
+              console.log('err saving user')
+              res.status(500).send(err);
               next();
-            });
-          }
+            }else{
+
+              var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+              newToken.save(function(err, token){
+                if(err){
+                  console.log('error saving token');
+                  res.status(500).send(err);
+                  return next();
+                }
+                // If no save error then send the user's new id and token
+                res.status(201).send({id: user._id, token: token.token});
+                next();
+              });
+            }
+          });
         });
-      });
+      }
     }
-  }
   },
 
-  signIn: function(req, res){
+  signIn: function(req, res, next){
     console.log('req.body: ', req.body);
     var user = req.body;
     // Requires that a user provides an email and password

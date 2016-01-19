@@ -27,7 +27,7 @@ describe('A lonely user', function(){
     "lastName": "User",
     "email": "user@test.com",
     "password": "test",
-    "age": 29,
+    "birthday": 731916000000,
     "gender": "mixed",
     "type": "ISTP",
     "personality": {ie:24,sn:24,ft:24,jp:24},
