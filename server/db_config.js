@@ -18,7 +18,7 @@ var usersSchema = new Schema({
   age: Number,
   gender: String,
   city: String,
-  interests: [String],
+  interests: String,
   type: String,
   personality: String,
   picture: String,
