@@ -1,4 +1,4 @@
-import { LOG_IN } from '../constants/Login_ActionTypes'
+import { LOG_IN, SAVE_LOGIN_INPUT } from '../constants/Login_ActionTypes'
 
 const initialState = {
   userData: {
@@ -13,9 +13,11 @@ const initialState = {
 
 export default function LogIn(state = initialState, action) {
   switch (action.type) {
+    case SAVE_LOGIN_INPUT:
+      state.userData[action.input] = action.value
+      return state
     case LOG_IN:
 
-      return state
     default:
       console.log('hit default case: returning state')
     	return state
