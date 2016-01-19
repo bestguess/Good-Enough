@@ -17,6 +17,7 @@ const initialState = {
     firstname: undefined,
     lastname: undefined,
     gender: undefined,
+    birthday: {},
   	answers: []
   }
 }
@@ -31,7 +32,15 @@ export default function SignUp(state = initialState, action) {
       newState.userData.answers[action.id] = action.answer
   		return newState
     case SAVE_INPUT:
-      state.userData[action.input] = action.value
+      if(action.input === "DOBMonth") {
+        state.userData.birthday.month = action.value
+      } else if (action.input === "DOBDay") {
+        state.userData.birthday.day = action.value
+      } else if (action.input === "DOBYear") {
+        state.userData.birthday.year = action.value
+      } else {
+        state.userData[action.input] = action.value
+      }
       return state
     case SUBMIT_SURVEY:
       const newObj = {};
