@@ -1,12 +1,21 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
+var Token = db.Token;
 var photo = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
 
+var rand = function() {
+  return Math.random().toString(36).substr(2);
+};
+var token = function() {
+  return rand() + rand();
+};
 
 module.exports = {
+
+  
 
   getEmails: function(req, res){
     User.find({}, 'email', function(err, emails){
@@ -21,7 +30,7 @@ module.exports = {
     // To be populated and submitted as a new user
     var userObject = {};
     // Required fields with which to create user
-    var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', age:'age', gender:'gender', 
+    var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'age', gender:'gender', 
         interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
     var failings = [];
     var failed = false;
@@ -49,12 +58,24 @@ module.exports = {
         var newUser = User(userObject);
         newUser.save(function(err, user){
           if(err){
+            console.log('err saving user')
             res.status(500).send(err);
             next();
           }else{
-            // If no save error then send the user's new id
-            res.status(201).send(user._id);
-            next();
+
+            var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+            newToken.save(function(err, token){
+              if(err){
+                console.log('error saving token');
+                res.status(500).send(err);
+                return next();
+              }
+              // If no save error then send the user's new id
+              localStorage.setItem("token", token.token);
+              localStorage.setItem("id", user._id);
+              res.status(201).send(user._id);
+              next();
+            });
           }
         });
       });
@@ -76,20 +97,51 @@ module.exports = {
           }else if(!user){
             res.status(400).send("User does not exist");
           }else{
-            var userInfo = {};
-            userInfo.firstName = user.firstName;
-            userInfo.lastName = user.lastName;
-            userInfo.picture = user.picture;
-            userInfo.meet = user.meet;
+            Token.findOne({user_id: user._id}, function(err, token){
+              if(err){
+                res.status(500).send(err);
+              }else if(!token){
+                var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+                newToken.save(function(err, token){
+                  if(err){
+                    res.status(500).send(err);
+                    return next();
+                  }
+                  // If no save error then send the user's new id
+                  localStorage.setItem("token", token.token);
+                  localStorage.setItem("id", user._id);
+                  var userInfo = {};
+                  userInfo.firstName = user.firstName;
+                  userInfo.lastName = user.lastName;
+                  userInfo.picture = user.picture;
+                  userInfo.meet = user.meet;
 
-            // Send back info needed for home page
-            res.status(200).send(userInfo);
+                  // Send back info needed for home page
+                  res.status(200).send(userInfo);
+                  next();
+                });
+              }else{
+                res.status(302).send("user is already logged in");
+                next();
+              }
+            });
           }
         });
       });  
     }
-  }
+  },
   
+  logout: function(){
+    Token.findOneAndRemove({token: localStorage.getItem("token")}, function(err){
+      if(err){
+        res.status(404).send();
+      }else{
+        localStorage.removeItem("token");
+        localStorage.removeItem("id");
+        res.status(200).send();
+      }
+    });
+  }
   // ToDo: changePicture function
 
 };

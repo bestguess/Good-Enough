@@ -25,7 +25,11 @@ var port = process.env.PORT || 4000;
   app.use(webpackHotMiddleware(compiler));
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 
-  app.use(session({secret: 'joshkeepstalkingaboutfood'}));
+  app.use(session({
+    secret: 'joshkeepstalkingaboutfood',
+    resave: true,
+    saveUninitialized: false
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
 
