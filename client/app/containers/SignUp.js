@@ -16,9 +16,7 @@ class SignUp extends Component {
     }
     return (
       <div>
-      <Link to="/login">
         <h1 className="logo">{h1Content}</h1>
-      </Link>
         <QuestionForm state={state} actions={actions} />
       </div>
     );
