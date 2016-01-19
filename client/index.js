@@ -58,13 +58,13 @@ const finalCreateStore = compose(
 const store = finalCreateStore(rootReducer);
 
 // Unsure if the importance of these
-// if (module.hot) {
-//     // Enable Webpack hot module replacement for reducers
-//     module.hot.accept('./app/reducers', () => {
-//       const nextReducer = require('./app/reducers')
-//       store.replaceReducer(nextReducer)
-//     })
-//   }
+if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('./app/reducers', () => {
+      const nextReducer = require('./app/reducers')
+      store.replaceReducer(nextReducer)
+    })
+  }
 routerMiddleware.listenForReplays(store);
 
 

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import PersonalQuestions from './PersonalQuestions'
 import PersonalityTest from './PersonalityTest'
 import ProgressBar from './ProgressBar'
+const { Link } = require('react-router');
 
 class QuestionForm extends Component {
   render() {
@@ -18,7 +19,7 @@ class QuestionForm extends Component {
     } else {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalQuestions state={this.props.state} actions={this.props.actions} />
-      formButton = <button onClick={this.props.actions.submitSurvey} className="question-form-button">Submit</button>
+      formButton = <Link to="/profile"><button onClick={this.props.actions.submitSurvey} className="question-form-button">Submit</button></Link>
     }
 
     return (

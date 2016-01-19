@@ -79,7 +79,7 @@ export default function SignUp(state = initialState, action) {
           console.log(res)
           if (res.status >= 200 && res.status < 300) {
             console.log('original: ', res)
-            res.json().then(data => console.log('jsoned: ', data));
+            res.json().then(data => {console.log('jsoned: ', data); window.localStorage.setItem('GoodEnough', JSON.stringify(data))});
           } else {
             const error = new Error(res.statusText);
             error.res = res;

@@ -1,4 +1,6 @@
 var fs = require('fs');
+var db = require('../db_config.js');
+var Token = db.Token;
 
 module.exports = {
   convertPhoto : function(photo,email){
@@ -13,9 +15,15 @@ module.exports = {
 
   // Authentication check
   isLoggedIn : function(req, res, next) {
-    if(true) return next();
-    // If not authenticated then redirect to home
-    res.status(401).redirect('/');
+    Token.findOne({token: userToken, user_id: userId}, function(err, token){
+      if(err){
+        res.status(500).send();
+      }else if(!token){
+        res.status(401).send().redirect('/');
+      }else{
+        return next(req);
+      }
+    })
   },
 
   splitDate : function(birthday){
