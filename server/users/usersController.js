@@ -24,8 +24,29 @@ module.exports = {
     });
   },
 
+  getUser: function(req, res, next){
+    var user = req.body;
+    User.findOne({email: user.email}, function(err, user){
+      if(err){
+        res.status(404).send(err);
+        return next();
+      }
+
+      delete user.password;
+      res.status(200).send(user);
+      next();
+    })
+  },
+
   signUp: function(req, res, next){
     var user = req.body;
+    // If user already exists, interrupt chain
+    User.findOne({email: user.email}, function(err, user){
+      if(user){
+        res.status(403).send("user already exists");
+        return next();
+      }
+    });
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -73,10 +94,8 @@ module.exports = {
                 res.status(500).send(err);
                 return next();
               }
-              // If no save error then send the user's new id
-              localStorage.setItem("token", token.token);
-              localStorage.setItem("id", user._id);
-              res.status(201).send(user._id);
+              // If no save error then send the user's new id and token
+              res.status(201).send({id: user._id, token: token.token});
               next();
             });
           }
@@ -111,17 +130,9 @@ module.exports = {
                     res.status(500).send(err);
                     return next();
                   }
-                  // If no save error then send the user's new id
-                  localStorage.setItem("token", token.token);
-                  localStorage.setItem("id", user._id);
-                  var userInfo = {};
-                  userInfo.firstName = user.firstName;
-                  userInfo.lastName = user.lastName;
-                  userInfo.picture = user.picture;
-                  userInfo.meet = user.meet;
 
                   // Send back info needed for home page
-                  res.status(200).send(userInfo);
+                  res.status(200).send({id: user._id, token: token.token});
                   next();
                 });
               }else{
@@ -135,14 +146,13 @@ module.exports = {
     }
   },
   
-  logout: function(){
-    Token.findOneAndRemove({token: localStorage.getItem("token")}, function(err){
+  logout: function(req, res){
+    user = req.body;
+    Token.findOneAndRemove({id: user._id, token: user.token}, function(err){
       if(err){
         res.status(404).send();
       }else{
-        localStorage.removeItem("token");
-        localStorage.removeItem("id");
-        res.status(200).send();
+        res.status(200).send("user session has been removed");
       }
     });
   }
