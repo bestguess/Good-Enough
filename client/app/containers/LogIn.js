@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import LogInForm from '../components/LogInForm'
-import * as QuestionActions from '../actions/signup'
+import * as LogInActions from '../actions/login'
 //import LogIn action here maybe...
 
 class LogIn extends Component {
@@ -31,7 +31,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(QuestionActions, dispatch),
+    actions: bindActionCreators(LogInActions, dispatch),
   }
 }
 
