@@ -6,12 +6,18 @@ import LogInForm from '../components/LogInForm'
 
 class Profile extends Component {
 
+  testFunction() {
+    if(this.props.state.profile.data === undefined) {
+      this.props.actions.profile()
+    }
+  }
+
   render() {
-  this.props.actions.profile()
+    this.testFunction()
     const { state, actions } = this.props
     return (
       <div>
-        <p>Profile Page Here</p>
+        <p>profile</p>
       </div>
     );
   }
