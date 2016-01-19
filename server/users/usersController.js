@@ -17,7 +17,6 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
-    
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -25,7 +24,7 @@ module.exports = {
       // To be populated and submitted as a new user
       var userObject = {};
       // Required fields with which to create user
-      var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', age:'age', gender:'gender', 
+      var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'age', gender:'gender', 
           interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
       var failings = [];
       var failed = false;
