@@ -31,10 +31,11 @@ module.exports = {
         res.status(404).send(err);
         return next();
       }
-
-      delete user.password;
-      res.status(200).send(user);
-      next();
+      if(user){
+        delete user.password;
+        res.status(200).send(user);
+        next();
+      }
     })
   },
 
@@ -85,10 +86,17 @@ module.exports = {
           var newUser = User(userObject);
           newUser.save(function(err, user){
             if(err){
-              console.log('err saving user')
+              console.log(err,'err saving user')
               res.status(500).send(err);
               next();
             }else{
+              user.matches.forEach(function(score){
+                User.update({_id: score[0]}, {
+                  $push: { matches : [user._id,score[1]]}
+                } ,function(err) { 
+                  if(err) console.log(err);
+                });
+              });
 
               var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
               newToken.save(function(err, token){
