@@ -12,6 +12,8 @@ function SiteRouter({ push, children }) {
         <Link to="/">Home</Link>
         {' '}
         <Link to="/login">Login</Link>
+        {' '}
+        <Link to="/profile">Profile</Link>
       </header>
       <div style={{borderTop: '1px solid #e0e0e0'}}>{children}</div>
     </div>
