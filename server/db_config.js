@@ -15,7 +15,7 @@ var usersSchema = new Schema({
   lastName: String,
   email: String,
   password: String,
-  age: Number,
+  birthday: String,
   gender: String,
   city: String,
   interests: [String],
@@ -59,6 +59,12 @@ var authSchema = new Schema({
   }
 });
 
+var tokenSchema = new Schema({
+  user_id: String,
+  token: String,
+  dateCreated: String
+});
+
 // Generates a hash
 authSchema.methods.generateHash = function(password){
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
@@ -72,8 +78,10 @@ authSchema.methods.validPassword = function(password){
 var Users = mongoose.model('User', usersSchema);
 var Messages = mongoose.model('Message', messagesSchema);
 var Auth = mongoose.model('Auth', authSchema);
+var Token = mongoose.model('Token', tokenSchema);
 
 module.exports.Users = Users;
 module.exports.Messages = Messages;
 module.exports.Auth = Auth;
+module.exports.Token = Token;
 module.exports.db = db;
