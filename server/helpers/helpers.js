@@ -16,5 +16,13 @@ module.exports = {
     if(true) return next();
     // If not authenticated then redirect to home
     res.status(401).redirect('/');
+  },
+
+  splitDate : function(birthday){
+    var bday = new Date(birthday);
+    var month = bday.getMonth();
+    var year = bday.getFullYear();
+    var date = bday.getDate();
+    return [year,month,date];
   }
 };
