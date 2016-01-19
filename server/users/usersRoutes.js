@@ -7,6 +7,8 @@ module.exports = function(app) {
   app.post('/signup', usersController.signUp);
   app.post('/signin', usersController.signIn);
   app.post('/logout', usersController.logout);
-  app.post('/info', usersController.getUser);
   app.post('/auth', helpers.isLoggedIn);
+
+  app.post('/info', helpers.isLoggedIn);
+  app.post('/info', usersController.getUser);
 };
