@@ -16,6 +16,16 @@ var compiler = webpack(config);
 
 var port = process.env.PORT || 4000;
 
+webpack({}).run(function (err, stats) {
+  if (err) { throw err; }
+  console.log(stats.toString({
+    colors: true,
+    children: false,
+    chunks: true,
+    modules: true
+  }));
+});
+
   app.use(morgan('dev'));
   app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
