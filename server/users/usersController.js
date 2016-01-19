@@ -34,16 +34,27 @@ module.exports = {
         interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
     var failings = [];
     var failed = false;
+    match.user(user, matchMe);
 
-    for(var key in properties){
-      if(!user[key]){
-        failings.push(properties[key]);
-        failed = true;
-      }else{
-        if(key === 'interests' || key === 'personality') user[key] = JSON.stringify(user[key]);
-        userObject[key] = user[key];
+    function matchMe(data){
+      user.matches = data;
+      // To be populated and submitted as a new user
+      var userObject = {};
+      // Required fields with which to create user
+      var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', age:'age', gender:'gender', 
+          interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
+      var failings = [];
+      var failed = false;
+
+      for(var key in properties){
+        if(!user[key]){
+          failings.push(properties[key]);
+          failed = true;
+        }else{
+          if(key === 'interests' || key === 'personality') user[key] = JSON.stringify(user[key]);
+          userObject[key] = user[key];
+        }
       }
-    }
 
     // If any of the fields are not submitted then send 400 
     // and list of missing fields
@@ -78,9 +89,8 @@ module.exports = {
             });
           }
         });
-      });
+      }
     }
-
   },
 
   signIn: function(req, res){

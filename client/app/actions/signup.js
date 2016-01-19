@@ -1,4 +1,4 @@
-import * as types from '../constants/ActionTypes'
+import * as types from '../constants/SignUp_ActionTypes'
 
 export function answerQuestion(id, answer) {
 	return { type: types.ANSWER_QUESTION, id, answer }
