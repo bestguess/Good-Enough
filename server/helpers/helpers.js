@@ -15,8 +15,6 @@ module.exports = {
 
   // Authentication check
   isLoggedIn : function(req, res, next) {
-    var userToken = localStorage.getItem("token");
-    var userId = localStorage.getItem("id");
     Token.findOne({token: userToken, user_id: userId}, function(err, token){
       if(err){
         res.status(500).send();
