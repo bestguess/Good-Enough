@@ -4,20 +4,17 @@ import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
 import LogInForm from '../components/LogInForm'
 
+
+
 class Profile extends Component {
-
-  testFunction() {
-    if(this.props.state.profile.data === undefined) {
-      this.props.actions.profile()
-    }
-  }
-
   render() {
-    this.testFunction()
+    if(!this.props.state.profile.serverCall) this.props.actions.profile()
     const { state, actions } = this.props
     return (
       <div>
-        <p>profile</p>
+        <p>Email: {this.props.state.profile.data.email}</p>
+        <p>Name: {this.props.state.profile.data.firstName}</p>
+        <p>Gender: {this.props.state.profile.data.gender}</p>
       </div>
     );
   }
