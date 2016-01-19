@@ -47,6 +47,7 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
+    
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
@@ -54,6 +55,8 @@ module.exports = {
         return next();
       }
     });
+
+    user.birthday = helper.splitDate(user.birthday);
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -76,40 +79,46 @@ module.exports = {
         }
       }
 
-    // If any of the fields are not submitted then send 400 
-    // and list of missing fields
-    if(failed){
-      res.status(400).send(JSON.stringify(failings));
-      next();
-    }else{
-      userObject.picture = photo.convertPhoto(userObject.picture, userObject.email);
-      
-      bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
-        userObject.password = hash;
-        var newUser = User(userObject);
-        newUser.save(function(err, user){
-          if(err){
-            console.log('err saving user')
-            res.status(500).send(err);
-            next();
-          }else{
-
-            var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
-            newToken.save(function(err, token){
-              if(err){
-                console.log('error saving token');
-                res.status(500).send(err);
-                return next();
-              }
-              // If no save error then send the user's new id and token
-              res.status(201).send({id: user._id, token: token.token});
+      // If any of the fields are not submitted then send 400
+      // and list of missing fields
+      if(failed){
+        res.status(400).send(JSON.parse(failings));
+        next();
+      }else{
+        userObject.picture = helper.convertPhoto(userObject.picture, userObject.email);
+        bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
+          userObject.password = hash;
+          var newUser = User(userObject);
+          newUser.save(function(err, user){
+            if(err){
+              console.log(err,'err saving user')
+              res.status(500).send(err);
               next();
-            });
-          }
+            }else{
+              user.matches.forEach(function(score){
+                User.update({_id: score[0]}, {
+                  $push: { matches : [user._id,score[1]]}
+                } ,function(err) { 
+                  if(err) console.log(err);
+                });
+              });
+
+              var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+              newToken.save(function(err, token){
+                if(err){
+                  console.log('error saving token');
+                  res.status(500).send(err);
+                  return next();
+                }
+                // If no save error then send the user's new id and token
+                res.status(201).send({id: user._id, token: token.token});
+                next();
+              });
+            }
+          });
         });
-      });
+      }
     }
-  }
   },
 
   signIn: function(req, res, next){

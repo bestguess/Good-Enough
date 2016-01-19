@@ -87,11 +87,19 @@ module.exports = {
       }
     };
 
-    var ageLow = Math.round( user.age - (user.age/6) + (user.age/25) );
-    var ageHigh = Math.round( user.age + ( (user.age/3) * (user.age/52) ) )
+    var birthTime = new Date(user.birthday[0],user.birthday[1],user.birthday[2]);
+    var age = calculateAge(birthTime);
 
-    User.find({age: { $gt: ageLow, $lt: ageHigh}}, function(err, list){
-      
+    var ageLow = user.birthday[0] - (age - Math.round( age - (age/6) + (age/25)) );
+    var ageHigh = user.birthday[0] + (Math.round( age + ( (age/3) * (age/52) ) ) - age) ;
+
+    function calculateAge(birthday) { // birthday is a date
+      var ageDifMs = Date.now() - birthday.getTime();
+      var ageDate = new Date(ageDifMs); // miliseconds from epoch
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
+    User.find({birthday: { $gt: ageLow, $lt: ageHigh }}, function(err, list){
       function findMatch(user) {
         var type = user.type;
         var scores = user.personality;
@@ -114,7 +122,11 @@ module.exports = {
           }
         }
         for(var stat in result){
-          if(result[stat] !== 0) resultArr.push([stat, Number((100-((result[stat]/1.8)-10)).toFixed(2).toString()) ]);
+          var total = Math.min((100-((result[stat]/1.8)-10)).toFixed(2),100);
+          if(total > 60){
+            var tmp = [stat,total];
+            resultArr.push(tmp);
+          }
         }
 
         callback(resultArr);
