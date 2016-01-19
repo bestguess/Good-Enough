@@ -20,7 +20,7 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
 // Importing React Components
-import { SiteRouter, SignUp, LogIn } from './app/containers'
+import { SiteRouter, SignUp, LogIn, Profile } from './app/containers'
 
 // Importing Redux Reducer
 import rootReducer from './app/reducers'
@@ -77,6 +77,7 @@ render(
         	<Route path="/" component={SiteRouter}>
         		<IndexRoute component={SignUp}/>
           		<Route path="LogIn" component={LogIn}/>
+              <Route path="Profile" component={Profile}/>
         	</Route>
       </Router>
       <DevTools />
