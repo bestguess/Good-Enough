@@ -31,11 +31,13 @@ module.exports = {
         res.status(404).send(err);
         return next();
       }
+
       if(user){
         delete user.password;
         res.status(200).send(user);
         next();
       }
+
     })
   },
 
