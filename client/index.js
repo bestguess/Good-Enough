@@ -20,7 +20,7 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
 // Importing React Components
-import { SiteRouter, SignUp, LogIn } from './app/containers'
+import { SiteRouter, SignUp, LogIn, Profile } from './app/containers'
 
 // Importing Redux Reducer
 import rootReducer from './app/reducers'
@@ -58,13 +58,13 @@ const finalCreateStore = compose(
 const store = finalCreateStore(rootReducer);
 
 // Unsure if the importance of these
-if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./app/reducers', () => {
-      const nextReducer = require('./app/reducers')
-      store.replaceReducer(nextReducer)
-    })
-  }
+// if (module.hot) {
+//     // Enable Webpack hot module replacement for reducers
+//     module.hot.accept('./app/reducers', () => {
+//       const nextReducer = require('./app/reducers')
+//       store.replaceReducer(nextReducer)
+//     })
+//   }
 routerMiddleware.listenForReplays(store);
 
 
@@ -77,6 +77,7 @@ render(
         	<Route path="/" component={SiteRouter}>
         		<IndexRoute component={SignUp}/>
           		<Route path="LogIn" component={LogIn}/>
+              <Route path="Profile" component={Profile}/>
         	</Route>
       </Router>
       <DevTools />
