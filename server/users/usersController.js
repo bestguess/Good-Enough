@@ -48,6 +48,7 @@ module.exports = {
         }
       }
 
+<<<<<<< HEAD
     // If any of the fields are not submitted then send 400 
     // and list of missing fields
     if(failed){
@@ -87,6 +88,7 @@ module.exports = {
   },
 
   signIn: function(req, res){
+    console.log('req.body: ', req.body);
     var user = req.body;
     // Requires that a user provides an email and password
     if(!user.email || !user.password){
@@ -130,7 +132,7 @@ module.exports = {
             });
           }
         });
-      });  
+      });
     }
   },
   
