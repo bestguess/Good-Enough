@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import PersonalQuestions from './PersonalQuestions'
 import PersonalityTest from './PersonalityTest'
 import ProgressBar from './ProgressBar'
-const { Link } = require('react-router');
-const { routeActions } = require('redux-simple-router');
 
 function status(response) {  
   if (response.status >= 200 && response.status < 300) {  
@@ -81,14 +79,46 @@ class QuestionForm extends Component {
     var progressBar;
     if (this.props.state.signup.viewData.signup.stage0) {
       formButton = <button onClick={this.props.actions.continueSurvey} className="start-test">Start Test</button>
-    } else if (!this.props.state.signup.viewData.signup.stage5) {
+    } else if (this.props.state.signup.viewData.signup.stage1) {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalityTest state={this.props.state} actions={this.props.actions} />
-      formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button">Continue</button>
-    } else {
+      if (this.props.state.signup.validationChecks.stage1) {
+        formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button">Continue</button>
+      } else {
+        formButton = <button className="question-form-button invalid">Continue</button>
+      }
+    } else if (this.props.state.signup.viewData.signup.stage2) {
+      progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
+      content = <PersonalityTest state={this.props.state} actions={this.props.actions} />
+      if (this.props.state.signup.validationChecks.stage2) {
+        formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button">Continue</button>
+      } else {
+        formButton = <button className="question-form-button invalid">Continue</button>
+      }
+    } else if (this.props.state.signup.viewData.signup.stage3) {
+      progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
+      content = <PersonalityTest state={this.props.state} actions={this.props.actions} />
+      if (this.props.state.signup.validationChecks.stage3) {
+        formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button">Continue</button>
+      } else {
+        formButton = <button className="question-form-button invalid">Continue</button>
+      }
+    } else if (this.props.state.signup.viewData.signup.stage4) {
+      progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
+      content = <PersonalityTest state={this.props.state} actions={this.props.actions} />
+      if (this.props.state.signup.validationChecks.stage4) {
+        formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button">Continue</button>
+      } else {
+        formButton = <button className="question-form-button invalid">Continue</button>
+      }
+    } else if (this.props.state.signup.viewData.signup.stage5) {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalQuestions state={this.props.state} actions={this.props.actions} />
-      formButton = <button onClick={() => {this.submitUserInfo(this.props)}} className="question-form-button">Submit</button>
+      if (this.props.state.signup.validationChecks.clearForSubmit) {
+        formButton = <button onClick={() => {this.submitUserInfo(this.props)}} className="question-form-button">Submit</button>
+      } else {
+        formButton = <button className="question-form-button invalid">Submit</button>
+      }
     }
 
     return (

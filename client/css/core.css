@@ -45,6 +45,7 @@ h1 {
   padding: 20px 0px;
 }
 
+
 .question-form-button {
   font-size: 16px;
   width: 250px;
@@ -55,6 +56,10 @@ h1 {
   border: none;
   border-radius: 3px;
   margin: 0px auto;
+}
+
+.invalid {
+  opacity: 0.4;
 }
 
 .question {
