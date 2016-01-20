@@ -134,17 +134,31 @@ module.exports = {
           }else if(!user){
             res.status(400).send("User does not exist");
           }else{
-            var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
-            newToken.save(function(err, token){
+            Token.findOne({use_id: user._id}, function(err, token){
               if(err){
-                res.status(500).send(err);
+                res.status(500).send("Server error finding user token");
                 return next();
-              }
+              }else if(!token){
+                // If the user doesn't have a session stored, then generate and store one
+                var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
+                newToken.save(function(err, token){
+                  if(err){
+                    res.status(500).send(err);
+                    next();
+                  }
 
-              // Send back info needed for home page
-              res.status(200).send({id: user._id, token: token.token});
-              next();
-            });
+                  // Send back info needed for home page
+                  res.status(200).send({id: user._id, token: token.token});
+                  next();
+                });
+              }else{
+                // If user already has a session stored then return the stored
+                // token. Allows users to sign in from multiple devices while
+                // still logging out for all devices when user logs out from one.
+                res.status(200).send({id: user._id, token: token.token});
+                next();
+              }
+            })
           }
         });
       });
