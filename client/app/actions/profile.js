@@ -5,6 +5,10 @@ export function optimisticProfile(newData) {
 	return { type: types.PROFILE, newData }
 }
 
+// export function profile(data) {
+// 	return { type: types.PROFILE, data }
+// }
+
 export function logout() {
 	return { type: types.LOGOUT }
 }

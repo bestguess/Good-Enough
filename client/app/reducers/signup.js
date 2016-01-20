@@ -18,7 +18,15 @@ const initialState = {
     lastname: undefined,
     gender: undefined,
     birthday: {},
-  	answers: []
+  	answers: {},
+    clearForSubmit: false
+  },
+  validationChecks: {
+    stage1: false,
+    stage2: false,
+    stage3: false,
+    stage4: false,
+    clearForSubmit: false
   }
 }
 
@@ -30,80 +38,61 @@ export default function SignUp(state = initialState, action) {
     case ANSWER_QUESTION:
       var newState = Object.assign({}, state)
       newState.userData.answers[action.id] = action.answer
+      // Validation Checks
+      var x = newState.userData
+      var y = newState.validationChecks
+      var a = x.answers
+      if (!y.stage1) {
+        if (a[1] && a[2] && a[3] && a[4] && a[5] && a[6] && a[7] && a[8]) y.stage1 = true;
+      } else if (!y.stage2) {
+        if (a[9] && a[10] && a[11] && a[12] && a[13] && a[14] && a[15] && a[16]) y.stage2 = true;
+      } else if (!y.stage3) {
+        if (a[17] && a[18] && a[19] && a[20] && a[21] && a[22] && a[23] && a[24]) y.stage3 = true;
+      } else if (!y.stage4) {
+        if (a[25] && a[26] && a[27] && a[28] && a[29] && a[30] && a[31] && a[32]) y.stage4 = true;
+      }
   		return newState
 
 
+
     case SAVE_INPUT:
+      var newState = Object.assign({}, state)
       if(action.input === "DOBMonth") {
-        state.userData.birthday.month = action.value
+        newState.userData.birthday.month = action.value
       } else if (action.input === "DOBDay") {
-        state.userData.birthday.day = action.value
+        newState.userData.birthday.day = action.value
       } else if (action.input === "DOBYear") {
-        state.userData.birthday.year = action.value
+        newState.userData.birthday.year = action.value
       } else {
-        state.userData[action.input] = action.value
+        newState.userData[action.input] = action.value
       }
-      return state
+      // Validation Checks
+      var x = newState.userData
+      var y = newState.validationChecks
+      var bdLength = Object.keys(x.birthday).length
+      if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.clearForSubmit = true;
+      return newState
+
 
 
     case SUBMIT_SURVEY:
-      const newObj = {};
+      var newState = Object.assign({}, state)
+      // Set token data into local storage
+      window.localStorage.setItem('GoodEnough', JSON.stringify(action.tokenData))
+      // Reset signup stages & validation checks for if user logs out in current session
+      newState.viewData.signup.stage0 = true;
+      newState.viewData.signup.stage1 = false;
+      newState.viewData.signup.stage2 = false;
+      newState.viewData.signup.stage3 = false;
+      newState.viewData.signup.stage4 = false;
+      newState.viewData.signup.stage5 = false;
+      newState.validationChecks.stage1 = false;
+      newState.validationChecks.stage2 = false;
+      newState.validationChecks.stage3 = false;
+      newState.validationChecks.stage4 = false;
+      newState.validationChecks.clearForSubmit = false;
+      return newState
 
-      // Calculate Personality Test results
-      var type = "";
-      newObj.IE = 30 - state.userData.answers[3] - state.userData.answers[7] - state.userData.answers[11] + state.userData.answers[15] - state.userData.answers[19] + state.userData.answers[23] + state.userData.answers[27] - state.userData.answers[31];
-      newObj.SN = 12 + state.userData.answers[4] + state.userData.answers[8] + state.userData.answers[12] + state.userData.answers[16] + state.userData.answers[20] - state.userData.answers[24] - state.userData.answers[28] + state.userData.answers[32];
-      newObj.FT = 30 - state.userData.answers[2] + state.userData.answers[6] + state.userData.answers[10] - state.userData.answers[14] - state.userData.answers[18] + state.userData.answers[22] - state.userData.answers[26] - state.userData.answers[30];
-      newObj.JP = 18 + state.userData.answers[1] + state.userData.answers[5] - state.userData.answers[9] + state.userData.answers[13] - state.userData.answers[17] + state.userData.answers[21] - state.userData.answers[25] + state.userData.answers[29];
-      type += newObj.IE<24 ? "I" : "E";
-      type += newObj.SN<24 ? "S" : "N";
-      type += newObj.FT<24 ? "F" : "T";
-      type += newObj.JP<24 ? "J" : "P";
-
-      // Organize SignUp data to send to server
-      var userData = {
-        email: state.userData.email,
-        password: state.userData.password,
-        firstName: state.userData.firstname,
-        lastName: state.userData.lastname,
-        birthday: new Date(state.userData.birthday.year, state.userData.birthday.month, state.userData.birthday.day).getTime(),
-        gender: state.userData.gender,
-        city: 'Austin',
-        interests: {discussion:[], activity:[]},
-        type: type,
-        personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
-        picture: "photoGoesHere",
-        places: [],
-        matches: []
-      }
-
-      // Make server request for new signup
-      fetch('http://localhost:4000/app/users/signup', {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData) })
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            res.json().then(data => {console.log('Server Response: ', data); window.localStorage.setItem('GoodEnough', JSON.stringify(data))});
-          } else {
-            const error = new Error(res.statusText);
-            error.res = res;
-            throw error;
-          }
-        })
-        .catch(error => { console.log('request failed', error); });
-
-      // Reset signup stages for if user logs out in current session
-      state.viewData.signup.stage0 = true;
-      state.viewData.signup.stage1 = false;
-      state.viewData.signup.stage2 = false;
-      state.viewData.signup.stage3 = false;
-      state.viewData.signup.stage4 = false;
-      state.viewData.signup.stage5 = false;
-      return state
 
 
     case CONTINUE_SURVEY:
@@ -125,6 +114,7 @@ export default function SignUp(state = initialState, action) {
         newState.viewData.signup.stage5 = true;
       }
       return newState
+
 
 
     default:

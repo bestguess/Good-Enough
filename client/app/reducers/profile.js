@@ -1,8 +1,7 @@
 import { PROFILE, LOGOUT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
-  serverCall: false,
-  data: {}
+
 }
 
 export default function Profile(state = initialState, action) {
@@ -10,8 +9,9 @@ export default function Profile(state = initialState, action) {
     case PROFILE:
       var newState = Object.assign({}, state)
       newState.data = action.newData;
-      newState.serverCall = true;
+      // newState.data = action.data
       return newState
+
     case LOGOUT:
       var newState = Object.assign({}, state)
 
