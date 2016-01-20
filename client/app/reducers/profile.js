@@ -8,7 +8,8 @@ export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
       var newState = Object.assign({}, state)
-      newState.data = action.data
+      newState.data = action.newData;
+      // newState.data = action.data
       return newState
 
     case LOGOUT:
@@ -34,7 +35,7 @@ export default function Profile(state = initialState, action) {
       newState.data = {};
       newState.serverCall = false;
       return newState
-      
+
 
     default:
     	return state
