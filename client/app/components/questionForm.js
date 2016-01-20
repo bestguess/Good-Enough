@@ -5,6 +5,7 @@ import ProgressBar from './ProgressBar'
 const { Link } = require('react-router');
 
 class QuestionForm extends Component {
+
   render() {
     var content;
     var formButton;
