@@ -6,16 +6,7 @@ var helpers = require("../helpers/helpers.js");
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
 
-var rand = function() {
-  return Math.random().toString(36).substr(2);
-};
-var genToken = function() {
-  return rand() + rand();
-};
-
 module.exports = {
-
-  
 
   getEmails: function(req, res){
     User.find({}, 'email', function(err, emails){
@@ -26,10 +17,7 @@ module.exports = {
 
   getUser: function(req, res, next){
     var user = req.body;
-    // if(!helpers.isLoggedIn(user)){
-    //   res.status(401).send();
-    //   return next();
-    // }
+
     User.findOne({_id: user.id}, function(err, user){
       if(err){
         console.log("couldn't find user in getUser", req)
@@ -95,23 +83,12 @@ module.exports = {
             }else{
               user.matches.forEach(function(score){
                 User.update({_id: score[0]}, {
-                  $push: { matches : [user._id,score[1]]}
+                  $push: { matches : [user._id,score[1],score[2],score[3],score[4],score[5]]}
                 } ,function(err) { 
                   if(err) console.log(err);
                 });
               });
-
-              var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
-              newToken.save(function(err, token){
-                if(err){
-                  console.log('error saving token');
-                  res.status(500).send(err);
-                  return next();
-                }
-                // If no save error then send the user's new id and token
-                res.status(201).send({id: user._id, token: token.token});
-                next();
-              });
+              helpers.createToken(req, res, next, user, helpers.genToken, "signup");
             }
           });
         });
@@ -120,7 +97,6 @@ module.exports = {
   },
 
   signIn: function(req, res, next){
-    //console.log('req.body: ', req.body);
     var user = req.body;
     // Requires that a user provides an email and password
     if(!user.email || !user.password){
@@ -140,17 +116,7 @@ module.exports = {
                 return next();
               }else if(!token){
                 // If the user doesn't have a session stored, then generate and store one
-                var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
-                newToken.save(function(err, token){
-                  if(err){
-                    res.status(500).send(err);
-                    next();
-                  }
-
-                  // Send back info needed for home page
-                  res.status(200).send({id: user._id, token: token.token});
-                  next();
-                });
+                helpers.createToken(req, res, next, user, helpers.genToken);
               }else{
                 // If user already has a session stored then return the stored
                 // token. Allows users to sign in from multiple devices while
