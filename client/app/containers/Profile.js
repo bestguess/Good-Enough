@@ -17,6 +17,19 @@ class Nav extends Component {
   }
 }
 
+class ProfileData extends Component {
+  render() {
+    const { state, actions } = this.props
+    return (
+      <div className="profile-page-data">
+        <p>Email: {this.props.state.profile.data.email}</p>
+        <p>Name: {this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</p>
+        <p>Gender: {this.props.state.profile.data.gender}</p>
+      </div>
+    )
+  }
+}
+
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -32,9 +45,7 @@ class Profile extends Component {
     return (
       <div>
         <Nav state={this.props.state} actions={this.props.actions} />
-        <p>Email: {this.props.state.profile.data.email}</p>
-        <p>Name: {this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</p>
-        <p>Gender: {this.props.state.profile.data.gender}</p>
+        <ProfileData state={this.props.state} actions={this.props.actions} />
       </div>
     );
   }
