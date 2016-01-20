@@ -5,25 +5,25 @@ class QuestionButtons extends Component {
     return (
       <span style={{float:'left', textAlign:'center', width:'20%'}}>
         <ul className="question-buttons">
-          <li>
+          <li className="question-button-large">
             <input onClick={() => this.props.answer(this.props.choices[0])} type='radio' value='1' name={this.props.id + 'question'}/>
-            <label>1</label>
+            <label></label>
           </li>
-          <li>
+          <li className="question-button-medium">
             <input onClick={() => this.props.answer(this.props.choices[1])} type='radio' value='2' name={this.props.id + 'question'}/>
-            <label>2</label>
+            <label></label>
           </li>
-          <li>
+          <li className="question-button-small">
             <input onClick={() => this.props.answer(this.props.choices[2])} type='radio' value='3' name={this.props.id + 'question'}/>
-            <label>3</label>
+            <label></label>
           </li>
-          <li>
+          <li className="question-button-medium">
             <input onClick={() => this.props.answer(this.props.choices[3])} type='radio' value='4' name={this.props.id + 'question'}/>
-            <label>4</label>
+            <label></label>
           </li>
-          <li>
+          <li className="question-button-large">
             <input onClick={() => this.props.answer(this.props.choices[4])} type='radio' value='5' name={this.props.id + 'question'}/>
-            <label>5</label>
+            <label></label>
           </li>
         </ul>
       </span>
