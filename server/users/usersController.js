@@ -56,7 +56,7 @@ module.exports = {
       }
     });
 
-    user.birthday = helper.splitDate(user.birthday);
+    user.birthday = helpers.splitDate(user.birthday);
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -85,7 +85,7 @@ module.exports = {
         res.status(400).send(JSON.parse(failings));
         next();
       }else{
-        userObject.picture = helper.convertPhoto(userObject.picture, userObject.email);
+        userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
         bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
           userObject.password = hash;
           var newUser = User(userObject);
@@ -103,7 +103,7 @@ module.exports = {
                 });
               });
 
-              var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+              var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
               newToken.save(function(err, token){
                 if(err){
                   console.log('error saving token');
@@ -136,25 +136,16 @@ module.exports = {
           }else if(!user){
             res.status(400).send("User does not exist");
           }else{
-            Token.findOne({user_id: user._id}, function(err, token){
+            var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
+            newToken.save(function(err, token){
               if(err){
                 res.status(500).send(err);
-              }else if(!token){
-                var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
-                newToken.save(function(err, token){
-                  if(err){
-                    res.status(500).send(err);
-                    return next();
-                  }
-
-                  // Send back info needed for home page
-                  res.status(200).send({id: user._id, token: token.token});
-                  next();
-                });
-              }else{
-                res.status(302).send("user is already logged in");
-                next();
+                return next();
               }
+
+              // Send back info needed for home page
+              res.status(200).send({id: user._id, token: token.token});
+              next();
             });
           }
         });
