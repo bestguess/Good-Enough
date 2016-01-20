@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
 import Nav from '../components/Nav'
 
-function status(response) {  
-  if (response.status >= 200 && response.status < 300) {  
-    return Promise.resolve(response)  
-  } else {  
-    return Promise.reject(new Error(response.statusText))  
-  }  
+function status(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return Promise.resolve(response)
+  } else {
+    return Promise.reject(new Error(response.statusText))
+  }
 }
 
 function json(response) { return response.json() }
@@ -20,14 +20,14 @@ function getUserInfo(props) {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(JSON.parse(userData))
-        })  
-    .then(status)  
-    .then(json)  
-    .then(function(data) {  
-      console.log('Request succeeded with JSON response', data); 
+        })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      console.log('Request succeeded with JSON response', data);
       props.actions.profile(data)
-    }).catch(function(error) {  
-      console.log('Request failed', error);  
+    }).catch(function(error) {
+      console.log('Request failed', error);
     });
 }
 
@@ -69,7 +69,8 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    getUserInfo(this.props)
+    this.props.actions.profile()
+    // getUserInfo(this.props)
   }
 
   reRoute(props) {

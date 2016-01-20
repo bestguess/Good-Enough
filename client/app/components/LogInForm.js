@@ -8,7 +8,7 @@ class LogInForm extends Component {
   }
 
   render() {
-    var formButton = <button onClick={this.props.actions.logIn} className="question-form-button"><Link to="/profile">Submit</Link></button>
+    var formButton = <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
 
     return (
       <div>
