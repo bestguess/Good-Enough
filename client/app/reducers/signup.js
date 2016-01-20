@@ -1,6 +1,7 @@
 import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/SignUp_ActionTypes'
 
 const initialState = {
+  check: false,
   viewData: {
     signup: {
       stage0: true,
@@ -47,64 +48,18 @@ export default function SignUp(state = initialState, action) {
 
 
     case SUBMIT_SURVEY:
-      const newObj = {};
-
-      // Calculate Personality Test results
-      var type = "";
-      newObj.IE = 30 - state.userData.answers[3] - state.userData.answers[7] - state.userData.answers[11] + state.userData.answers[15] - state.userData.answers[19] + state.userData.answers[23] + state.userData.answers[27] - state.userData.answers[31];
-      newObj.SN = 12 + state.userData.answers[4] + state.userData.answers[8] + state.userData.answers[12] + state.userData.answers[16] + state.userData.answers[20] - state.userData.answers[24] - state.userData.answers[28] + state.userData.answers[32];
-      newObj.FT = 30 - state.userData.answers[2] + state.userData.answers[6] + state.userData.answers[10] - state.userData.answers[14] - state.userData.answers[18] + state.userData.answers[22] - state.userData.answers[26] - state.userData.answers[30];
-      newObj.JP = 18 + state.userData.answers[1] + state.userData.answers[5] - state.userData.answers[9] + state.userData.answers[13] - state.userData.answers[17] + state.userData.answers[21] - state.userData.answers[25] + state.userData.answers[29];
-      type += newObj.IE<24 ? "I" : "E";
-      type += newObj.SN<24 ? "S" : "N";
-      type += newObj.FT<24 ? "F" : "T";
-      type += newObj.JP<24 ? "J" : "P";
-
-      // Organize SignUp data to send to server
-      var userData = {
-        email: state.userData.email,
-        password: state.userData.password,
-        firstName: state.userData.firstname,
-        lastName: state.userData.lastname,
-        birthday: new Date(state.userData.birthday.year, state.userData.birthday.month, state.userData.birthday.day).getTime(),
-        gender: state.userData.gender,
-        city: 'Austin',
-        interests: {discussion:[], activity:[]},
-        type: type,
-        personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
-        picture: "photoGoesHere",
-        places: [],
-        matches: []
-      }
-      console.log(userData)
-      // Make server request for new signup
-      fetch('http://localhost:4000/app/users/signup', {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData) })
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            res.json().then(data => {console.log('Server Response: ', data); window.localStorage.setItem('GoodEnough', JSON.stringify(data))});
-
-          } else {
-            const error = new Error(res.statusText);
-            error.res = res;
-            throw error;
-          }
-        })
-        .catch(error => { console.log('request failed', error); });
+      window.localStorage.setItem('GoodEnough', JSON.stringify(action.tokenData))
+      var newState = Object.assign({}, state)
+      newState.check = true;
 
       // Reset signup stages for if user logs out in current session
-      state.viewData.signup.stage0 = true;
-      state.viewData.signup.stage1 = false;
-      state.viewData.signup.stage2 = false;
-      state.viewData.signup.stage3 = false;
-      state.viewData.signup.stage4 = false;
-      state.viewData.signup.stage5 = false;
-      return state
+      newState.viewData.signup.stage0 = true;
+      newState.viewData.signup.stage1 = false;
+      newState.viewData.signup.stage2 = false;
+      newState.viewData.signup.stage3 = false;
+      newState.viewData.signup.stage4 = false;
+      newState.viewData.signup.stage5 = false;
+      return newState
 
 
     case CONTINUE_SURVEY:

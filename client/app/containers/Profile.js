@@ -12,30 +12,24 @@ function status(response) {
   }  
 }
 
-function json(response) {  
-  return response.json()  
-}
+function json(response) { return response.json() }
 
 function getUserInfo(props) {
-    var userData = window.localStorage.getItem('GoodEnough')
-          fetch('http://localhost:4000/app/users/info', {
-                  method: 'post',
-                  headers: {
-                    'mode': 'no-cors',
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(JSON.parse(userData))
-                })  
-      .then(status)  
-      .then(json)  
-      .then(function(data) {  
-        console.log('Request succeeded with JSON response', data); 
-        props.actions.profile(data)
-      }).catch(function(error) {  
-        console.log('Request failed', error);  
-      });
-  }
+  var userData = window.localStorage.getItem('GoodEnough')
+  fetch('http://localhost:4000/app/users/info', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(JSON.parse(userData))
+        })  
+    .then(status)  
+    .then(json)  
+    .then(function(data) {  
+      console.log('Request succeeded with JSON response', data); 
+      props.actions.profile(data)
+    }).catch(function(error) {  
+      console.log('Request failed', error);  
+    });
+}
 
 class ProfileData extends Component {
   render() {
@@ -60,7 +54,6 @@ class Profile extends Component {
   }
 
   render() {
-    console.log('rendering: ', this)
     if (!this.props.state.profile.data) {
       return <h1><i>Loading profile...</i></h1>
     }
