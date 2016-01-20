@@ -76,7 +76,7 @@ export default function SignUp(state = initialState, action) {
         places: [],
         matches: []
       }
-
+      console.log(userData)
       // Make server request for new signup
       fetch('http://localhost:4000/app/users/signup', {
         method: 'post',
@@ -88,6 +88,7 @@ export default function SignUp(state = initialState, action) {
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             res.json().then(data => {console.log('Server Response: ', data); window.localStorage.setItem('GoodEnough', JSON.stringify(data))});
+
           } else {
             const error = new Error(res.statusText);
             error.res = res;
