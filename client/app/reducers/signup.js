@@ -1,7 +1,6 @@
 import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/SignUp_ActionTypes'
 
 const initialState = {
-  check: false,
   viewData: {
     signup: {
       stage0: true,
@@ -19,7 +18,15 @@ const initialState = {
     lastname: undefined,
     gender: undefined,
     birthday: {},
-  	answers: []
+  	answers: {},
+    clearForSubmit: false
+  },
+  validationChecks: {
+    stage1: false,
+    stage2: false,
+    stage3: false,
+    stage4: false,
+    clearForSubmit: false
   }
 }
 
@@ -31,27 +38,47 @@ export default function SignUp(state = initialState, action) {
     case ANSWER_QUESTION:
       var newState = Object.assign({}, state)
       newState.userData.answers[action.id] = action.answer
+      // Validation Checks
+      var x = newState.userData
+      var y = newState.validationChecks
+      var a = x.answers
+      if (!y.stage1) {
+        if (a[1] && a[2] && a[3] && a[4] && a[5] && a[6] && a[7] && a[8]) y.stage1 = true;
+      } else if (!y.stage2) {
+        if (a[9] && a[10] && a[11] && a[12] && a[13] && a[14] && a[15] && a[16]) y.stage2 = true;
+      } else if (!y.stage3) {
+        if (a[17] && a[18] && a[19] && a[20] && a[21] && a[22] && a[23] && a[24]) y.stage3 = true;
+      } else if (!y.stage4) {
+        if (a[25] && a[26] && a[27] && a[28] && a[29] && a[30] && a[31] && a[32]) y.stage4 = true;
+      }
   		return newState
 
 
+
     case SAVE_INPUT:
+      var newState = Object.assign({}, state)
       if(action.input === "DOBMonth") {
-        state.userData.birthday.month = action.value
+        newState.userData.birthday.month = action.value
       } else if (action.input === "DOBDay") {
-        state.userData.birthday.day = action.value
+        newState.userData.birthday.day = action.value
       } else if (action.input === "DOBYear") {
-        state.userData.birthday.year = action.value
+        newState.userData.birthday.year = action.value
       } else {
-        state.userData[action.input] = action.value
+        newState.userData[action.input] = action.value
       }
-      return state
+      // Validation Checks
+      var x = newState.userData
+      var y = newState.validationChecks
+      var bdLength = Object.keys(x.birthday).length
+      if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.clearForSubmit = true;
+      return newState
+
 
 
     case SUBMIT_SURVEY:
-      window.localStorage.setItem('GoodEnough', JSON.stringify(action.tokenData))
       var newState = Object.assign({}, state)
-      newState.check = true;
-
+      // Set token data into local storage
+      window.localStorage.setItem('GoodEnough', JSON.stringify(action.tokenData))
       // Reset signup stages for if user logs out in current session
       newState.viewData.signup.stage0 = true;
       newState.viewData.signup.stage1 = false;
@@ -60,6 +87,7 @@ export default function SignUp(state = initialState, action) {
       newState.viewData.signup.stage4 = false;
       newState.viewData.signup.stage5 = false;
       return newState
+
 
 
     case CONTINUE_SURVEY:
@@ -81,6 +109,7 @@ export default function SignUp(state = initialState, action) {
         newState.viewData.signup.stage5 = true;
       }
       return newState
+
 
 
     default:
