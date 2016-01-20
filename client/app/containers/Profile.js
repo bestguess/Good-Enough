@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
 import LogInForm from '../components/LogInForm'
+const { Link } = require('react-router');
 
 class Nav extends Component {
   render() {
@@ -10,7 +11,7 @@ class Nav extends Component {
     return (
       <nav>
         <span>Good Enough</span>
-        <span className="nav-signout">Sign Out</span>
+        <Link to="/"><span className="nav-logout" onClick={this.props.actions.logout}>Log Out</span></Link>
       </nav>
     )
   }
@@ -22,11 +23,11 @@ class Profile extends Component {
   }
 
   componentWillMount() {    
-    if(!this.props.state.profile.serverCall) this.props.actions.profile()
+    this.props.actions.profile()
   }
 
   render() {
-    console.log('rendering')
+    console.log('rendering: ', this)
     const { state, actions } = this.props
     return (
       <div>
