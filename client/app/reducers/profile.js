@@ -50,7 +50,6 @@ export default function Profile(state = initialState, action) {
 
 
     default:
-      console.log('hit default case: returning state')
     	return state
   }
 }
