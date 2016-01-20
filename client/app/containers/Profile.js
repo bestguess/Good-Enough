@@ -22,7 +22,7 @@ class Profile extends Component {
     super(props)
   }
 
-  componentWillMount() {    
+  componentWillMount() {
     this.props.actions.profile()
   }
 
