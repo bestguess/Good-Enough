@@ -1,15 +1,17 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
-var helper = require('../helpers/helpers.js');
 var Token = db.Token;
+var helpers = require("../helpers/helpers.js");
+
+var photo = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
 
 var rand = function() {
   return Math.random().toString(36).substr(2);
 };
-var token = function() {
+var genToken = function() {
   return rand() + rand();
 };
 
@@ -26,18 +28,20 @@ module.exports = {
 
   getUser: function(req, res, next){
     var user = req.body;
+    // if(!helpers.isLoggedIn(user)){
+    //   res.status(401).send();
+    //   return next();
+    // }
     User.findOne({_id: user.id}, function(err, user){
       if(err){
+        console.log("couldn't find user in getUser", req)
         res.status(404).send(err);
         return next();
       }
-
-      if(user){
-        delete user.password;
-        res.status(200).send(user);
-        next();
-      }
-
+      // purge password info from user object before sending
+      delete user.password;
+      res.status(200).send(user);
+      next();
     })
   },
 
@@ -82,7 +86,6 @@ module.exports = {
         next();
       }else{
         userObject.picture = helper.convertPhoto(userObject.picture, userObject.email);
-
         bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
           userObject.password = hash;
           var newUser = User(userObject);
@@ -137,7 +140,7 @@ module.exports = {
               if(err){
                 res.status(500).send(err);
               }else if(!token){
-                var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+                var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
                 newToken.save(function(err, token){
                   if(err){
                     res.status(500).send(err);
@@ -161,13 +164,18 @@ module.exports = {
   
   logout: function(req, res){
     user = req.body;
-    Token.findOneAndRemove({id: user._id, token: user.token}, function(err){
+    console.log("user for logout", user.id);
+    Token.findOne({token: user.token, user_id: user.id}, function(err, token){
       if(err){
-        res.status(404).send();
+        res.status(500).send();
+      }else if(!token){
+        res.status(401).send();
       }else{
-        res.status(200).send("user session has been removed");
+        token.remove();
+        res.status(200).send();
+        return
       }
-    });
+    })
   }
   // ToDo: changePicture function
 
