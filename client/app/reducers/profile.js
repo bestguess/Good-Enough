@@ -31,8 +31,8 @@ export default function Profile(state = initialState, action) {
         }
       })
       .catch(error => { console.log('request failed', error)});
-      console.log('profile state: ', state)
       newState.serverCall = true;
+      console.log('profile state: ', state)
       return newState
     default:
       console.log('hit default case: returning state')
