@@ -37,7 +37,12 @@ describe('A lonely user', function(){
     "interests": [ { discussion:[ "testing" ],activity:[ "testing" ]}]
   };
 
+  var message = { 
+    message : "test"
+  };
+
   it("should be able to register", function(done){
+    this.timeout(5000);
     request.post('localhost:4000/app/users/signup')
       .set('Content-Type', 'application/json')
       .send(JSON.stringify(testUser))
@@ -55,26 +60,12 @@ describe('A lonely user', function(){
       .end(function(err,res){
         expect(res).to.exist;
         expect(res.status).to.equal(200);
-        console.log(res.body);
-        expect(res.body.firstName).to.equal('Test');
-        expect(res.body.lastName).to.equal('User');
+        expect(res.body.token).to.exist;
+        message.token = res.body.token;
+        message.to = message.from = res.body.id;
         done();
       })
   });
-
-  it("should be able to be deleted", function(done){
-    User.find({ email:"user@test.com" }).remove(function(err, res){
-      expect(res).to.exist;
-      expect(res.result.ok).to.equal(1);
-      done();
-    });
-  });
-
-  var message = { 
-    to: "bob",
-    from: "frank",
-    message : "test"
-  };
 
   it("should be able to start a new conversation", function(done){
     request.post('localhost:4000/app/messages/new')
@@ -91,7 +82,7 @@ describe('A lonely user', function(){
   it("should be able to get a list of convos", function(done){
     request.post('localhost:4000/app/messages/list')
       .set('Content-Type', 'application/json')
-      .send(JSON.stringify({"user": "frank"}))
+      .send(JSON.stringify({"user": message.from}))
       .end(function(err,res){
         expect(res).to.exist;
         expect(res.status).to.equal(200);
@@ -113,7 +104,15 @@ describe('A lonely user', function(){
   });
 
   it("should be able to delete message", function(done){
-    Messages.find({ users:"frank" }).remove(function(err, res){
+    Messages.find({ users: message.to }).remove(function(err, res){
+      expect(res).to.exist;
+      expect(res.result.ok).to.equal(1);
+      done();
+    });
+  });
+
+  it("should be able to be deleted", function(done){
+    User.find({ email:"user@test.com" }).remove(function(err, res){
       expect(res).to.exist;
       expect(res.result.ok).to.equal(1);
       done();

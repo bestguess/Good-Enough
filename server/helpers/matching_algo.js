@@ -113,22 +113,21 @@ module.exports = {
           
           for(var pair in scores){
             if(result[person_id]){
-              if(pair === "ft") result[person_id] += Math.abs(scores[pair]-person_scores[pair]/2+5);
-              else result[person_id] += Math.abs(scores[pair]-person_scores[pair]+9);
+              if(pair === "ft") result[person_id][1] += Math.abs(scores[pair]-person_scores[pair]/2+5);
+              else result[person_id][1] += Math.abs(scores[pair]-person_scores[pair]+9);
             }else{
-              result[person_id] = Math.abs(scores[pair]-person_scores[pair]);
-              result[person_id] += conflicts[type][person_type]-10;
+              result[person_id] = [list[p]._id, Math.abs(scores[pair]-person_scores[pair])];
+              result[person_id][1] += conflicts[type][person_type]-10;
             }
           }
-        }
-        for(var stat in result){
-          var total = Math.min((100-((result[stat]/1.8)-10)).toFixed(2),100);
-          if(total > 60){
-            var tmp = [stat,total];
-            resultArr.push(tmp);
-          }
+          var matchAge = new Date(list[p].birthday[0],list[p].birthday[1],list[p].birthday[2]);
+          result[person_id].push( list[p].firstName, list[p].lastName, list[p].picture, calculateAge(matchAge));
         }
 
+        for(var stat in result){
+          result[stat][1] = Math.min((100-((result[stat][1]/1.8)-10)).toFixed(2),100);
+          resultArr.push(result[stat]);
+        }
         callback(resultArr);
       }
       findMatch(user);

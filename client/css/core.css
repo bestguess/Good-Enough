@@ -13,10 +13,38 @@ nav {
   text-align: center;
 }
 
-.nav-logout {
+.nav-left {
+  width: 30%;
+  float: left;
+  margin-left: 5%;
+  list-style-type: none;
+  text-align: right;
+  padding-top: 10px;
+}
+
+.nav-middle {
+  width: 30%;
+  font-size: 24px;
+  font-weight: 800;
+  padding-top: 5px;
   float: right;
+  list-style-type: none;
+}
+
+.nav-right {
+  width: 30%;
+  float: right;
+  margin-right: 5%;
+  list-style-type: none;
+  color: #fff;
+  text-align: right;
+  padding-top: 10px;
+}
+
+nav a {
   text-decoration: none;
   color: #fff;
+  font-weight: 600;
 }
 
 div {
@@ -45,6 +73,7 @@ h1 {
   padding: 20px 0px;
 }
 
+
 .question-form-button {
   font-size: 16px;
   width: 250px;
@@ -55,6 +84,10 @@ h1 {
   border: none;
   border-radius: 3px;
   margin: 0px auto;
+}
+
+.invalid {
+  opacity: 0.4;
 }
 
 .question {
