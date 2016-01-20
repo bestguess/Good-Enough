@@ -1,4 +1,4 @@
-import { PROFILE } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
   serverCall: false,
@@ -9,7 +9,11 @@ export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
       var newState = Object.assign({}, state)
+
+      // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')
+
+      // Make server request for new signup
       fetch('http://localhost:4000/app/users/info', {
         method: 'post',
         headers: {
@@ -20,10 +24,8 @@ export default function Profile(state = initialState, action) {
         body: JSON.stringify(JSON.parse(userData))
       })
       .then(res => {
-        console.log('res: ', res)
         if (res.status >= 200 && res.status < 300) {
-          console.log('original: ', res)
-          res.json().then(data => {console.log('jsoned data: ', data); newState.data = data;});
+          res.json().then(data => {console.log('Server Response: ', data); newState.data = data;});
         } else {
           const error = new Error(res.statusText);
           error.res = res;
@@ -31,11 +33,35 @@ export default function Profile(state = initialState, action) {
         }
       })
       .catch(error => { console.log('request failed', error)});
-      console.log('profile state: ', state)
       newState.serverCall = true;
+      return newState  
+
+    case LOGOUT:
+      var newState = Object.assign({}, state)
+
+      // Gather User ID and Session Token from Local Storage
+      var userData = window.localStorage.getItem('GoodEnough')
+      // Make server request to delete token storage on server side
+      fetch('http://localhost:4000/app/users/logout', {
+        method: 'post',
+        headers: {
+          'mode': 'no-cors',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(JSON.parse(userData))
+      })
+
+      // Remove local storage ID and Token
+      window.localStorage.removeItem('GoodEnough');
+
+      // Reset Initial Profile State (for if a different user logs on right after logout)
+      newState.data = {};
+      newState.serverCall = false;
       return newState
+      
+
     default:
-      console.log('hit default case: returning state')
     	return state
   }
 }

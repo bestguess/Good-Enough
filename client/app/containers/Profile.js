@@ -2,19 +2,37 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
-import LogInForm from '../components/LogInForm'
+import Nav from '../components/Nav'
 
-
+class ProfileData extends Component {
+  render() {
+    const { state, actions } = this.props
+    return (
+      <div className="profile-page-data">
+        <p>Email: {this.props.state.profile.data.email}</p>
+        <p>Name: {this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</p>
+        <p>Gender: {this.props.state.profile.data.gender}</p>
+      </div>
+    )
+  }
+}
 
 class Profile extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  componentWillMount() {    
+    this.props.actions.profile()
+  }
+
   render() {
-    if(!this.props.state.profile.serverCall) this.props.actions.profile()
+    console.log('rendering: ', this)
     const { state, actions } = this.props
     return (
       <div>
-        <p>Email: {this.props.state.profile.data.email}</p>
-        <p>Name: {this.props.state.profile.data.firstName}</p>
-        <p>Gender: {this.props.state.profile.data.gender}</p>
+        <Nav state={this.props.state} actions={this.props.actions} />
+        <ProfileData state={this.props.state} actions={this.props.actions} />
       </div>
     );
   }

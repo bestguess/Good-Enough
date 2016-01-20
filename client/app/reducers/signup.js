@@ -31,6 +31,8 @@ export default function SignUp(state = initialState, action) {
       var newState = Object.assign({}, state)
       newState.userData.answers[action.id] = action.answer
   		return newState
+
+
     case SAVE_INPUT:
       if(action.input === "DOBMonth") {
         state.userData.birthday.month = action.value
@@ -42,8 +44,12 @@ export default function SignUp(state = initialState, action) {
         state.userData[action.input] = action.value
       }
       return state
+
+
     case SUBMIT_SURVEY:
       const newObj = {};
+
+      // Calculate Personality Test results
       var type = "";
       newObj.IE = 30 - state.userData.answers[3] - state.userData.answers[7] - state.userData.answers[11] + state.userData.answers[15] - state.userData.answers[19] + state.userData.answers[23] + state.userData.answers[27] - state.userData.answers[31];
       newObj.SN = 12 + state.userData.answers[4] + state.userData.answers[8] + state.userData.answers[12] + state.userData.answers[16] + state.userData.answers[20] - state.userData.answers[24] - state.userData.answers[28] + state.userData.answers[32];
@@ -53,6 +59,8 @@ export default function SignUp(state = initialState, action) {
       type += newObj.SN<24 ? "S" : "N";
       type += newObj.FT<24 ? "F" : "T";
       type += newObj.JP<24 ? "J" : "P";
+
+      // Organize SignUp data to send to server
       var userData = {
         email: state.userData.email,
         password: state.userData.password,
@@ -68,6 +76,8 @@ export default function SignUp(state = initialState, action) {
         places: [],
         matches: []
       }
+
+      // Make server request for new signup
       fetch('http://localhost:4000/app/users/signup', {
         method: 'post',
         headers: {
@@ -76,10 +86,8 @@ export default function SignUp(state = initialState, action) {
         },
         body: JSON.stringify(userData) })
         .then(res => {
-          console.log(res)
           if (res.status >= 200 && res.status < 300) {
-            console.log('original: ', res)
-            res.json().then(data => {console.log('jsoned: ', data); window.localStorage.setItem('GoodEnough', JSON.stringify(data))});
+            res.json().then(data => {console.log('Server Response: ', data); window.localStorage.setItem('GoodEnough', JSON.stringify(data))});
           } else {
             const error = new Error(res.statusText);
             error.res = res;
@@ -87,8 +95,17 @@ export default function SignUp(state = initialState, action) {
           }
         })
         .catch(error => { console.log('request failed', error); });
-      console.log('submitting survey')
+
+      // Reset signup stages for if user logs out in current session
+      state.viewData.signup.stage0 = true;
+      state.viewData.signup.stage1 = false;
+      state.viewData.signup.stage2 = false;
+      state.viewData.signup.stage3 = false;
+      state.viewData.signup.stage4 = false;
+      state.viewData.signup.stage5 = false;
       return state
+
+
     case CONTINUE_SURVEY:
       var newState = Object.assign({}, state)
       if (newState.viewData.signup.stage0) {
@@ -108,8 +125,9 @@ export default function SignUp(state = initialState, action) {
         newState.viewData.signup.stage5 = true;
       }
       return newState
+
+
     default:
-      console.log('hit default case: returning state')
     	return state
   }
 }

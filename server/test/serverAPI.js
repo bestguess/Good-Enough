@@ -55,6 +55,7 @@ describe('A lonely user', function(){
       .end(function(err,res){
         expect(res).to.exist;
         expect(res.status).to.equal(200);
+        console.log(res.body);
         expect(res.body.firstName).to.equal('Test');
         expect(res.body.lastName).to.equal('User');
         done();
