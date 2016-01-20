@@ -5,8 +5,6 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var path = require('path');
-var session = require('express-session');
-
 
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
@@ -16,16 +14,6 @@ var compiler = webpack(config);
 
 var port = process.env.PORT || 4000;
 
-webpack({}).run(function (err, stats) {
-  if (err) { throw err; }
-  console.log(stats.toString({
-    colors: true,
-    children: false,
-    chunks: true,
-    modules: true
-  }));
-});
-
   app.use(morgan('dev'));
   app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
@@ -33,14 +21,6 @@ webpack({}).run(function (err, stats) {
 
   app.use(webpackHotMiddleware(compiler));
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-
-  // app.use(session({
-  //   secret: 'joshkeepstalkingaboutfood',
-  //   resave: true,
-  //   saveUninitialized: false
-  // }));
-  // app.use(passport.initialize());
-  // app.use(passport.session());
 
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
@@ -53,6 +33,10 @@ webpack({}).run(function (err, stats) {
 
   app.get('/',function(req,res,next){
     res.sendFile(path.join(__dirname + '/../client/index.html'));
+  });
+
+  app.get('/*', function(req, res){
+      res.sendFile(path.join(__dirname + '/../' + req.url));
   });
 
 app.listen(port, function(error){

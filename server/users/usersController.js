@@ -3,8 +3,6 @@ var mongoose = require('mongoose');
 var User = db.Users;
 var Token = db.Token;
 var helpers = require("../helpers/helpers.js");
-
-var photo = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
 
@@ -122,7 +120,7 @@ module.exports = {
   },
 
   signIn: function(req, res, next){
-    console.log('req.body: ', req.body);
+    //console.log('req.body: ', req.body);
     var user = req.body;
     // Requires that a user provides an email and password
     if(!user.email || !user.password){
