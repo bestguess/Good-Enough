@@ -2,20 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
-import LogInForm from '../components/LogInForm'
-const { Link } = require('react-router');
-
-class Nav extends Component {
-  render() {
-    const { state, actions } = this.props
-    return (
-      <nav>
-        <span>Good Enough</span>
-        <Link to="/"><span className="nav-logout" onClick={this.props.actions.logout}>Log Out</span></Link>
-      </nav>
-    )
-  }
-}
+import Nav from '../components/Nav'
 
 class ProfileData extends Component {
   render() {
