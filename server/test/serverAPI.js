@@ -42,7 +42,7 @@ describe('A lonely user', function(){
   };
 
   it("should be able to register", function(done){
-    this.timeout(4000);
+    this.timeout(5000);
     request.post('localhost:4000/app/users/signup')
       .set('Content-Type', 'application/json')
       .send(JSON.stringify(testUser))
