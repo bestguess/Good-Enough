@@ -79,13 +79,18 @@ export default function SignUp(state = initialState, action) {
       var newState = Object.assign({}, state)
       // Set token data into local storage
       window.localStorage.setItem('GoodEnough', JSON.stringify(action.tokenData))
-      // Reset signup stages for if user logs out in current session
+      // Reset signup stages & validation checks for if user logs out in current session
       newState.viewData.signup.stage0 = true;
       newState.viewData.signup.stage1 = false;
       newState.viewData.signup.stage2 = false;
       newState.viewData.signup.stage3 = false;
       newState.viewData.signup.stage4 = false;
       newState.viewData.signup.stage5 = false;
+      newState.validationChecks.stage1 = false;
+      newState.validationChecks.stage2 = false;
+      newState.validationChecks.stage3 = false;
+      newState.validationChecks.stage4 = false;
+      newState.validationChecks.clearForSubmit = false;
       return newState
 
 
