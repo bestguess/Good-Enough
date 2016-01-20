@@ -88,6 +88,12 @@ export default function SignUp(state = initialState, action) {
         })
         .catch(error => { console.log('request failed', error); });
       console.log('submitting survey')
+      state.viewData.signup.stage0 = true;
+      state.viewData.signup.stage1 = false;
+      state.viewData.signup.stage2 = false;
+      state.viewData.signup.stage3 = false;
+      state.viewData.signup.stage4 = false;
+      state.viewData.signup.stage5 = false;
       return state
     case CONTINUE_SURVEY:
       var newState = Object.assign({}, state)

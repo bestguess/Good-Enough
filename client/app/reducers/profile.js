@@ -1,4 +1,4 @@
-import { PROFILE } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
   serverCall: false,
@@ -33,6 +33,12 @@ export default function Profile(state = initialState, action) {
       .catch(error => { console.log('request failed', error)});
       newState.serverCall = true;
       console.log('profile state: ', state)
+      return newState
+    case LOGOUT:
+      var newState = Object.assign({}, state)
+      window.localStorage.removeItem('GoodEnough');
+      newState.data = {};
+      newState.serverCall = false;
       return newState
     default:
       console.log('hit default case: returning state')
