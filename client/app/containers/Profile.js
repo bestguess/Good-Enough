@@ -31,6 +31,19 @@ function getUserInfo(props) {
     });
 }
 
+class ProfileMatch extends Component {
+  render() {
+    const { state, actions } = this.props
+    return (
+      <div className="profile-page-match">
+        <h4>{this.props.data[2]} {this.props.data[3]}</h4>
+        <p>{this.props.data[5]} years old</p>
+        <p>{this.props.data[1]}%</p>
+      </div>
+    )
+  }
+}
+
 class ProfileData extends Component {
   render() {
     const { state, actions } = this.props
@@ -39,6 +52,12 @@ class ProfileData extends Component {
         <p>Email: {this.props.state.profile.data.email}</p>
         <p>Name: {this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</p>
         <p>Gender: {this.props.state.profile.data.gender}</p>
+        <div>
+          <h3>Matches:</h3>
+          {this.props.state.profile.data.matches.map(match =>
+            <ProfileMatch key={match[0]} data={match} state={this.props.state} actions={this.props.actions} />
+          )}
+        </div>
       </div>
     )
   }
@@ -53,7 +72,12 @@ class Profile extends Component {
     getUserInfo(this.props)
   }
 
+  reRoute(props) {
+    this.props.history.push({ pathname: '/' })
+  }
+
   render() {
+    if (!window.localStorage.getItem('GoodEnough')) this.reRoute(this.props)
     if (!this.props.state.profile.data) {
       return <h1><i>Loading profile...</i></h1>
     }
