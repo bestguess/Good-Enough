@@ -6,6 +6,7 @@ import login from './login'
 import profile from './profile'
 import { routeReducer } from 'redux-simple-router'
 
+// The rootReducer combines all reducers into one
 const rootReducer = combineReducers({
 	signup,
 	login,

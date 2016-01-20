@@ -9,7 +9,11 @@ export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
       var newState = Object.assign({}, state)
+
+      // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')
+
+      // Make server request for new signup
       fetch('http://localhost:4000/app/users/info', {
         method: 'post',
         headers: {
@@ -20,10 +24,8 @@ export default function Profile(state = initialState, action) {
         body: JSON.stringify(JSON.parse(userData))
       })
       .then(res => {
-        console.log('res: ', res)
         if (res.status >= 200 && res.status < 300) {
-          console.log('original: ', res)
-          res.json().then(data => {console.log('jsoned data: ', data); newState.data = data;});
+          res.json().then(data => {console.log('Server Response: ', data); newState.data = data;});
         } else {
           const error = new Error(res.statusText);
           error.res = res;
@@ -32,14 +34,21 @@ export default function Profile(state = initialState, action) {
       })
       .catch(error => { console.log('request failed', error)});
       newState.serverCall = true;
-      console.log('profile state: ', state)
       return newState
+
+
     case LOGOUT:
       var newState = Object.assign({}, state)
+
+      // Remove local storage ID and Token
       window.localStorage.removeItem('GoodEnough');
+
+      // Reset Initial Profile State (for if a different user logs on right after logout)
       newState.data = {};
       newState.serverCall = false;
       return newState
+
+
     default:
       console.log('hit default case: returning state')
     	return state
