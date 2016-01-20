@@ -1,7 +1,7 @@
 import * as types from '../constants/Profile_ActionTypes'
 
-export function profile() {
-	return { type: types.PROFILE }
+export function profile(data) {
+	return { type: types.PROFILE, data }
 }
 
 export function logout() {
