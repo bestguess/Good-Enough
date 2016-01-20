@@ -8,8 +8,8 @@ export function saveInput(input, value) {
 	return { type: types.SAVE_INPUT, input, value };
 }
 
-export function submitSurvey() {
-	return { type: types.SUBMIT_SURVEY };
+export function submitSurvey(tokenData) {
+	return { type: types.SUBMIT_SURVEY, tokenData };
 }
 
 export function continueSurvey() {
