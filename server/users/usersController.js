@@ -3,8 +3,6 @@ var mongoose = require('mongoose');
 var User = db.Users;
 var Token = db.Token;
 var helpers = require("../helpers/helpers.js");
-
-var photo = require('../helpers/helpers.js');
 var match = require('../helpers/matching_algo.js');
 var bcrypt = require('bcrypt');
 
@@ -56,7 +54,7 @@ module.exports = {
       }
     });
 
-    user.birthday = helper.splitDate(user.birthday);
+    user.birthday = helpers.splitDate(user.birthday);
     match.user(user, matchMe);
 
     function matchMe(data){
@@ -85,7 +83,7 @@ module.exports = {
         res.status(400).send(JSON.parse(failings));
         next();
       }else{
-        userObject.picture = helper.convertPhoto(userObject.picture, userObject.email);
+        userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
         bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
           userObject.password = hash;
           var newUser = User(userObject);
@@ -103,7 +101,7 @@ module.exports = {
                 });
               });
 
-              var newToken = Token({user_id: user._id, token: token(), dateCreated: new Date().getTime()});
+              var newToken = Token({user_id: user._id, token: genToken(), dateCreated: new Date().getTime()});
               newToken.save(function(err, token){
                 if(err){
                   console.log('error saving token');
@@ -122,7 +120,7 @@ module.exports = {
   },
 
   signIn: function(req, res, next){
-    console.log('req.body: ', req.body);
+    //console.log('req.body: ', req.body);
     var user = req.body;
     // Requires that a user provides an email and password
     if(!user.email || !user.password){
