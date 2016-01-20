@@ -64,7 +64,7 @@ function submitSurvey(props) {
 
 class QuestionForm extends Component {
 
-  testFunction(props) {
+  reRoute(props) {
     this.props.history.push({ pathname: '/profile' })
   }
 
@@ -73,7 +73,7 @@ class QuestionForm extends Component {
   }
 
   render() {
-    if (window.localStorage.getItem('GoodEnough')) this.testFunction(this.props)
+    if (window.localStorage.getItem('GoodEnough')) this.reRoute(this.props)
     var content;
     var formButton;
     var progressBar;
