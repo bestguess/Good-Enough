@@ -5,5 +5,5 @@ module.exports = function(app) {
   app.post('/new', messagesController.startConvo);
   app.post('/list', messagesController.getConvo);
   app.post('/reply', messagesController.reply);
-  app.post('/messages', messagesController.getMessages);
+  // app.post('/messages', messagesController.getMessages);
 };
