@@ -32,7 +32,6 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
-    
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
@@ -109,39 +108,38 @@ module.exports = {
     if(!user.email || !user.password){
       res.status(400).send();
     }else{
-      bcrypt.hash(user.password, user.password.length, function(err, hash) {
+      User.findOne({email: user.email}, function(err, foundUser){
         if(err){
-            res.status(500).send(err);
-            return next();
-          }
-          if(!hash){
-            res.status(500).send("Error producing hash");
-            return next();
-          }
-        user.password = hash;
-        User.findOne({email: user.email, password: user.password}, function(err, user){
-          if(err){
-            res.status(400).send(err);
-          }else if(!user){
-            res.status(400).send("User does not exist");
-          }else{
-            Token.findOne({use_id: user._id}, function(err, token){
+          res.status(400).send(err);
+        }else if(!foundUser){
+          res.status(400).send("User does not exist");
+        }else{
+          bcrypt.compare(user.password, foundUser.password, function(err, result) {
+            if(err){
+              res.status(500).send(err);
+              return next();
+            }
+            if(!result){
+              res.status(404).send("Incorrect Password");
+              return next();
+            }
+            Token.findOne({use_id: foundUser._id}, function(err, token){
               if(err){
                 res.status(500).send("Server error finding user token");
                 return next();
               }else if(!token){
                 // If the user doesn't have a session stored, then generate and store one
-                helpers.createToken(req, res, next, user, helpers.genToken);
+                helpers.createToken(req, res, next, foundUser, helpers.genToken);
               }else{
                 // If user already has a session stored then return the stored
                 // token. Allows users to sign in from multiple devices while
                 // still logging out for all devices when user logs out from one.
-                res.status(200).send({id: user._id, token: token.token});
+                res.status(200).send({id: foundUser._id, token: token.token});
                 next();
               }
             })
-          }
-        });
+          });
+        }
       });
     }
   },

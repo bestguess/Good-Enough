@@ -64,9 +64,10 @@ nav a {
 
 footer {
   text-align: center;
-  margin: 50px auto;
-  margin-top: 180px;
-  padding-top: 10px;
+  bottom: 0;
+  position: fixed;
+  margin: 50px 5% 25px 5%;
+  padding-top: 8px;
   font-size: 12px;
   width: 90%;
   border-top: 1px solid #e0e0e0;
@@ -211,7 +212,7 @@ h1 {
 
 .question-button-small {
   height: 24px;
-  width: 8%;
+  width: 1em;
   margin: 4px 0% 8px 8%;
 }
 
