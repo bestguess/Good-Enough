@@ -8,6 +8,7 @@ class ProfilePageMatchBox extends Component {
         <h4>{this.props.data[2]} {this.props.data[3]}</h4>
         <p>{this.props.data[5]} years old</p>
         <p>{this.props.data[1]}%</p>
+        <button>Connect</button>
       </div>
     )
   }

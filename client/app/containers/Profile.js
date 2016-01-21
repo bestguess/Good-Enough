@@ -32,6 +32,16 @@ function getUserInfo(props) {
     });
 }
 
+class ProfileConnections extends Component {
+  render() {
+    const { state, actions } = this.props
+    return (
+      <div className="profile-page-connections">
+        <span> This is where the profile connections would go</span>
+      </div>
+    );
+  }  
+}
 
 
 class Profile extends Component {
@@ -57,6 +67,7 @@ class Profile extends Component {
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
+        <ProfileConnections state={this.props.state} actions={this.props.actions} />
         <ProfileMatches state={this.props.state} actions={this.props.actions} />
       </div>
     );
