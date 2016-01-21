@@ -12,7 +12,6 @@ class LogIn extends Component {
     return (
       <div>
         <PublicNav state={this.props.state} actions={this.props.actions} />
-        <h1 className="logo">Login</h1>
         <LogInForm state={this.props.state} actions={this.props.actions} />
       </div>
     );

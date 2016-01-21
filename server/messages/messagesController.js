@@ -12,18 +12,28 @@ module.exports = {
       date : date,
       message : req.body.message
     };
-    var newConvo = new Messages;
-    newConvo.users.push( req.body.to , req.body.from );
-    newConvo.messages.push(text);
-    newConvo.save(function(err, text){
-      if(err) res.status(400).send(err);
-      else res.status(201).send(text);
-    })
+
+    if(!req.body.id){
+      var newConvo = new Messages;
+      newConvo.users.push( req.body.to , req.body.from );
+      newConvo.messages.push(text);
+      newConvo.save(function(err, text){
+        if(err) res.status(400).send(err);
+        else res.status(201).send(text);
+      })
+    }else{
+      Messages.update({_id: req.body.id}, {
+        $push: { messages : text}
+      }, function(err) { 
+        if(err) res.status(400).send(err);
+        else res.status(201).send(text);
+      })
+    }
   },
 
 
   getConvo : function(req, res, next){
-    Messages.find({users: req.body.user}, function(err, list){
+    Messages.find({users: { $all: [ req.body.to, req.body.from ] }}, function(err, list){
       if(err) res.status(404).send(err);
       else res.status(200).send(list);
    });
