@@ -20,14 +20,11 @@ module.exports = {
 
     User.findOne({_id: user.id}, function(err, user){
       if(err){
-        console.log("couldn't find user in getUser", req)
         res.status(404).send(err);
         return next();
       }
       // purge password info from user object before sending
-      console.log("found user before deleting password", user)
       delete user.password;
-      console.log("user Object after deleting password", user)
       res.status(200).send(user);
       next();
     })
@@ -73,7 +70,6 @@ module.exports = {
         res.status(400).send(JSON.parse(failings));
         next();
       }else{
-        console.log("password before hash for new user", userObject);
         userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
         bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
           if(err){
@@ -86,7 +82,6 @@ module.exports = {
           }
           userObject.password = hash;
           var newUser = User(userObject);
-          console.log("new user going being saved", newUser);
           newUser.save(function(err, user){
             if(err){
               console.log(err,'err saving user')
@@ -153,7 +148,6 @@ module.exports = {
   
   logout: function(req, res){
     user = req.body;
-    console.log("user for logout", user.id);
     Token.findOne({token: user.token, user_id: user.id}, function(err, token){
       if(err){
         res.status(500).send();
