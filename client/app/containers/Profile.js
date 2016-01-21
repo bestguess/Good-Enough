@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
-import Nav from '../components/Nav'
+import PrivateNav from '../components/PrivateNav'
+import ProfileMatches from '../components/ProfileMatches'
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -31,37 +32,7 @@ function getUserInfo(props) {
     });
 }
 
-class ProfileMatch extends Component {
-  render() {
-    const { state, actions } = this.props
-    return (
-      <div className="profile-page-match">
-        <h4>{this.props.data[2]} {this.props.data[3]}</h4>
-        <p>{this.props.data[5]} years old</p>
-        <p>{this.props.data[1]}%</p>
-      </div>
-    )
-  }
-}
 
-class ProfileData extends Component {
-  render() {
-    const { state, actions } = this.props
-    return (
-      <div className="profile-page-data">
-        <p>Email: {this.props.state.profile.data.email}</p>
-        <p>Name: {this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</p>
-        <p>Gender: {this.props.state.profile.data.gender}</p>
-        <div>
-          <h3>Matches:</h3>
-          {this.props.state.profile.data.matches.map(match =>
-            <ProfileMatch key={match[0]} data={match} state={this.props.state} actions={this.props.actions} />
-          )}
-        </div>
-      </div>
-    )
-  }
-}
 
 class Profile extends Component {
   constructor(props) {
@@ -85,8 +56,8 @@ class Profile extends Component {
     const { state, actions } = this.props
     return (
       <div>
-        <Nav state={this.props.state} actions={this.props.actions} />
-        <ProfileData state={this.props.state} actions={this.props.actions} />
+        <PrivateNav state={this.props.state} actions={this.props.actions} />
+        <ProfileMatches state={this.props.state} actions={this.props.actions} />
       </div>
     );
   }
