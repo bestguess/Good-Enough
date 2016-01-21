@@ -36,12 +36,23 @@ class MatchInfo extends Component {
   }
 }
 
+class MatchMessageImage extends Component {
+  render() {
+    return (
+      <div className="match-conversation-image">
+        <img src={this.props.state.profile.data.picture}/>
+      </div>
+    );
+  }
+}
 
 class MatchMessage extends Component {
   render() {
     return (
       <div className="match-conversation-message">
-        <span>Match Message goes here</span>
+        <MatchMessageImage state={this.props.state} actions={this.props.actions} />
+        <span className="match-conversation-username">Username</span>
+        <p>Message goes here</p>
       </div>
     );
   }
