@@ -64,9 +64,10 @@ nav a {
 
 footer {
   text-align: center;
-  margin: 50px auto;
-  margin-top: 180px;
-  padding-top: 10px;
+  bottom: 0;
+  position: fixed;
+  margin: 50px 5% 25px 5%;
+  padding-top: 8px;
   font-size: 12px;
   width: 90%;
   border-top: 1px solid #e0e0e0;
@@ -211,7 +212,7 @@ h1 {
 
 .question-button-small {
   height: 24px;
-  width: 8%;
+  width: 1em;
   margin: 4px 0% 8px 8%;
 }
 
@@ -279,6 +280,28 @@ h1 {
 }
 
 .user-info-form input {
+  clear: both;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 15px auto;
+  display: block;
+  padding: 5px 3%;
+  width: 94%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.login-form {
+  margin: 0px auto;
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px;
+  height: 6em;
+}
+
+.login-form input {
   clear: both;
   font-size: 16px;
   line-height: 20px;
