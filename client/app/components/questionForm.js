@@ -3,12 +3,12 @@ import PersonalQuestions from './PersonalQuestions'
 import PersonalityTest from './PersonalityTest'
 import ProgressBar from './ProgressBar'
 
-function status(response) {  
-  if (response.status >= 200 && response.status < 300) {  
-    return Promise.resolve(response)  
-  } else {  
-    return Promise.reject(new Error(response.statusText))  
-  }  
+function status(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return Promise.resolve(response)
+  } else {
+    return Promise.reject(new Error(response.statusText))
+  }
 }
 
 function json(response) { return response.json() }
@@ -50,13 +50,13 @@ function submitSurvey(props) {
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify(userData)
   })
-    .then(status)  
-    .then(json)  
-    .then(function(data) {  
+    .then(status)
+    .then(json)
+    .then(function(data) {
       console.log('Request succeeded with JSON response', data);
       props.actions.submitSurvey(data)
-    }).catch(function(error) {  
-      console.log('Request failed', error);  
+    }).catch(function(error) {
+      console.log('Request failed', error);
     });
 }
 

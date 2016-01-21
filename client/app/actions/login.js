@@ -23,26 +23,28 @@ export function logIn() {
         body: JSON.stringify(state.login.userData)
       })
       .then(res => {
-        console.log('res: ', res)
         if (res.status >= 200 && res.status < 400) {
-          console.log('original: ', res)
           res.json()
           // Set user ID and Session Token to localStorage
-          .then(data => {console.log('jsoned data: ', data);
+          .then(data => {
+            console.log('Server Response after login: ', data);
             window.localStorage.setItem('GoodEnough', JSON.stringify(data));
             // Dispatch the optimisticLogIn so the reducer can update the state.
             dispatch(optimisticLogIn());
           })
-          // After the logIn reducer has updated the state, user gets redirected to the profile
-          .then(() => { dispatch(routeActions.push('/profile'))});
+          // After the logIn reducer has updated the state, user gets redirected to the profile.
+          .then(() => {
+            dispatch(routeActions.push('/profile'))
+          });
         } else {
           const error = new Error(res.statusText);
           error.res = res;
           throw error;
         }
       })
-      .catch(error => { console.log('request failed', error)});
-      console.log('logging in')
+      .catch(error => {
+        console.log('request failed', error);
+      });
   }
   return null;
 }

@@ -1,4 +1,5 @@
 import * as types from '../constants/Profile_ActionTypes'
+import { routeActions } from 'redux-simple-router'
 
 export function optimisticProfile(newData) {
   console.log('newData: ', newData);
@@ -9,7 +10,7 @@ export function optimisticProfile(newData) {
 // 	return { type: types.PROFILE, data }
 // }
 
-export function logout() {
+export function optimisticlogout() {
 	return { type: types.LOGOUT }
 }
 
@@ -38,6 +39,36 @@ export function profile() {
         }
       })
       .catch(error => { console.log('request failed', error)});
+  }
+  return null;
+}
+
+export function logOut() {
+  return function (dispatch, getState) {
+      // Gather User ID and Session Token from Local Storage
+      var userData = window.localStorage.getItem('GoodEnough')
+      // Make server request to delete token storage on server side
+      fetch('http://localhost:4000/app/users/logout', {
+        method: 'post',
+        headers: {
+          'mode': 'no-cors',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(JSON.parse(userData))
+      })
+      .then(res => {
+        res.json()
+        .then(data => {
+          console.log ('Server Response: ', data);
+          // Remove local storage ID and Token
+          window.localStorage.removeItem('GoodEnough');
+          dispatch(optimisticlogout());
+        })
+        .then(() => {
+          dispatch(routeActions.push('/'))
+        })
+      })
   }
   return null;
 }
