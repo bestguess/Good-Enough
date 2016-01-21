@@ -292,6 +292,28 @@ h1 {
   border-bottom: 2px solid #e0e0e0;
 }
 
+.login-form {
+  margin: 0px auto;
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px;
+  height: 6em;
+}
+
+.login-form input {
+  clear: both;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 15px auto;
+  display: block;
+  padding: 5px 3%;
+  width: 94%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+}
+
 
 .profile-page-data {
   background-color: #fff;
