@@ -39,7 +39,7 @@ var port = process.env.PORT || 4000;
   });
 
   app.get('/*', function(req, res){
-      res.sendFile(path.join(__dirname + '/../' + req.url));
+    res.sendFile(path.join(__dirname + '/../client/index.html'));
   });
 
 app.listen(port, function(error){

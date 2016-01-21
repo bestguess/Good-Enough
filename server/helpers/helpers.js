@@ -7,8 +7,11 @@ module.exports = {
     if(photo.slice(0,4) === "http") return photo;
     var decodedImage = new Buffer(photo
     .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
-    var fileLocation = "./server/uploads/" + email.replace("@","").replace(".","") + ".jpeg";
-    fs.writeFile(fileLocation, decodedImage, function(err) {
+    var fileLocation = "/server/uploads/" + email.replace("@","").replace(".","") + ".jpeg";
+
+    if (!fs.existsSync('./server/uploads/')) fs.mkdirSync('./server/uploads/');
+
+    fs.writeFile("." + fileLocation, decodedImage, function(err) {
       if (err) console.error(err);
     });
     return fileLocation;
