@@ -11,7 +11,7 @@ module.exports = {
       date : date,
       message : req.body.message
     };
-​
+    
     if(!req.body.id){
       var newConvo = new Messages;
       newConvo.users.push( req.body.to , req.body.from );

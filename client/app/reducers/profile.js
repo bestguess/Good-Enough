@@ -8,8 +8,7 @@ export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
       var newState = Object.assign({}, state)
-      newState.data = action.newData;
-      // newState.data = action.data
+      newState.data = action.data
       return newState
 
     case CONNECT:
