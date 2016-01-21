@@ -3,6 +3,7 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	margin: 0px;
 	color: #7f8d8e;
+  height: 100%;
 }
 
 nav {
@@ -63,14 +64,31 @@ nav a {
 }
 
 footer {
-  text-align: center;
   bottom: 0;
-  position: fixed;
-  margin: 50px 5% 25px 5%;
-  padding-top: 8px;
+  margin: 13% 5% 25px 5%;
   font-size: 12px;
   width: 90%;
+  position: absolute;
+  height: 30px;
+  z-index: -1;
+  opacity: 1;
+  transition: opacity .5s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -webkit-transition: opacity .5s ease-in-out;
+}
+
+.footer-elements {
+  bottom: 0px;
+  position: absolute;
   border-top: 1px solid #e0e0e0;
+  width: 100%;
+  padding-top: 8px;
+}
+
+@media screen and ( max-height: 700px ){
+  footer {
+    opacity: 0;
+  }
 }
 
 div {
