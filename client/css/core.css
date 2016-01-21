@@ -302,6 +302,20 @@ h1 {
   padding: 10px;
 }
 
+.profile-page-match {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+}
+
+.profile-page-connections {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
 
 /*** Progress Bar for SignUp ***/
 .progress-bar-container {
