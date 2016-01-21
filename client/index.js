@@ -62,9 +62,9 @@ render(
     	<Router history={history}>
         	<Route path="/" component={SiteRouter}>
         		<IndexRoute component={SignUp}/>
-          		<Route path="LogIn" component={LogIn}/>
-              <Route path="Profile" component={Profile}/>
-              <Route path="Match" component={Match}/>
+          		<Route path="logIn" component={LogIn}/>
+              <Route path="profile" component={Profile}/>
+              <Route path="/:match_id" component={Match}/>
         	</Route>
       </Router>
     </div>

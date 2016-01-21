@@ -62,5 +62,20 @@ module.exports = {
   genToken : function(){
     var rand = function() {return Math.random().toString(36).substr(2);};
     return rand() + rand();
+  },
+
+  UserData: function(){
+    this.firstName = 'firstName';
+    this.lastName = 'lastName';
+    this.email = 'email';
+    this.password = 'password';
+    this.birthday = 'birthday';
+    this.gender = 'gender';
+    this.interests = 'interests';
+    this.type = 'type';
+    this.personality = 'personality';
+    this.picture = 'picture';
+    this.places = 'places';
+    this.matches = 'matches';
   }
 };
