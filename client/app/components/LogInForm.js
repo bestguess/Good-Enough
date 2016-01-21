@@ -8,9 +8,8 @@ class LogInForm extends Component {
   }
 
   handleKeyPress(e) {
-    if (e.key === 'Enter') {
-      console.log("entered");
-      this.props.actions.logIn
+    if (e.which === 13) {
+      this.props.actions.logIn()
     }
   }
 
@@ -18,18 +17,16 @@ class LogInForm extends Component {
     var formButton = <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
 
     return (
-      <form>
       <div className="login-box">
         <h1 className="login-logo">Login</h1>
         <div className="login-form">
-          <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress = {this.handleKeyPress}/>
-          <input type="password" placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} onKeyPress = {this.handleKeyPress}/>
+          <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)}  />
+          <input type="password" placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} onKeyPress={(event) => this.handleKeyPress(event)} />
         </div>
         <div className="question-form-submit-button">
           {formButton}
         </div>
       </div>
-      </form>
       )
   }
 }
