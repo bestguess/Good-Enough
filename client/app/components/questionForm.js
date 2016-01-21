@@ -40,7 +40,7 @@ function submitSurvey(props) {
     interests: {discussion:[], activity:[]},
     type: type,
     personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
-    picture: "photoGoesHere",
+    picture: state.userData.picture || "http://e27.co/img/no_image_profile.jpg",
     places: [],
     matches: []
   }
