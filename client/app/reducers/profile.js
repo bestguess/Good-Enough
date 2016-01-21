@@ -32,8 +32,7 @@ export default function Profile(state = initialState, action) {
       window.localStorage.removeItem('GoodEnough');
 
       // Reset Initial Profile State (for if a different user logs on right after logout)
-      newState.data = {};
-      newState.serverCall = false;
+      newState = {};
       return newState
 
 
