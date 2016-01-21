@@ -7,19 +7,29 @@ class LogInForm extends Component {
     this.props.actions.saveLogInInput(input, this.refs[input].value)
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter') {
+      console.log("entered");
+      this.props.actions.logIn
+    }
+  }
+
   render() {
     var formButton = <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
 
     return (
-      <div>
+      <form>
+      <div className="login-box">
+        <h1 className="login-logo">Login</h1>
         <div className="login-form">
-          <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} />
-          <input placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} />
+          <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress = {this.handleKeyPress}/>
+          <input type="password" placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} onKeyPress = {this.handleKeyPress}/>
         </div>
         <div className="question-form-submit-button">
           {formButton}
         </div>
       </div>
+      </form>
       )
   }
 }
