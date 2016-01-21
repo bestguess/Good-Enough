@@ -27,7 +27,7 @@ function getMatchInfo(props) {
     .then(json)
     .then(function(data) {
       console.log('Request succeeded with JSON response', data);
-      // props.actions.profile(data)
+      props.actions.saveMatchData(data)
     }).catch(function(error) {
       console.log('Request failed', error);
     });
@@ -90,10 +90,16 @@ class MatchMessage extends Component {
 }
 
 class MatchMessageInput extends Component {
+
+  handleKeyUp() {
+    this.props.actions.saveInput(this.refs.message.value)
+  }
+
   render() {
     return (
       <div className="match-conversation-input">
-        <input placeholder="Match Message Input goes here"></input>
+        <input placeholder="Match Message Input goes here" ref="message" onKeyUp={() => this.handleKeyUp()}></input>
+        <button onClick={() => this.props.actions.sendMessage()}>Send Message</button>
       </div>
     );
   }
