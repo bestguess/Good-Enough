@@ -25,7 +25,9 @@ module.exports = {
         return next();
       }
       // purge password info from user object before sending
+      console.log("found user before deleting password", user)
       delete user.password;
+      console.log("user Object after deleting password", user)
       res.status(200).send(user);
       next();
     })
@@ -71,10 +73,20 @@ module.exports = {
         res.status(400).send(JSON.parse(failings));
         next();
       }else{
+        console.log("password before hash for new user", userObject);
         userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
-        bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
+        bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
+          if(err){
+            res.status(500).send(err);
+            return next();
+          }
+          if(!hash){
+            res.status(500).send("Error producing hash");
+            return next();
+          }
           userObject.password = hash;
           var newUser = User(userObject);
+          console.log("new user going being saved", newUser);
           newUser.save(function(err, user){
             if(err){
               console.log(err,'err saving user')
@@ -102,7 +114,15 @@ module.exports = {
     if(!user.email || !user.password){
       res.status(400).send();
     }else{
-      bcrypt.hash(user.password, user.password, function(err, hash) {
+      bcrypt.hash(user.password, user.password.length, function(err, hash) {
+        if(err){
+            res.status(500).send(err);
+            return next();
+          }
+          if(!hash){
+            res.status(500).send("Error producing hash");
+            return next();
+          }
         user.password = hash;
         User.findOne({email: user.email, password: user.password}, function(err, user){
           if(err){
