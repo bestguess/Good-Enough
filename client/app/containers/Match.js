@@ -33,6 +33,27 @@ function getMatchInfo(props) {
     });
 }
 
+function sendMessage(props) {
+  var obj = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  var messageData = {}
+  messageData.from = obj.id;
+  messageData.to = props.state.routing.location.pathname.substring(1);
+  messageData.message = props.state.match.message;
+  console.log('messageData: ', messageData)
+  fetch('http://localhost:4000/app/messages/new', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(messageData)
+        })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      console.log('Request succeeded with JSON response', data);
+      props.actions.sendMessage()
+    }).catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
 
 
 class MatchPicture extends Component {
@@ -95,11 +116,16 @@ class MatchMessageInput extends Component {
     this.props.actions.saveInput(this.refs.message.value)
   }
 
+  sendMessage() {
+    sendMessage(this.props)
+    this.refs.message.value = '';
+  }
+
   render() {
     return (
       <div className="match-conversation-input">
         <input placeholder="Match Message Input goes here" ref="message" onKeyUp={() => this.handleKeyUp()}></input>
-        <button onClick={() => this.props.actions.sendMessage()}>Send Message</button>
+        <button onClick={() => this.sendMessage()}>Send Message</button>
       </div>
     );
   }
