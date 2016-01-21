@@ -1,4 +1,4 @@
-import { PROFILE, LOGOUT } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT, CONNECT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
 
@@ -8,10 +8,13 @@ export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
       var newState = Object.assign({}, state)
-      newState.data = action.newData;
-      // newState.data = action.data
+      newState.data = action.data
       return newState
 
+    case CONNECT:
+      var newState = Object.assign({}, state)
+      newData.data = action.newData
+      return newState
     case LOGOUT:
       var newState = Object.assign({}, state)
 

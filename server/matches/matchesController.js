@@ -16,13 +16,17 @@ module.exports = {
         res.status(404).send();
         return next();
       }
-      console.log('match',match)
-      delete match.password;
-      delete match.matches;
-      delete match.conversations;
-      delete match.meet;
-      console.log('match',match)
-      res.status(200).send(match);
+      var properties = new helpers.UserData;
+      var matchObject = {}
+      for(var key in properties){
+        if(
+          key !== 'password' &&
+          key !== 'matches' &&
+          key !== 'conversations' &&
+          key !== 'meet'
+          ) matchObject[key] = match[key];
+      }
+      res.status(200).send(matchObject);
     });
   }
 
