@@ -62,6 +62,16 @@ nav a {
   color: #25b79a;
 }
 
+footer {
+  text-align: center;
+  margin: 50px auto;
+  margin-top: 180px;
+  padding-top: 10px;
+  font-size: 12px;
+  width: 90%;
+  border-top: 1px solid #e0e0e0;
+}
+
 div {
 	margin: 0px auto;
 }
@@ -73,6 +83,7 @@ h1 {
 .logo {
 	font-weight: 800;
 	color: #25b79a;
+  margin: 0px auto;
 }
 
 .question-form {
