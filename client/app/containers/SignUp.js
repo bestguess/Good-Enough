@@ -3,6 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import QuestionForm from '../components/questionForm'
 import * as QuestionActions from '../actions/signup'
+import PublicNav from '../components/PublicNav'
+import Footer from '../components/Footer'
 
 
 class SignUp extends Component {
@@ -21,8 +23,10 @@ class SignUp extends Component {
     }
     return (
       <div>
+        <PublicNav state={this.props.state} actions={this.props.actions} />
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
+        <Footer state={state} actions={actions} />
       </div>
     );
   }
