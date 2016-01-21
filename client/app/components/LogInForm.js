@@ -12,8 +12,7 @@ class LogInForm extends Component {
 
     return (
       <div>
-        <h1 className="logo">Login</h1>
-        <div className="user-info-form">
+        <div className="login-form">
           <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} />
           <input placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} />
         </div>
