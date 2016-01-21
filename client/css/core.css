@@ -105,9 +105,15 @@ h1 {
 }
 
 .logo {
-	font-weight: 800;
-	color: #25b79a;
+  font-weight: 700;
+  color: #25b79a;
   margin: 0px auto;
+  font-size: 2.4em;
+}
+
+.logo-img {
+  width: 12em;
+  padding: 2em 0 1.2em 0;
 }
 
 .question-form {
@@ -316,11 +322,18 @@ h1 {
   border-bottom: 2px solid #e0e0e0;
 }
 
+.login-logo{
+  font-weight: 700;
+  color: #25b79a;
+  margin: 0px auto;
+  font-size: 2.4em;
+}
+
 .login-form {
   margin: 0px auto;
-  width: 250px;
+  width: 19em;
   border-radius: 3px;
-  padding: 10px;
+  padding: 19px 0 10px 0;
   height: 6em;
 }
 
@@ -335,9 +348,47 @@ h1 {
   outline: none;
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 1.5px solid #e0e0e0;
+  color: #7D7D7D;
 }
 
+
+input[type="submit"]{
+  font-size: 16px;
+  color: #fff;
+  padding: 8px 12px;
+  text-align: center;
+  background-color: #25b79a;
+  border: none;
+  border-radius: 3px;
+  margin: 20px auto 30px auto;
+  height: 40px;
+  outline: none;
+  width: 19em;
+  display: block;
+}
+
+.login-box {
+  margin-top: 10em;
+  background-color: rgba(255,255,255,0.5);
+  padding: 47px 35px 35px 35px;
+  width: 23em;
+  border-radius: 3px;
+  box-shadow:  rgba(225, 229, 225, 0.7) 1px 1px 5px;
+}
+
+.question-form-button {
+  font-size: 16px;
+  color: #fff;
+  padding: 8px 12px;
+  text-align: center;
+  background-color: #25b79a;
+  border: none;
+  border-radius: 3px;
+  margin: 0px auto;
+  outline: none;
+  width: 19em;
+}
 
 .profile-page-data {
   background-color: #fff;
