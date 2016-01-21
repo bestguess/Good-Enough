@@ -1,8 +1,8 @@
 import * as types from '../constants/Profile_ActionTypes'
 
-export function optimisticProfile(newData) {
-  console.log('newData: ', newData);
-	return { type: types.PROFILE, newData }
+export function optimisticProfile(data) {
+  console.log('newData: ', data);
+	return { type: types.PROFILE, data }
 }
 
 // export function profile(data) {
