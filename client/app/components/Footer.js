@@ -5,8 +5,10 @@ class Footer extends Component {
     const { state, actions } = this.props
     return (
       <footer>
-        <span style={{float: 'left'}}>Made in Austin</span>
-        <span style={{float: 'right'}}>© Best Guess, Inc.</span>
+        <div className="footer-elements">
+          <span style={{float: 'left'}}>Made in Austin</span>
+          <span style={{float: 'right'}}>© Best Guess, Inc.</span>
+        </div>
       </footer>
     )
   }
