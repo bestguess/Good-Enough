@@ -19,8 +19,9 @@ export default function Match(state = initialState, action) {
 
 
     case SEND_MESSAGE:
-    	console.log('sending message: ', state.message)
-    	return state
+      var newState = Object.assign({}, state)
+    	console.log('sending message...')
+    	return newState
 
 
     default:
