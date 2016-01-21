@@ -16,16 +16,21 @@ module.exports = {
   },
 
   getUser: function(req, res, next){
-    var user = req.body;
-
     User.findOne({_id: user.id}, function(err, user){
       if(err){
         res.status(404).send(err);
         return next();
       }
+      console.log('user password', user.password)
       // purge password info from user object before sending
-      delete user.password;
-      res.status(200).send(user);
+      var properties = new helpers.UserData;
+      var userObject = {};
+        for(var key in properties){
+          if(key !== "password") {
+            userObject[key] = user[key];
+          }
+      }
+      res.status(200).send(userObject);
       next();
     })
   },
@@ -48,8 +53,9 @@ module.exports = {
       // To be populated and submitted as a new user
       var userObject = {};
       // Required fields with which to create user
-      var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender', 
-          interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
+      // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender', 
+      //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
+      var properties = new helpers.UserData;
       var failings = [];
       var failed = false;
 
