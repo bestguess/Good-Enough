@@ -8,15 +8,68 @@ body {
 nav {
   width: 100%;
   height: 45px;
-  background-color: #25b79a;
-  color: #fff;
   text-align: center;
 }
 
-.nav-logout {
-  float: right;
-  text-decoration: none;
+.public-nav {
+  background-color: transparent;
+  color: #7f8d8e;
+}
+
+.private-nav {
+  background-color: #25b79a;
   color: #fff;
+}
+
+.nav-left {
+  width: 30%;
+  float: left;
+  margin-left: 5%;
+  list-style-type: none;
+  text-align: right;
+  padding-top: 10px;
+}
+
+.nav-middle {
+  width: 30%;
+  font-size: 24px;
+  font-weight: 800;
+  padding-top: 5px;
+  float: right;
+  list-style-type: none;
+}
+
+.nav-right {
+  width: 30%;
+  float: right;
+  margin-right: 5%;
+  list-style-type: none;
+  color: #fff;
+  text-align: right;
+  padding-top: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.private-nav a {
+  color: #fff;
+}
+
+.public-nav a {
+  color: #25b79a;
+}
+
+footer {
+  text-align: center;
+  margin: 50px auto;
+  margin-top: 180px;
+  padding-top: 10px;
+  font-size: 12px;
+  width: 90%;
+  border-top: 1px solid #e0e0e0;
 }
 
 div {
@@ -30,6 +83,7 @@ h1 {
 .logo {
 	font-weight: 800;
 	color: #25b79a;
+  margin: 0px auto;
 }
 
 .question-form {
@@ -56,6 +110,11 @@ h1 {
   border: none;
   border-radius: 3px;
   margin: 0px auto;
+  outline: none;
+}
+
+.valid:hover {
+  background-color: #1d927b;
 }
 
 .invalid {
@@ -121,19 +180,19 @@ h1 {
 .Checked + label {
   background: #25b79a;
   color: #fff;
-  border: 1px solid #25b79a;
+  border: 4px solid #25b79a;
 }
 
 .question-buttons label {
-  border: 1px solid #e0e0e0;
-  background-color: #fff;
+  border: 4px solid #e0e0e0;
+  background-color: transparent;
   cursor:pointer;
 }
 
 .question-button-large {
   height: 32px;
-  width: 14%;
-  margin: 0px 0% 8px 6%;
+  width: 11%;
+  margin: 0px 0% 8px 8%;
 }
 
 .question-button-large label {
@@ -142,8 +201,8 @@ h1 {
 
 .question-button-medium {
   height: 28px;
-  width: 12%;
-  margin: 2px 0% 8px 6%;
+  width: 9.5%;
+  margin: 2px 0% 8px 8%;
 }
 
 .question-button-medium label {
@@ -152,8 +211,8 @@ h1 {
 
 .question-button-small {
   height: 24px;
-  width: 10%;
-  margin: 4px 0% 8px 6%;
+  width: 8%;
+  margin: 4px 0% 8px 8%;
 }
 
 .question-button-small label {
@@ -235,6 +294,20 @@ h1 {
 
 
 .profile-page-data {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.profile-page-match {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+}
+
+.profile-page-connections {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
