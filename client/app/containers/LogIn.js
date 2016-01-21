@@ -3,15 +3,16 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import LogInForm from '../components/LogInForm'
 import * as LogInActions from '../actions/login'
+import PublicNav from '../components/PublicNav'
 //import LogIn action here maybe...
 
 class LogIn extends Component {
   render() {
     const { state, actions } = this.props
-    var h1Content = <img src="../client/img/logo.png" style={{width: 450 + "px"}}/>
     return (
       <div>
-        <h1 className="logo">{h1Content}</h1>
+        <PublicNav state={this.props.state} actions={this.props.actions} />
+        <h1 className="logo">Login</h1>
         <LogInForm state={this.props.state} actions={this.props.actions} />
       </div>
     );
