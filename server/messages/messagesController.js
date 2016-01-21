@@ -26,7 +26,7 @@ module.exports = {
         return next();
         });
       }  
-      Messages.update({_id: req.body.id}, {
+      Messages.update({_id: convo._id}, {
         $push: { messages : text}
       }, function(err) { 
         if(err) res.status(400).send(err);

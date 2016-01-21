@@ -11,3 +11,7 @@ export function sendMessage() {
 export function saveInput(value) {
 	return { type: types.SAVE_INPUT, value };
 }
+
+export function logout() {
+	return { type: types.LOGOUT }
+}
