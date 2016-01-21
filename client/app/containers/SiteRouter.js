@@ -1,5 +1,5 @@
-const React = require('react');
-const { Link } = require('react-router');
+import React from 'react'
+import { Link } from 'react-router'
 const { connect } = require('react-redux');
 const { routeActions } = require('redux-simple-router');
 
