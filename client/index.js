@@ -10,11 +10,6 @@ import { Router, Route, IndexRoute } from 'react-router'
 import { syncHistory, routeReducer } from 'redux-simple-router'
 import { createHistory } from 'history'
 
-// Redux DevTools
-import { createDevTools } from 'redux-devtools';
-import LogMonitor from 'redux-devtools-log-monitor';
-import DockMonitor from 'redux-devtools-dock-monitor';
-
 // Redux State Logger
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
@@ -37,22 +32,13 @@ const history = createHistory();
 const routerMiddleware = syncHistory(history);
 const loggerMiddleware = createLogger()
 
-// Create Redux DevTools
-const DevTools = createDevTools(
-  <DockMonitor toggleVisibilityKey='ctrl-h'
-               changePositionKey='ctrl-q'>
-    <LogMonitor theme='tomorrow' />
-  </DockMonitor>
-);
-
 // Connecting all the dots...
 const finalCreateStore = compose(
   applyMiddleware(
   	routerMiddleware,
   	thunkMiddleware,
   	loggerMiddleware
-  ),
-  DevTools.instrument()
+  )
 )(createStore);
 
 const store = finalCreateStore(rootReducer);
@@ -80,7 +66,6 @@ render(
               <Route path="Profile" component={Profile}/>
         	</Route>
       </Router>
-      <DevTools />
     </div>
   </Provider>,
   document.getElementById('root')
