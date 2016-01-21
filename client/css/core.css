@@ -316,6 +316,41 @@ h1 {
   padding: 10px;
 }
 
+.match-info-container {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 800px;
+  margin: 20px auto;
+  padding: 3%;
+}
+
+.match-info-picture {
+  width: 40%;
+  float: left;
+  border: 1px solid #e0e0e0;
+}
+
+.match-conversation-container {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 800px;
+  margin: 20px auto;
+  padding: 3%;
+}
+
+.match-conversation-message {
+  border: 1px solid #e0e0e0;
+  padding: 3%;
+  width: 94%%;
+}
+
+.match-conversation-input {
+  border: 1px solid #e0e0e0;
+  padding: 3%;
+  width: 94%%;
+}
 
 /*** Progress Bar for SignUp ***/
 .progress-bar-container {
