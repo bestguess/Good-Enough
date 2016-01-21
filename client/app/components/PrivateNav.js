@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-const { Link } = require('react-router');
+import { Link } from 'react-router'
 
 class PrivateNav extends Component {
   render() {
