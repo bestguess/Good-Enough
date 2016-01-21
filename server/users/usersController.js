@@ -20,7 +20,6 @@ module.exports = {
 
     User.findOne({_id: user.id}, function(err, user){
       if(err){
-        console.log("couldn't find user in getUser", req)
         res.status(404).send(err);
         return next();
       }
@@ -72,7 +71,15 @@ module.exports = {
         next();
       }else{
         userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
-        bcrypt.hash(userObject.password, userObject.password, function(err, hash) {
+        bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
+          if(err){
+            res.status(500).send(err);
+            return next();
+          }
+          if(!hash){
+            res.status(500).send("Error producing hash");
+            return next();
+          }
           userObject.password = hash;
           var newUser = User(userObject);
           newUser.save(function(err, user){
@@ -102,7 +109,15 @@ module.exports = {
     if(!user.email || !user.password){
       res.status(400).send();
     }else{
-      bcrypt.hash(user.password, user.password, function(err, hash) {
+      bcrypt.hash(user.password, user.password.length, function(err, hash) {
+        if(err){
+            res.status(500).send(err);
+            return next();
+          }
+          if(!hash){
+            res.status(500).send("Error producing hash");
+            return next();
+          }
         user.password = hash;
         User.findOne({email: user.email, password: user.password}, function(err, user){
           if(err){
@@ -133,7 +148,6 @@ module.exports = {
   
   logout: function(req, res){
     user = req.body;
-    console.log("user for logout", user.id);
     Token.findOne({token: user.token, user_id: user.id}, function(err, token){
       if(err){
         res.status(500).send();
