@@ -17,6 +17,7 @@ const initialState = {
     firstname: undefined,
     lastname: undefined,
     gender: undefined,
+    picture: null,
     birthday: {},
   	answers: {},
     clearForSubmit: false
