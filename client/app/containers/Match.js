@@ -28,6 +28,7 @@ function getMatchInfo(props) {
     .then(function(data) {
       console.log('Request succeeded with JSON response', data);
       props.actions.saveMatchData(data)
+      getAllMessages(props)
     }).catch(function(error) {
       console.log('Request failed', error);
     });
@@ -44,6 +45,25 @@ function sendMessage(props) {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(messageData)
+        })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      console.log('Request succeeded with JSON response', data);
+      props.actions.sendMessage(data)
+    }).catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
+
+function getAllMessages(props) {
+  var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  requestData.match_id = props.state.routing.location.pathname.substring(1)
+  console.log('requestData: ', requestData)
+  fetch('http://localhost:4000/app/messages/get', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData)
         })
     .then(status)
     .then(json)
@@ -101,13 +121,12 @@ class MatchMessageImage extends Component {
 class MatchMessage extends Component {
   render() {
     var username
-    console.log(this.props.data.user, this.props.state.routing.location.pathname.substring(1))
     if (this.props.data.user === this.props.state.routing.location.pathname.substring(1)) {
-      username = "match"
+      username = this.props.state.match.data.firstName + ' ' + this.props.state.match.data.lastName
     } else {
-      username = 'user'
+      username = this.props.state.profile.data.firstName + ' ' + this.props.state.profile.data.lastName
     }
-    console.log('hank: ', this.props.data)
+    console.log('hank: ', this.props.state)
     return (
       <div className="match-conversation-message">
         <MatchMessageImage state={this.props.state} actions={this.props.actions} />

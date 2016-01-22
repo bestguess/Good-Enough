@@ -51,8 +51,7 @@ module.exports = {
   },
 
   getConvo : function(req, res, next){
-
-    Messages.findOne({users: {$all:[req.body.match_id, req.body.user_id]}}, function(err, convo){
+    Messages.findOne({users: {$all:[req.body.match_id, req.body.id]}}, function(err, convo){
       if(err){
         res.status(500).send(err);
         return next();

@@ -9,6 +9,10 @@ export function saveLogInInput(input, value) {
   return { type: types.SAVE_LOGIN_INPUT, input, value }
 }
 
+export function logInFailed() {
+  return { type: types.LOG_IN_FAILED }
+}
+
 export function logIn() {
   return function (dispatch, getState) {
     var state = getState();
@@ -36,6 +40,8 @@ export function logIn() {
           // After the logIn reducer has updated the state, user gets redirected to the profile
           .then(() => { dispatch(routeActions.push('/profile'))});
         } else {
+          console.log('FAILED YO');
+          dispatch(logInFailed());
           const error = new Error(res.statusText);
           error.res = res;
           throw error;
