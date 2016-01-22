@@ -15,6 +15,7 @@ function status(response) {
 function json(response) { return response.json() }
 
 function getMatchInfo(props) {
+  props.actions.clearCurrentMatchData()
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
   fetch('http://localhost:4000/app/matches/match', {
@@ -96,8 +97,8 @@ class MatchUserData extends Component {
     return (
       <div className="match-info-userdata">
         <h4>{this.props.state.match.data.firstName} {this.props.state.match.data.lastName}</h4>
-        <p>Interests</p>
-        <p>Places</p>
+        <p>Interests: Drinking Beer, Coding, & Sewing</p>
+        <p>Favorite Places: Bangers, Lucys Fried Chicken, Hoovers, Pinthouse Pizza, & East Side Pies</p>
       </div>
     );
   }
@@ -153,7 +154,7 @@ class MatchMessageInput extends Component {
   }
 
   handleKeyPress(e) {
-    if (e.which === 13) {
+    if (e.which === 13 && this.refs.message.value !== '') {
       sendMessage(this.props)
       this.refs.message.value = '';
     }
@@ -192,7 +193,12 @@ class Match extends Component {
 
   componentWillMount() {
     getMatchInfo(this.props)
-    startMessagesInterval(this.props)
+    if (!messageInterval) {
+      startMessagesInterval(this.props)
+    } else {
+      clearMessagesInterval()
+      startMessagesInterval(this.props)
+    }
   }
 
   reRoute(props) {
