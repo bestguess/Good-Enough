@@ -1,6 +1,7 @@
 import { SAVE_MATCH_DATA, SAVE_INPUT, SEND_MESSAGE, LOGOUT } from '../constants/Match_ActionTypes'
 
 const initialState = {
+  conversation: []
 
 }
 
@@ -20,7 +21,8 @@ export default function Match(state = initialState, action) {
 
     case SEND_MESSAGE:
       var newState = Object.assign({}, state)
-    	console.log('sending message...')
+      // updating convo in the state
+      newState.conversation = action.convo.messages
     	return newState
 
 
