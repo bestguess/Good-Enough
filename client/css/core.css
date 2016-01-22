@@ -374,7 +374,7 @@ input[type="submit"]{
 }
 
 .login-box {
-  margin-top: 10em;
+  margin-top: 7%;
   background-color: rgba(255,255,255,0.5);
   padding: 47px 35px 35px 35px;
   width: 23em;
@@ -404,9 +404,25 @@ input[type="submit"]{
   padding: 10px;
 }
 
+.profile-page-data:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
 .profile-page-match {
   border: 1px solid #e0e0e0;
-  padding: 10px;
+  padding: 1%;
+  width: 31%;
+  float: left;
+  text-align: center;
+}
+
+.profile-page-match-image {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }
 
 .profile-page-connections {
@@ -434,11 +450,19 @@ input[type="submit"]{
   border-radius: 5px;
   width: 800px;
   margin: 20px auto;
-  padding: 3%;
+  padding: 2%;
+}
+
+.match-info-container:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
 }
 
 .match-info-picture {
-  width: 40%;
+  width: 100px;
+  height: 100px;
   float: left;
   border: 1px solid #e0e0e0;
 }
@@ -449,7 +473,7 @@ input[type="submit"]{
   border-radius: 5px;
   width: 800px;
   margin: 20px auto;
-  padding: 3%;
+  padding: 2%;
 }
 
 .match-conversation-image {
@@ -463,7 +487,6 @@ input[type="submit"]{
 }
 
 .match-conversation-message {
-  border: 1px solid #e0e0e0;
   padding: 1%;
 }
 
@@ -477,9 +500,19 @@ input[type="submit"]{
 }
 
 .match-conversation-input {
-  border: 1px solid #e0e0e0;
-  padding: 3%;
-  width: 94%%;
+  border: 2px solid #e0e0e0;
+  padding: 1px;
+  border-radius: 5px;
+}
+
+.match-conversation-input input {
+  outline: none;
+  padding: 1%;
+  margin: 0px;
+  border: none;
+  font-size: 16px;
+  line-height: 20px;
+  width: 98%;
 }
 
 /*** Progress Bar for SignUp ***/

@@ -60,9 +60,7 @@ class Profile extends Component {
 
   render() {
     if (!window.localStorage.getItem('GoodEnough')) this.reRoute(this.props)
-    if (!this.props.state.profile.data) {
-      return <h1><i>Loading profile...</i></h1>
-    }
+    if (!this.props.state.profile.data) return <h1><i>Loading profile...</i></h1>
     const { state, actions } = this.props
     return (
       <div>
