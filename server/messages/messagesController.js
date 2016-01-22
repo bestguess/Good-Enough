@@ -57,7 +57,9 @@ module.exports = {
         return next();
       }
       if(!convo){
-        res.status(404).send("Conversation not found")
+        // If there are no conversations send back an empty array
+        // So front end doesn't have to add handling for this case
+        res.status(200).send({messages: []})
         return next();
       }
 
