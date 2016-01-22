@@ -11,6 +11,7 @@ module.exports = {
       date : date,
       message : req.body.message
     };
+
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
       if(err){
         res.status(500).send(err);
@@ -48,6 +49,7 @@ module.exports = {
   },
 
   getConvo : function(req, res, next){
+
     Messages.findOne({users: {$all:[req.body.match_id, req.body.user_id]}}, function(err, convo){
       if(err){
         res.status(500).send(err);
@@ -57,6 +59,7 @@ module.exports = {
         res.status(404).send("Conversation not found")
         return next();
       }
+
       res.status(200).send(convo);
    });
   }

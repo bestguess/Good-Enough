@@ -34,11 +34,15 @@ var port = process.env.PORT || 4000;
   app.use('/app/messages', messagesRouter);
   app.use('/app/matches', matchesRouter);
 
-  app.get('/',function(req,res,next){
-    res.sendFile(path.join(__dirname + '/../client/index.html'));
+  app.get('/client',function(req,res,next){
+    res.sendFile(path.join(__dirname + req.url));
   });
 
-  app.get('/*', function(req, res){
+  app.get('/picture/:pic',function(req,res,next){
+    res.sendFile(path.join(__dirname + '/uploads/' + req.params.pic));
+  });
+
+  app.get('/*',function(req,res,next){
     res.sendFile(path.join(__dirname + '/../client/index.html'));
   });
 

@@ -5,16 +5,18 @@ var Token = db.Token;
 module.exports = {
   convertPhoto : function(photo,email){
     if(photo.slice(0,4) === "http") return photo;
+    console.log(photo);
     var decodedImage = new Buffer(photo
     .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
-    var fileLocation = "/server/uploads/" + email.replace("@","").replace(".","") + ".jpeg";
+    var fileName = email.replace("@","").replace(".","") + ".jpeg";
+    var fileLocation = "./server/uploads/" + fileName;
 
     if (!fs.existsSync('./server/uploads/')) fs.mkdirSync('./server/uploads/');
 
-    fs.writeFile("." + fileLocation, decodedImage, function(err) {
+    fs.writeFile(fileLocation, decodedImage, function(err) {
       if (err) console.error(err);
     });
-    return fileLocation;
+    return "picture/" + fileName;
   },
 
   // Authentication check
