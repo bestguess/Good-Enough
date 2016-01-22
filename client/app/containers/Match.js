@@ -17,7 +17,6 @@ function json(response) { return response.json() }
 function getMatchInfo(props) {
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
-  console.log('requestData: ', requestData)
   fetch('http://localhost:4000/app/matches/match', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -40,7 +39,6 @@ function sendMessage(props) {
   messageData.from = obj.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message = props.state.match.message;
-  console.log('messageData: ', messageData)
   fetch('http://localhost:4000/app/messages/send', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -59,7 +57,6 @@ function sendMessage(props) {
 function getAllMessages(props) {
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
-  console.log('requestData: ', requestData)
   fetch('http://localhost:4000/app/messages/get', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -84,7 +81,7 @@ class MatchPicture extends Component {
   render() {
     return (
       <div className="match-info-picture">
-        <span>Match Picture Goes Here</span>
+        <img src={this.props.state.match.data.picture} />
       </div>
     );
   }
@@ -94,7 +91,7 @@ class MatchUserData extends Component {
   render() {
     return (
       <div className="match-info-userdata">
-        <span>Match MatchUserData Goes Here</span>
+        <h4>{this.props.state.match.data.firstName} {this.props.state.match.data.lastName}</h4>
       </div>
     );
   }
@@ -130,7 +127,6 @@ class MatchMessage extends Component {
     } else {
       username = this.props.state.profile.data.firstName + ' ' + this.props.state.profile.data.lastName
     }
-    console.log('hank: ', this.props.state)
     return (
       <div className="match-conversation-message">
         <MatchMessageImage state={this.props.state} actions={this.props.actions} />
@@ -191,7 +187,7 @@ class Match extends Component {
   }
 
   render() {
-    console.log(this.props.state.routing.location.pathname.substring(1))
+    if (!this.props.state.match.data) return <h1><i>Loading match...</i></h1>
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />

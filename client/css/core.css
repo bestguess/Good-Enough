@@ -450,11 +450,19 @@ input[type="submit"]{
   border-radius: 5px;
   width: 800px;
   margin: 20px auto;
-  padding: 3%;
+  padding: 2%;
+}
+
+.match-info-container:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
 }
 
 .match-info-picture {
-  width: 40%;
+  width: 100px;
+  height: 100px;
   float: left;
   border: 1px solid #e0e0e0;
 }
