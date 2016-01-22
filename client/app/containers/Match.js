@@ -75,6 +75,10 @@ function getAllMessages(props) {
     });
 }
 
+function startMessagesInterval(props) {
+  setInterval(function() { getAllMessages(props) }, 5000)
+}
+
 
 class MatchPicture extends Component {
   render() {
@@ -184,6 +188,7 @@ class Match extends Component {
 
   componentWillMount() {
     getMatchInfo(this.props)
+    startMessagesInterval(this.props)
   }
 
   render() {
