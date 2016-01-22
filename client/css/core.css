@@ -444,7 +444,7 @@ input[type="submit"]{
   border-radius: 5px;
   width: 800px;
   margin: 20px auto;
-  padding: 3%;
+  padding: 2%;
 }
 
 .match-conversation-image {
@@ -458,7 +458,6 @@ input[type="submit"]{
 }
 
 .match-conversation-message {
-  border: 1px solid #e0e0e0;
   padding: 1%;
 }
 
