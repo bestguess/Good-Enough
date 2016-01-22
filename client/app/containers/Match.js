@@ -116,7 +116,7 @@ class MatchMessageImage extends Component {
   render() {
     return (
       <div className="match-conversation-image">
-        <img src='http://cdn.truthinmedia.com/wp-content/uploads/2014/11/Obama-Hand-to-Ear.jpg'/>
+        <img src={this.props.state.match.data.picture}/>
       </div>
     );
   }
@@ -162,8 +162,7 @@ class MatchMessageInput extends Component {
   render() {
     return (
       <div className="match-conversation-input">
-        <input placeholder="Match Message Input goes here" ref="message" onKeyUp={() => this.handleKeyUp()} onKeyPress={(event) => this.handleKeyPress(event)}></input>
-        <button onClick={() => this.sendMessage()}>Send Message</button>
+        <input placeholder="start typing..." ref="message" onKeyUp={() => this.handleKeyUp()} onKeyPress={(event) => this.handleKeyPress(event)}></input>
       </div>
     );
   }
