@@ -67,49 +67,49 @@ describe('A lonely user', function(){
       })
   });
 
-  it("should be able to start a new conversation", function(done){
-    request.post('localhost:4000/app/messages/new')
-      .set('Content-Type', 'application/json')
-      .send(JSON.stringify(message))
-      .end(function(err,res){
-        message.id = res.body._id;
-        expect(res).to.exist;
-        expect(res.status).to.equal(201);
-        done();
-      })
-  });
+  // it("should be able to start a new conversation", function(done){
+  //   request.post('localhost:4000/app/messages/new')
+  //     .set('Content-Type', 'application/json')
+  //     .send(JSON.stringify(message))
+  //     .end(function(err,res){
+  //       message.id = res.body._id;
+  //       expect(res).to.exist;
+  //       expect(res.status).to.equal(201);
+  //       done();
+  //     })
+  // });
 
-  it("should be able to get a list of convos", function(done){
-    request.post('localhost:4000/app/messages/list')
-      .set('Content-Type', 'application/json')
-      .send(JSON.stringify({"user": message.from}))
-      .end(function(err,res){
-        expect(res).to.exist;
-        expect(res.status).to.equal(200);
-        expect(res.body.length).to.equal(1);
-        done();
-      })
-  });
+  // it("should be able to get a list of convos", function(done){
+  //   request.post('localhost:4000/app/messages/list')
+  //     .set('Content-Type', 'application/json')
+  //     .send(JSON.stringify({"user": message.from}))
+  //     .end(function(err,res){
+  //       expect(res).to.exist;
+  //       expect(res.status).to.equal(200);
+  //       expect(res.body.length).to.equal(1);
+  //       done();
+  //     })
+  // });
 
-  it("should be able to reply to a message", function(done){
-    request.post('localhost:4000/app/messages/reply')
-      .set('Content-Type', 'application/json')
-      .send(JSON.stringify(message))
-      .end(function(err,res){
-        expect(res).to.exist;
-        expect(res.status).to.equal(201);
-        expect(res.body.message).to.equal('test');
-        done();
-      })
-  });
+  // it("should be able to reply to a message", function(done){
+  //   request.post('localhost:4000/app/messages/reply')
+  //     .set('Content-Type', 'application/json')
+  //     .send(JSON.stringify(message))
+  //     .end(function(err,res){
+  //       expect(res).to.exist;
+  //       expect(res.status).to.equal(201);
+  //       expect(res.body.message).to.equal('test');
+  //       done();
+  //     })
+  // });
 
-  it("should be able to delete message", function(done){
-    Messages.find({ users: message.to }).remove(function(err, res){
-      expect(res).to.exist;
-      expect(res.result.ok).to.equal(1);
-      done();
-    });
-  });
+  // it("should be able to delete message", function(done){
+  //   Messages.find({ users: message.to }).remove(function(err, res){
+  //     expect(res).to.exist;
+  //     expect(res.result.ok).to.equal(1);
+  //     done();
+  //   });
+  // });
 
   it("should be able to be deleted", function(done){
     User.find({ email:"user@test.com" }).remove(function(err, res){
