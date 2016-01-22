@@ -15,3 +15,7 @@ export function saveInput(value) {
 export function logout() {
 	return { type: types.LOGOUT }
 }
+
+export function clearCurrentMatchData() {
+	return { type: types.CLEAR_CURRENT_MATCH_DATA }
+}
