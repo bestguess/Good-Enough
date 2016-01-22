@@ -40,7 +40,7 @@ class ProfileConnections extends Component {
         <span> This is where the profile connections would go</span>
       </div>
     );
-  }  
+  }
 }
 
 
