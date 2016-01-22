@@ -101,13 +101,12 @@ class MatchMessageImage extends Component {
 class MatchMessage extends Component {
   render() {
     var username
-    console.log(this.props.data.user, this.props.state.routing.location.pathname.substring(1))
     if (this.props.data.user === this.props.state.routing.location.pathname.substring(1)) {
-      username = "match"
+      username = this.props.state.match.data.firstName + ' ' + this.props.state.match.data.lastName
     } else {
-      username = 'user'
+      username = this.props.state.profile.data.firstName + ' ' + this.props.state.profile.data.lastName
     }
-    console.log('hank: ', this.props.data)
+    console.log('hank: ', this.props.state)
     return (
       <div className="match-conversation-message">
         <MatchMessageImage state={this.props.state} actions={this.props.actions} />
