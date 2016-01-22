@@ -27,20 +27,24 @@ module.exports = {
           key !== 'meet'
           ) matchObject[key] = match[key];
       }
-      console.log('user', req.body._id, 'match', match._id);
-      Messages.findOne({users: {$all:[req.body._id, match._id]}}, function(err, convo){
+      console.log('user', req.body.id, 'match', match._id);
+      Messages.findOne({users: {$all:[req.body.match_id, req.body.id]}}, function(err, convo){
             if(err){
               res.status(500).send(err);
               return next();
             }
-            if(convo){
-              matchObject.conversations = convo;
+            if(!convo){
+              console.log("sending matchObject without conversations")
+              res.status(200).send(matchObject);
+              return next();
+            }
+            else{
+              matchObject.messages = convo.messages;
               console.log('matchObject', matchObject)
               res.status(200).send(matchObject);
               return next();
             }
          });
-      res.status(200).send(matchObject);
     }
     });
   }
