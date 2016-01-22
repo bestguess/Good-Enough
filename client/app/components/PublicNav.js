@@ -8,7 +8,6 @@ class PublicNav extends Component {
       <nav className="public-nav">
         <li className='nav-left'></li>
         <li className='nav-right'>
-          <Link to="/login">Log In</Link>
         </li>
         <li className='nav-middle'></li>
       </nav>
