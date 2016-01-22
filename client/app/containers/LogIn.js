@@ -7,7 +7,13 @@ import PublicNav from '../components/PublicNav'
 //import LogIn action here maybe...
 
 class LogIn extends Component {
+
+  reRoute(props) {
+    this.props.history.push({ pathname: '/profile' })
+  }
+
   render() {
+    if (window.localStorage.getItem('GoodEnough')) this.reRoute(this.props)
     const { state, actions } = this.props
     return (
       <div>
