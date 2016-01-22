@@ -15,14 +15,7 @@ class SignUp extends Component {
   render() {
     const { state, actions } = this.props
     var h1Content;
-    var loginButton;
-
-    if (this.props.state.signup.viewData.signup.stage0) {
-     loginButton = <p onClick={() => {this.props.actions.redirectToLogIn()}} className="login-navbar-button">Login</p>
-    } else {
-      loginButton = null;
-    }
-
+    var loginButton = <p onClick={() => {this.props.actions.redirectToLogIn()}} className="login-navbar-button">Login</p>
     if (this.props.state.signup.viewData.signup.stage0) {
       h1Content = <div className="logo-img"><img src="../client/img/logo.png"/></div>
     } else {
