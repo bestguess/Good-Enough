@@ -334,6 +334,14 @@ h1 {
   font-size: 2.4em;
 }
 
+.login-navbar-button {
+  font-size: 18px;
+  font-weight: 600;
+  color: #25b79a;
+  padding: 2px 31px;
+  float: right;
+}
+
 .login-form {
   margin: 0px auto;
   width: 19em;

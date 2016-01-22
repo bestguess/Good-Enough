@@ -18,7 +18,7 @@ class SignUp extends Component {
     var loginButton;
 
     if (this.props.state.signup.viewData.signup.stage0) {
-     loginButton = <button onClick={() => {this.props.actions.redirectToLogIn()}} className="start-test">Login</button>
+     loginButton = <p onClick={() => {this.props.actions.redirectToLogIn()}} className="login-navbar-button">Login</p>
     } else {
       loginButton = null;
     }
@@ -32,11 +32,11 @@ class SignUp extends Component {
 
     return (
       <div>
+        {loginButton}
         <PublicNav state={this.props.state} actions={this.props.actions} />
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
         <div className="question-form-submit-button">
-        {loginButton}
         </div>
         <Footer state={state} actions={actions} />
       </div>
