@@ -59,6 +59,12 @@ module.exports = {
       var failings = [];
       var failed = false;
 
+      function calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - birthday.getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+      }
+
       for(var key in properties){
         if(!user[key]){
           failings.push(properties[key]);
@@ -93,9 +99,13 @@ module.exports = {
               res.status(500).send(err);
               next();
             }else{
+
+              var userAge = new Date(user.birthday[0],user.birthday[1],user.birthday[2]);
+              userAge = calculateAge(userAge);
+
               user.matches.forEach(function(score){
-                User.update({_id: score[0]}, {
-                  $push: { matches : [user._id,score[1],score[2],score[3],score[4],score[5]]}
+                User.findByIdAndUpdate(score[0], {
+                  $push: { matches : [user._id,score[1],user.firstName,user.lastName,user.picture,userAge]}
                 } ,function(err) { 
                   if(err) console.log(err);
                 });
