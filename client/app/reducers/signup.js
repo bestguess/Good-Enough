@@ -23,10 +23,10 @@ const initialState = {
     clearForSubmit: false
   },
   validationChecks: {
-    stage1: true,
-    stage2: true,
-    stage3: true,
-    stage4: true,
+    stage1: false,
+    stage2: false,
+    stage3: false,
+    stage4: false,
     clearForSubmit: false
   }
 }
