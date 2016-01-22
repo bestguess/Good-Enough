@@ -72,10 +72,14 @@ function getAllMessages(props) {
     });
 }
 
+var messageInterval
 function startMessagesInterval(props) {
-  setInterval(function() { getAllMessages(props) }, 5000)
+  messageInterval = setInterval(function() { getAllMessages(props) }, 5000)
 }
 
+function clearMessagesInterval(props) {
+ messageInterval = clearInterval(messageInterval)
+}
 
 class MatchPicture extends Component {
   render() {
@@ -92,6 +96,8 @@ class MatchUserData extends Component {
     return (
       <div className="match-info-userdata">
         <h4>{this.props.state.match.data.firstName} {this.props.state.match.data.lastName}</h4>
+        <p>Interests</p>
+        <p>Places</p>
       </div>
     );
   }
@@ -113,7 +119,7 @@ class MatchMessageImage extends Component {
   render() {
     return (
       <div className="match-conversation-image">
-        <img src={this.props.state.match.data.picture}/>
+        <img src={this.props.img}/>
       </div>
     );
   }
@@ -121,15 +127,18 @@ class MatchMessageImage extends Component {
 
 class MatchMessage extends Component {
   render() {
-    var username
+    var username;
+    var picture;
     if (this.props.data.user === this.props.state.routing.location.pathname.substring(1)) {
       username = this.props.state.match.data.firstName + ' ' + this.props.state.match.data.lastName
+      picture = this.props.state.match.data.picture
     } else {
       username = this.props.state.profile.data.firstName + ' ' + this.props.state.profile.data.lastName
+      picture = this.props.state.profile.data.picture
     }
     return (
       <div className="match-conversation-message">
-        <MatchMessageImage state={this.props.state} actions={this.props.actions} />
+        <MatchMessageImage state={this.props.state} actions={this.props.actions} img={ picture } />
         <span className="match-conversation-username">{ username }</span>
         <p>{this.props.data.message}</p>
       </div>
@@ -184,6 +193,10 @@ class Match extends Component {
   componentWillMount() {
     getMatchInfo(this.props)
     startMessagesInterval(this.props)
+  }
+
+  reRoute(props) {
+    this.props.history.push({ pathname: '/' })
   }
 
   render() {
