@@ -15,8 +15,9 @@ const initialState = {
 export default function LogIn(state = initialState, action) {
   switch (action.type) {
     case SAVE_LOGIN_INPUT:
-      state.userData[action.input] = action.value
-      return state
+      var newState = Object.assign({}, state)
+      newState.userData[action.input] = action.value
+      return newState
     case LOG_IN:
       var newState = Object.assign({}, state)
       console.log('newState: ', newState)

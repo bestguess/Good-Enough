@@ -5,7 +5,7 @@ import QuestionForm from '../components/questionForm'
 import * as QuestionActions from '../actions/signup'
 import PublicNav from '../components/PublicNav'
 import Footer from '../components/Footer'
-
+import { routeActions } from 'redux-simple-router'
 
 class SignUp extends Component {
   constructor(props) {
@@ -15,16 +15,29 @@ class SignUp extends Component {
   render() {
     const { state, actions } = this.props
     var h1Content;
+    var loginButton;
+
+    if (this.props.state.signup.viewData.signup.stage0) {
+     loginButton = <button onClick={() => {this.props.actions.redirectToLogIn()}} className="start-test">Login</button>
+    } else {
+      loginButton = null;
+    }
+
     if (this.props.state.signup.viewData.signup.stage0) {
       h1Content = <div className="logo-img"><img src="../client/img/logo.png"/></div>
     } else {
       h1Content = "Good Enough"
     }
+
+
     return (
       <div>
         <PublicNav state={this.props.state} actions={this.props.actions} />
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
+        <div className="question-form-submit-button">
+        {loginButton}
+        </div>
         <Footer state={state} actions={actions} />
       </div>
     );
