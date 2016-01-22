@@ -4,8 +4,8 @@ export function saveMatchData(data) {
   return { type: types.SAVE_MATCH_DATA, data }
 }
 
-export function sendMessage() {
-  return { type: types.SEND_MESSAGE }
+export function sendMessage(convo) {
+  return { type: types.SEND_MESSAGE, convo }
 }
 
 export function saveInput(value) {
