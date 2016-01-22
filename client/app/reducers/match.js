@@ -10,6 +10,7 @@ export default function Match(state = initialState, action) {
   	case SAVE_MATCH_DATA:
     	var newState = Object.assign({}, state)
     	newState.data = action.data
+      newState.conversation = []
      	return newState
 
 
