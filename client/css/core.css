@@ -128,6 +128,13 @@ h1 {
 	padding: 10px;
 }
 
+.question-form-submit-button-login {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0px;
+  margin-top: 10px;
+}
+
 .question-form-submit-button {
   width: 100%;
   text-align: center;
@@ -404,10 +411,10 @@ input[type="submit"]{
   padding: 10px;
 }
 
-.profile-page-data:after { 
+.profile-page-data:after {
    content: " ";
-   display: block; 
-   height: 0; 
+   display: block;
+   height: 0;
    clear: both;
 }
 
@@ -453,10 +460,10 @@ input[type="submit"]{
   padding: 2%;
 }
 
-.match-info-container:after { 
+.match-info-container:after {
    content: " ";
-   display: block; 
-   height: 0; 
+   display: block;
+   height: 0;
    clear: both;
 }
 
