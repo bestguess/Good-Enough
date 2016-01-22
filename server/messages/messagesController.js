@@ -22,11 +22,11 @@ module.exports = {
         newConvo.messages.push(text);
         newConvo.save(function(err, text){
         if(err) res.status(400).send(err);
-        else res.status(201).send(text);
+        else res.status(201).send(newConvo);
         return next();
         });
       }  
-      Messages.update({_id: convo._id}, {
+      else Messages.update({_id: convo._id}, {
         $push: { messages : text}
       }, function(err) { 
         if(err) res.status(400).send(err);
