@@ -12,14 +12,18 @@ class SignUp extends Component {
     super(props)
   }
 
-  handleLogIn() {
-    this.props.actions.redirectToLogIn();
-  }
-
   render() {
     const { state, actions } = this.props
     console.log(this)
     var h1Content;
+    var loginButton;
+
+    if (this.props.state.signup.viewData.signup.stage0) {
+     loginButton = <button onClick={() => {this.props.actions.redirectToLogIn()}} className="start-test">Login</button>
+    } else {
+      loginButton = null;
+    }
+
     if (this.props.state.signup.viewData.signup.stage0) {
       h1Content = <div className="logo-img"><img src="../client/img/logo.png"/></div>
     } else {
@@ -32,7 +36,9 @@ class SignUp extends Component {
         <PublicNav state={this.props.state} actions={this.props.actions} />
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
-        <button onClick={() => {this.handleLogIn()}} className="start-test">Login</button>
+        <div className="question-form-submit-button">
+        {loginButton}
+        </div>
         <Footer state={state} actions={actions} />
       </div>
     );
