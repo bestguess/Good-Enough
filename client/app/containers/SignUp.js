@@ -5,11 +5,15 @@ import QuestionForm from '../components/questionForm'
 import * as QuestionActions from '../actions/signup'
 import PublicNav from '../components/PublicNav'
 import Footer from '../components/Footer'
-
+import { routeActions } from 'redux-simple-router'
 
 class SignUp extends Component {
   constructor(props) {
     super(props)
+  }
+
+  handleLogIn() {
+    this.props.actions.redirectToLogIn();
   }
 
   render() {
@@ -21,11 +25,14 @@ class SignUp extends Component {
     } else {
       h1Content = "Good Enough"
     }
+
+
     return (
       <div>
         <PublicNav state={this.props.state} actions={this.props.actions} />
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
+        <button onClick={() => {this.handleLogIn()}} className="start-test">Login</button>
         <Footer state={state} actions={actions} />
       </div>
     );
