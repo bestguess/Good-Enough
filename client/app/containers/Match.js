@@ -123,6 +123,13 @@ class MatchMessageInput extends Component {
     this.props.actions.saveInput(this.refs.message.value)
   }
 
+  handleKeyPress(e) {
+    if (e.which === 13) {
+      sendMessage(this.props)
+      this.refs.message.value = '';
+    }
+  }
+
   sendMessage() {
     sendMessage(this.props)
     this.refs.message.value = '';
@@ -131,7 +138,7 @@ class MatchMessageInput extends Component {
   render() {
     return (
       <div className="match-conversation-input">
-        <input placeholder="Match Message Input goes here" ref="message" onKeyUp={() => this.handleKeyUp()}></input>
+        <input placeholder="Match Message Input goes here" ref="message" onKeyUp={() => this.handleKeyUp()} onKeyPress={(event) => this.handleKeyPress(event)}></input>
         <button onClick={() => this.sendMessage()}>Send Message</button>
       </div>
     );
