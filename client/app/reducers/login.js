@@ -1,6 +1,7 @@
-import { LOG_IN, SAVE_LOGIN_INPUT } from '../constants/Login_ActionTypes'
+import { LOG_IN, SAVE_LOGIN_INPUT, LOG_IN_FAILED } from '../constants/Login_ActionTypes'
 
 const initialState = {
+  loggedStatus: true,
   userData: {
     email: undefined,
     password: undefined,
@@ -18,6 +19,12 @@ export default function LogIn(state = initialState, action) {
       return state
     case LOG_IN:
       var newState = Object.assign({}, state)
+      console.log('newState: ', newState)
+      newState.loggedStatus = true;
+      return newState
+    case LOG_IN_FAILED:
+      var newState = Object.assign({}, state)
+      newState.loggedStatus = false;
       return newState
     default:
       console.log('hit default case: returning state')
