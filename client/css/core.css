@@ -17,6 +17,11 @@ img {
   height: 100%;
 }
 
+.loginError {
+  margin-left: 50px;
+  color: red;
+}
+
 .public-nav {
   background-color: transparent;
   color: #7f8d8e;
@@ -226,7 +231,7 @@ h1 {
 }
 
 .question-button-large label {
-  border-radius: 16px; 
+  border-radius: 16px;
 }
 
 .question-button-medium {
@@ -236,7 +241,7 @@ h1 {
 }
 
 .question-button-medium label {
-  border-radius: 14px; 
+  border-radius: 14px;
 }
 
 .question-button-small {
@@ -246,7 +251,7 @@ h1 {
 }
 
 .question-button-small label {
-  border-radius: 12px; 
+  border-radius: 12px;
 }
 
 
@@ -444,7 +449,7 @@ input[type="submit"]{
   border-radius: 5px;
   width: 800px;
   margin: 20px auto;
-  padding: 3%;
+  padding: 2%;
 }
 
 .match-conversation-image {
@@ -458,7 +463,6 @@ input[type="submit"]{
 }
 
 .match-conversation-message {
-  border: 1px solid #e0e0e0;
   padding: 1%;
 }
 
