@@ -92,15 +92,16 @@ class MatchMessageImage extends Component {
   render() {
     return (
       <div className="match-conversation-image">
+        <img src='http://cdn.truthinmedia.com/wp-content/uploads/2014/11/Obama-Hand-to-Ear.jpg'/>
       </div>
     );
   }
 }
-// <img src={this.props.state.profile.data.picture}/>
 
 class MatchMessage extends Component {
   render() {
     var username
+    console.log(this.props.data.user, this.props.state.routing.location.pathname.substring(1))
     if (this.props.data.user === this.props.state.routing.location.pathname.substring(1)) {
       username = "match"
     } else {
@@ -123,6 +124,13 @@ class MatchMessageInput extends Component {
     this.props.actions.saveInput(this.refs.message.value)
   }
 
+  handleKeyPress(e) {
+    if (e.which === 13) {
+      sendMessage(this.props)
+      this.refs.message.value = '';
+    }
+  }
+
   sendMessage() {
     sendMessage(this.props)
     this.refs.message.value = '';
@@ -131,7 +139,7 @@ class MatchMessageInput extends Component {
   render() {
     return (
       <div className="match-conversation-input">
-        <input placeholder="Match Message Input goes here" ref="message" onKeyUp={() => this.handleKeyUp()}></input>
+        <input placeholder="Match Message Input goes here" ref="message" onKeyUp={() => this.handleKeyUp()} onKeyPress={(event) => this.handleKeyPress(event)}></input>
         <button onClick={() => this.sendMessage()}>Send Message</button>
       </div>
     );

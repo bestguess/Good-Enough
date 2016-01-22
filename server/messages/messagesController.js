@@ -28,9 +28,9 @@ module.exports = {
         return next();
         });
       } else {
-        Messages.update({_id: convo._id}, {
+        Messages.findByIdAndUpdate(convo._id, {
           $push: { messages : text}
-        }, function(err) { 
+        }, {  safe: true, upsert: true} ,function(err) { 
           if(err) res.status(400).send(err);
           else {
             Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
