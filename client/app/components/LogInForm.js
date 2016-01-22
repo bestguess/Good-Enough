@@ -14,12 +14,21 @@ class LogInForm extends Component {
   }
 
   render() {
+    var loginErr;
     var formButton = <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
+
+    if (this.props.state.login.loggedStatus) {
+      loginErr = null;
+    } else {
+      loginErr = <span className="loginError">Invalid username/password</span>
+    }
+
 
     return (
       <div className="login-box">
         <h1 className="login-logo">Login</h1>
         <div className="login-form">
+          {loginErr}
           <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)}  />
           <input type="password" placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} onKeyPress={(event) => this.handleKeyPress(event)} />
         </div>
