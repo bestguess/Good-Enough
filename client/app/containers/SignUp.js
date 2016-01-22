@@ -14,7 +14,6 @@ class SignUp extends Component {
 
   render() {
     const { state, actions } = this.props
-    console.log(this)
     var h1Content;
     if (this.props.state.signup.viewData.signup.stage0) {
       h1Content = <div className="logo-img"><img src="../client/img/logo.png"/></div>
