@@ -427,8 +427,8 @@ input[type="submit"]{
 }
 
 .profile-page-match-image {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 200px;
 }
 
 .profile-page-match-image img {
@@ -487,6 +487,10 @@ input[type="submit"]{
 
 .match-info-userdata h4 {
   margin: 0px;
+}
+
+.match-info-userdata p {
+  margin: 10px 0px;
 }
 
 .match-conversation-container {
