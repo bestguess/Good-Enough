@@ -125,7 +125,7 @@ module.exports = {
         }
 
         for(var stat in result){
-          result[stat][1] = Math.min((100-((result[stat][1]/1.8)-10)).toFixed(2),100);
+          result[stat][1] = Math.round(Math.min((100-((result[stat][1]/1.8)-10))),100);
           resultArr.push(result[stat]);
         }
         callback(resultArr);
