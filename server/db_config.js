@@ -24,6 +24,7 @@ var usersSchema = new Schema({
   picture: String,
   places: [String],
   matches: [Schema.Types.Mixed],
+  connections: [],
   conversations: [Schema.Types.ObjectId],
   meet: [String]
 });
