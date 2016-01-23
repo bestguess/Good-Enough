@@ -608,6 +608,12 @@ input[type="submit"]{
   margin: 5px 0px 5px 60px;
 }
 
+.match-conversation-timestamp {
+  color: #b3b3b3;
+  font-size: 0.8em;
+  font-weight: 100;
+}
+
 .match-conversation-username {
   font-weight: 600;
   margin: 0px 10px;

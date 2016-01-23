@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as MatchActions from '../actions/match'
 import PrivateNav from '../components/PrivateNav'
+import { convertTimeStamp } from '../helpers'
 
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -141,6 +142,7 @@ class MatchMessage extends Component {
       <div className="match-conversation-message">
         <MatchMessageImage state={this.props.state} actions={this.props.actions} img={ picture } />
         <span className="match-conversation-username">{ username }</span>
+        <span className="match-conversation-timestamp">{ convertTimeStamp(this.props.data.date) }</span>
         <p>{this.props.data.message}</p>
       </div>
     );
