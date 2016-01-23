@@ -1,3 +1,4 @@
+import SiteRouter from './SiteRouter'
 import SignUp from './SignUp'
 import LogIn from './LogIn'
 import Profile from './Profile'
