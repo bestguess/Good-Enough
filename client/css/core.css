@@ -666,36 +666,28 @@ progress::-webkit-progress-value {
   font-weight: 700;
 }
 
-.percent-0-25 {
+.percent-0-45 {
   color: #AA3939;
 }
 
-.percent-26-35 {
-  color: #AA5939;
-}
-
-.percent-36-45 {
-  color: #AA7939;
-}
-
 .percent-46-55 {
-  color: #AA8E39;
+  color: #AA6C39;
 }
 
 .percent-56-65 {
-  color: #AAA039;
+  color: #AA8439;
 }
 
 .percent-66-75 {
-  color: #91A437;
+  color: #AA9739;
 }
 
 .percent-76-85 {
-  color: #7A9F35;
+  color: #AAAA39;
 }
 
 .percent-86-95 {
-  color: #609732;
+  color: #7A9F35;
 }
 
 .percent-96-100.perc {

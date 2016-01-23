@@ -6,12 +6,8 @@ class MatchRating extends Component {
     console.log('RATING YO: ', perc)
     var percent;
 
-    if (perc <= 25) {
-      percent = <p className="percent-0-25 perc">{perc}%</p>
-    } else if (perc >= 26 && perc <= 35) {
-      percent = <p className="percent-26-35 perc">{perc}%</p>
-    } else if (perc >= 36 && perc <= 45) {
-      percent = <p className="percent-36-45 perc">{perc}%</p>
+    if (perc <= 45) {
+      percent = <p className="percent-0-45 perc">{perc}%</p>
     } else if (perc >= 46 && perc <= 55) {
       percent = <p className="percent-46-55 perc">{perc}%</p>
     } else if (perc >= 56 && perc <= 65) {
