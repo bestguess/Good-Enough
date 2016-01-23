@@ -644,6 +644,10 @@ progress::-webkit-progress-value {
   padding: 0.5em 0;
 }
 
+.perc {
+  font-weight: 700;
+}
+
 .percent-0-25 {
   color: #AA3939;
 }
@@ -676,6 +680,6 @@ progress::-webkit-progress-value {
   color: #609732;
 }
 
-.percent-96-100 {
+.percent-96-100.perc {
   color: #2D882D;
 }
