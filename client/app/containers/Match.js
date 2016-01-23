@@ -3,17 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as MatchActions from '../actions/match'
 import PrivateNav from '../components/PrivateNav'
-import { convertTimeStamp } from '../helpers'
-
-function status(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response)
-  } else {
-    return Promise.reject(new Error(response.statusText))
-  }
-}
-
-function json(response) { return response.json() }
+import { convertTimeStamp, status, json } from '../helpers'
 
 function getMatchInfo(props) {
   props.actions.clearCurrentMatchData()
@@ -204,10 +194,11 @@ class Match extends Component {
   }
 
   reRoute(props) {
-    this.props.history.push({ pathname: '/' })
+    this.props.history.push({ pathname: '/profile' })
   }
 
   render() {
+    if (!this.props.state.profile.data) this.reRoute(this.props)
     if (!this.props.state.match.data) return <h1><i>Loading match...</i></h1>
     return (
       <div>

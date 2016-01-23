@@ -17,6 +17,10 @@ export function logout() {
 	return { type: types.LOGOUT }
 }
 
+export function editUserInfo() {
+  return { type: types.EDIT_USER_INFO }
+}
+
 export function connect(friend) {
   return function (dispatch, getState) {
     var state = getState();
