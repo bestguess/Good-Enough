@@ -8,7 +8,7 @@ class ProfilePageMatchBoxImage extends Component {
     return (
       <div className="profile-page-match-image">
         <MatchRating rating={this.props.data[1]}/>
-        <MatchBoxHover />
+        <MatchBoxHover data={this.props.data} />
         <img src={this.props.data[4]} />
       </div>
     )
@@ -25,8 +25,6 @@ class ProfilePageMatchBox extends Component {
     return (
       <div className="profile-page-match">
         <ProfilePageMatchBoxImage state={this.props.state} actions={this.props.actions} data={this.props.data} />
-        <h4>{this.props.data[2]} {this.props.data[3]}</h4>
-        <p>{this.props.data[5]} years old</p>
         {connectButton}
         <Link to={conversationURL}><button>Conversation</button></Link>
       </div>
