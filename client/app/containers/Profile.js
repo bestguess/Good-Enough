@@ -44,6 +44,41 @@ class ProfileConnections extends Component {
 }
 
 
+
+class ProfileUserPicture extends Component {
+  render() {
+    return (
+      <div className="personal-info-card-picture">
+        <img src={this.props.state.profile.data.picture} />
+      </div>
+    );
+  }
+}
+
+class ProfileUserInfoBox extends Component {
+  render() {
+    return (
+      <div className="personal-info-card-userdata">
+        <h4>{this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</h4>
+        <p>Interests: Drinking Beer, Coding, & Sewing</p>
+        <p>Favorite Places: Bangers, Lucys Fried Chicken, Hoovers, Pinthouse Pizza, & East Side Pies</p>
+      </div>
+    );
+  }
+}
+
+class ProfileUserData extends Component {
+  render() {
+    return (
+      <div className="personal-info-card">
+        <ProfileUserPicture state={this.props.state} actions={this.props.actions} />
+        <ProfileUserInfoBox state={this.props.state} actions={this.props.actions} />
+      </div>
+    )
+  }
+}
+
+
 class Profile extends Component {
   constructor(props) {
     super(props)
@@ -65,6 +100,7 @@ class Profile extends Component {
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
+        <ProfileUserData state={this.props.state} actions={this.props.actions} />
         <ProfileConnections state={this.props.state} actions={this.props.actions} />
         <ProfileMatches state={this.props.state} actions={this.props.actions} />
       </div>
