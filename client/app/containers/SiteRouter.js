@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
-const { connect } = require('react-redux');
-const { routeActions } = require('redux-simple-router');
+import { connect } from 'react-redux'
+import { routeActions } from 'redux-simple-router'
 
 function SiteRouter({ push, children }) {
   return (
@@ -11,7 +11,7 @@ function SiteRouter({ push, children }) {
   );
 };
 
-module.exports = connect(
+export default connect(
   null,
   { push: routeActions.push }
 )(SiteRouter);
