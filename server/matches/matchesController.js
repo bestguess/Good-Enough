@@ -47,6 +47,137 @@ module.exports = {
          });
     }
     });
+  },
+
+  sendConnect: function(req, res, next){
+    var user = req.body.id;
+    var match = req.body.match_id;
+    var connection = {};
+    connection.id = req.body.id;
+    connection.connected = false;
+
+    User.findById(match, function(err, foundMatch){
+      if(err){
+        res.status(500).send(err);
+        return next();
+      }
+      if(!foundMatch){
+        res.status(404).send("Could not connect with match");
+        return next();
+      }
+      else{
+        foundMatch.connections.push(connection);
+        var foundem = false;
+        for(var i = 0; i < foundMatch.matches.length; i++){
+          if(foundMatch.matches[i][0] === "" + user){
+            foundem = true;
+            foundMatch.matches.splice(i, 1);
+            break;
+          }
+        }
+        foundMatch.save(next);
+        User.findById(user, function(err, foundUser){
+          if(err){
+            res.status(500).send(err);
+            return next();
+          }
+          if(!foundMatch){
+            res.status(404).send("Could not connect with match");
+            return next();
+          }
+          else{
+            var foundem = false;
+            for(var i = 0; i < foundUser.matches.length; i++){
+              if(foundUser.matches[i][0] === "" + match){
+                foundem = true;
+                foundUser.matches.splice(i, 1);
+                break;
+              }
+            }
+            res.status(200).send();
+            foundUser.save(next);
+          }
+        })
+      }
+    });
+
+    // User.findByIdAndUpdate(req.body.match_id, {$push: { connections : connection}}, {$pull: { matches: "Ivan"}} ,function(err) { 
+    //   if(err){
+    //     res.status(500).send(err);
+    //     return next();
+    //   }
+    //   // if(!foundUser){
+    //   //   res.status(404).send("Could not find user");
+    //   //   return next();
+    //   // }
+    //   else {
+    //     console.log(user);
+    //     console.log("trying to find match")
+    //     User.findByIdAndUpdate(req.body.id, {$pull: { matches: "Kayla"}, function(err){
+    //       if(err){
+    //         console.log("err")
+    //         res.status(500).send(err);
+    //         return next();
+    //       }
+    //       // if(!foungUser){
+    //       //   console.log("no user");
+    //       //   res.status(404).send("Could not find match");
+    //       //   return next();
+    //       // }
+    //       else{
+    //         console.log("did it")
+    //         res.status(200).send("Connection request sent");
+    //         return next();
+    //         }
+    //       }
+    //     });
+    //   }
+    // });
+  },
+
+  acceptConnect: function(req, res, next){
+    var user = req.body.id;
+    var match = req.body.match_id
+    var connection = {};
+    connection.id = user;
+    connection.connected = true;
+
+    User.findByIdAndUpdate(user, {$set: { connected: true }}, function(err){
+      if(err){
+        res.status(500).send(err);
+        return next();
+      }
+      else{
+        User.findByIdAndUpdate(match, {$push: { connections: connection}}, function(err){
+          if(err){
+            res.status(500).send(err);
+            return next();
+          }
+          else{
+            res.status(200).send("Connection accepted");
+            return next();
+          }
+        });
+      }
+    });
+  },
+
+
+
+  declineConnect: function(req, res, next){
+    var user = req.body.id;
+    var match = req.body.match_id
+
+    User.findByIdAndUpdate(user, {$pull: { connections: match}}, function(err){
+      if(err){
+        res.status(500).send(err);
+        return next();
+      }
+      else{
+        res.status(200).send("Connection declined");
+        return next();
+      }
+    });
   }
 
 };

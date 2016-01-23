@@ -30,7 +30,7 @@ module.exports = {
       } else {
         Messages.findByIdAndUpdate(convo._id, {
           $push: { messages : text}
-        }, {  safe: true, upsert: true} ,function(err) { 
+        } ,function(err) { 
           if(err) res.status(400).send(err);
           else {
             Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){

@@ -21,7 +21,6 @@ module.exports = {
         res.status(404).send(err);
         return next();
       }
-      console.log('user password', user.password)
       // purge password info from user object before sending
       var properties = new helpers.UserData;
       var userObject = {};
