@@ -69,11 +69,17 @@ class ProfileUserInfoBox extends Component {
 
 class ProfileUserData extends Component {
   render() {
+    var editUserInfoButton;
+    if (!this.props.state.profile.editUserInfo) {
+      var editUserInfoButton = <i onClick={this.props.actions.editUserInfo} className="edit-user-info fa fa-cog"></i>
+    } else {
+      var editUserInfoButton = <button onClick={this.props.actions.editUserInfo} className="edit-user-info save-button">Save Info</button>
+    }
     return (
       <div className="personal-info-card">
         <ProfileUserPicture state={this.props.state} actions={this.props.actions} />
         <ProfileUserInfoBox state={this.props.state} actions={this.props.actions} />
-        <i className="edit-user-info fa fa-cog"></i>
+        {editUserInfoButton}
       </div>
     )
   }
