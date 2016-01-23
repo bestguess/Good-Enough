@@ -395,11 +395,60 @@ input[type="submit"]{
   width: 19em;
 }
 
+
+
+/*** Personal Info Card ***/
+.personal-info-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 70%;
+  margin: 20px auto;
+  padding: 1%;
+}
+
+.personal-info-card:after { 
+   content: " ";
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+.personal-info-card-picture {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+
+.personal-info-card-picture img {
+  border-radius: 5px
+}
+
+.personal-info-card-userdata {
+  float: left;
+  margin-left: 20px;
+}
+
+.personal-info-card-userdata h4 {
+  margin: 0px;
+}
+
+.personal-info-card-userdata p {
+  margin: 10px 0px;
+}
+
+
+
+
+
+
+
+
 .profile-page-data {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 800px;
+  width: 70%;
   margin: 20px auto;
   padding: 10px;
 }
@@ -419,8 +468,8 @@ input[type="submit"]{
 }
 
 .profile-page-match-image {
-  height: 200px;
-  width: 200px;
+  height: 80%;
+  width: 80%;
 }
 
 .profile-page-match-image img {
@@ -431,7 +480,7 @@ input[type="submit"]{
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 800px;
+  width: 70%;
   margin: 20px auto;
   padding: 10px;
 }
@@ -446,52 +495,31 @@ input[type="submit"]{
   padding: 10px;
 }
 
-.match-info-container {
+.profile-page-user-data {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 800px;
+  width: 70%;
   margin: 20px auto;
-  padding: 2%;
+  padding: 10px;
 }
 
-.match-info-container:after { 
+.profile-page-user-data:after { 
    content: " ";
    display: block; 
    height: 0; 
    clear: both;
 }
 
-.match-info-picture {
-  width: 100px;
-  height: 100px;
-  float: left;
-}
 
-.match-info-picture img {
-  border-radius: 5px
-}
-
-.match-info-userdata {
-  float: left;
-  margin-left: 20px;
-}
-
-.match-info-userdata h4 {
-  margin: 0px;
-}
-
-.match-info-userdata p {
-  margin: 10px 0px;
-}
 
 .match-conversation-container {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 800px;
+  width: 70%;
   margin: 20px auto;
-  padding: 2%;
+  padding: 1%;
 }
 
 .match-conversation-image {
