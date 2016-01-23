@@ -12,14 +12,14 @@ class ProfilePageMatchBoxImage extends Component {
         <img src={this.props.data[4]} />
       </div>
     )
-  } 
+  }
 }
 
 
 class ProfilePageMatchBox extends Component {
   render() {
-    const { state, actions, data, key } = this.props
-    var connectButton = <button onClick={() => {this.props.actions.connect(this.props.data)}}>Connect!</button>
+
+    var connectButton = <button className="connect" onClick={() => {this.props.actions.connect(this.props.data)}}>Connect!</button>
     const conversationURL = '/' + this.props.data[0]
 
     return (
