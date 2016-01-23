@@ -73,6 +73,7 @@ class ProfileUserData extends Component {
       <div className="personal-info-card">
         <ProfileUserPicture state={this.props.state} actions={this.props.actions} />
         <ProfileUserInfoBox state={this.props.state} actions={this.props.actions} />
+        <i className="edit-user-info fa fa-cog"></i>
       </div>
     )
   }

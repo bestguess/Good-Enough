@@ -29,8 +29,6 @@ class SignUp extends Component {
         <PublicNav state={this.props.state} actions={this.props.actions} />
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
-        <div className="question-form-submit-button">
-        </div>
         <Footer state={state} actions={actions} />
       </div>
     );
