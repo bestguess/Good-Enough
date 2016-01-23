@@ -422,10 +422,10 @@ input[type="submit"]{
   padding: 1%;
 }
 
-.personal-info-card:after { 
+.personal-info-card:after {
    content: " ";
-   display: block; 
-   height: 0; 
+   display: block;
+   height: 0;
    clear: both;
 }
 
@@ -529,7 +529,7 @@ input[type="submit"]{
   padding: 10px;
 }
 
-.profile-page-user-data:after { 
+.profile-page-user-data:after {
    content: " ";
    display: block;
    height: 0;
@@ -644,3 +644,38 @@ progress::-webkit-progress-value {
   padding: 0.5em 0;
 }
 
+.percent-0-25 {
+  color: #AA3939;
+}
+
+.percent-26-35 {
+  color: #AA5939;
+}
+
+.percent-36-45 {
+  color: #AA7939;
+}
+
+.percent-46-55 {
+  color: #AA8E39;
+}
+
+.percent-56-65 {
+  color: #AAA039;
+}
+
+.percent-66-75 {
+  color: #91A437;
+}
+
+.percent-76-85 {
+  color: #7A9F35;
+}
+
+.percent-86-95 {
+  color: #609732;
+}
+
+.percent-96-100 {
+  color: #2D882D;
+}
