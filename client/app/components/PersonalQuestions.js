@@ -29,7 +29,7 @@ class PersonalQuestions extends Component {
           ctx.drawImage(img, 0, 0)
           dataURL = canvas.toDataURL()
           dropzone.props.actions.saveInput('picture', dataURL)
-          canvas = null 
+          canvas = null
       }
       img.src = url
     }
