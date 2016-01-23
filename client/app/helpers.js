@@ -1,18 +1,18 @@
 
 export const convertTimeStamp = function(timestamp) {
 	var monthObj = {
-		'01': "January",
-		'02': "February",
-		'03': "March",
-		'04': "April",
-		'05': "May",
-		'06': "June",
-		'07': "July",
-		'08': "August",
-		'09': "September",
-		'10': "October",
-		'11': "November",
-		'12': "December"
+		'Jan': "January",
+		'Feb': "February",
+		'Mar': "March",
+		'Apr': "April",
+		'May': "May",
+		'Jun': "June",
+		'Jul': "July",
+		'Aug': "August",
+		'Sep': "September",
+		'Oct': "October",
+		'Nov': "November",
+		'Dec': "December"
 	};
 	var dayObj = {
 		'01': 'st',
@@ -23,11 +23,11 @@ export const convertTimeStamp = function(timestamp) {
 		'23': 'rd',
 		'31': 'st'
 	};
-	var year = timestamp.substring(0, 4);
-	var month = monthObj[timestamp.substring(5, 7)];
+	var year = timestamp.substring(11, 15);
+	var month = monthObj[timestamp.substring(4, 7)];
 	var day = timestamp.substring(8, 10);
-	var hour = timestamp.substring(11, 13);
-	var minute = timestamp.substring(14, 16);
+	var hour = timestamp.substring(16, 18);
+	var minute = timestamp.substring(19, 21);
 	var zone;
 	if(dayObj[day]) {
 		var end = dayObj[day]
