@@ -4,33 +4,7 @@ import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
 import PrivateNav from '../components/PrivateNav'
 import ProfileMatches from '../components/ProfileMatches'
-
-function status(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response)
-  } else {
-    return Promise.reject(new Error(response.statusText))
-  }
-}
-
-function json(response) { return response.json() }
-
-function getUserInfo(props) {
-  var userData = window.localStorage.getItem('GoodEnough')
-  fetch('http://localhost:4000/app/users/info', {
-          method: 'POST',
-          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(JSON.parse(userData))
-        })
-    .then(status)
-    .then(json)
-    .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
-      props.actions.profile(data)
-    }).catch(function(error) {
-      console.log('Request failed', error);
-    });
-}
+import { status, json, getUserInfo } from '../helpers'
 
 class ProfileConnections extends Component {
   render() {
