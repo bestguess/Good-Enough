@@ -85,7 +85,7 @@ function clearMessagesInterval(props) {
 class MatchPicture extends Component {
   render() {
     return (
-      <div className="match-info-picture">
+      <div className="personal-info-card-picture">
         <img src={this.props.state.match.data.picture} />
       </div>
     );
@@ -95,7 +95,7 @@ class MatchPicture extends Component {
 class MatchUserData extends Component {
   render() {
     return (
-      <div className="match-info-userdata">
+      <div className="personal-info-card-userdata">
         <h4>{this.props.state.match.data.firstName} {this.props.state.match.data.lastName}</h4>
         <p>Interests: Drinking Beer, Coding, & Sewing</p>
         <p>Favorite Places: Bangers, Lucys Fried Chicken, Hoovers, Pinthouse Pizza, & East Side Pies</p>
@@ -108,7 +108,7 @@ class MatchUserData extends Component {
 class MatchInfo extends Component {
   render() {
     return (
-      <div className="match-info-container">
+      <div className="personal-info-card">
         <MatchPicture state={this.props.state} actions={this.props.actions} />
         <MatchUserData state={this.props.state} actions={this.props.actions} />
       </div>
