@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import MatchRating from './MatchRating'
+import MatchBoxHover from './MatchBoxHover'
 import { Link } from 'react-router'
 
 class ProfilePageMatchBoxImage extends Component {
@@ -7,6 +8,7 @@ class ProfilePageMatchBoxImage extends Component {
     return (
       <div className="profile-page-match-image">
         <MatchRating rating={this.props.data[1]}/>
+        <MatchBoxHover />
         <img src={this.props.data[4]} />
       </div>
     )
