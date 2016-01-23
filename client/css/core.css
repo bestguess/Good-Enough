@@ -457,6 +457,24 @@ input[type="submit"]{
 
 
 
+.match-rating {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  height: auto;
+  padding-top: 0.70%;
+  padding-bottom: 0.75%;
+  font-size: 1.2vw;
+  width: 3%;
+  background-color: #d45252;
+  color: #fff;
+  z-index: 1;
+  position: absolute;
+  margin: 13.25%;
+  text-align: center;
+}
+
+
+
 
 
 .profile-page-data {
