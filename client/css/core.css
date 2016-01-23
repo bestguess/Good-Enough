@@ -467,12 +467,33 @@ input[type="submit"]{
   width: 3%;
   background-color: #d45252;
   color: #fff;
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   margin: 13.25%;
   text-align: center;
 }
 
+.match-box-hover {
+  border-radius: 50%;
+  height: auto;
+  padding-top: 7.5%;
+  padding-bottom: 7.5%;
+  font-size: 2vw;
+  font-weight: 800;
+  width: 17.5%;
+  background-color: rgba(0, 0, 0, 0);
+  color: transparent;
+  z-index: 1;
+  position: absolute;
+  margin: 0%;
+  text-align: center;
+}
+
+
+.match-box-hover:hover {
+  background-color: rgba(0, 0, 0, 0.60);
+  color: #fff;
+}
 
 
 
