@@ -422,10 +422,10 @@ input[type="submit"]{
   padding: 1%;
 }
 
-.personal-info-card:after { 
+.personal-info-card:after {
    content: " ";
-   display: block; 
-   height: 0; 
+   display: block;
+   height: 0;
    clear: both;
 }
 
@@ -458,14 +458,14 @@ input[type="submit"]{
 
 
 .match-rating {
-  border: 2px solid #fff;
+  border: 2px solid #eef3f4;
   border-radius: 50%;
   height: auto;
   padding-top: 0.70%;
   padding-bottom: 0.75%;
   font-size: 1.2vw;
   width: 3%;
-  background-color: #d45252;
+  background-color: #eef3f4;
   color: #fff;
   z-index: 2;
   position: absolute;
@@ -568,7 +568,7 @@ input[type="submit"]{
   padding: 10px;
 }
 
-.profile-page-user-data:after { 
+.profile-page-user-data:after {
    content: " ";
    display: block;
    height: 0;
@@ -683,3 +683,34 @@ progress::-webkit-progress-value {
   padding: 0.5em 0;
 }
 
+.perc {
+  font-weight: 700;
+}
+
+.percent-0-45 {
+  color: #AA3939;
+}
+
+.percent-46-55 {
+  color: #AA6C39;
+}
+
+.percent-56-65 {
+  color: #AA8439;
+}
+
+.percent-66-75 {
+  color: #AA9739;
+}
+
+.percent-76-85 {
+  color: #AAAA39;
+}
+
+.percent-86-95 {
+  color: #7A9F35;
+}
+
+.percent-96-100.perc {
+  color: #2D882D;
+}
