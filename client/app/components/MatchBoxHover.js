@@ -4,7 +4,8 @@ class MatchBoxHover extends Component {
   render() {
     return (
         <div className="match-box-hover">
-          <span>Connect</span>
+        	<p className="match-box-name">{this.props.data[2]} {this.props.data[3]}</p>
+        	<span>Connect</span>
         </div>
       )
   }
