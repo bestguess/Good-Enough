@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/SignUp_ActionTypes'
+import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, REDIRECT_TO_LOGIN } from '../constants/SignUp_ActionTypes'
 
 const initialState = {
   viewData: {
@@ -23,10 +23,10 @@ const initialState = {
     clearForSubmit: false
   },
   validationChecks: {
-    stage1: true,
-    stage2: true,
-    stage3: true,
-    stage4: true,
+    stage1: false,
+    stage2: false,
+    stage3: false,
+    stage4: false,
     clearForSubmit: false
   }
 }
@@ -116,7 +116,9 @@ export default function SignUp(state = initialState, action) {
       }
       return newState
 
-
+    case REDIRECT_TO_LOGIN:
+      var newState = Object.assign({}, state)
+      return newState
 
     default:
     	return state
