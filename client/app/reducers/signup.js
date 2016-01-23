@@ -115,10 +115,7 @@ export default function SignUp(state = initialState, action) {
         newState.viewData.signup.stage5 = true;
       }
       return newState
-
-    case REDIRECT_TO_LOGIN:
-      var newState = Object.assign({}, state)
-      return newState
+      
 
     default:
     	return state
