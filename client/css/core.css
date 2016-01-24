@@ -724,3 +724,27 @@ progress::-webkit-progress-value {
 .percent-96-100.perc {
   color: #2D882D;
 }
+
+
+@media only screen and (max-width: 600px) {
+  
+  .logo-img {
+      width: 81vw;
+  }
+  
+  .start-test {
+    width: 270px;
+  }
+
+  .login-box {
+    padding: 39px 35px 15px 35px;
+    width: 19em;
+  }
+  .login-form {
+    padding: 0px 0 10px 0;
+  }
+
+
+
+
+}
