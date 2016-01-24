@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as MatchActions from '../actions/match'
-import PrivateNav from '../components/PrivateNav'
+import PrivateNav from '../components/Nav/PrivateNav'
 import { convertTimeStamp, status, json } from '../helpers'
 
 function getMatchInfo(props) {
