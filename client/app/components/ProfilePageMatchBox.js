@@ -15,7 +15,6 @@ class ProfilePageMatchBoxImage extends Component {
   }
 }
 
-
 class ProfilePageMatchBox extends Component {
   render() {
 
