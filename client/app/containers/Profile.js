@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
-import PrivateNav from '../components/PrivateNav'
+import PrivateNav from '../components/Nav/PrivateNav'
 import ProfileMatches from '../components/ProfileMatches'
 import { status, json, getUserInfo } from '../helpers'
 
