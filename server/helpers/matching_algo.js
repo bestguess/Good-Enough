@@ -101,7 +101,8 @@ module.exports = {
 
     User.find({birthday: { $gt: ageLow, $lt: ageHigh }}, function(err, list){
       function findMatch(user) {
-        var user_id = user._id.toString();
+        if(user._id) var user_id = user._id.toString();
+        else var user_id = "000";
         var user_interests = JSON.parse(user.interests);
         var type = user.type;
         var scores = JSON.parse(user.personality);
@@ -148,7 +149,7 @@ module.exports = {
 
         for(var stat in result){
           result[stat][1] = Math.round(Math.min((100-((result[stat][1]/0.9)-10))),100);
-          resultArr.push(result[stat]);
+          if(result[stat][1]>30) resultArr.push(result[stat]);
         }
         callback(resultArr);
       }

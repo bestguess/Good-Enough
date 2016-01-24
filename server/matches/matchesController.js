@@ -54,12 +54,12 @@ module.exports = {
 
     User.find({}, function(err, users){
       users.forEach(function(user){
-        match.user(user, matchMe);
-        function matchMe(data){
+        match.user(user, function (data){
+          data.sort(function(a,b){ return b[1]-a[1]; });
           User.update({_id: user._id},{matches:data},function(err, user){
             if(err) console.log(err);
           });
-        }
+        });
       });
     });
 
