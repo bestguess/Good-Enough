@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import QuestionForm from '../components/questionForm'
 import * as QuestionActions from '../actions/signup'
-import PublicNav from '../components/PublicNav'
+import PublicNav from '../components/Nav/PublicNav'
 import Footer from '../components/Footer'
 
 class SignUp extends Component {

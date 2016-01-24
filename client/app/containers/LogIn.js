@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import LogInForm from '../components/LogInForm'
 import * as LogInActions from '../actions/login'
-import PublicNav from '../components/PublicNav'
+import PublicNav from '../components/Nav/PublicNav'
 import Footer from '../components/Footer'
 
 class LogIn extends Component {

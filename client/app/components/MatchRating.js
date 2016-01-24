@@ -2,25 +2,16 @@ import React, { Component, PropTypes } from 'react'
 
 class MatchRating extends Component {
   genPerc(perc) {
-    var range
-
-    if (perc <= 45) { range = "0-45" }
-    else if (perc >= 46 && perc <= 55) { range = "46-55" }
-    else if (perc >= 56 && perc <= 65) { range = "56-65" }
-    else if (perc >= 66 && perc <= 75) { range = "66-75" }
-    else if (perc >= 76 && perc <= 85) { range = "76-85" }
-    else if (perc >= 86 && perc <= 95) { range = "86-95" }
-    else { range = "96-100" }
-
-    var ratingClassFore = "percent-" + range
-    var ratingClassBack = "match-rating-" + range
-    var percEl = <div className={ratingClassBack}><span><p className={ratingClassFore}>{perc}%</p></span></div>
-
-    return percEl;
+    var range;
+    if (perc >= 60 && perc <= 69) { range = "mr-60-69" }
+    else if (perc >= 70 && perc <= 79) { range = "mr-70-79" }
+    else if (perc >= 80 && perc <= 89) { range = "mr-80-89" }
+    else if (perc >= 90 && perc <= 100) { range = "mr-90-100" }
+    else { range = "mr-0-59" }
+    return <div className={"match-rating " + range}><span><p>{perc}%</p></span></div>
   }
 
   render() {
-
     return (
       <div>
         {this.genPerc(this.props.rating)}
