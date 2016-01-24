@@ -2,16 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import PersonalQuestions from './PersonalQuestions'
 import PersonalityTest from './PersonalityTest'
 import ProgressBar from './ProgressBar'
-
-function status(response) {  
-  if (response.status >= 200 && response.status < 300) {  
-    return Promise.resolve(response)  
-  } else {  
-    return Promise.reject(new Error(response.statusText))  
-  }  
-}
-
-function json(response) { return response.json() }
+import { status, json } from '../helpers'
 
 function submitSurvey(props) {
   const newObj = {};
