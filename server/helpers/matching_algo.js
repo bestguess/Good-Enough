@@ -101,8 +101,7 @@ module.exports = {
 
     User.find({birthday: { $gt: ageLow, $lt: ageHigh }}, function(err, list){
       function findMatch(user) {
-        if(user._id) var user_id = user._id.toString();
-        else var user_id = "000";
+        var user_id = user._id.toString();
         var user_interests = JSON.parse(user.interests);
         var type = user.type;
         var scores = JSON.parse(user.personality);
