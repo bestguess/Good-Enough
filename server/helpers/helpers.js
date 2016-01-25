@@ -5,7 +5,6 @@ var Token = db.Token;
 module.exports = {
   convertPhoto : function(photo,email){
     if(photo.slice(0,4) === "http") return photo;
-    console.log(photo);
     var decodedImage = new Buffer(photo
     .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
     var fileName = email.replace("@","").replace(".","") + ".jpeg";
