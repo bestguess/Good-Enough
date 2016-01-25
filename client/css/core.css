@@ -409,8 +409,8 @@ input[type="submit"]{
 }
 
 .personal-info-card-picture {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   float: left;
 }
 
@@ -428,7 +428,7 @@ input[type="submit"]{
 }
 
 .personal-info-card-userdata p {
-  margin: 10px 0px;
+  margin: 8px 0px;
 }
 
 
@@ -481,6 +481,15 @@ input[type="submit"]{
   width: 70%;
   margin: 20px auto;
   padding: 10px;
+}
+
+.poll-container-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  width: 70%;
+  margin: 20px auto;
+  padding: 10px; 
 }
 
 .profile-page-picture {
