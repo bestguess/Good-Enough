@@ -49,7 +49,6 @@ function sendMessage(props) {
 function getAllMessages(props) {
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
-  console.log(requestData.match_id);
   fetch('http://localhost:4000/app/messages/get', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
