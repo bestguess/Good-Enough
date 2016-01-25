@@ -8,7 +8,8 @@ const initialState = {
       stage2: false,
       stage3: false,
       stage4: false,
-      stage5: false
+      stage5: false,
+      stage6: false
     }
   },
   userData: {
@@ -18,6 +19,9 @@ const initialState = {
     lastname: undefined,
     gender: undefined,
     picture: null,
+    interests: {
+      activity: ['javascript']
+    },
     birthday: {},
   	answers: {},
     clearForSubmit: false
@@ -27,6 +31,7 @@ const initialState = {
     stage2: false,
     stage3: false,
     stage4: false,
+    stage5: false,
     clearForSubmit: false
   }
 }
@@ -64,6 +69,8 @@ export default function SignUp(state = initialState, action) {
         newState.userData.birthday.day = action.value
       } else if (action.input === "DOBYear") {
         newState.userData.birthday.year = action.value
+      } else if (action.input === "activity") {
+        newState.userData.interests.activity.push(action.value)
       } else {
         newState.userData[action.input] = action.value
       }
@@ -71,7 +78,7 @@ export default function SignUp(state = initialState, action) {
       var x = newState.userData
       var y = newState.validationChecks
       var bdLength = Object.keys(x.birthday).length
-      if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.clearForSubmit = true;
+      if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.stage5 = true;
       return newState
 
 
@@ -87,10 +94,12 @@ export default function SignUp(state = initialState, action) {
       newState.viewData.signup.stage3 = false;
       newState.viewData.signup.stage4 = false;
       newState.viewData.signup.stage5 = false;
+      newState.viewData.signup.stage6 = false;
       newState.validationChecks.stage1 = false;
       newState.validationChecks.stage2 = false;
       newState.validationChecks.stage3 = false;
       newState.validationChecks.stage4 = false;
+      newState.validationChecks.stage5 = false;
       newState.validationChecks.clearForSubmit = false;
       return newState
 
@@ -113,6 +122,9 @@ export default function SignUp(state = initialState, action) {
       } else if (state.viewData.signup.stage4) {
         newState.viewData.signup.stage4 = false;
         newState.viewData.signup.stage5 = true;
+      } else if (state.viewData.signup.stage5) {
+        newState.viewData.signup.stage5 = false;
+        newState.viewData.signup.stage6 = true;
       }
       return newState
       
