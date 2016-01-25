@@ -3,13 +3,17 @@ import { Link } from 'react-router'
 
 class PublicNav extends Component {
   render() {
+    var button;
+    if (this.props.state.routing.location.pathname === '/') {
+      var button = <Link to="/login">Login</Link>
+    } else {
+      var button = <Link to="/">Signup</Link>
+    }
     const { state, actions } = this.props
     return (
       <nav className="public-nav">
         <li className='nav-left'></li>
-        <li className='nav-right'>
-          <Link to="/login">Log In</Link>
-        </li>
+        <li className='nav-right'>{button}</li>
         <li className='nav-middle'></li>
       </nav>
     )

@@ -20,52 +20,52 @@ describe('Homepage', function(){
   });
 })
 
-describe('A lonely user', function(){
+// describe('A lonely user', function(){
  
-  var testUser = { 
-    "firstName": "Test",
-    "lastName": "User",
-    "email": "user@test.com",
-    "password": "test",
-    "birthday": 731916000000,
-    "gender": "mixed",
-    "type": "ISTP",
-    "personality": {ie:24,sn:24,ft:24,jp:24},
-    "picture": "testdata.jpeg",
-    "places": [ "Test Facility" ],
-    "matches": [],
-    "interests": [ { discussion:[ "testing" ],activity:[ "testing" ]}]
-  };
+//   var testUser = { 
+//     "firstName": "Test",
+//     "lastName": "User",
+//     "email": "user@test.com",
+//     "password": "test",
+//     "birthday": 731916000000,
+//     "gender": "mixed",
+//     "type": "ISTP",
+//     "personality": {ie:24,sn:24,ft:24,jp:24},
+//     "picture": "http://e27.co/img/no_image_profile.jpg",
+//     "places": [ "Test Facility" ],
+//     "matches": [],
+//     "interests": [ { discussion:[ "testing" ],activity:[ "testing" ]}]
+//   };
 
-  var message = { 
-    message : "test"
-  };
+//   var message = { 
+//     message : "test"
+//   };
 
-  it("should be able to register", function(done){
-    this.timeout(5000);
-    request.post('localhost:4000/app/users/signup')
-      .set('Content-Type', 'application/json')
-      .send(JSON.stringify(testUser))
-      .end(function(err,res){
-        expect(res).to.exist;
-        expect(res.status).to.equal(201);
-        done();
-      })
-  });
+//   it("should be able to register", function(done){
+//     this.timeout(5000);
+//     request.post('localhost:4000/app/users/signup')
+//       .set('Content-Type', 'application/json')
+//       .send(JSON.stringify(testUser))
+//       .end(function(err,res){
+//         expect(res).to.exist;
+//         expect(res.status).to.equal(201);
+//         done();
+//       })
+//   });
 
-  it("should be able to sign in", function(done){
-    request.post('localhost:4000/app/users/signin')
-      .set('Content-Type', 'application/json')
-      .send(JSON.stringify({"email": "user@test.com" , "password": "test"}))
-      .end(function(err,res){
-        expect(res).to.exist;
-        expect(res.status).to.equal(200);
-        expect(res.body.token).to.exist;
-        message.token = res.body.token;
-        message.to = message.from = res.body.id;
-        done();
-      })
-  });
+//   it("should be able to sign in", function(done){
+//     request.post('localhost:4000/app/users/signin')
+//       .set('Content-Type', 'application/json')
+//       .send(JSON.stringify({"email": "user@test.com" , "password": "test"}))
+//       .end(function(err,res){
+//         expect(res).to.exist;
+//         expect(res.status).to.equal(200);
+//         expect(res.body.token).to.exist;
+//         message.token = res.body.token;
+//         message.to = message.from = res.body.id;
+//         done();
+//       })
+//   });
 
   // it("should be able to start a new conversation", function(done){
   //   request.post('localhost:4000/app/messages/new')
@@ -111,14 +111,20 @@ describe('A lonely user', function(){
   //   });
   // });
 
-  it("should be able to be deleted", function(done){
-    User.find({ email:"user@test.com" }).remove(function(err, res){
-      expect(res).to.exist;
-      expect(res.result.ok).to.equal(1);
-      done();
-    });
-  });
+  // it("should be able to be deleted", function(done){
+  //   User.find({ email:"user@test.com" }).remove(function(err, res){
+  //     expect(res).to.exist;
+  //     expect(res.result.ok).to.equal(1);
+  //     done();
+  //   });
 
-})
+  //   Favorite.update( {matches: "test"}, 
+  //     { $pullAll: {uid: [req.params.deleteUid] } },
+  //     function(err,user){
+  //       console.log("Deleted", user);
+  //     })
+  // });
+
+// })
 
 

@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import LogInForm from '../components/LogInForm'
 import * as LogInActions from '../actions/login'
-import PublicNav from '../components/PublicNav'
-//import LogIn action here maybe...
+import PublicNav from '../components/Nav/PublicNav'
+import Footer from '../components/Footer'
 
 class LogIn extends Component {
 
@@ -19,6 +19,7 @@ class LogIn extends Component {
       <div>
         <PublicNav state={this.props.state} actions={this.props.actions} />
         <LogInForm state={this.props.state} actions={this.props.actions} />
+        <Footer state={state} actions={actions} />
       </div>
     );
   }

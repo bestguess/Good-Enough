@@ -2,35 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
-import PrivateNav from '../components/PrivateNav'
+import PrivateNav from '../components/Nav/PrivateNav'
 import ProfileMatches from '../components/ProfileMatches'
-
-function status(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response)
-  } else {
-    return Promise.reject(new Error(response.statusText))
-  }
-}
-
-function json(response) { return response.json() }
-
-function getUserInfo(props) {
-  var userData = window.localStorage.getItem('GoodEnough')
-  fetch('http://localhost:4000/app/users/info', {
-          method: 'POST',
-          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(JSON.parse(userData))
-        })
-    .then(status)
-    .then(json)
-    .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
-      props.actions.profile(data)
-    }).catch(function(error) {
-      console.log('Request failed', error);
-    });
-}
+import { status, json, getUserInfo } from '../helpers'
 
 class ProfileConnections extends Component {
   render() {
@@ -40,6 +14,48 @@ class ProfileConnections extends Component {
         <span> This is where the profile connections would go</span>
       </div>
     );
+  }
+}
+
+
+
+class ProfileUserPicture extends Component {
+  render() {
+    return (
+      <div className="personal-info-card-picture">
+        <img src={this.props.state.profile.data.picture} />
+      </div>
+    );
+  }
+}
+
+class ProfileUserInfoBox extends Component {
+  render() {
+    return (
+      <div className="personal-info-card-userdata">
+        <h4>{this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</h4>
+        <p>Interests: Drinking Beer, Coding, & Sewing</p>
+        <p>Favorite Places: Bangers, Lucys Fried Chicken, Hoovers, Pinthouse Pizza, & East Side Pies</p>
+      </div>
+    );
+  }
+}
+
+class ProfileUserData extends Component {
+  render() {
+    var editUserInfoButton;
+    if (!this.props.state.profile.editUserInfo) {
+      var editUserInfoButton = <i onClick={this.props.actions.editUserInfo} className="edit-user-info fa fa-cog"></i>
+    } else {
+      var editUserInfoButton = <button onClick={this.props.actions.editUserInfo} className="edit-user-info save-button">Save Info</button>
+    }
+    return (
+      <div className="personal-info-card">
+        <ProfileUserPicture state={this.props.state} actions={this.props.actions} />
+        <ProfileUserInfoBox state={this.props.state} actions={this.props.actions} />
+        {editUserInfoButton}
+      </div>
+    )
   }
 }
 
@@ -65,6 +81,7 @@ class Profile extends Component {
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
+        <ProfileUserData state={this.props.state} actions={this.props.actions} />
         <ProfileConnections state={this.props.state} actions={this.props.actions} />
         <ProfileMatches state={this.props.state} actions={this.props.actions} />
       </div>

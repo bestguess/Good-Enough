@@ -7,4 +7,5 @@ module.exports = function(app) {
   app.post('/request', matchesController.sendConnect);
   app.post('/accept', matchesController.acceptConnect);
   app.post('/decline', matchesController.declineConnect);
+  app.post('/rematch', matchesController.reMatch);
 };

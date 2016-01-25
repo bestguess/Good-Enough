@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var User = db.Users;
 var Messages = db.Messages;
 var helpers = require("../helpers/helpers.js");
+var match = require('../helpers/matching_algo.js');
 
 module.exports = {
 
@@ -23,7 +24,7 @@ module.exports = {
         if(
           key !== 'password' &&
           key !== 'matches' &&
-          key !== 'conversati ons' &&
+          key !== 'conversations' &&
           key !== 'meet'
           ) matchObject[key] = match[key];
       }
@@ -163,6 +164,24 @@ module.exports = {
         return next();
       }
     });
-  }
+  },
+
+  reMatch: function(req, res, next){
+
+  User.find({}, function(err, users){
+    users.forEach(function(user){
+      match.user(user, function (data){
+        data.sort(function(a,b){ return b[1]-a[1]; });
+        User.update({_id: user._id},{matches:data},function(err, user){
+          if(err) console.log(err);
+        });
+      });
+    });
+  });
+
+  User.findOne({_id: req.body.id}, function(err, user){
+    res.status(200).send(user);
+  });
+}
 
 };

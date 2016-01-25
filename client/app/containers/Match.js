@@ -2,19 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as MatchActions from '../actions/match'
-import PrivateNav from '../components/PrivateNav'
-
-function status(response) {
-  if (response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response)
-  } else {
-    return Promise.reject(new Error(response.statusText))
-  }
-}
-
-function json(response) { return response.json() }
+import PrivateNav from '../components/Nav/PrivateNav'
+import { convertTimeStamp, status, json } from '../helpers'
 
 function getMatchInfo(props) {
+  props.actions.clearCurrentMatchData()
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
   fetch('http://localhost:4000/app/matches/match', {
@@ -84,7 +76,7 @@ function clearMessagesInterval(props) {
 class MatchPicture extends Component {
   render() {
     return (
-      <div className="match-info-picture">
+      <div className="personal-info-card-picture">
         <img src={this.props.state.match.data.picture} />
       </div>
     );
@@ -94,10 +86,10 @@ class MatchPicture extends Component {
 class MatchUserData extends Component {
   render() {
     return (
-      <div className="match-info-userdata">
+      <div className="personal-info-card-userdata">
         <h4>{this.props.state.match.data.firstName} {this.props.state.match.data.lastName}</h4>
-        <p>Interests</p>
-        <p>Places</p>
+        <p>Interests: Drinking Beer, Coding, & Sewing</p>
+        <p>Favorite Places: Bangers, Lucys Fried Chicken, Hoovers, Pinthouse Pizza, & East Side Pies</p>
       </div>
     );
   }
@@ -107,7 +99,7 @@ class MatchUserData extends Component {
 class MatchInfo extends Component {
   render() {
     return (
-      <div className="match-info-container">
+      <div className="personal-info-card">
         <MatchPicture state={this.props.state} actions={this.props.actions} />
         <MatchUserData state={this.props.state} actions={this.props.actions} />
       </div>
@@ -140,6 +132,7 @@ class MatchMessage extends Component {
       <div className="match-conversation-message">
         <MatchMessageImage state={this.props.state} actions={this.props.actions} img={ picture } />
         <span className="match-conversation-username">{ username }</span>
+        <span className="match-conversation-timestamp">{ convertTimeStamp(this.props.data.date) }</span>
         <p>{this.props.data.message}</p>
       </div>
     );
@@ -153,7 +146,7 @@ class MatchMessageInput extends Component {
   }
 
   handleKeyPress(e) {
-    if (e.which === 13) {
+    if (e.which === 13 && this.refs.message.value !== '') {
       sendMessage(this.props)
       this.refs.message.value = '';
     }
@@ -192,14 +185,20 @@ class Match extends Component {
 
   componentWillMount() {
     getMatchInfo(this.props)
-    startMessagesInterval(this.props)
+    if (!messageInterval) {
+      startMessagesInterval(this.props)
+    } else {
+      clearMessagesInterval()
+      startMessagesInterval(this.props)
+    }
   }
 
   reRoute(props) {
-    this.props.history.push({ pathname: '/' })
+    this.props.history.push({ pathname: '/profile' })
   }
 
   render() {
+    if (!this.props.state.profile.data) this.reRoute(this.props)
     if (!this.props.state.match.data) return <h1><i>Loading match...</i></h1>
     return (
       <div>
