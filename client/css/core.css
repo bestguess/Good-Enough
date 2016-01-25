@@ -514,6 +514,7 @@ input[type="submit"]{
   float: left;
   margin-left: 20px;
   font-size: 1.2em;
+  width: 75%;
 }
 
 .personal-info-card-userdata h4 {
@@ -523,6 +524,36 @@ input[type="submit"]{
 .personal-info-card-userdata p {
   margin: 8px 0px;
 }
+
+.user-interest-container {
+  padding: 0.25% 0%;
+}
+
+.user-interest-container span {
+  font-size: 0.7em;
+}
+
+.user-interest {
+  color: #4c5455;
+  border-radius: 8%;
+  font-weight: 300;
+  padding: 0.5% 1.5%;
+  margin: 0px 0% 0px 1%;
+}
+
+.discussion {
+  background-color: #f2fcf5;
+}
+
+.activity {
+  background-color: #f2fcfa;
+}
+
+.place {
+  background-color: #f2f9fc;
+}
+
+
 
 
 .profile-page-data {
