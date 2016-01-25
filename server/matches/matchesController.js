@@ -75,8 +75,7 @@ module.exports = {
             break;
           }
         }
-        foundMatch.save(next);
-        User.findById(user, function(err, foundUser){
+        foundMatch.save(User.findById(user, function(err, foundUser){
           if(err){
             res.status(500).send(err);
             return next();
@@ -86,10 +85,8 @@ module.exports = {
             return next();
           }
           else{
-            var foundem = false;
             for(var i = 0; i < foundUser.matches.length; i++){
               if(foundUser.matches[i][0] === "" + match){
-                foundem = true;
                 foundUser.matches.splice(i, 1);
                 break;
               }
@@ -97,42 +94,9 @@ module.exports = {
             res.status(200).send();
             foundUser.save(next);
           }
-        })
+        }));
       }
     });
-
-    // User.findByIdAndUpdate(req.body.match_id, {$push: { connections : connection}}, {$pull: { matches: "Ivan"}} ,function(err) { 
-    //   if(err){
-    //     res.status(500).send(err);
-    //     return next();
-    //   }
-    //   // if(!foundUser){
-    //   //   res.status(404).send("Could not find user");
-    //   //   return next();
-    //   // }
-    //   else {
-    //     console.log(user);
-    //     console.log("trying to find match")
-    //     User.findByIdAndUpdate(req.body.id, {$pull: { matches: "Kayla"}, function(err){
-    //       if(err){
-    //         console.log("err")
-    //         res.status(500).send(err);
-    //         return next();
-    //       }
-    //       // if(!foungUser){
-    //       //   console.log("no user");
-    //       //   res.status(404).send("Could not find match");
-    //       //   return next();
-    //       // }
-    //       else{
-    //         console.log("did it")
-    //         res.status(200).send("Connection request sent");
-    //         return next();
-    //         }
-    //       }
-    //     });
-    //   }
-    // });
   },
 
   acceptConnect: function(req, res, next){
@@ -141,23 +105,47 @@ module.exports = {
     var connection = {};
     connection.id = user;
     connection.connected = true;
-
-    User.findByIdAndUpdate(user, {$set: { connected: true }}, function(err){
+    console.log("user", user);
+    console.log("match", match);
+    User.findById(user, function(err, foundUser){
       if(err){
         res.status(500).send(err);
         return next();
       }
+      if(!foundUser){
+        res.status(404).send("Could not accept connection");
+        return next();
+      }
       else{
-        User.findByIdAndUpdate(match, {$push: { connections: connection}}, function(err){
+        console.log("gonig to try to find user")
+        for(var i = 0; i < foundUser.connections.length; i++){
+          if(foundUser.connections[i].id === "" + match){
+            console.log("found match")
+            foundUser.connections[i].connected = true;
+            console.log(foundUser.firstName, foundUser.connections)
+            break;
+          }
+        }
+        User.findByIdAndUpdate(user, {connections: foundUser.connections}, function(err){
           if(err){
-            res.status(500).send(err);
+            res.status(500).send();
             return next();
+          }else{
+            User.findByIdAndUpdate(match, {$push: { connections: connection}}, function(err){
+              if(err){
+                res.status(500).send(err);
+                return next();
+              }
+              else{
+                res.status(200).send("Connection accepted");
+                return next();
+              }
+            })
           }
-          else{
-            res.status(200).send("Connection accepted");
-            return next();
-          }
-        });
+        })
+        // foundUser.save();
+        // console.log("now finding the match")
+        
       }
     });
   },
