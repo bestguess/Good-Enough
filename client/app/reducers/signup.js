@@ -20,8 +20,10 @@ const initialState = {
     gender: undefined,
     picture: null,
     interests: {
-      activity: ['javascript']
+      activity: [],
+      discussion: []
     },
+    places: [],
     birthday: {},
   	answers: {},
     clearForSubmit: false
@@ -32,7 +34,7 @@ const initialState = {
     stage3: false,
     stage4: false,
     stage5: false,
-    clearForSubmit: false
+    clearForSubmit: true
   }
 }
 
@@ -71,6 +73,10 @@ export default function SignUp(state = initialState, action) {
         newState.userData.birthday.year = action.value
       } else if (action.input === "activity") {
         newState.userData.interests.activity.push(action.value)
+      } else if (action.input === "discussion") {
+        newState.userData.interests.discussion.push(action.value)
+      } else if (action.input === "place") {
+        newState.userData.places.push(action.value)
       } else {
         newState.userData[action.input] = action.value
       }
@@ -100,7 +106,7 @@ export default function SignUp(state = initialState, action) {
       newState.validationChecks.stage3 = false;
       newState.validationChecks.stage4 = false;
       newState.validationChecks.stage5 = false;
-      newState.validationChecks.clearForSubmit = false;
+      // newState.validationChecks.clearForSubmit = false;
       return newState
 
 
