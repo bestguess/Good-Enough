@@ -5,18 +5,76 @@ import Dropzone from 'react-dropzone'
 class ActivityInterests extends Component {
   handleKeyPress(e) {
     if (e.which === 13 && this.refs.activity.value !== '') {
+      var val = this.refs.activity.value;
+      this.refs.activity.value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput('activity', this.refs.activity.value);
       this.refs.activity.value = '';
     }
   }
 
   render() {
+    var stateValues;
+    if (this.props.state.signup.userData.interests.activity.length > 0) {
+      stateValues = this.props.state.signup.userData.interests.activity.map(activity =>
+                      <span key={activity} className="activity">{activity}</span> )
+    }
     return (
         <div className='interest-input-container'>
-          {this.props.state.signup.userData.interests.activity.map(activity =>
-            <span key={activity} className="activity">{activity}</span>
-          )}
+          <p>What activities do you like to do with friends?</p>
+          {stateValues}
           <input className="interest-input" ref="activity" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add activity..."/>
+        </div>
+      )
+  }
+}
+
+class DiscussionInterests extends Component {
+  handleKeyPress(e) {
+    if (e.which === 13 && this.refs.discussion.value !== '') {
+      var val = this.refs.discussion.value;
+      this.refs.discussion.value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput('discussion', this.refs.discussion.value);
+      this.refs.discussion.value = '';
+    }
+  }
+
+  render() {
+    var stateValues;
+    if (this.props.state.signup.userData.interests.discussion.length > 0) {
+      stateValues = this.props.state.signup.userData.interests.discussion.map(discussion =>
+                      <span key={discussion} className="discussion">{discussion}</span> )
+    }
+    return (
+        <div className='interest-input-container'>
+          <p>What topics do you like to talk about with friends?</p>
+          {stateValues}
+          <input className="interest-input" ref="discussion" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add topic..."/>
+        </div>
+      )
+  }
+}
+
+class FavoritePlaces extends Component {
+  handleKeyPress(e) {
+    if (e.which === 13 && this.refs.place.value !== '') {
+      var val = this.refs.place.value;
+      this.refs.place.value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput('place', this.refs.place.value);
+      this.refs.place.value = '';
+    }
+  }
+
+  render() {
+    var stateValues;
+    if (this.props.state.signup.userData.places.length > 0) {
+      stateValues = this.props.state.signup.userData.places.map(place =>
+                      <span key={place} className="place">{place}</span> )
+    }
+    return (
+        <div className='interest-input-container'>
+          <p>What are your favorite places to hang out around Austin?</p>
+          {stateValues}
+          <input className="interest-input" ref="place" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add place..."/>
         </div>
       )
   }
@@ -26,8 +84,10 @@ class ActivityInterests extends Component {
 class Interests extends Component {
   render() {
     return (
-        <div>
+        <div className="user-interest-form">
           <ActivityInterests state={this.props.state} actions={this.props.actions} />
+          <DiscussionInterests state={this.props.state} actions={this.props.actions} />
+          <FavoritePlaces state={this.props.state} actions={this.props.actions} />
         </div>
       )
   }
