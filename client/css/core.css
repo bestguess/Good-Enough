@@ -614,11 +614,24 @@ progress::-webkit-progress-value {
     padding: 39px 35px 15px 35px;
     width: 19em;
   }
+
   .login-form {
     padding: 0px 0 10px 0;
   }
 
+  .question-option-left {
+    padding: 6px 0;
+  }
 
+  .question-buttons {
+    margin: 26.6px -100px;
+    width: 220px;
+    left: 50px;
+    position: relative;;
+  }
 
+  .question-option-right {
+    padding: 6px 0px;
+  }
 
 }
