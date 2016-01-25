@@ -1,0 +1,95 @@
+
+/*** Edit User Information Button ***/
+
+.edit-user-info {
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.edit-user-info:hover {
+  color: #25b79a;
+}
+
+
+.save-button {
+  border-radius: 5px;
+  border: none;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 6px;
+  color: #fff;
+}
+
+.save-button:hover {
+  background-color: #25b79a;
+  color: #fff;
+}
+
+
+
+/*** Match Box & Rating ***/
+
+.match-box-hover {
+  border-radius: 50%;
+  height: auto;
+  padding-top: 2.5%;
+  padding-bottom: 7.5%;
+  font-size: 2vw;
+  font-weight: 800;
+  width: 17.5%;
+  background-color: rgba(0, 0, 0, 0);
+  color: transparent;
+  z-index: 1;
+  position: absolute;
+  margin: 0%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.match-box-hover:hover {
+  background-color: rgba(0, 0, 0, 0.60);
+  color: #fff;
+}
+
+.match-box-name {
+  font-size: 1.2vw;
+  padding-top: 12%;
+  padding-bottom: 7%;
+}
+
+.match-rating {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  height: auto;
+  padding-top: 0.70%;
+  padding-bottom: 0.75%;
+  font-size: 1.5vw;
+  font-weight: 600;
+  width: 3.5%;
+  color: #fff;
+  z-index: 2;
+  position: absolute;
+  margin: 13.25%;
+  text-align: center;
+}
+
+.mr-0-59 {
+  background-color: #8B505C;
+}
+
+.mr-60-69 {
+  background-color: #6E6E6E;
+}
+
+.mr-70-79 {
+  background-color: #5F7C76;
+}
+
+.mr-80-89 {
+  background-color: #429988;
+}
+
+.mr-90-100 {
+  background-color: #25b79a;
+}

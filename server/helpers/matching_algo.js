@@ -90,8 +90,10 @@ module.exports = {
     var birthTime = new Date(user.birthday[0],user.birthday[1],user.birthday[2]);
     var age = calculateAge(birthTime);
 
-    var ageLow = user.birthday[0] - (age - Math.round( age - (age/6) + (age/25)) );
-    var ageHigh = user.birthday[0] + (Math.round( age + ( (age/3) * (age/52) ) ) - age) ;
+    var ageLow = user.birthday[0] - (age - Math.round( age - (age/6) + (age/25)) )-2;
+    var ageHigh = user.birthday[0] + (Math.round( age + ( (age/4) * (age/65) ) ) - age)+1 ;
+
+    //console.log("\nAge:",age,"\nLow:",ageHigh,2016-ageHigh,"\nHigh:",ageLow,2016-ageLow,"\n");
 
     function calculateAge(birthday) { // birthday is a date
       var ageDifMs = Date.now() - birthday.getTime();
@@ -101,32 +103,54 @@ module.exports = {
 
     User.find({birthday: { $gt: ageLow, $lt: ageHigh }}, function(err, list){
       function findMatch(user) {
+        var user_id = user._id.toString();
+        var user_interests = JSON.parse(user.interests);
         var type = user.type;
-        var scores = user.personality;
+        var scores = JSON.parse(user.personality);
         var result = {};
         var resultArr = [];
 
         for(var p=0;p<list.length;p++){
-          var person_id = list[p]._id;
+          var person_id = list[p]._id.toString();
           var person_scores = JSON.parse(list[p].personality);
           var person_type = list[p].type;
-          
-          for(var pair in scores){
-            if(result[person_id]){
-              if(pair === "ft") result[person_id][1] += Math.abs(scores[pair]-person_scores[pair]/2+5);
-              else result[person_id][1] += Math.abs(scores[pair]-person_scores[pair]+9);
-            }else{
-              result[person_id] = [list[p]._id, Math.abs(scores[pair]-person_scores[pair])];
-              result[person_id][1] += conflicts[type][person_type]-10;
+          var person_interests = JSON.parse(list[p].interests);
+
+          //prevents scoring against yourself
+          if(user_id !== person_id){
+
+            //creates your original score based off of personality conflicts
+            for(var pair in scores){
+              if(result[person_id]){
+                if(pair === "ft") result[person_id][1] += Math.abs(scores[pair]-person_scores[pair]/2+5);
+                else result[person_id][1] += Math.abs(scores[pair]-person_scores[pair]+9);
+              }else{
+                result[person_id] = [person_id, Math.abs(scores[pair]-person_scores[pair])];
+                result[person_id][1] += conflicts[type][person_type]-10;
+              }
             }
+
+            //knocks off points if you're of the opposite gender
+            if(user.gender !== list[p].gender) result[person_id][1] += 8;
+
+            //adds points if you have similar interests
+            for(var key in user_interests){
+              user_interests[key].forEach(function(user_interest){
+                person_interests[key].forEach(function(person_interest){
+                  if(user_interest === person_interest) result[person_id][1] -= 1.6;
+                });
+              });
+            }
+            //sends back an array of information to be saved in matches
+            var matchAge = new Date(list[p].birthday[0],list[p].birthday[1],list[p].birthday[2]);
+            result[person_id].push( list[p].firstName, list[p].lastName, list[p].picture, calculateAge(matchAge));
           }
-          var matchAge = new Date(list[p].birthday[0],list[p].birthday[1],list[p].birthday[2]);
-          result[person_id].push( list[p].firstName, list[p].lastName, list[p].picture, calculateAge(matchAge));
         }
 
+
         for(var stat in result){
-          result[stat][1] = Math.round(Math.min((100-((result[stat][1]/1.8)-10))),100);
-          resultArr.push(result[stat]);
+          result[stat][1] = Math.round(Math.min((100-((result[stat][1]/0.9)-10))),100);
+          if(result[stat][1]>45) resultArr.push(result[stat]);
         }
         callback(resultArr);
       }

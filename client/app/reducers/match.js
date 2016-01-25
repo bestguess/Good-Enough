@@ -1,4 +1,4 @@
-import { SAVE_MATCH_DATA, SAVE_INPUT, SEND_MESSAGE, LOGOUT } from '../constants/Match_ActionTypes'
+import { SAVE_MATCH_DATA, SAVE_INPUT, SEND_MESSAGE, LOGOUT, CLEAR_CURRENT_MATCH_DATA } from '../constants/Match_ActionTypes'
 
 const initialState = {
   conversation: []
@@ -26,6 +26,10 @@ export default function Match(state = initialState, action) {
       newState.conversation = action.convo.messages
     	return newState
 
+
+    case CLEAR_CURRENT_MATCH_DATA:
+      newState = { conversation: [] }
+      return newState
 
     case LOGOUT:
       var newState = Object.assign({}, state)

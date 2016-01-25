@@ -5,8 +5,8 @@ var Messages = db.Messages;
 module.exports = {
 
   send : function(req, res, next){
-    console.log(req.body)
-    var date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    console.log(req.body)    
+    var date = new Date().toString();
     var text = {
       user : req.body.from,
       date : date,
