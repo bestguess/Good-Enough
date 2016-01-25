@@ -162,7 +162,6 @@ module.exports = {
             if(result.score>60) resultArr.push(result);
           }
         }
-        console.log(resultArr);
         callback(resultArr);
       }
       findMatch(user);
