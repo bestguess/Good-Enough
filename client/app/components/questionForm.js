@@ -28,14 +28,14 @@ function submitSurvey(props) {
     birthday: new Date(state.userData.birthday.year, state.userData.birthday.month, state.userData.birthday.day).getTime(),
     gender: state.userData.gender,
     city: 'Austin',
-    interests: {discussion:[], activity:[]},
+    interests: state.userData.interests,
     type: type,
     personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
     picture: state.userData.picture || "http://e27.co/img/no_image_profile.jpg",
-    places: [],
+    places: state.userData.places,
     matches: []
   }
-
+  console.log('data: ', userData)
   fetch('http://localhost:4000/app/users/signup', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
