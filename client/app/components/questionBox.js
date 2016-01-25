@@ -14,6 +14,7 @@ class QuestionBox extends Component {
           <div className="question-option-left">
             <span className="question-option-left-text" style={{textAlign:'right',float:'right'}}>{this.props.data.option1}</span>
           </div>
+          <div className="question-separator"></div>
           <div className="question-buttons">
             <QuestionButtons state={this.props.state} actions={this.props.actions} id={this.props.data.id} choices={[1, 2, 3, 4, 5]} answer={this.submitAnswer.bind(this)}/>
           </div>
