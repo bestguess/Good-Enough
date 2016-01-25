@@ -135,11 +135,15 @@ module.exports = {
 
             //adds points if you have similar interests
             for(var key in user_interests){
-              user_interests[key].forEach(function(user_interest){
-                person_interests[key].forEach(function(person_interest){
-                  if(user_interest === person_interest) result[person_id][1] -= 1.6;
+              if(user_interests[key]){
+                user_interests[key].forEach(function(user_interest){
+                  if(person_interests[key]){
+                    person_interests[key].forEach(function(person_interest){
+                      if(user_interest === person_interest) result[person_id][1] -= 1.6;
+                    });
+                  }
                 });
-              });
+              }
             }
             //sends back an array of information to be saved in matches
             var matchAge = new Date(list[p].birthday[0],list[p].birthday[1],list[p].birthday[2]);
