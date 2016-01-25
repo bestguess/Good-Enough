@@ -95,7 +95,7 @@ footer {
   padding-top: 8px;
 }
 
-@media screen and ( max-height: 700px ){
+@media screen and ( max-height: 750px ){
   footer {
     opacity: 0;
   }
@@ -197,7 +197,6 @@ h1 {
   text-align: left;
   width: 100%;
 }
-
 
 .start-test {
   font-size: 20px;
@@ -661,10 +660,12 @@ progress::-webkit-progress-value {
   .login-box {
     padding: 39px 35px 15px 35px;
     width: 19em;
+    max-width: 80%;
   }
 
   .login-form {
     padding: 0px 0 10px 0;
+    max-width: 95%;
   }
 
   .question-option-left {
@@ -680,6 +681,22 @@ progress::-webkit-progress-value {
 
   .question-option-right {
     padding: 6px 0px;
+  }
+
+  .question-separator {
+    border: 1px solid rgba(200,200,200,0.34);
+    height: 38px;
+    position: absolute;
+    left: 49.9%;
+    border-radius: 22px;
+  }
+
+  .question-form-button {
+    max-width: 90%;
+  }
+
+  footer {
+    opacity: 0;
   }
 
 }
