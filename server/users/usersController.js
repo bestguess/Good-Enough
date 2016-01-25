@@ -21,15 +21,16 @@ module.exports = {
         res.status(404).send(err);
         return next();
       }
+
       // purge password info from user object before sending
       var properties = new helpers.UserData;
       var userObject = {};
         for(var key in properties){
           if(key !== "password") {
-            userObject[key] = user[key];
+            if(key === "questions") userObject[key] = user[key][0];
+            else userObject[key] = user[key];
           }
       }
-
       res.status(200).send(userObject);
       next();
     })
@@ -170,7 +171,8 @@ module.exports = {
         return
       }
     })
-  }
+  },
+
   // ToDo: changePicture function
 
 };

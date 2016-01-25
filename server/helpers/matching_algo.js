@@ -150,7 +150,7 @@ module.exports = {
 
         for(var stat in result){
           result[stat][1] = Math.round(Math.min((100-((result[stat][1]/0.9)-10))),100);
-          if(result[stat][1]>45) resultArr.push(result[stat]);
+          if(result[stat][1]>60) resultArr.push(result[stat]);
         }
         callback(resultArr);
       }
