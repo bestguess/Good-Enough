@@ -325,12 +325,49 @@ h1 {
   line-height: 20px;
   margin: 15px auto;
   display: block;
-  padding: 5px 3%;
   width: 94%;
+  padding: 5px 3%;
   outline: none;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #e0e0e0;
+}
+
+
+.interest-input-container {
+
+}
+
+.interest-input-container span {
+  float: left;
+  padding: 5px 3%;
+  border-radius: 8%;
+  color: #4c5455;
+  font-weight: 300;
+  margin: 0% 2%;
+}
+
+.discussion {
+  background-color: #f2fcf5;
+}
+
+.activity {
+  background-color: #f2fcfa;
+}
+
+.place {
+  background-color: #f2f9fc;
+}
+
+.interest-input-container input{
+  float: left;
+  width: 120px;
+  clear: none;
+  margin: 0px;
+}
+
+.interest-input {
+  float: right;
 }
 
 .login-logo{
@@ -421,6 +458,7 @@ input[type="submit"]{
 .personal-info-card-userdata {
   float: left;
   margin-left: 20px;
+  font-size: 1.2em;
 }
 
 .personal-info-card-userdata h4 {
@@ -577,6 +615,7 @@ progress::-webkit-progress-value {
   text-align: center;
   padding: 0.5em 0;
 }
+
 
 
 
