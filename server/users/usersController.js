@@ -36,6 +36,27 @@ module.exports = {
     })
   },
 
+  updateUser: function(req, res, next){
+    User.findOne({_id: user.id}, function(err, user){
+      if(err){
+        res.status(404).send(err);
+        return next();
+      }
+
+      // purge password info from user object before sending
+      var properties = new helpers.UserData;
+      var userObject = {};
+        for(var key in properties){
+          if(key !== "password") {
+            if(key === "questions") userObject[key] = user[key][0];
+            else userObject[key] = user[key];
+          }
+      }
+      res.status(200).send(userObject);
+      next();
+    })
+  },
+
   signUp: function(req, res, next){
     var user = req.body;
     // If user already exists, interrupt chain
