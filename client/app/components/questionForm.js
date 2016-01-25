@@ -105,6 +105,14 @@ class QuestionForm extends Component {
     } else if (this.props.state.signup.viewData.signup.stage5) {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalQuestions state={this.props.state} actions={this.props.actions} />
+      if (this.props.state.signup.validationChecks.stage5) {
+        formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button valid">Continue</button>
+      } else {
+        formButton = <button className="question-form-button invalid">Continue</button>
+      }
+    } else if (this.props.state.signup.viewData.signup.stage6) {
+      progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
+      content = <PersonalQuestions state={this.props.state} actions={this.props.actions} />
       if (this.props.state.signup.validationChecks.clearForSubmit) {
         formButton = <button onClick={() => {this.submitUserInfo(this.props)}} className="question-form-button valid">Submit</button>
       } else {
