@@ -122,10 +122,9 @@ h1 {
 }
 
 .question-form {
-	width: 1100px;
-  height: 368px;
+	width: 100%;
 	border-radius: 3px;
-	padding: 10px;
+	padding-top: 20px;
 }
 
 .question-form-submit-button-login {
@@ -163,13 +162,40 @@ h1 {
 }
 
 .question {
-	width: 100%;
-	height: 50px;
+	display: flex;
+  width: 87%;
 }
 
+.question-container {
+  width: 100%;
+}
+
+
 .question-option {
-	width: 40%;
-	padding: 13px 0px;
+  padding: 13px 0px;
+  position: relative;
+}
+
+.question-option-left {
+  width: calc(50%);
+  padding: 13px 0px;
+  position: relative;
+}
+
+.question-option-left-text {
+  text-align: right;
+  width: 100%;
+}
+
+.question-option-right {
+  width: calc(50%);
+  padding: 13px 0px;
+  position: relative;
+}
+
+.question-option-right-text {
+  text-align: left;
+  width: 100%;
 }
 
 
@@ -193,7 +219,7 @@ h1 {
 .question-buttons {
   list-style-type: none;
   padding: 0px;
-  margin: 8px 0px;
+  margin: 4.6px 0px;
 }
 
 .question-buttons li {
@@ -514,7 +540,8 @@ input[type="submit"]{
 /*** Progress Bar for SignUp ***/
 .progress-bar-container {
   text-align: center;
-  padding: 10px;
+  padding-top: 15px;
+  width:82%;
 }
 
 progress {
@@ -522,7 +549,8 @@ progress {
   border: none;
   border-radius: 9px;
   height: 18px;
-  width: 500px;
+  width: 90%;
+  max-width: 611px;
 }
 
 progress::-webkit-progress-bar {
