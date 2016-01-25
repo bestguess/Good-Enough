@@ -28,20 +28,17 @@ module.exports = {
           key !== 'meet'
           ) matchObject[key] = match[key];
       }
-      console.log('user', req.body.id, 'match', match._id);
       Messages.findOne({users: {$all:[req.body.match_id, req.body.id]}}, function(err, convo){
             if(err){
               res.status(500).send(err);
               return next();
             }
             if(!convo){
-              console.log("sending matchObject without conversations")
               res.status(200).send(matchObject);
               return next();
             }
             else{
               matchObject.messages = convo.messages;
-              console.log('matchObject', matchObject)
               res.status(200).send(matchObject);
               return next();
             }
@@ -106,8 +103,6 @@ module.exports = {
     var connection = {};
     connection.id = user;
     connection.connected = true;
-    console.log("user", user);
-    console.log("match", match);
     User.findById(user, function(err, foundUser){
       if(err){
         res.status(500).send(err);
@@ -118,12 +113,9 @@ module.exports = {
         return next();
       }
       else{
-        console.log("gonig to try to find user")
         for(var i = 0; i < foundUser.connections.length; i++){
           if(foundUser.connections[i].id === "" + match){
-            console.log("found match")
             foundUser.connections[i].connected = true;
-            console.log(foundUser.firstName, foundUser.connections)
             break;
           }
         }
@@ -153,17 +145,34 @@ module.exports = {
   declineConnect: function(req, res, next){
     var user = req.body.id;
     var match = req.body.match_id
-
-    User.findByIdAndUpdate(user, {$pull: { connections: match}}, function(err){
+    User.findById(user, function(err, foundUser){
       if(err){
-        res.status(500).send(err);
+        res.status(500).send();
         return next();
+      }
+      if(!foundUser){
+        res.status(404).send("Could not complete decline");
       }
       else{
-        res.status(200).send("Connection declined");
-        return next();
+        for(var i = 0; i < foundUser.connections.length; i++){
+          if(foundUser.connections[i].id === "" + match){
+            foundUser.connections.splice(i, 1);
+            break;
+          }
+        }
+        User.findByIdAndUpdate(user, {connections: foundUser.connections}, function(err){
+          if(err){
+            res.status(500).send(err);
+            return next();
+          }
+          else{
+            res.status(200).send("Connection successfully declined");
+            return next();
+          }
+        })
       }
-    });
+    })
+    
   },
 
   reMatch: function(req, res, next){
