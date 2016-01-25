@@ -90,8 +90,10 @@ module.exports = {
     var birthTime = new Date(user.birthday[0],user.birthday[1],user.birthday[2]);
     var age = calculateAge(birthTime);
 
-    var ageLow = user.birthday[0] - (age - Math.round( age - (age/6) + (age/25)) );
-    var ageHigh = user.birthday[0] + (Math.round( age + ( (age/3) * (age/52) ) ) - age) ;
+    var ageLow = user.birthday[0] - (age - Math.round( age - (age/6) + (age/25)) )-2;
+    var ageHigh = user.birthday[0] + (Math.round( age + ( (age/4) * (age/65) ) ) - age)+1 ;
+
+    //console.log("\nAge:",age,"\nLow:",ageHigh,2016-ageHigh,"\nHigh:",ageLow,2016-ageLow,"\n");
 
     function calculateAge(birthday) { // birthday is a date
       var ageDifMs = Date.now() - birthday.getTime();
@@ -148,7 +150,7 @@ module.exports = {
 
         for(var stat in result){
           result[stat][1] = Math.round(Math.min((100-((result[stat][1]/0.9)-10))),100);
-          if(result[stat][1]>30) resultArr.push(result[stat]);
+          if(result[stat][1]>45) resultArr.push(result[stat]);
         }
         callback(resultArr);
       }
