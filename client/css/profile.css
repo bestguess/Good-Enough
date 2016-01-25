@@ -1,4 +1,37 @@
 
+
+
+
+.user-interest-container {
+  padding: 0.5% 0%;
+}
+
+.user-interest-container span {
+  font-size: 0.7em;
+}
+
+.user-interest {
+  color: #4c5455;
+  border-radius: 8%;
+  font-weight: 300;
+  padding: 0.5% 3%;
+  margin: 0px 1% 0px 1%;
+}
+
+.discussion {
+  background-color: #f2fcf5;
+}
+
+.activity {
+  background-color: #f2fcfa;
+}
+
+.place {
+  background-color: #f2f9fc;
+}
+
+
+
 /*** Edit User Information Button ***/
 
 .edit-user-info {

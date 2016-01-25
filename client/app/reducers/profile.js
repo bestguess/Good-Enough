@@ -9,6 +9,8 @@ export default function Profile(state = initialState, action) {
     case PROFILE:
       var newState = Object.assign({}, state)
       newState.data = action.data
+      // Parse user interests object
+      newState.data.interests = JSON.parse(newState.data.interests)
       return newState
 
     case CONNECT:
