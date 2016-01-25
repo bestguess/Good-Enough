@@ -2,7 +2,39 @@ import React, { Component, PropTypes } from 'react'
 import BirthdayDropdown from './BirthdayDropdown'
 import Dropzone from 'react-dropzone'
 
-class PersonalQuestions extends Component {
+class ActivityInterests extends Component {
+  handleKeyPress(e) {
+    if (e.which === 13 && this.refs.activity.value !== '') {
+      this.props.actions.saveInput('activity', this.refs.activity.value);
+      this.refs.activity.value = '';
+    }
+  }
+
+  render() {
+    return (
+        <div className='interest-input-container'>
+          {this.props.state.signup.userData.interests.activity.map(activity =>
+            <span key={activity} className="activity">{activity}</span>
+          )}
+          <input className="interest-input" ref="activity" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add activity..."/>
+        </div>
+      )
+  }
+}
+
+
+class Interests extends Component {
+  render() {
+    return (
+        <div>
+          <ActivityInterests state={this.props.state} actions={this.props.actions} />
+        </div>
+      )
+  }
+}
+
+
+class BasicUserInfo extends Component {
 
   handleKeyUp(event,input) {
     this.props.actions.saveInput(input, this.refs[input].value);
@@ -68,6 +100,23 @@ class PersonalQuestions extends Component {
       )
   }
 }
+
+class PersonalQuestions extends Component {
+  render() {
+    var content;
+    if (this.props.state.signup.viewData.signup.stage5) {
+      content = <BasicUserInfo state={this.props.state} actions={this.props.actions} />
+    } else if (this.props.state.signup.viewData.signup.stage6) {
+      content = <Interests state={this.props.state} actions={this.props.actions} />
+    }
+    return (
+        <div>
+          {content}
+        </div>
+      )
+  }
+}
+
 
 PersonalQuestions.PropTypes = {
   state: PropTypes.object.isRequired,
