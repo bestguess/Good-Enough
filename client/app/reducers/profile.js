@@ -29,7 +29,7 @@ export default function Profile(state = initialState, action) {
       // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')
       // Make server request to delete token storage on server side
-      fetch('http://localhost:4000/app/users/logout', {
+      fetch('/app/users/logout', {
         method: 'post',
         headers: {
           'mode': 'no-cors',

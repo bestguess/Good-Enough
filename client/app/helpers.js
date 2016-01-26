@@ -59,7 +59,7 @@ export const json = function(response) { return response.json() }
 
 export const getUserInfo = function(props) {
   var userData = window.localStorage.getItem('GoodEnough')
-  fetch('http://localhost:4000/app/users/info', {
+  fetch('/app/users/info', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: userData
