@@ -26,9 +26,8 @@ function getMatchInfo(props) {
 }
 
 function sendMessage(props) {
-  var obj = JSON.parse(window.localStorage.getItem('GoodEnough'))
-  var messageData = {}
-  messageData.from = obj.id;
+  var messageData = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  messageData.from = messageData.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message = props.state.match.message;
   fetch('/app/messages/send', {

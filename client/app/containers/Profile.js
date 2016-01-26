@@ -16,6 +16,7 @@ function updateUserInfo(props) {
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.interests = props.state.profile.data.interests
   requestData.places = props.state.profile.data.places
+  console.log(requestData)
   fetch('/app/users/update', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
