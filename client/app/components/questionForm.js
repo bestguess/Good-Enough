@@ -28,14 +28,15 @@ function submitSurvey(props) {
     birthday: new Date(state.userData.birthday.year, state.userData.birthday.month, state.userData.birthday.day).getTime(),
     gender: state.userData.gender,
     city: 'Austin',
-    interests: {discussion:[], activity:[]},
+    interests: state.userData.interests,
     type: type,
     personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
     picture: state.userData.picture || "http://e27.co/img/no_image_profile.jpg",
-    places: [],
-    matches: []
+    places: state.userData.places,
+    matches: [],
+    questions: []
   }
-
+  console.log('data: ', userData)
   fetch('http://localhost:4000/app/users/signup', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -103,6 +104,14 @@ class QuestionForm extends Component {
         formButton = <button className="question-form-button invalid">Continue</button>
       }
     } else if (this.props.state.signup.viewData.signup.stage5) {
+      progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
+      content = <PersonalQuestions state={this.props.state} actions={this.props.actions} />
+      if (this.props.state.signup.validationChecks.stage5) {
+        formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button valid">Continue</button>
+      } else {
+        formButton = <button className="question-form-button invalid">Continue</button>
+      }
+    } else if (this.props.state.signup.viewData.signup.stage6) {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalQuestions state={this.props.state} actions={this.props.actions} />
       if (this.props.state.signup.validationChecks.clearForSubmit) {

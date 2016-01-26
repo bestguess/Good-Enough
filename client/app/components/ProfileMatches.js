@@ -8,7 +8,7 @@ class ProfileMatches extends Component {
       <div className="profile-page-data">
         <div>
           {this.props.state.profile.data.matches.map(match =>
-            <ProfilePageMatchBox key={match[0]} data={match} state={this.props.state} actions={this.props.actions} />
+            <ProfilePageMatchBox key={match.id} data={match} state={this.props.state} actions={this.props.actions} />
           )}
         </div>
       </div>

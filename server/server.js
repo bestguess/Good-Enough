@@ -25,14 +25,17 @@ var port = process.env.PORT || 4000;
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
   var matchesRouter = express.Router();
+  var pollingRouter = express.Router();
 
   require('./users/usersRoutes.js')(usersRouter);
   require('./messages/messagesRoutes.js')(messagesRouter);
   require('./matches/matchesRoutes.js')(matchesRouter);
+  require('./polling/pollingRoutes.js')(pollingRouter);
 
   app.use('/app/users', usersRouter);
   app.use('/app/messages', messagesRouter);
   app.use('/app/matches', matchesRouter);
+  app.use('/app/polling', pollingRouter);
 
   app.get('/client',function(req,res,next){
     res.sendFile(path.join(__dirname + req.url));

@@ -7,25 +7,20 @@ class ProfilePageMatchBoxImage extends Component {
   render() {
     return (
       <div className="profile-page-match-image">
-        <MatchRating rating={this.props.data[1]}/>
-        <MatchBoxHover data={this.props.data} />
-        <img src={this.props.data[4]} />
+        <MatchRating rating={this.props.data.score}/>
+        <MatchBoxHover actions={this.props.actions} data={this.props.data} />
+        <img src={this.props.data.picture} />
       </div>
     )
   }
 }
 
-
 class ProfilePageMatchBox extends Component {
   render() {
-
-    var connectButton = <button className="connect" onClick={() => {this.props.actions.connect(this.props.data)}}>Connect!</button>
-    const conversationURL = '/' + this.props.data[0]
-
+    const conversationURL = '/' + this.props.data.id
     return (
       <div className="profile-page-match">
         <ProfilePageMatchBoxImage state={this.props.state} actions={this.props.actions} data={this.props.data} />
-        {connectButton}
         <Link to={conversationURL}><button>Conversation</button></Link>
       </div>
     )

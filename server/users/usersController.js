@@ -21,22 +21,39 @@ module.exports = {
         res.status(404).send(err);
         return next();
       }
+
       // purge password info from user object before sending
       var properties = new helpers.UserData;
       var userObject = {};
         for(var key in properties){
           if(key !== "password") {
-            userObject[key] = user[key];
+            if(key === "questions") userObject[key] = user[key][0];
+            else userObject[key] = user[key];
           }
       }
-      //sort users on page.
-      userObject.matches.sort(function(a,b){
-        return b[1]-a[1];
-      });
-
       res.status(200).send(userObject);
       next();
     })
+  },
+
+  updateUser: function(req, res){
+    var data = req.body;
+    //delete data.id;
+
+    if(data.password){
+      bcrypt.hash(data.password, data.password.length, function(err, hash) {
+        data.password = hash;
+        User.findByIdAndUpdate(req.body.id, data,function(err, changes){
+          if(err) console.log(err);
+          else res.status(201).send(changes);
+        });
+      });
+    }else{
+      User.findByIdAndUpdate(req.body.id, data,function(err, changes){
+        if(err) console.log(err);
+        else res.status(201).send(changes);
+      });
+    }
   },
 
   signUp: function(req, res, next){
@@ -50,76 +67,74 @@ module.exports = {
     });
 
     user.birthday = helpers.splitDate(user.birthday);
-    match.user(user, matchMe);
 
-    function matchMe(data){
-      user.matches = data;
-      // To be populated and submitted as a new user
-      var userObject = {};
-      // Required fields with which to create user
-      // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender', 
-      //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
-      var properties = new helpers.UserData;
-      var failings = [];
-      var failed = false;
+    // To be populated and submitted as a new user
+    var userObject = {};
+    // Required fields with which to create user
+    // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender', 
+    //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
+    var properties = new helpers.UserData;
+    var failings = [];
+    var failed = false;
 
-      function calculateAge(birthday) { // birthday is a date
-        var ageDifMs = Date.now() - birthday.getTime();
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-      }
+    function calculateAge(birthday) { // birthday is a date
+      var ageDifMs = Date.now() - birthday.getTime();
+      var ageDate = new Date(ageDifMs); // miliseconds from epoch
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
 
-      for(var key in properties){
-        if(!user[key]){
-          failings.push(properties[key]);
-          failed = true;
-        }else{
-          if(key === 'interests' || key === 'personality') user[key] = JSON.stringify(user[key]);
-          userObject[key] = user[key];
-        }
-      }
-
-      // If any of the fields are not submitted then send 400
-      // and list of missing fields
-      if(failed){
-        res.status(400).send(JSON.parse(failings));
-        next();
+    for(var key in properties){
+      if(!user[key]){
+        failings.push(properties[key]);
+        failed = true;
       }else{
-        userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
-        bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
-          if(err){
-            res.status(500).send(err);
-            return next();
-          }
-          if(!hash){
-            res.status(500).send("Error producing hash");
-            return next();
-          }
-          userObject.password = hash;
-          var newUser = User(userObject);
-          newUser.save(function(err, user){
-            if(err){
-              console.log(err,'err saving user')
-              res.status(500).send(err);
-              next();
-            }else{
-
-              var userAge = new Date(user.birthday[0],user.birthday[1],user.birthday[2]);
-              userAge = calculateAge(userAge);
-
-              user.matches.forEach(function(score){
-                User.findByIdAndUpdate(score[0], {
-                  $push: { matches : [user._id,score[1],user.firstName,user.lastName,user.picture,userAge]}
-                } ,function(err) { 
-                  if(err) console.log(err);
-                });
-              });
-              helpers.createToken(req, res, next, user, helpers.genToken, "signup");
-            }
-          });
-        });
+        if(key === 'interests' || key === 'personality') user[key] = JSON.stringify(user[key]);
+        userObject[key] = user[key];
       }
     }
+
+    // If any of the fields are not submitted then send 400
+    // and list of missing fields
+    if(failed){
+      console.log('signup failed: ', failings)
+      res.status(400).send(failings);
+      next();
+    }else{
+      userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
+      bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
+        if(err){
+          res.status(500).send(err);
+          return next();
+        }
+        if(!hash){
+          res.status(500).send("Error producing hash");
+          return next();
+        }
+        userObject.password = hash;
+        var newUser = User(userObject);
+        newUser.save(function(err, user){
+          if(err){
+            console.log(err,'err saving user')
+            res.status(500).send(err);
+            next();
+          }else{
+            User.find({}, function(err, users){
+              users.forEach(function(user){
+                match.user(user, function (data){
+                  data.sort(function(a,b){ return b.score-a.score; });
+                  User.update({_id: user._id},{matches:data},function(err, user){
+                    if(err) console.log(err);
+                  });
+                });
+              });
+            });
+            
+            helpers.createToken(req, res, next, user, helpers.genToken, "signup");
+          }
+        });
+      });
+    }
+
   },
 
   signIn: function(req, res, next){
@@ -177,7 +192,8 @@ module.exports = {
         return
       }
     })
-  }
+  },
+
   // ToDo: changePicture function
 
 };

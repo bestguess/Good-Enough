@@ -11,4 +11,5 @@ module.exports = function(app) {
 
   app.post('/info', helpers.isLoggedIn);
   app.post('/info', usersController.getUser);
+  app.post('/update', usersController.updateUser);
 };

@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, REDIRECT_TO_LOGIN } from '../constants/SignUp_ActionTypes'
+import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/SignUp_ActionTypes'
 
 const initialState = {
   viewData: {
@@ -8,7 +8,8 @@ const initialState = {
       stage2: false,
       stage3: false,
       stage4: false,
-      stage5: false
+      stage5: false,
+      stage6: false
     }
   },
   userData: {
@@ -18,16 +19,22 @@ const initialState = {
     lastname: undefined,
     gender: undefined,
     picture: null,
+    interests: {
+      activity: [],
+      discussion: []
+    },
+    places: [],
     birthday: {},
   	answers: {},
     clearForSubmit: false
   },
   validationChecks: {
-    stage1: false,
-    stage2: false,
-    stage3: false,
-    stage4: false,
-    clearForSubmit: false
+    stage1: true,
+    stage2: true,
+    stage3: true,
+    stage4: true,
+    stage5: false,
+    clearForSubmit: true
   }
 }
 
@@ -64,6 +71,12 @@ export default function SignUp(state = initialState, action) {
         newState.userData.birthday.day = action.value
       } else if (action.input === "DOBYear") {
         newState.userData.birthday.year = action.value
+      } else if (action.input === "activity") {
+        newState.userData.interests.activity.push(action.value)
+      } else if (action.input === "discussion") {
+        newState.userData.interests.discussion.push(action.value)
+      } else if (action.input === "place") {
+        newState.userData.places.push(action.value)
       } else {
         newState.userData[action.input] = action.value
       }
@@ -71,7 +84,31 @@ export default function SignUp(state = initialState, action) {
       var x = newState.userData
       var y = newState.validationChecks
       var bdLength = Object.keys(x.birthday).length
-      if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.clearForSubmit = true;
+      if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.stage5 = true;
+      return newState
+
+
+    case DELETE_INPUT:
+      var newState = Object.assign({}, state)
+      if (action.input === "activity") {
+        var arr = []
+        newState.userData.interests.activity.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.userData.interests.activity = arr
+      } else if (action.input === "discussion") {
+        var arr = []
+        newState.userData.interests.discussion.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.userData.interests.discussion = arr
+      } else if (action.input === "place") {
+        var arr = []
+        newState.userData.places.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.userData.places = arr
+      }
       return newState
 
 
@@ -87,11 +124,13 @@ export default function SignUp(state = initialState, action) {
       newState.viewData.signup.stage3 = false;
       newState.viewData.signup.stage4 = false;
       newState.viewData.signup.stage5 = false;
+      newState.viewData.signup.stage6 = false;
       newState.validationChecks.stage1 = false;
       newState.validationChecks.stage2 = false;
       newState.validationChecks.stage3 = false;
       newState.validationChecks.stage4 = false;
-      newState.validationChecks.clearForSubmit = false;
+      newState.validationChecks.stage5 = false;
+      // newState.validationChecks.clearForSubmit = false;
       return newState
 
 
@@ -113,12 +152,12 @@ export default function SignUp(state = initialState, action) {
       } else if (state.viewData.signup.stage4) {
         newState.viewData.signup.stage4 = false;
         newState.viewData.signup.stage5 = true;
+      } else if (state.viewData.signup.stage5) {
+        newState.viewData.signup.stage5 = false;
+        newState.viewData.signup.stage6 = true;
       }
       return newState
-
-    case REDIRECT_TO_LOGIN:
-      var newState = Object.assign({}, state)
-      return newState
+      
 
     default:
     	return state
