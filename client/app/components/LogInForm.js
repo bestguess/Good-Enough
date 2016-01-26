@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import UsernamePasswordReset from './UsernamePasswordReset'
+
 const { Link } = require('react-router');
 
 class LogInForm extends Component {
@@ -35,6 +37,7 @@ class LogInForm extends Component {
         <div className="question-form-submit-button-login">
           {formButton}
         </div>
+        <UsernamePasswordReset state={this.props.state} actions={this.props.actions}/>
       </div>
       )
   }
