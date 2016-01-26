@@ -36,7 +36,7 @@ export default function Profile(state = initialState, action) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(JSON.parse(userData))
+        body: userData
       })
 
       // Remove local storage ID and Token
