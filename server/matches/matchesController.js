@@ -50,11 +50,8 @@ module.exports = {
   sendConnect: function(req, res, next){
     var user = req.body.id;
     var match = req.body.match_id;
-    var connection = {};
-    connection.id = req.body.id;
-    connection.connected = false;
 
-    User.findById(match, function(err, foundMatch){
+    User.findOne({_id:match}, function(err, foundMatch){
       if(err){
         res.status(500).send(err);
         return next();
@@ -64,35 +61,49 @@ module.exports = {
         return next();
       }
       else{
-        foundMatch.connections.push(connection);
-        var foundem = false;
         for(var i = 0; i < foundMatch.matches.length; i++){
-          if(foundMatch.matches[i][0] === "" + user){
-            foundem = true;
-            foundMatch.matches.splice(i, 1);
+          if(foundMatch.matches[i].id === user){
+            foundMatch.matches[i].requested = true;
             break;
           }
         }
-        foundMatch.save(User.findById(user, function(err, foundUser){
+        User.findByIdAndUpdate(match, {matches: foundMatch.matches}, function(err){
           if(err){
             res.status(500).send(err);
             return next();
           }
-          if(!foundMatch){
-            res.status(404).send("Could not connect with match");
-            return next();
-          }
           else{
-            for(var i = 0; i < foundUser.matches.length; i++){
-              if(foundUser.matches[i][0] === "" + match){
-                foundUser.matches.splice(i, 1);
-                break;
+            User.findOne({_id:user}, function(err, foundUser){
+              if(err){
+                res.status(500).send(err);
+                return next();
               }
-            }
-            res.status(200).send();
-            foundUser.save(next);
+              if(!foundUser){
+                res.status(404).send("Could not connect with match");
+                return next();
+              }
+              else{
+                for(var i = 0; i < foundUser.matches.length; i++){
+                  if(foundUser.matches[i].id === match){
+                    foundUser.matches[i].display = false;
+                    break;
+                  }
+                }
+                User.findByIdAndUpdate(user, {matches: foundUser.matches}, function(err){
+                  if(err){
+                    res.status(500).send(err);
+                    return next();
+                  }
+                  else{
+                    console.log(foundUser);
+                    res.status(200).send(foundUser);
+                    return next();
+                  }
+                })
+              }
+            })
           }
-        }));
+        })
       }
     });
   },
@@ -100,9 +111,7 @@ module.exports = {
   acceptConnect: function(req, res, next){
     var user = req.body.id;
     var match = req.body.match_id
-    var connection = {};
-    connection.id = user;
-    connection.connected = true;
+
     User.findById(user, function(err, foundUser){
       if(err){
         res.status(500).send(err);
@@ -113,25 +122,45 @@ module.exports = {
         return next();
       }
       else{
-        for(var i = 0; i < foundUser.connections.length; i++){
-          if(foundUser.connections[i].id === "" + match){
-            foundUser.connections[i].connected = true;
+        for(var i = 0; i < foundUser.matches.length; i++){
+          if(foundUser.matches[i].id === match){
+            foundUser.matches[i].requested = false;
+            foundUser.matches[i].connected = true;
             break;
           }
         }
-        User.findByIdAndUpdate(user, {connections: foundUser.connections}, function(err){
+        User.findByIdAndUpdate(user, {matches: foundUser.matches}, function(err){
           if(err){
-            res.status(500).send();
+            res.status(500).send(err);
             return next();
           }else{
-            User.findByIdAndUpdate(match, {$push: { connections: connection}}, function(err){
+            User.findById(match, function(err, foundMatch){
               if(err){
                 res.status(500).send(err);
                 return next();
               }
-              else{
-                res.status(200).send("Connection accepted");
+              if(!foundMatch){
+                res.status(404).send("Could not find match to accept");
                 return next();
+              }
+              else{
+                for(var i = 0; i < foundMatch.matches.length; i++){
+                  if(foundMatch.matches[i].id === "" + foundUser._id){
+                    foundMatch.matches[i].connected = true;
+                    foundMatch.matches[i].display = true;
+                    break;
+                  }
+                }
+                User.findByIdAndUpdate(match, {matches: foundMatch.matches}, function(err){
+                  if(err){
+                    res.status(500).send(err);
+                    return next();
+                  }
+                  else{
+                    res.status(200).send(foundUser);
+                    return next();
+                  }
+                })
               }
             })
           }
@@ -154,19 +183,20 @@ module.exports = {
         res.status(404).send("Could not complete decline");
       }
       else{
-        for(var i = 0; i < foundUser.connections.length; i++){
-          if(foundUser.connections[i].id === "" + match){
-            foundUser.connections.splice(i, 1);
+        for(var i = 0; i < foundUser.matches.length; i++){
+          if(foundUser.matches[i].id === "" + match){
+            foundUser.matches[i].display = false;
+            foundUser.matches[i].requested = false;
             break;
           }
         }
-        User.findByIdAndUpdate(user, {connections: foundUser.connections}, function(err){
+        User.findByIdAndUpdate(user, {matches: foundUser.matches}, function(err){
           if(err){
             res.status(500).send(err);
             return next();
           }
           else{
-            res.status(200).send("Connection successfully declined");
+            res.status(200).send(foundUser);
             return next();
           }
         })
