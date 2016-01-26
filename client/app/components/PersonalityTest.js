@@ -4,7 +4,7 @@ import QuestionBox from './QuestionBox'
 // Personality Test Questions
 const stage1 = [
   {id: 1, option1: 'makes lists', option2: 'relies on memory'},
-  {id: 2, option1: 'sceptical', option2: 'wants to believe'},
+  {id: 2, option1: 'skeptical', option2: 'wants to believe'},
   {id: 3, option1: 'bored by time alone', option2: 'needs time alone'},
   {id: 4, option1: 'accepts things as they are', option2: 'unsatisfied with the ways things are'},
   {id: 5, option1: 'keeps a clean room', option2: 'just puts stuff where ever'},
@@ -36,7 +36,7 @@ const stage4 = [
   {id: 25, option1: 'improvises', option2: 'prepares'},
   {id: 26, option1: 'bases morality on justice', option2: 'bases morality on compassion'},
   {id: 27, option1: 'finds it difficult to yell very loudly', option2: 'yelling to others when they are far away comes naturally'},
-  {id: 28, option1: 'theoretical', option2: 'empirical'},
+  {id: 28, option1: 'believes theories', option2: 'needs evidence'},
   {id: 29, option1: 'works hard', option2: 'plays hard'},
   {id: 30, option1: 'uncomfortable with emotions', option2: 'values emotions'},
   {id: 31, option1: 'likes to perform in front of other people', option2: 'avoids public speaking'},
