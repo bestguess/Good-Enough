@@ -16,6 +16,7 @@ export default function RecoverPassword(state = initialState, action) {
 
     case RECOVER_PASSWORD:
       var newState = Object.assign({}, state)
+      newState.newData = action.newData
       return newState
 
     default:
