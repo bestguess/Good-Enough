@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SAVE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, REDIRECT_TO_LOGIN } from '../constants/SignUp_ActionTypes'
+import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY } from '../constants/SignUp_ActionTypes'
 
 const initialState = {
   viewData: {
@@ -85,6 +85,30 @@ export default function SignUp(state = initialState, action) {
       var y = newState.validationChecks
       var bdLength = Object.keys(x.birthday).length
       if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.stage5 = true;
+      return newState
+
+
+    case DELETE_INPUT:
+      var newState = Object.assign({}, state)
+      if (action.input === "activity") {
+        var arr = []
+        newState.userData.interests.activity.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.userData.interests.activity = arr
+      } else if (action.input === "discussion") {
+        var arr = []
+        newState.userData.interests.discussion.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.userData.interests.discussion = arr
+      } else if (action.input === "place") {
+        var arr = []
+        newState.userData.places.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.userData.places = arr
+      }
       return newState
 
 
