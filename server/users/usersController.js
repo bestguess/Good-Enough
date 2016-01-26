@@ -44,7 +44,7 @@ module.exports = {
     
     User.findByIdAndUpdate(req.body.id, data,function(err, changes){
       if(err) console.log(err);
-      else res.status(201).send(changes);
+      else res.status(201).send("Updated User");
     });
   },
 
