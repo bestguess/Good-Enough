@@ -15,8 +15,7 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
 // Importing React Components
-import { SiteRouter, SignUp, LogIn, Profile, Match } from './app/containers'
-import UsernamePasswordReset from './app/components/UsernamePasswordReset'
+import { SiteRouter, SignUp, LogIn, Profile, Match, UsernamePasswordReset } from './app/containers'
 
 // Importing Redux Reducer
 import rootReducer from './app/reducers'
