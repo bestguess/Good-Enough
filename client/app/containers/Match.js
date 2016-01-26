@@ -9,7 +9,7 @@ function getMatchInfo(props) {
   props.actions.clearCurrentMatchData()
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
-  fetch('http://localhost:4000/app/matches/match', {
+  fetch('/app/matches/match', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(requestData)
@@ -26,12 +26,11 @@ function getMatchInfo(props) {
 }
 
 function sendMessage(props) {
-  var obj = JSON.parse(window.localStorage.getItem('GoodEnough'))
-  var messageData = {}
-  messageData.from = obj.id;
+  var messageData = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  messageData.from = messageData.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message = props.state.match.message;
-  fetch('http://localhost:4000/app/messages/send', {
+  fetch('/app/messages/send', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(messageData)
@@ -49,7 +48,7 @@ function sendMessage(props) {
 function getAllMessages(props) {
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
-  fetch('http://localhost:4000/app/messages/get', {
+  fetch('/app/messages/get', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(requestData)

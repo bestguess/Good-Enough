@@ -535,17 +535,41 @@ input[type="submit"]{
   padding: 0.25% 0%;
 }
 
+.user-interest-container:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
 .user-interest-container span {
   font-size: 0.7em;
+  float: left;
+  margin-bottom: 0.5%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+.user-interest-container input {
+  font-size: 0.7em;
+  line-height: 1.4em;
+  float: left;
+  clear: none;
+  margin: 0px 0% 0% 1%;
+  font-weight: 300;
+  padding: 0.5% 1.5%;
+  outline: none;
+  background-color: transparent;
+  border: none;
 }
 
 .user-interest {
   color: #4c5455;
   border-radius: 8%;
   font-weight: 300;
-  padding: 0.5% 1.5%;
-  margin: 0px 0% 0px 1%;
   cursor: pointer;
+  margin: 0px 0% 0px 1%;
+  padding: 0.5% 1.5%;
 }
 
 .discussion {

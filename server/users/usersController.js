@@ -8,13 +8,6 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
-  getEmails: function(req, res){
-    User.find({}, 'email', function(err, emails){
-      if(err) res.status(404).send(err);
-      else res.status(302).send(emails);
-    });
-  },
-
   getUser: function(req, res, next){
     User.findOne({_id: user.id}, function(err, user){
       if(err){
@@ -38,22 +31,29 @@ module.exports = {
 
   updateUser: function(req, res){
     var data = req.body;
-    //delete data.id;
 
-    if(data.password){
-      bcrypt.hash(data.password, data.password.length, function(err, hash) {
-        data.password = hash;
-        User.findByIdAndUpdate(req.body.id, data,function(err, changes){
-          if(err) console.log(err);
-          else res.status(201).send(changes);
-        });
-      });
-    }else{
-      User.findByIdAndUpdate(req.body.id, data,function(err, changes){
-        if(err) console.log(err);
-        else res.status(201).send(changes);
-      });
-    }
+    if(data.password) data.password = bcrypt.hashSync(data.password, data.password.length);
+    if(data.interests) data.interests = JSON.stringify(data.interests);
+    
+    User.findByIdAndUpdate(req.body.id, data,function(err, changes){
+      if(err) console.log(err);
+      else{
+        if(data.interests){
+          User.find({}, function(err, users){
+            users.forEach(function(user){
+              match.user(user, function (data){
+                data.sort(function(a,b){ return b.score-a.score; });
+                User.update({_id: user._id},{matches:data},function(err, user){
+                  if(err) console.log(err);
+                  else res.end("Updated Matches");
+                });
+              });
+            });
+          });
+        }
+        res.status(201).send("Updated User");
+      }
+    });
   },
 
   signUp: function(req, res, next){
