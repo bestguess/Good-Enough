@@ -540,6 +540,7 @@ input[type="submit"]{
 .user-interest-container span {
   font-size: 0.7em;
   float: left;
+  margin-bottom: 0.5%;
   padding-top: 0.5%;
   padding-bottom: 0.5%;
 }

@@ -34,7 +34,7 @@ export function connect(friend) {
     var state = getState();
     console.log('state inside connect: ', state)
     console.log('friend to connect to: ', friend);
-    fetch('/app/users/connectUrlGoesHere', {
+    fetch('/app/matches/request', {
         method: 'post',
         headers: {
           'mode': 'no-cors',
