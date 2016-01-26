@@ -36,12 +36,15 @@ class DiscussionInterests extends Component {
   }
 
   render() {
+    var editInput;
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="topic" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add topic..."/>
     return (
       <div className="user-interest-container">
         <span>Likes to talk about: </span>
         {this.props.state.profile.data.interests.discussion.map(topic =>
             <span key={topic} className="user-interest discussion" onClick={() => this.deleteInput(topic)}>{topic}</span>
         )}
+        {editInput}
       </div>
     );
   }
@@ -54,12 +57,15 @@ class ActivityInterests extends Component {
   }
 
   render() {
+    var editInput;
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="activity" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add activity..."/>
     return (
       <div className="user-interest-container">
         <span>Likes to do: </span>
         {this.props.state.profile.data.interests.activity.map(activity =>
             <span key={activity} className="user-interest activity" onClick={() => this.deleteInput(activity)}>{activity}</span>
         )}
+        {editInput}
       </div>
     );
   }
@@ -72,12 +78,15 @@ class FavoritePlaces extends Component {
   }
 
   render() {
+    var editInput;
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="place" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add place..."/>
     return (
       <div className="user-interest-container">
         <span>Favorite Places: </span>
         {this.props.state.profile.data.places.map(place =>
             <span key={place} className="user-interest place" onClick={() => this.deleteInput(place)}>{place}</span>
         )}
+        {editInput}
       </div>
     );
   }
