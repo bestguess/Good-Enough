@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import QuestionButtons from './QuestionButtons'
+import QuestionButtons from './questionButtons'
 
 class QuestionBox extends Component {
 

@@ -38,22 +38,14 @@ module.exports = {
 
   updateUser: function(req, res){
     var data = req.body;
-    //delete data.id;
 
-    if(data.password){
-      bcrypt.hash(data.password, data.password.length, function(err, hash) {
-        data.password = hash;
-        User.findByIdAndUpdate(req.body.id, data,function(err, changes){
-          if(err) console.log(err);
-          else res.status(201).send(changes);
-        });
-      });
-    }else{
-      User.findByIdAndUpdate(req.body.id, data,function(err, changes){
-        if(err) console.log(err);
-        else res.status(201).send(changes);
-      });
-    }
+    if(data.password) data.password = bcrypt.hashSync(data.password, data.password.length);
+    if(data.interests) data.interests = JSON.stringify(data.interests);
+    
+    User.findByIdAndUpdate(req.body.id, data,function(err, changes){
+      if(err) console.log(err);
+      else res.status(201).send("Updated User");
+    });
   },
 
   signUp: function(req, res, next){
