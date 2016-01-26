@@ -27,10 +27,13 @@ class Profile extends Component {
     if (!this.props.state.profile.data) return <h1><i>Loading profile...</i></h1>
     const { state, actions } = this.props
     var profileMatchesDisplay = [];
+    var profileTempDisplay = [];
     var profileConnectionsDisplay = [];
     this.props.state.profile.data.matches.filter(function(match) {
-      if (match.requested) {
+      if (match.connected) {
         profileConnectionsDisplay.push(match)
+      } else if (match.requested) {
+        profileTempDisplay.push(match)
       } else if (match.display) {
         profileMatchesDisplay.push(match)
       }
@@ -40,7 +43,7 @@ class Profile extends Component {
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <ProfileUserData state={this.props.state} actions={this.props.actions} />
         <PollContainer state={this.props.state} actions={this.props.actions} />
-        <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} />
+        <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
         <ProfileMatches state={this.props.state} actions={this.props.actions} matches={profileMatchesDisplay} />
       </div>
     );
