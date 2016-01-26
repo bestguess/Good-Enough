@@ -159,7 +159,7 @@ module.exports = {
             }
             //sends back an array of information to be saved in matches
             result.score = Math.round(Math.min((100-((result.score/0.9)-10))),100);
-            if(result.score>60) resultArr.push(result);
+            if(result.score>0) resultArr.push(result);
           }
         }
         callback(resultArr);

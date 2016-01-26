@@ -17,7 +17,7 @@ export function logIn() {
   return function (dispatch, getState) {
     var state = getState();
     console.log('State inside login middleware: ', state);
-    fetch('http://localhost:4000/app/users/signin', {
+    fetch('/app/users/signin', {
         method: 'post',
         headers: {
           'mode': 'no-cors',
