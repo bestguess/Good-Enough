@@ -9,7 +9,7 @@ function getMatchInfo(props) {
   props.actions.clearCurrentMatchData()
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
-  fetch('http://localhost:4000/app/matches/match', {
+  fetch('/app/matches/match', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(requestData)
@@ -31,7 +31,7 @@ function sendMessage(props) {
   messageData.from = obj.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message = props.state.match.message;
-  fetch('http://localhost:4000/app/messages/send', {
+  fetch('/app/messages/send', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(messageData)
@@ -49,7 +49,7 @@ function sendMessage(props) {
 function getAllMessages(props) {
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
-  fetch('http://localhost:4000/app/messages/get', {
+  fetch('/app/messages/get', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(requestData)
@@ -73,6 +73,57 @@ function clearMessagesInterval(props) {
  messageInterval = clearInterval(messageInterval)
 }
 
+class DiscussionInterests extends Component {
+  render() {
+    var values;
+    if (this.props.state.match.data.interests.discussion.length > 0) {
+      values = this.props.state.match.data.interests.discussion.map(topic =>
+        <span key={topic} className="user-interest discussion">{topic}</span> )
+    }
+    return (
+      <div className="user-interest-container">
+        <span>Likes to talk about: </span>
+        {values}
+      </div>
+    );
+  }
+}
+
+class ActivityInterests extends Component {
+  render() {
+    var values;
+    if (this.props.state.match.data.interests.activity.length > 0) {
+      values = this.props.state.match.data.interests.activity.map(activity =>
+        <span key={activity} className="user-interest activity">{activity}</span> )
+    }
+    return (
+      <div className="user-interest-container">
+        <span>Likes to do: </span>
+        {values}
+      </div>
+    );
+  }
+}
+
+class FavoritePlaces extends Component {
+  render() {
+    var values;
+    if (this.props.state.match.data.places.length > 0) {
+      values = this.props.state.match.data.places.map(place =>
+            <span key={place} className="user-interest place">{place}</span> )
+    }
+    return (
+      <div className="user-interest-container">
+        <span>Favorite Places: </span>
+        {values}
+      </div>
+    );
+  }
+}
+
+
+
+
 class MatchPicture extends Component {
   render() {
     return (
@@ -88,8 +139,9 @@ class MatchUserData extends Component {
     return (
       <div className="personal-info-card-userdata">
         <h4>{this.props.state.match.data.firstName} {this.props.state.match.data.lastName}</h4>
-        <p>Interests: Drinking Beer, Coding, & Sewing</p>
-        <p>Favorite Places: Bangers, Lucys Fried Chicken, Hoovers, Pinthouse Pizza, & East Side Pies</p>
+        <ActivityInterests state={this.props.state} actions={this.props.actions} />
+        <DiscussionInterests state={this.props.state} actions={this.props.actions} />
+        <FavoritePlaces state={this.props.state} actions={this.props.actions} />
       </div>
     );
   }

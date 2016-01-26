@@ -10,6 +10,7 @@ export default function Match(state = initialState, action) {
   	case SAVE_MATCH_DATA:
     	var newState = Object.assign({}, state)
     	newState.data = action.data
+      newState.data.interests = JSON.parse(newState.data.interests)
       newState.conversation = []
      	return newState
 
@@ -37,7 +38,7 @@ export default function Match(state = initialState, action) {
       // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')
       // Make server request to delete token storage on server side
-      fetch('http://localhost:4000/app/users/logout', {
+      fetch('/app/users/logout', {
         method: 'post',
         headers: {
           'mode': 'no-cors',
