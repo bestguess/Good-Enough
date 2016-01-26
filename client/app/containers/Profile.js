@@ -3,74 +3,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
 import PrivateNav from '../components/Nav/PrivateNav'
-import ProfileMatches from '../components/ProfileMatches'
-import ProfileConnections from '../components/Profile/ProfileConnections'
+import ProfileUserData from '../components/Profile/ProfileUserData'
 import PollContainer from '../components/Profile/PollContainer'
-import DiscussionInterests from '../components/Profile/DiscussionInterests'
-import ActivityInterests from '../components/Profile/ActivityInterests'
-import FavoritePlaces from '../components/Profile/FavoritePlaces'
-import { status, json, getUserInfo } from '../helpers'
-
-
-function updateUserInfo(props) {
-  var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
-  requestData.interests = props.state.profile.data.interests
-  requestData.places = props.state.profile.data.places
-  console.log(requestData)
-  fetch('/app/users/update', {
-          method: 'POST',
-          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(requestData)
-        })
-    .then(status)
-    .then(props.actions.editUserInfo)
-    .catch(function(error) {
-      console.log('Request failed', error);
-    });
-}
-
-
-class ProfileUserPicture extends Component {
-  render() {
-    return (
-      <div className="personal-info-card-picture">
-        <img src={this.props.state.profile.data.picture} />
-      </div>
-    );
-  }
-}
-
-class ProfileUserInfoBox extends Component {
-  render() {
-    return (
-      <div className="personal-info-card-userdata">
-        <h4>{this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</h4>
-        <ActivityInterests state={this.props.state} actions={this.props.actions} />
-        <DiscussionInterests state={this.props.state} actions={this.props.actions} />
-        <FavoritePlaces state={this.props.state} actions={this.props.actions} />
-      </div>
-    );
-  }
-}
-
-class ProfileUserData extends Component {
-  render() {
-    var editUserInfoButton;
-    if (!this.props.state.profile.editUserInfo) {
-      var editUserInfoButton = <i onClick={this.props.actions.editUserInfo} className="edit-user-info fa fa-cog"></i>
-    } else {
-      var editUserInfoButton = <button onClick={() => updateUserInfo(this.props)} className="edit-user-info save-button">Save Info</button>
-    }
-    return (
-      <div className="personal-info-card">
-        <ProfileUserPicture state={this.props.state} actions={this.props.actions} />
-        <ProfileUserInfoBox state={this.props.state} actions={this.props.actions} />
-        {editUserInfoButton}
-      </div>
-    )
-  }
-}
-
+import ProfileConnections from '../components/Profile/ProfileConnections'
+import ProfileMatches from '../components/ProfileMatches'
 
 class Profile extends Component {
   constructor(props) {
@@ -90,13 +26,25 @@ class Profile extends Component {
     if (!window.localStorage.getItem('GoodEnough')) this.reRoute(this.props)
     if (!this.props.state.profile.data) return <h1><i>Loading profile...</i></h1>
     const { state, actions } = this.props
+    var profileMatchesDisplay = [];
+    var profileTempDisplay = [];
+    var profileConnectionsDisplay = [];
+    this.props.state.profile.data.matches.filter(function(match) {
+      if (match.connected) {
+        profileConnectionsDisplay.push(match)
+      } else if (match.requested) {
+        profileTempDisplay.push(match)
+      } else if (match.display) {
+        profileMatchesDisplay.push(match)
+      }
+    })
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <ProfileUserData state={this.props.state} actions={this.props.actions} />
         <PollContainer state={this.props.state} actions={this.props.actions} />
-        <ProfileConnections state={this.props.state} actions={this.props.actions} />
-        <ProfileMatches state={this.props.state} actions={this.props.actions} />
+        <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
+        <ProfileMatches state={this.props.state} actions={this.props.actions} matches={profileMatchesDisplay} />
       </div>
     );
   }
