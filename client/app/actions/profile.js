@@ -14,11 +14,19 @@ export function optimisticConnect(newData) {
 }
 
 export function logout() {
-	return { type: types.LOGOUT }
+  return { type: types.LOGOUT }
 }
 
 export function editUserInfo() {
   return { type: types.EDIT_USER_INFO }
+}
+
+export function saveInput(input, value) {
+  return { type: types.SAVE_INPUT, input, value };
+}
+
+export function deleteInput(input, value) {
+  return { type: types.DELETE_INPUT, input, value };
 }
 
 export function connect(friend) {
