@@ -12,11 +12,15 @@ class ActivityInterests extends Component {
     }
   }
 
+  deleteInput(activity) {
+    this.props.actions.deleteInput('activity', activity)
+  }
+
   render() {
     var stateValues;
     if (this.props.state.signup.userData.interests.activity.length > 0) {
       stateValues = this.props.state.signup.userData.interests.activity.map(activity =>
-                      <span key={activity} className="activity">{activity}</span> )
+                      <span key={activity} className="activity" onClick={() => this.deleteInput(activity)}>{activity}</span> )
     }
     return (
         <div className='interest-input-container'>
@@ -38,11 +42,15 @@ class DiscussionInterests extends Component {
     }
   }
 
+  deleteInput(topic) {
+    this.props.actions.deleteInput('discussion', topic)
+  }
+
   render() {
     var stateValues;
     if (this.props.state.signup.userData.interests.discussion.length > 0) {
       stateValues = this.props.state.signup.userData.interests.discussion.map(discussion =>
-                      <span key={discussion} className="discussion">{discussion}</span> )
+                      <span key={discussion} className="discussion" onClick={() => this.deleteInput(discussion)}>{discussion}</span> )
     }
     return (
         <div className='interest-input-container'>
@@ -64,11 +72,15 @@ class FavoritePlaces extends Component {
     }
   }
 
+  deleteInput(place) {
+    this.props.actions.deleteInput('place', place)
+  }
+
   render() {
     var stateValues;
     if (this.props.state.signup.userData.places.length > 0) {
       stateValues = this.props.state.signup.userData.places.map(place =>
-                      <span key={place} className="place">{place}</span> )
+                      <span key={place} className="place" onClick={() => this.deleteInput(place)}>{place}</span> )
     }
     return (
         <div className='interest-input-container'>
