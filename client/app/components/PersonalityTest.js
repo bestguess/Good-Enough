@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import QuestionBox from './QuestionBox'
+import QuestionBox from './questionBox'
 
 // Personality Test Questions
 const stage1 = [
