@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as usernamePasswordResetActions from '../actions/usernamePasswordReset'
+import * as UsernamePasswordResetActions from '../actions/usernamePasswordReset'
 
 import PublicNav from '../components/Nav/PublicNav'
 import Footer from '../components/Footer'
-import ResetForm from '../components/UsernamePasswordResetForm'
+import UsernamePasswordResetForm from '../components/UsernamePasswordResetForm'
 
 class UsernamePasswordReset extends Component {
   render() {
@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(usernamePasswordResetActions, dispatch),
+    actions: bindActionCreators(UsernamePasswordResetActions, dispatch),
   }
 }
 
