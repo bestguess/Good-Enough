@@ -1,6 +1,6 @@
 export const PROFILE = 'PROFILE'
 export const LOGOUT = 'LOGOUT'
-export const CONNECT = 'CONNECT'
+export const CONNECT_REQUEST = 'CONNECT_REQUEST'
 export const EDIT_USER_INFO = 'EDIT_USER_INFO'
 export const SAVE_INPUT = 'SAVE_INPUT'
 export const DELETE_INPUT = 'DELETE_INPUT'

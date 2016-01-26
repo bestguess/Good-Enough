@@ -9,10 +9,6 @@ export function optimisticProfile(data) {
 // 	return { type: types.PROFILE, data }
 // }
 
-export function optimisticConnect(newData) {
-  return { type: types.CONNECT, newData }
-}
-
 export function logout() {
   return { type: types.LOGOUT }
 }
@@ -29,34 +25,8 @@ export function deleteInput(input, value) {
   return { type: types.DELETE_INPUT, input, value };
 }
 
-export function connect(friend) {
-  return function (dispatch, getState) {
-    var state = getState();
-    console.log('state inside connect: ', state)
-    console.log('friend to connect to: ', friend);
-    fetch('/app/matches/request', {
-        method: 'post',
-        headers: {
-          'mode': 'no-cors',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(friend)
-      })
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {
-          res.json().then(data => {console.log('Server Response after connect: ', data);
-            dispatch(optimisticConnect(data));
-          });
-        } else {
-          const error = new Error(res.statusText);
-          error.res = res;
-          throw error;
-        }
-      })
-      .catch(error => { console.log('request failed', error)});
-  }
-  return null;
+export function connectRequest(data) {
+  return { type: types.CONNECT_REQUEST, data };
 }
 
 export function profile() {
