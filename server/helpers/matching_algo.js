@@ -105,6 +105,7 @@ module.exports = {
       function findMatch(user) {
         var user_id = user._id.toString();
         var user_interests = JSON.parse(user.interests);
+        var user_matches = user.matches;
         var type = user.type;
         var scores = JSON.parse(user.personality);
         var result = {};
@@ -128,8 +129,17 @@ module.exports = {
           var person_type = list[p].type;
           var person_interests = JSON.parse(list[p].interests);
 
+
           //prevents scoring against yourself
           if(user_id !== result.id){
+
+          user_matches.forEach(function(match){
+            if(match.id === list[p]._id.toString()){
+              result.display = match.display;
+              result.requested = match.requested;
+              result.connected = match.connected;
+            }
+          });
 
             //creates your original score based off of personality conflicts
             for(var pair in scores){
@@ -159,7 +169,7 @@ module.exports = {
             }
             //sends back an array of information to be saved in matches
             result.score = Math.round(Math.min((100-((result.score/0.9)-10))),100);
-            if(result.score>60) resultArr.push(result);
+            if(result.score>0) resultArr.push(result);
           }
         }
         callback(resultArr);

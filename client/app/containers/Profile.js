@@ -4,19 +4,30 @@ import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
 import PrivateNav from '../components/Nav/PrivateNav'
 import ProfileMatches from '../components/ProfileMatches'
+import ProfileConnections from '../components/Profile/ProfileConnections'
+import PollContainer from '../components/Profile/PollContainer'
+import DiscussionInterests from '../components/Profile/DiscussionInterests'
+import ActivityInterests from '../components/Profile/ActivityInterests'
+import FavoritePlaces from '../components/Profile/FavoritePlaces'
 import { status, json, getUserInfo } from '../helpers'
 
-class ProfileConnections extends Component {
-  render() {
-    const { state, actions } = this.props
-    return (
-      <div className="profile-page-connections">
-        <span> This is where the profile connections would go</span>
-      </div>
-    );
-  }
-}
 
+function updateUserInfo(props) {
+  var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  requestData.interests = props.state.profile.data.interests
+  requestData.places = props.state.profile.data.places
+  console.log(requestData)
+  fetch('/app/users/update', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData)
+        })
+    .then(status)
+    .then(props.actions.editUserInfo)
+    .catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
 
 
 class ProfileUserPicture extends Component {
@@ -28,62 +39,6 @@ class ProfileUserPicture extends Component {
     );
   }
 }
-
-class DiscussionInterests extends Component {
-
-  deleteInput(topic) {
-    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('discussion', topic)
-  }
-
-  render() {
-    return (
-      <div className="user-interest-container">
-        <span>Likes to talk about: </span>
-        {this.props.state.profile.data.interests.discussion.map(topic =>
-            <span key={topic} className="user-interest discussion" onClick={() => this.deleteInput(topic)}>{topic}</span>
-        )}
-      </div>
-    );
-  }
-}
-
-class ActivityInterests extends Component {
-
-  deleteInput(activity) {
-    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('activity', activity)
-  }
-
-  render() {
-    return (
-      <div className="user-interest-container">
-        <span>Likes to do: </span>
-        {this.props.state.profile.data.interests.activity.map(activity =>
-            <span key={activity} className="user-interest activity" onClick={() => this.deleteInput(activity)}>{activity}</span>
-        )}
-      </div>
-    );
-  }
-}
-
-class FavoritePlaces extends Component {
-
-  deleteInput(place) {
-    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('place', place)
-  }
-
-  render() {
-    return (
-      <div className="user-interest-container">
-        <span>Favorite Places: </span>
-        {this.props.state.profile.data.places.map(place =>
-            <span key={place} className="user-interest place" onClick={() => this.deleteInput(place)}>{place}</span>
-        )}
-      </div>
-    );
-  }
-}
-
-
 
 class ProfileUserInfoBox extends Component {
   render() {
@@ -104,23 +59,13 @@ class ProfileUserData extends Component {
     if (!this.props.state.profile.editUserInfo) {
       var editUserInfoButton = <i onClick={this.props.actions.editUserInfo} className="edit-user-info fa fa-cog"></i>
     } else {
-      var editUserInfoButton = <button onClick={this.props.actions.editUserInfo} className="edit-user-info save-button">Save Info</button>
+      var editUserInfoButton = <button onClick={() => updateUserInfo(this.props)} className="edit-user-info save-button">Save Info</button>
     }
     return (
       <div className="personal-info-card">
         <ProfileUserPicture state={this.props.state} actions={this.props.actions} />
         <ProfileUserInfoBox state={this.props.state} actions={this.props.actions} />
         {editUserInfoButton}
-      </div>
-    )
-  }
-}
-
-class PollContainer extends Component {
-  render() {
-    return (
-      <div className="poll-container-card">
-        Poll goes here
       </div>
     )
   }

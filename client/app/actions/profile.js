@@ -21,6 +21,10 @@ export function editUserInfo() {
   return { type: types.EDIT_USER_INFO }
 }
 
+export function saveInput(input, value) {
+  return { type: types.SAVE_INPUT, input, value };
+}
+
 export function deleteInput(input, value) {
   return { type: types.DELETE_INPUT, input, value };
 }
@@ -30,7 +34,7 @@ export function connect(friend) {
     var state = getState();
     console.log('state inside connect: ', state)
     console.log('friend to connect to: ', friend);
-    fetch('http://localhost:4000/app/users/connectUrlGoesHere', {
+    fetch('/app/matches/request', {
         method: 'post',
         headers: {
           'mode': 'no-cors',
@@ -59,7 +63,7 @@ export function profile() {
   return function (dispatch, getState) {
     // Gather User ID and Session Token from Local Storage
     var userData = window.localStorage.getItem('GoodEnough')
-    fetch('http://localhost:4000/app/users/info', {
+    fetch('/app/users/info', {
         method: 'post',
         headers: {
           'mode': 'no-cors',

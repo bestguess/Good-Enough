@@ -1,4 +1,4 @@
-import { PROFILE, LOGOUT, CONNECT, EDIT_USER_INFO, DELETE_INPUT } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT, CONNECT, EDIT_USER_INFO, SAVE_INPUT, DELETE_INPUT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
 
@@ -21,6 +21,17 @@ export default function Profile(state = initialState, action) {
     case EDIT_USER_INFO:
       var newState = Object.assign({}, state)
       newState.editUserInfo = (!newState.editUserInfo) ? true : false
+      return newState
+
+    case SAVE_INPUT:
+      var newState = Object.assign({}, state)
+      if (action.input === "activity") {
+        newState.data.interests.activity.push(action.value)
+      } else if (action.input === "discussion") {
+        newState.data.interests.discussion.push(action.value)
+      } else if (action.input === "place") {
+        newState.data.places.push(action.value)
+      }
       return newState
 
     case DELETE_INPUT:
@@ -52,7 +63,7 @@ export default function Profile(state = initialState, action) {
       // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')
       // Make server request to delete token storage on server side
-      fetch('http://localhost:4000/app/users/logout', {
+      fetch('/app/users/logout', {
         method: 'post',
         headers: {
           'mode': 'no-cors',
