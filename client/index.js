@@ -16,6 +16,7 @@ import thunkMiddleware from 'redux-thunk'
 
 // Importing React Components
 import { SiteRouter, SignUp, LogIn, Profile, Match } from './app/containers'
+import UsernamePasswordReset from './app/components/UsernamePasswordReset'
 
 // Importing Redux Reducer
 import rootReducer from './app/reducers'
@@ -65,6 +66,7 @@ render(
         	<Route path="/" component={SiteRouter}>
         		<IndexRoute component={SignUp}/>
           		<Route path="logIn" component={LogIn}/>
+              <Route path="reset-user" component={UsernamePasswordReset}/>
               <Route path="profile" component={Profile}/>
               <Route path="/:match_id" component={Match}/>
         	</Route>
