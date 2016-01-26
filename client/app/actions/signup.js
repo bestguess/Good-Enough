@@ -9,6 +9,10 @@ export function saveInput(input, value) {
 	return { type: types.SAVE_INPUT, input, value };
 }
 
+export function deleteInput(input, value) {
+	return { type: types.DELETE_INPUT, input, value };
+}
+
 export function submitSurvey(tokenData) {
 	return { type: types.SUBMIT_SURVEY, tokenData };
 }
