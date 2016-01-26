@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 class QuestionButtons extends Component {
   render() {
     return (
-      <span style={{float:'left', textAlign:'center', width:'20%'}}>
+      <span style={{float:'left', width:'220px',position:'relative'}}>
         <ul className="question-buttons">
           <li className="question-button-large">
             <input onClick={() => this.props.answer(this.props.choices[0])} type='radio' value='1' name={this.props.id + 'question'}/>

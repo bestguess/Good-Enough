@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as ProfileActions from '../actions/profile'
-import PrivateNav from '../components/PrivateNav'
+import PrivateNav from '../components/Nav/PrivateNav'
 import ProfileMatches from '../components/ProfileMatches'
 import { status, json, getUserInfo } from '../helpers'
 
@@ -29,13 +29,70 @@ class ProfileUserPicture extends Component {
   }
 }
 
+class DiscussionInterests extends Component {
+
+  deleteInput(topic) {
+    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('discussion', topic)
+  }
+
+  render() {
+    return (
+      <div className="user-interest-container">
+        <span>Likes to talk about: </span>
+        {this.props.state.profile.data.interests.discussion.map(topic =>
+            <span key={topic} className="user-interest discussion" onClick={() => this.deleteInput(topic)}>{topic}</span>
+        )}
+      </div>
+    );
+  }
+}
+
+class ActivityInterests extends Component {
+
+  deleteInput(activity) {
+    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('activity', activity)
+  }
+
+  render() {
+    return (
+      <div className="user-interest-container">
+        <span>Likes to do: </span>
+        {this.props.state.profile.data.interests.activity.map(activity =>
+            <span key={activity} className="user-interest activity" onClick={() => this.deleteInput(activity)}>{activity}</span>
+        )}
+      </div>
+    );
+  }
+}
+
+class FavoritePlaces extends Component {
+
+  deleteInput(place) {
+    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('place', place)
+  }
+
+  render() {
+    return (
+      <div className="user-interest-container">
+        <span>Favorite Places: </span>
+        {this.props.state.profile.data.places.map(place =>
+            <span key={place} className="user-interest place" onClick={() => this.deleteInput(place)}>{place}</span>
+        )}
+      </div>
+    );
+  }
+}
+
+
+
 class ProfileUserInfoBox extends Component {
   render() {
     return (
       <div className="personal-info-card-userdata">
         <h4>{this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</h4>
-        <p>Interests: Drinking Beer, Coding, & Sewing</p>
-        <p>Favorite Places: Bangers, Lucys Fried Chicken, Hoovers, Pinthouse Pizza, & East Side Pies</p>
+        <ActivityInterests state={this.props.state} actions={this.props.actions} />
+        <DiscussionInterests state={this.props.state} actions={this.props.actions} />
+        <FavoritePlaces state={this.props.state} actions={this.props.actions} />
       </div>
     );
   }
@@ -54,6 +111,16 @@ class ProfileUserData extends Component {
         <ProfileUserPicture state={this.props.state} actions={this.props.actions} />
         <ProfileUserInfoBox state={this.props.state} actions={this.props.actions} />
         {editUserInfoButton}
+      </div>
+    )
+  }
+}
+
+class PollContainer extends Component {
+  render() {
+    return (
+      <div className="poll-container-card">
+        Poll goes here
       </div>
     )
   }
@@ -82,6 +149,7 @@ class Profile extends Component {
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <ProfileUserData state={this.props.state} actions={this.props.actions} />
+        <PollContainer state={this.props.state} actions={this.props.actions} />
         <ProfileConnections state={this.props.state} actions={this.props.actions} />
         <ProfileMatches state={this.props.state} actions={this.props.actions} />
       </div>

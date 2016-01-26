@@ -9,10 +9,19 @@ class QuestionBox extends Component {
 
   render() {
     return (
-      <div className="question">
-        <span className="question-option" style={{float:'left', textAlign:'right'}}>{this.props.data.option1}</span>
-        <QuestionButtons state={this.props.state} actions={this.props.actions} id={this.props.data.id} choices={[1, 2, 3, 4, 5]} answer={this.submitAnswer.bind(this)}/>
-        <span className="question-option" style={{float:'right', textAlign:'left'}}>{this.props.data.option2}</span>
+      <div className="question-container">
+        <div className="question">
+          <div className="question-option-left">
+            <span className="question-option-left-text" style={{textAlign:'right',float:'right'}}>{this.props.data.option1}</span>
+          </div>
+          <div className="question-separator"></div>
+          <div className="question-buttons">
+            <QuestionButtons state={this.props.state} actions={this.props.actions} id={this.props.data.id} choices={[1, 2, 3, 4, 5]} answer={this.submitAnswer.bind(this)}/>
+          </div>
+          <div className="question-option-right">
+            <span className="question-option-right-text" style={{textAlign:'left',float:'left'}}>{this.props.data.option2}</span>
+          </div>
+        </div>
       </div>
     )
   }

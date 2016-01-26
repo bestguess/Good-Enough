@@ -1,4 +1,4 @@
-import { PROFILE, LOGOUT, CONNECT, EDIT_USER_INFO } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT, CONNECT, EDIT_USER_INFO, DELETE_INPUT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
 
@@ -9,6 +9,8 @@ export default function Profile(state = initialState, action) {
     case PROFILE:
       var newState = Object.assign({}, state)
       newState.data = action.data
+      // Parse user interests object
+      newState.data.interests = JSON.parse(newState.data.interests)
       return newState
 
     case CONNECT:
@@ -19,6 +21,29 @@ export default function Profile(state = initialState, action) {
     case EDIT_USER_INFO:
       var newState = Object.assign({}, state)
       newState.editUserInfo = (!newState.editUserInfo) ? true : false
+      return newState
+
+    case DELETE_INPUT:
+      var newState = Object.assign({}, state)
+      if (action.input === "activity") {
+        var arr = []
+        newState.data.interests.activity.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.data.interests.activity = arr
+      } else if (action.input === "discussion") {
+        var arr = []
+        newState.data.interests.discussion.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.data.interests.discussion = arr
+      } else if (action.input === "place") {
+        var arr = []
+        newState.data.places.forEach(function(value) {
+          if (value !== action.value) arr.push(value)
+        })
+        newState.data.places = arr
+      }
       return newState
 
     case LOGOUT:
@@ -34,7 +59,7 @@ export default function Profile(state = initialState, action) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(JSON.parse(userData))
+        body: userData
       })
 
       // Remove local storage ID and Token

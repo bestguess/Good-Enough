@@ -22,6 +22,8 @@ import rootReducer from './app/reducers'
 
 // Loading CSS Files
 import './css/core.css'
+import './css/profile.css'
+import './css/match.css'
 
 // Commented out for a day when we will refactor
 // import configureStore from './app/store/configureStore'
