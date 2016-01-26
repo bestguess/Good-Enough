@@ -95,7 +95,7 @@ footer {
   padding-top: 8px;
 }
 
-@media screen and ( max-height: 700px ){
+@media screen and ( max-height: 750px ){
   footer {
     opacity: 0;
   }
@@ -197,7 +197,6 @@ h1 {
   text-align: left;
   width: 100%;
 }
-
 
 .start-test {
   font-size: 20px;
@@ -360,17 +359,58 @@ h1 {
 }
 
 
-.interest-input-container {
-
+.user-interest-form {
+  margin: 0px auto;
+  width: 600px;
+  border-radius: 3px;
+  padding: 10px;
+  height: 24.5em;
 }
+
+.interest-input-container {
+  border-bottom: 2px solid #e0e0e0;
+  padding: 1% 0%;
+  margin: 1% 0% 5%;
+}
+
+.interest-input-container:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.interest-input-container p {
+  margin: 0% 0% 1%;
+}
+
 
 .interest-input-container span {
   float: left;
-  padding: 5px 3%;
+  padding: 0.5% 1.5%;
   border-radius: 8%;
   color: #4c5455;
   font-weight: 300;
-  margin: 0% 2%;
+  margin: 0.5% 0.5%;
+  cursor: pointer;
+}
+
+.interest-input-container input{
+  float: left;
+  clear: none;
+  margin: 0.5% 0.5%;
+  font-size: 16px;
+  line-height: 22px;
+  display: block;
+  font-weight: 300;
+  padding: 0.5% 1%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+.interest-input {
+  float: right;
 }
 
 .discussion {
@@ -385,16 +425,6 @@ h1 {
   background-color: #f2f9fc;
 }
 
-.interest-input-container input{
-  float: left;
-  width: 120px;
-  clear: none;
-  margin: 0px;
-}
-
-.interest-input {
-  float: right;
-}
 
 .login-logo{
   font-weight: 700;
@@ -485,6 +515,7 @@ input[type="submit"]{
   float: left;
   margin-left: 20px;
   font-size: 1.2em;
+  width: 75%;
 }
 
 .personal-info-card-userdata h4 {
@@ -494,6 +525,60 @@ input[type="submit"]{
 .personal-info-card-userdata p {
   margin: 8px 0px;
 }
+
+.user-interest-container {
+  padding: 0.25% 0%;
+}
+
+.user-interest-container:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.user-interest-container span {
+  font-size: 0.7em;
+  float: left;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+.user-interest-container input {
+  font-size: 0.7em;
+  line-height: 1.4em;
+  float: left;
+  clear: none;
+  margin: 0px 0% 0% 1%;
+  font-weight: 300;
+  padding: 0.5% 1.5%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+.user-interest {
+  color: #4c5455;
+  border-radius: 8%;
+  font-weight: 300;
+  cursor: pointer;
+  margin: 0px 0% 0px 1%;
+  padding: 0.5% 1.5%;
+}
+
+.discussion {
+  background-color: #f2fcf5;
+}
+
+.activity {
+  background-color: #f2fcfa;
+}
+
+.place {
+  background-color: #f2f9fc;
+}
+
+
 
 
 .profile-page-data {
@@ -661,10 +746,12 @@ progress::-webkit-progress-value {
   .login-box {
     padding: 39px 35px 15px 35px;
     width: 19em;
+    max-width: 80%;
   }
 
   .login-form {
     padding: 0px 0 10px 0;
+    max-width: 95%;
   }
 
   .question-option-left {
@@ -680,6 +767,22 @@ progress::-webkit-progress-value {
 
   .question-option-right {
     padding: 6px 0px;
+  }
+
+  .question-separator {
+    border: 1px solid rgba(200,200,200,0.34);
+    height: 38px;
+    position: absolute;
+    left: 49.9%;
+    border-radius: 22px;
+  }
+
+  .question-form-button {
+    max-width: 90%;
+  }
+
+  footer {
+    opacity: 0;
   }
 
 }

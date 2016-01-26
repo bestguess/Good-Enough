@@ -36,25 +36,16 @@ module.exports = {
     })
   },
 
-  updateUser: function(req, res, next){
-    User.findOne({_id: user.id}, function(err, user){
-      if(err){
-        res.status(404).send(err);
-        return next();
-      }
+  updateUser: function(req, res){
+    var data = req.body;
 
-      // purge password info from user object before sending
-      var properties = new helpers.UserData;
-      var userObject = {};
-        for(var key in properties){
-          if(key !== "password") {
-            if(key === "questions") userObject[key] = user[key][0];
-            else userObject[key] = user[key];
-          }
-      }
-      res.status(200).send(userObject);
-      next();
-    })
+    if(data.password) data.password = bcrypt.hashSync(data.password, data.password.length);
+    if(data.interests) data.interests = JSON.stringify(data.interests);
+    
+    User.findByIdAndUpdate(req.body.id, data,function(err, changes){
+      if(err) console.log(err);
+      else res.status(201).send("Updated User");
+    });
   },
 
   signUp: function(req, res, next){
@@ -97,7 +88,8 @@ module.exports = {
     // If any of the fields are not submitted then send 400
     // and list of missing fields
     if(failed){
-      res.status(400).send(JSON.parse(failings));
+      console.log('signup failed: ', failings)
+      res.status(400).send(failings);
       next();
     }else{
       userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
@@ -121,7 +113,7 @@ module.exports = {
             User.find({}, function(err, users){
               users.forEach(function(user){
                 match.user(user, function (data){
-                  data.sort(function(a,b){ return b[1]-a[1]; });
+                  data.sort(function(a,b){ return b.score-a.score; });
                   User.update({_id: user._id},{matches:data},function(err, user){
                     if(err) console.log(err);
                   });

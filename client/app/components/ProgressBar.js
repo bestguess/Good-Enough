@@ -6,12 +6,14 @@ class ProgressBar extends Component {
     if (this.props.state.signup.viewData.signup.stage1) {
       progressValue = 0
     } else if (this.props.state.signup.viewData.signup.stage2) {
-      progressValue = 25
+      progressValue = 20
     } else if (this.props.state.signup.viewData.signup.stage3) {
-      progressValue = 50
+      progressValue = 40
     } else if (this.props.state.signup.viewData.signup.stage4) {
-      progressValue = 75
+      progressValue = 60
     } else if (this.props.state.signup.viewData.signup.stage5) {
+      progressValue = 80
+    } else if (this.props.state.signup.viewData.signup.stage6) {
       progressValue = 100
     }
     return (

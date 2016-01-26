@@ -207,20 +207,24 @@ module.exports = {
 
   reMatch: function(req, res, next){
 
-  User.find({}, function(err, users){
-    users.forEach(function(user){
-      match.user(user, function (data){
-        data.sort(function(a,b){ return b[1]-a[1]; });
-        User.update({_id: user._id},{matches:data},function(err, user){
-          if(err) console.log(err);
+    User.find({}, function(err, users){
+      users.forEach(function(user){
+        match.user(user, function (data){
+          data.sort(function(a,b){ return b.score-a.score; });
+          User.update({_id: user._id},{matches:data},function(err, user){
+            if(err) console.log(err);
+            else res.end(`
+╥━━━━━━━━╭━━╮━━┳
+╢╭╮╭━━━━━┫┃▋▋━▅┣
+╢┃╰┫┈┈┈┈┈┃┃┈┈╰┫┣
+╢╰━┫┈┈┈┈┈╰╯╰┳━╯┣
+╢┊┊┃┏┳┳━━┓┏┳┫┊┊┣
+╨━━┗┛┗┛━━┗┛┗┛━━┻
+            `);
+          });
         });
       });
     });
-  });
-
-  User.findOne({_id: req.body.id}, function(err, user){
-    res.status(200).send(user);
-  });
-}
+  }
 
 };

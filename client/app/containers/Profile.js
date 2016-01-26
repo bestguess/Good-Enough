@@ -6,6 +6,29 @@ import PrivateNav from '../components/Nav/PrivateNav'
 import ProfileMatches from '../components/ProfileMatches'
 import { status, json, getUserInfo } from '../helpers'
 
+
+function updateUserInfo(props) {
+  var obj = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  var ID = obj.id
+  var requestData = { id: ID }
+  requestData.interests = props.state.profile.data.interests
+  requestData.places = props.state.profile.data.places
+  fetch('/app/users/update', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData)
+        })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      console.log('Request succeeded with JSON response', data);
+      props.actions.editUserInfo()
+    }).catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
+
+
 class ProfileConnections extends Component {
   render() {
     const { state, actions } = this.props
@@ -30,39 +53,90 @@ class ProfileUserPicture extends Component {
 }
 
 class DiscussionInterests extends Component {
+
+  handleKeyPress(e) {
+    if (e.which === 13 && this.refs.discussion.value !== '') {
+      var val = this.refs.discussion.value;
+      this.refs.discussion.value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput('discussion', this.refs.discussion.value);
+      this.refs.discussion.value = '';
+    }
+  }
+
+  deleteInput(topic) {
+    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('discussion', topic)
+  }
+
   render() {
+    var editInput;
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="discussion" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add topic..."/>
     return (
       <div className="user-interest-container">
         <span>Likes to talk about: </span>
         {this.props.state.profile.data.interests.discussion.map(topic =>
-            <span key={topic} className="user-interest discussion">{topic}</span>
+            <span key={topic} className="user-interest discussion" onClick={() => this.deleteInput(topic)}>{topic}</span>
         )}
+        {editInput}
       </div>
     );
   }
 }
 
 class ActivityInterests extends Component {
+
+  handleKeyPress(e) {
+    if (e.which === 13 && this.refs.activity.value !== '') {
+      var val = this.refs.activity.value;
+      this.refs.activity.value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput('activity', this.refs.activity.value);
+      this.refs.activity.value = '';
+    }
+  }
+
+  deleteInput(activity) {
+    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('activity', activity)
+  }
+
   render() {
+    var editInput;
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="activity" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add activity..."/>
     return (
       <div className="user-interest-container">
         <span>Likes to do: </span>
         {this.props.state.profile.data.interests.activity.map(activity =>
-            <span key={activity} className="user-interest activity">{activity}</span>
+            <span key={activity} className="user-interest activity" onClick={() => this.deleteInput(activity)}>{activity}</span>
         )}
+        {editInput}
       </div>
     );
   }
 }
 
 class FavoritePlaces extends Component {
+
+  handleKeyPress(e) {
+    if (e.which === 13 && this.refs.place.value !== '') {
+      var val = this.refs.place.value;
+      this.refs.place.value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput('place', this.refs.place.value);
+      this.refs.place.value = '';
+    }
+  }
+
+  deleteInput(place) {
+    if (this.props.state.profile.editUserInfo) this.props.actions.deleteInput('place', place)
+  }
+
   render() {
+    var editInput;
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="place" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add place..."/>
     return (
       <div className="user-interest-container">
         <span>Favorite Places: </span>
         {this.props.state.profile.data.places.map(place =>
-            <span key={place} className="user-interest place">{place}</span>
+            <span key={place} className="user-interest place" onClick={() => this.deleteInput(place)}>{place}</span>
         )}
+        {editInput}
       </div>
     );
   }
@@ -89,7 +163,7 @@ class ProfileUserData extends Component {
     if (!this.props.state.profile.editUserInfo) {
       var editUserInfoButton = <i onClick={this.props.actions.editUserInfo} className="edit-user-info fa fa-cog"></i>
     } else {
-      var editUserInfoButton = <button onClick={this.props.actions.editUserInfo} className="edit-user-info save-button">Save Info</button>
+      var editUserInfoButton = <button onClick={() => updateUserInfo(this.props)} className="edit-user-info save-button">Save Info</button>
     }
     return (
       <div className="personal-info-card">
