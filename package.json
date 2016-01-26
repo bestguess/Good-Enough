@@ -7,6 +7,9 @@
     "start": "node server/server.js",
     "test": "./node_modules/jshint/bin/jshint server/*.js && ./node_modules/mocha/bin/mocha server/test/serverAPI.js"
   },
+  "engines": {
+    "node": "5.1.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bestguess/Good-Enough.git"
