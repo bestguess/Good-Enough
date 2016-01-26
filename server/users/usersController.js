@@ -8,13 +8,6 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
 
-  getEmails: function(req, res){
-    User.find({}, 'email', function(err, emails){
-      if(err) res.status(404).send(err);
-      else res.status(302).send(emails);
-    });
-  },
-
   getUser: function(req, res, next){
     User.findOne({_id: user.id}, function(err, user){
       if(err){
