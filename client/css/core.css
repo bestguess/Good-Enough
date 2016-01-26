@@ -633,6 +633,13 @@ input[type="submit"]{
   padding: 10px;
 }
 
+.profile-page-connections:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
 .poll-container-card {
   background-color: #fff;
   border: 1px solid #e0e0e0;
