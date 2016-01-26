@@ -44,7 +44,22 @@ module.exports = {
     
     User.findByIdAndUpdate(req.body.id, data,function(err, changes){
       if(err) console.log(err);
-      else res.status(201).send("Updated User");
+      else{
+        if(data.interests){
+          User.find({}, function(err, users){
+            users.forEach(function(user){
+              match.user(user, function (data){
+                data.sort(function(a,b){ return b.score-a.score; });
+                User.update({_id: user._id},{matches:data},function(err, user){
+                  if(err) console.log(err);
+                  else res.end("Updated Matches");
+                });
+              });
+            });
+          });
+        }
+        res.status(201).send("Updated User");
+      }
     });
   },
 
