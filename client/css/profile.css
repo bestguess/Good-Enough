@@ -129,3 +129,27 @@
   color: red;
   font-size: 2.5em;
 }
+
+
+.connection-box-hover {
+  border-radius: 50%;
+  height: auto;
+  padding-top: 2.5%;
+  padding-bottom: 7.5%;
+  font-size: 2vw;
+  font-weight: 800;
+  width: 17.5%;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  opacity: 0;
+  z-index: 1;
+  position: absolute;
+  margin: 0%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.connection-box-hover:hover {
+  background-color: rgba(0, 0, 0, 0.60);
+  opacity: 1;
+}
