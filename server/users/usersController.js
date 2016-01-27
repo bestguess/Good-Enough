@@ -34,7 +34,7 @@ module.exports = {
 
     if(data.password) data.password = bcrypt.hashSync(data.password, data.password.length);
     if(data.interests) data.interests = JSON.stringify(data.interests);
-    
+
     User.findByIdAndUpdate(req.body.id, data,function(err, changes){
       if(err) console.log(err);
       else{
@@ -71,7 +71,7 @@ module.exports = {
     // To be populated and submitted as a new user
     var userObject = {};
     // Required fields with which to create user
-    // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender', 
+    // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender',
     //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
     var properties = new helpers.UserData;
     var failings = [];
@@ -128,7 +128,7 @@ module.exports = {
                 });
               });
             });
-            
+
             helpers.createToken(req, res, next, user, helpers.genToken, "signup");
           }
         });
@@ -178,7 +178,7 @@ module.exports = {
       });
     }
   },
-  
+
   logout: function(req, res){
     user = req.body;
     Token.findOne({token: user.token, user_id: user.id}, function(err, token){
