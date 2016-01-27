@@ -37,7 +37,7 @@ class LogInForm extends Component {
           {formButton}
         </div>
         <div className="forgot-username-password">
-          <Link to="/reset-user">Forgot password?</Link>
+          <Link to="/recover-password">Forgot password?</Link>
         </div>
       </div>
       )
