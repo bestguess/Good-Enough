@@ -39,7 +39,8 @@
   font-weight: 800;
   width: 17.5%;
   background-color: rgba(0, 0, 0, 0);
-  color: transparent;
+  color: #fff;
+  opacity: 0;
   z-index: 1;
   position: absolute;
   margin: 0%;
@@ -49,7 +50,7 @@
 
 .match-box-hover:hover {
   background-color: rgba(0, 0, 0, 0.60);
-  color: #fff;
+  opacity: 1;
 }
 
 .match-box-name {
@@ -92,4 +93,63 @@
 
 .mr-90-100 {
   background-color: #25b79a;
+}
+
+
+.temp-box-hover {
+  border-radius: 50%;
+  height: auto;
+  padding-top: 2.5%;
+  padding-bottom: 5.25%;
+  font-size: 2vw;
+  font-weight: 800;
+  width: 17.5%;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  opacity: 0;
+  z-index: 1;
+  position: absolute;
+  margin: 0%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.temp-box-hover:hover {
+  background-color: rgba(0, 0, 0, 0.60);
+  opacity: 1;
+}
+
+.accept-connect-icon {
+  color: green;
+  padding-right: 15%;
+  font-size: 2.5em;
+}
+
+.reject-connect-icon {
+  color: red;
+  font-size: 2.5em;
+}
+
+
+.connection-box-hover {
+  border-radius: 50%;
+  height: auto;
+  padding-top: 2.5%;
+  padding-bottom: 7.5%;
+  font-size: 2vw;
+  font-weight: 800;
+  width: 17.5%;
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+  opacity: 0;
+  z-index: 1;
+  position: absolute;
+  margin: 0%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.connection-box-hover:hover {
+  background-color: rgba(0, 0, 0, 0.60);
+  opacity: 1;
 }

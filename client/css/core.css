@@ -544,6 +544,7 @@ input[type="submit"]{
 .user-interest-container span {
   font-size: 0.7em;
   float: left;
+  margin-bottom: 0.5%;
   padding-top: 0.5%;
   padding-bottom: 0.5%;
 }
@@ -641,6 +642,13 @@ input[type="submit"]{
   width: 70%;
   margin: 20px auto;
   padding: 10px;
+}
+
+.profile-page-connections:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
 }
 
 .poll-container-card {

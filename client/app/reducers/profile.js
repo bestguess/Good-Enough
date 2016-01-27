@@ -1,4 +1,4 @@
-import { PROFILE, LOGOUT, CONNECT, EDIT_USER_INFO, SAVE_INPUT, DELETE_INPUT } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_INPUT, DELETE_INPUT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
 
@@ -13,9 +13,11 @@ export default function Profile(state = initialState, action) {
       newState.data.interests = JSON.parse(newState.data.interests)
       return newState
 
-    case CONNECT:
+    case CONNECT_REQUEST:
       var newState = Object.assign({}, state)
-      newData.data = action.newData
+      newState.data = action.data
+      // Parse user interests object
+      newState.data.interests = JSON.parse(newState.data.interests)
       return newState
 
     case EDIT_USER_INFO:
