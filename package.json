@@ -4,7 +4,7 @@
   "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "test": "./node_modules/jshint/bin/jshint server/*.js && ./node_modules/mocha/bin/mocha server/test/serverAPI.js"
   },
   "engines": {
