@@ -212,3 +212,70 @@
   background-color: rgba(0, 0, 0, 0.60);
   opacity: 1;
 }
+
+
+
+@media only screen and (max-width: 895px) {
+
+  .personal-info-card {
+    width: 92%;
+  }
+
+  .poll-container-card {
+    width: 92%;
+  }
+
+  .profile-page-connections {
+    width: 94%;
+  }
+
+  .profile-page-data {
+    width: 94%;
+  }
+
+  .profile-page-match {
+      width: 48%;
+  }
+
+  .match-box-hover {
+    padding-top: 5.1% !important;
+    padding-bottom: 9.7% !important;
+    width: 26.8% !important;
+    font-size: 3vw !important;
+  }
+
+  .match-rating {
+    padding: 1.4% 0.70% !important;
+    font-size: 2.2vw !important;
+    margin: 28.25% !important;
+    width: 4.5%;
+  }
+
+
+}
+
+@media only screen and (max-width: 600px) {
+
+  .poll-container-card {
+    width: 92%;
+  }
+
+  .profile-page-match {
+    width: 98%;
+  }
+
+  .match-box-hover {
+    padding-top: 10.0% !important;
+    padding-bottom: 20.2% !important;
+    width: 55.0% !important;
+    font-size: 6vw !important;
+  }
+
+  .match-rating {
+    padding: 2.2% 4.8% 2.2% 1% !important;
+    font-size: 3.7vw !important;
+    margin: 60.75% !important;
+  }
+  
+}
+
