@@ -38,11 +38,13 @@ class Profile extends Component {
         profileMatchesDisplay.push(match)
       }
     })
+    var showPolling;
+    if (this.props.state.profile.data.questions) showPolling = <PollContainer state={this.props.state} actions={this.props.actions} /> 
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <ProfileUserData state={this.props.state} actions={this.props.actions} />
-        <PollContainer state={this.props.state} actions={this.props.actions} />
+        {showPolling}
         <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
         <ProfileMatches state={this.props.state} actions={this.props.actions} matches={profileMatchesDisplay} />
       </div>
