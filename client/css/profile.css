@@ -33,11 +33,11 @@
 .match-box-hover {
   border-radius: 50%;
   height: auto;
-  padding-top: 2.32%;
+  padding-top: 3.25%;
   padding-bottom: 7.5%;
   font-size: 2vw;
   font-weight: 800;
-  width: 17.5%;
+  width: 18.75%;
   background-color: rgba(0, 0, 0, 0);
   color: #fff;
   opacity: 0;
@@ -71,7 +71,7 @@
   color: #fff;
   z-index: 2;
   position: absolute;
-  margin: 13.25%;
+  margin: 14.25%;
   text-align: center;
 }
 
@@ -99,11 +99,11 @@
 .temp-box-hover {
   border-radius: 50%;
   height: auto;
-  padding-top: 2.5%;
+  padding-top: 3.25%;
   padding-bottom: 5.25%;
   font-size: 2vw;
   font-weight: 800;
-  width: 17.5%;
+  width: 18.75%;
   background-color: rgba(0, 0, 0, 0);
   color: #fff;
   opacity: 0;
@@ -134,11 +134,11 @@
 .connection-box-hover {
   border-radius: 50%;
   height: auto;
-  padding-top: 2.5%;
+  padding-top: 3.25%;
   padding-bottom: 7.5%;
   font-size: 2vw;
   font-weight: 800;
-  width: 17.5%;
+  width: 18.75%;
   background-color: rgba(0, 0, 0, 0);
   color: #fff;
   opacity: 0;

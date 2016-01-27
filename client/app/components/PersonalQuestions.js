@@ -4,8 +4,7 @@ import Dropzone from 'react-dropzone'
 
 class ActivityInterests extends Component {
   handleKeyPress(e) {
-    console.log('keypress e: ', e);
-    if (e.which === 13 || e.which === 9 && this.refs.activity.value !== '') {
+    if (e.which === 13 && this.refs.activity.value !== '') {
       var val = this.refs.activity.value;
       this.refs.activity.value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput('activity', this.refs.activity.value);
@@ -27,7 +26,7 @@ class ActivityInterests extends Component {
         <div className='interest-input-container'>
           <p>What activities do you like to do with friends?</p>
           {stateValues}
-          <input className="interest-input" ref="activity" onKeyDown={(event) => this.handleKeyPress(event)} placeholder="add activity..."/>
+          <input className="interest-input" ref="activity" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add activity..."/>
         </div>
       )
   }
@@ -35,7 +34,7 @@ class ActivityInterests extends Component {
 
 class DiscussionInterests extends Component {
   handleKeyPress(e) {
-    if (e.which === 13 || e.which === 9 && this.refs.discussion.value !== '') {
+    if (e.which === 13 && this.refs.discussion.value !== '') {
       var val = this.refs.discussion.value;
       this.refs.discussion.value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput('discussion', this.refs.discussion.value);
@@ -57,7 +56,7 @@ class DiscussionInterests extends Component {
         <div className='interest-input-container'>
           <p>What topics do you like to talk about with friends?</p>
           {stateValues}
-          <input className="interest-input" ref="discussion" onKeyDown={(event) => this.handleKeyPress(event)} placeholder="add topic..."/>
+          <input className="interest-input" ref="discussion" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add topic..."/>
         </div>
       )
   }
@@ -65,7 +64,7 @@ class DiscussionInterests extends Component {
 
 class FavoritePlaces extends Component {
   handleKeyPress(e) {
-    if (e.which === 13 || e.which === 9 && this.refs.place.value !== '') {
+    if (e.which === 13 && this.refs.place.value !== '') {
       var val = this.refs.place.value;
       this.refs.place.value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput('place', this.refs.place.value);
@@ -87,7 +86,7 @@ class FavoritePlaces extends Component {
         <div className='interest-input-container'>
           <p>What are your favorite places to hang out around Austin?</p>
           {stateValues}
-          <input className="interest-input" ref="place" onKeyDown={(event) => this.handleKeyPress(event)} placeholder="add place..."/>
+          <input className="interest-input" ref="place" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add place..."/>
         </div>
       )
   }
