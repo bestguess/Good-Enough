@@ -10,14 +10,14 @@ class ProfileConnections extends Component {
           {this.props.temp.map(temp =>
             <ProfilePageMatchBox key={temp.id} data={temp} state={this.props.state} actions={this.props.actions} />
           )}
+          {this.props.connections.map(connection =>
+            <ProfilePageMatchBox key={connection.id} data={connection} state={this.props.state} actions={this.props.actions} />
+          )}
         </div>
       </div>
     );
   }
 }
-          // {this.props.connections.map(connection =>
-          //   <ProfilePageMatchBox key={connection.id} data={connection} state={this.props.state} actions={this.props.actions} />
-          // )}
 
 ProfileConnections.PropTypes = {
   state: PropTypes.object.isRequired,
