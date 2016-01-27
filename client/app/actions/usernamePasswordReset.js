@@ -12,15 +12,16 @@ export function optimisticRecoverPassword(newData) {
 export function recoverPassword() {
   return function (dispatch, getState) {
     var state = getState();
+    var email = state.usernamePasswordReset.userData.email;
     console.log('State inside recoverPassword middleware: ', state);
-    fetch('http://localhost:4000/app/recoverPassword/recover-password', {
+    fetch('/app/recoverPassword/recover-password', {
         method: 'post',
         headers: {
           'mode': 'no-cors',
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(state.usernamePasswordReset.userData.email)
+        body: JSON.stringify(JSON.parse(email))
       })
       .then(res => {
         console.log('res: ', res)
@@ -45,7 +46,7 @@ export function recoverPassword() {
         }
       })
       .catch(error => { console.log('request failed', error)});
-      console.log('logging in')
+      console.log('recovering password...')
   }
   return null;
 }

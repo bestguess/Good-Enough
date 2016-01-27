@@ -65,7 +65,7 @@ render(
         	<Route path="/" component={SiteRouter}>
         		<IndexRoute component={SignUp}/>
           		<Route path="logIn" component={LogIn}/>
-              <Route path="reset-user" component={UsernamePasswordReset}/>
+              <Route path="recover-password" component={UsernamePasswordReset}/>
               <Route path="profile" component={Profile}/>
               <Route path="/:match_id" component={Match}/>
         	</Route>
