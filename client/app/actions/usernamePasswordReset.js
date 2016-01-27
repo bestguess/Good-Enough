@@ -13,8 +13,7 @@ export function recoverPassword() {
   return function (dispatch, getState) {
     var state = getState();
     console.log('State inside recoverPassword middleware: ', state);
-    // TODO: change url here when/if implemented
-    fetch('http://localhost:4000/app/users/recoverPassword', {
+    fetch('http://localhost:4000/app/recoverPassword/recover-password', {
         method: 'post',
         headers: {
           'mode': 'no-cors',
