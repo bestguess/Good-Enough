@@ -2,13 +2,17 @@ import React, { Component, PropTypes } from 'react'
 
 class DiscussionInterests extends Component {
 
-  handleKeyPress(e) {
-    if (e.which === 13 && this.refs.discussion.value !== '') {
-      var val = this.refs.discussion.value;
-      this.refs.discussion.value = val.charAt(0).toUpperCase() + val.slice(1);
-      this.props.actions.saveInput('discussion', this.refs.discussion.value);
-      this.refs.discussion.value = '';
+  handleKeyDown(e, input) {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+      var val = this.refs[input].value;
+      this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput(input, this.refs[input].value);
+      this.refs[input].value = '';
     }
+  }
+
+  handleKeyUp(e, input) {
+    if (e.which === 188) this.refs[input].value = '';
   }
 
   deleteInput(topic) {
@@ -17,7 +21,7 @@ class DiscussionInterests extends Component {
 
   render() {
     var editInput;
-    if (this.props.state.profile.editUserInfo) editInput = <input ref="discussion" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add topic..."/>
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="discussion" onKeyDown={(event) => this.handleKeyDown(event, 'discussion')} onKeyUp={(event) => this.handleKeyUp(event, 'discussion')} placeholder="add topic..."/>
     return (
       <div className="user-interest-container">
         <span>Likes to talk about: </span>
