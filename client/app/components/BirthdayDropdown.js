@@ -12,7 +12,7 @@ class BirthdayDropdown extends Component {
 				<select style={{float: "left"}} id="DOBMonth" onChange={() => this.submitDate("DOBMonth")}>
 					<option>Month</option>
 					<option value="0">January</option>
-					<option value="1">Febuary</option>
+					<option value="1">February</option>
 					<option value="2">March</option>
 					<option value="3">April</option>
 					<option value="4">May</option>
