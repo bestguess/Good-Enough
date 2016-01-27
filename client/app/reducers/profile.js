@@ -1,4 +1,4 @@
-import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_INPUT, DELETE_INPUT } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT } from '../constants/Profile_ActionTypes'
 
 const initialState = {
 
@@ -25,7 +25,7 @@ export default function Profile(state = initialState, action) {
       newState.editUserInfo = (!newState.editUserInfo) ? true : false
       return newState
 
-    case SAVE_INPUT:
+    case SAVE_PROFILE_INPUT:
       var newState = Object.assign({}, state)
       if (action.input === "activity") {
         newState.data.interests.activity.push(action.value)
@@ -36,7 +36,7 @@ export default function Profile(state = initialState, action) {
       }
       return newState
 
-    case DELETE_INPUT:
+    case DELETE_PROFILE_INPUT:
       var newState = Object.assign({}, state)
       if (action.input === "activity") {
         var arr = []

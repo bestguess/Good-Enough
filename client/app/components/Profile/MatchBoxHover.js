@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { status, json } from '../helpers'
+import { status, json } from '../../helpers'
 
-export const connectRequest = function(props, response) {
+export const connectRequest = function(props) {
   var connectData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   connectData.match_id = props.data.id
-  fetch('/app/matches/'+response, {
+  fetch('/app/matches/request', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(connectData)
@@ -19,21 +19,20 @@ export const connectRequest = function(props, response) {
     });
 }
 
-class TempBoxHover extends Component {
+class MatchBoxHover extends Component {
   render() {
     return (
-        <div className="temp-box-hover">
+        <div className="match-box-hover" onClick={() => {connectRequest(this.props)}}>
         	<p className="match-box-name">{this.props.data.firstName} {this.props.data.lastName}</p>
-          <i className="accept-connect-icon fa fa-check-circle" onClick={() => {connectRequest(this.props, 'accept')}}></i>
-          <i className="reject-connect-icon fa fa-times-circle" onClick={() => {connectRequest(this.props, 'decline')}}></i>
+        	<span>Connect</span>
         </div>
       )
   }
 }
 
-TempBoxHover.PropTypes = {
+MatchBoxHover.PropTypes = {
   state: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
 
-export default TempBoxHover
+export default MatchBoxHover
