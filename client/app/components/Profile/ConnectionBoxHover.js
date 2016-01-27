@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { status, json } from '../helpers'
+import { status, json } from '../../helpers'
 
 class ConnectionBoxHover extends Component {
   render() {

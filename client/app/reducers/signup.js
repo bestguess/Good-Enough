@@ -29,11 +29,11 @@ const initialState = {
     clearForSubmit: false
   },
   validationChecks: {
-    stage1: true,
-    stage2: true,
-    stage3: true,
-    stage4: true,
-    stage5: true,
+    stage1: false,
+    stage2: false,
+    stage3: false,
+    stage4: false,
+    stage5: false,
     clearForSubmit: true
   }
 }
@@ -85,13 +85,13 @@ export default function SignUp(state = initialState, action) {
       var y = newState.validationChecks
       var bdLength = Object.keys(x.birthday).length
       if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.stage5 = true;
-      return newState
-
+      return state
 
     case DELETE_INPUT:
       var newState = Object.assign({}, state)
       if (action.input === "activity") {
         var arr = []
+        if(newState.userData)
         newState.userData.interests.activity.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
@@ -163,3 +163,4 @@ export default function SignUp(state = initialState, action) {
     	return state
   }
 }
+

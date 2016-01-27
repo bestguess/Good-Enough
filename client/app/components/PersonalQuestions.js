@@ -3,18 +3,17 @@ import BirthdayDropdown from './BirthdayDropdown'
 import Dropzone from 'react-dropzone'
 
 class ActivityInterests extends Component {
-  handleKeyPress(e) {
-    console.log('keypress e: ', e);
-    if (e.which === 13 || e.which === 9 && this.refs.activity.value !== '') {
-      var val = this.refs.activity.value;
-      this.refs.activity.value = val.charAt(0).toUpperCase() + val.slice(1);
-      this.props.actions.saveInput('activity', this.refs.activity.value);
-      this.refs.activity.value = '';
+  handleKeyDown(e, input) {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+      var val = this.refs[input].value;
+      this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput(input, this.refs[input].value);
+      this.refs[input].value = '';
     }
   }
 
-  deleteInput(activity) {
-    this.props.actions.deleteInput('activity', activity)
+  handleKeyUp(e, input) {
+    if (e.which === 188) this.refs[input].value = '';
   }
 
   render() {
@@ -27,24 +26,24 @@ class ActivityInterests extends Component {
         <div className='interest-input-container'>
           <p>What activities do you like to do with friends?</p>
           {stateValues}
-          <input className="interest-input" ref="activity" onKeyDown={(event) => this.handleKeyPress(event)} placeholder="add activity..."/>
+          <input className="interest-input" ref="activity" onKeyDown={(event) => this.handleKeyDown(event, 'activity')} onKeyUp={(event) => this.handleKeyUp(event, 'activity')} placeholder="add activity..."/>
         </div>
       )
   }
 }
 
 class DiscussionInterests extends Component {
-  handleKeyPress(e) {
-    if (e.which === 13 || e.which === 9 && this.refs.discussion.value !== '') {
-      var val = this.refs.discussion.value;
-      this.refs.discussion.value = val.charAt(0).toUpperCase() + val.slice(1);
-      this.props.actions.saveInput('discussion', this.refs.discussion.value);
-      this.refs.discussion.value = '';
+  handleKeyDown(e, input) {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+      var val = this.refs[input].value;
+      this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput(input, this.refs[input].value);
+      this.refs[input].value = '';
     }
   }
 
-  deleteInput(topic) {
-    this.props.actions.deleteInput('discussion', topic)
+  handleKeyUp(e, input) {
+    if (e.which === 188) this.refs[input].value = '';
   }
 
   render() {
@@ -57,27 +56,28 @@ class DiscussionInterests extends Component {
         <div className='interest-input-container'>
           <p>What topics do you like to talk about with friends?</p>
           {stateValues}
-          <input className="interest-input" ref="discussion" onKeyDown={(event) => this.handleKeyPress(event)} placeholder="add topic..."/>
+          <input className="interest-input" ref="discussion" onKeyDown={(event) => this.handleKeyDown(event, 'discussion')} onKeyUp={(event) => this.handleKeyUp(event, 'discussion')} placeholder="add topic..."/>
         </div>
       )
   }
 }
 
 class FavoritePlaces extends Component {
-  handleKeyPress(e) {
-    if (e.which === 13 || e.which === 9 && this.refs.place.value !== '') {
-      var val = this.refs.place.value;
-      this.refs.place.value = val.charAt(0).toUpperCase() + val.slice(1);
-      this.props.actions.saveInput('place', this.refs.place.value);
-      this.refs.place.value = '';
+  handleKeyDown(e, input) {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+      var val = this.refs[input].value;
+      this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput(input, this.refs[input].value);
+      this.refs[input].value = '';
     }
   }
 
-  deleteInput(place) {
-    this.props.actions.deleteInput('place', place)
+  handleKeyUp(e, input) {
+    if (e.which === 188) this.refs[input].value = '';
   }
 
   render() {
+    console.log('places length: ', this.props.state.signup.userData.places.length)
     var stateValues;
     if (this.props.state.signup.userData.places.length > 0) {
       stateValues = this.props.state.signup.userData.places.map(place =>
@@ -87,7 +87,7 @@ class FavoritePlaces extends Component {
         <div className='interest-input-container'>
           <p>What are your favorite places to hang out around Austin?</p>
           {stateValues}
-          <input className="interest-input" ref="place" onKeyDown={(event) => this.handleKeyPress(event)} placeholder="add place..."/>
+          <input className="interest-input" ref="place" onKeyDown={(event) => this.handleKeyDown(event, 'place')} onKeyUp={(event) => this.handleKeyUp(event, 'place')} placeholder="add place..."/>
         </div>
       )
   }
