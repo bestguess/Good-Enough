@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import MatchRating from './MatchRating'
-import MatchBoxHover from './MatchBoxHover'
-import TempBoxHover from './TempBoxHover'
-import ConnectionBoxHover from './ConnectionBoxHover'
+import MatchBoxHover from './Profile/MatchBoxHover'
+import TempBoxHover from './Profile/TempBoxHover'
+import ConnectionBoxHover from './Profile/ConnectionBoxHover'
 import { Link } from 'react-router'
 
 class ProfilePageMatchBoxImage extends Component {

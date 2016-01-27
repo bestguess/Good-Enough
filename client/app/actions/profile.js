@@ -18,11 +18,11 @@ export function editUserInfo() {
 }
 
 export function saveInput(input, value) {
-  return { type: types.SAVE_INPUT, input, value };
+  return { type: types.SAVE_PROFILE_INPUT, input, value };
 }
 
 export function deleteInput(input, value) {
-  return { type: types.DELETE_INPUT, input, value };
+  return { type: types.DELETE_PROFILE_INPUT, input, value };
 }
 
 export function connectRequest(data) {
