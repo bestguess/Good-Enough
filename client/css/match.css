@@ -5,9 +5,21 @@
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 68%;
-  margin: 20px auto;
-  padding: 1%;
+  width: 70%;
+  margin: 1% auto;
+  padding: 0%;
+}
+
+.match-conversation-container-header {
+  width: 98%;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: center;
+  color: #25b79a;
+  padding: 0.5% 1%;
+  border-bottom: 2px solid #25b79a;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #f2fcfa;
 }
 
 .match-conversation-image {
@@ -21,7 +33,7 @@
 }
 
 .match-conversation-message {
-  padding: 1%;
+  padding: 1.5% 2% 0.5%;
 }
 
 .match-conversation-message p {
@@ -43,6 +55,7 @@
   border: 2px solid #e0e0e0;
   padding: 1px;
   border-radius: 5px;
+  margin: 1%;
 }
 
 .match-conversation-input input {

@@ -494,7 +494,7 @@ input[type="submit"]{
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   width: 68%;
-  margin: 20px auto;
+  margin: 1% auto;
   padding: 1%;
 }
 
@@ -591,8 +591,8 @@ input[type="submit"]{
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   width: 70%;
-  margin: 20px auto;
-  padding: 0%;
+  margin: 1% auto;
+  padding: 0% 0% 0.75% 0%;
 }
 
 .profile-page-data:after {
@@ -609,7 +609,7 @@ input[type="submit"]{
 }
 
 .profile-page-match {
-  padding: 2% 0%;
+  padding: 1.5% 0% 0% 0%;
   width: 33.33%;
   float: left;
   text-align: center;
@@ -640,8 +640,8 @@ input[type="submit"]{
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   width: 70%;
-  margin: 20px auto;
-  padding: 0%;
+  margin: 1% auto;
+  padding: 0% 0% 0.75% 0%;
 }
 
 .profile-page-connections:after {
@@ -652,11 +652,11 @@ input[type="submit"]{
 }
 
 .poll-container-card {
-  background-color: #fff;
+  background-color: #f2f9fc;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   width: 68%;
-  margin: 20px auto;
+  margin: 1% auto;
   padding: 1%; 
 }
 
