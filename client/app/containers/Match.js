@@ -223,6 +223,7 @@ class MatchConversation extends Component {
     console.log(this.props.state.match.conversation)
     return (
       <div className="match-conversation-container">
+        <div className="match-conversation-container-header">Messages</div>
         {this.props.state.match.conversation.map(message =>
           <MatchMessage key={message.date} data={message} state={this.props.state} actions={this.props.actions} />
         )}

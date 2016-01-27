@@ -1,5 +1,48 @@
 
 
+/*** Poll Container ***/
+
+.poll-container-card {
+  background-color: #f2f9fc;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  color: #4c5455;
+  width: 68%;
+  margin: 1% auto;
+  padding: 0.75% 1%; 
+}
+
+.poll-container-card:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.poll-question {
+  margin: 0%;
+  float: left;
+  line-height: 1.9em;
+  padding-top: 0.1%;
+}
+
+.poll-button {
+  border: 1px solid #e0e0e0;
+  outline: none;
+  border-radius: 3px;
+  background-color: #fff;
+  margin: 0% 0% 0% 1.5%;
+  float: right;
+  padding: 1%;
+  font-size: 0.8em;
+
+}
+
+.poll-button:hover {
+  background-color: #eef3f4;
+}
+
+
 /*** Connections Container ***/
 
 .connections-header {
@@ -11,7 +54,7 @@
   padding: 0.5% 1%;
   border-bottom: 2px solid #25b79a;
   border-radius: 5px 5px 0px 0px;
-  background-color: #DFE9EB;
+  background-color: #f2fcfa;
 }
 
 
