@@ -4,7 +4,10 @@ class PollContainer extends Component {
   render() {
     return (
       <div className="poll-container-card">
-        Poll goes here
+        <p className="poll-question">Poll Question: {this.props.state.profile.data.questions.question}</p>
+        <button className="poll-button">{this.props.state.profile.data.questions.answers[2].answer}</button>
+        <button className="poll-button">{this.props.state.profile.data.questions.answers[1].answer}</button>
+        <button className="poll-button">{this.props.state.profile.data.questions.answers[0].answer}</button>
       </div>
     )
   }

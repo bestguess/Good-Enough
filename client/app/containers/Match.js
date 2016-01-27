@@ -220,9 +220,12 @@ class MatchMessageInput extends Component {
 
 class MatchConversation extends Component {
   render() {
-    console.log(this.props.state.match.conversation)
+    var noMessagesAlert;
+    if (this.props.state.match.conversation.length === 0) noMessagesAlert = <div className="no-messages-alert">I feel a friendship in the making. Go ahead and start the conversation...</div>
     return (
       <div className="match-conversation-container">
+        <div className="match-conversation-container-header">Messages</div>
+        {noMessagesAlert}
         {this.props.state.match.conversation.map(message =>
           <MatchMessage key={message.date} data={message} state={this.props.state} actions={this.props.actions} />
         )}

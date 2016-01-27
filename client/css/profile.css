@@ -1,4 +1,63 @@
 
+
+/*** Poll Container ***/
+
+.poll-container-card {
+  background-color: #f2f9fc;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  color: #4c5455;
+  width: 68%;
+  margin: 1% auto;
+  padding: 0.75% 1%; 
+}
+
+.poll-container-card:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.poll-question {
+  margin: 0%;
+  float: left;
+  line-height: 1.9em;
+  padding-top: 0.1%;
+}
+
+.poll-button {
+  border: 1px solid #e0e0e0;
+  outline: none;
+  border-radius: 3px;
+  background-color: #fff;
+  margin: 0% 0% 0% 1.5%;
+  float: right;
+  padding: 1%;
+  font-size: 0.8em;
+
+}
+
+.poll-button:hover {
+  background-color: #eef3f4;
+}
+
+
+/*** Connections Container ***/
+
+.connections-header {
+  width: 98%;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: center;
+  color: #25b79a;
+  padding: 0.5% 1%;
+  border-bottom: 2px solid #25b79a;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #f2fcfa;
+}
+
+
 /*** Edit User Information Button ***/
 
 .edit-user-info {
@@ -153,3 +212,70 @@
   background-color: rgba(0, 0, 0, 0.60);
   opacity: 1;
 }
+
+
+
+@media only screen and (max-width: 895px) {
+
+  .personal-info-card {
+    width: 92%;
+  }
+
+  .poll-container-card {
+    width: 92%;
+  }
+
+  .profile-page-connections {
+    width: 94%;
+  }
+
+  .profile-page-data {
+    width: 94%;
+  }
+
+  .profile-page-match {
+      width: 48%;
+  }
+
+  .match-box-hover {
+    padding-top: 5.1% !important;
+    padding-bottom: 9.7% !important;
+    width: 26.8% !important;
+    font-size: 3vw !important;
+  }
+
+  .match-rating {
+    padding: 1.4% 0.70% !important;
+    font-size: 2.2vw !important;
+    margin: 28.25% !important;
+    width: 4.5%;
+  }
+
+
+}
+
+@media only screen and (max-width: 600px) {
+
+  .poll-container-card {
+    width: 92%;
+  }
+
+  .profile-page-match {
+    width: 98%;
+  }
+
+  .match-box-hover {
+    padding-top: 10.0% !important;
+    padding-bottom: 20.2% !important;
+    width: 55.0% !important;
+    font-size: 6vw !important;
+  }
+
+  .match-rating {
+    padding: 2.2% 4.8% 2.2% 1% !important;
+    font-size: 3.7vw !important;
+    margin: 60.75% !important;
+  }
+  
+}
+
