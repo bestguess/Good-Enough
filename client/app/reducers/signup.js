@@ -65,7 +65,6 @@ export default function SignUp(state = initialState, action) {
 
     case SAVE_INPUT:
       var newState = Object.assign({}, state)
-      console.log(newState.userData)
       if(action.input === "DOBMonth") {
         newState.userData.birthday.month = action.value
       } else if (action.input === "DOBDay") {
@@ -86,8 +85,7 @@ export default function SignUp(state = initialState, action) {
       var y = newState.validationChecks
       var bdLength = Object.keys(x.birthday).length
       if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.stage5 = true;
-      return newState
-
+      return state
 
     case DELETE_INPUT:
       var newState = Object.assign({}, state)
@@ -165,3 +163,4 @@ export default function SignUp(state = initialState, action) {
     	return state
   }
 }
+
