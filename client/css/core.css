@@ -215,6 +215,10 @@ h1 {
 
 
 /*** Question Buttons for Personality Test ***/
+.question-buttons-mobile {
+  display: none;
+}
+
 .question-buttons {
   list-style-type: none;
   padding: 0px;
@@ -598,11 +602,18 @@ input[type="submit"]{
    clear: both;
 }
 
+.profile-page-boxes {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
 .profile-page-match {
   padding: 3% 1%;
   width: 31.33%;
   float: left;
   text-align: center;
+  display: block;
 }
 
 .profile-page-match h4 {
@@ -737,7 +748,28 @@ progress::-webkit-progress-value {
   padding: 0.5em 0;
 }
 
+@media only screen and (max-width: 895px) {
+  .profile-page-match {
+      width: 48%;
+  }
 
+  .match-box-hover {
+    padding-top: 5.1% !important;
+    padding-bottom: 9.7% !important;
+    width: 26.8% !important;
+    font-size: 3vw !important;
+  }
+
+  .match-rating {
+    padding: 1.2% 0.70% 1.20% 0.70% !important;
+    font-size: 1.7vw !important;
+    margin: 20.25% !important;
+  }
+
+  .match-box-name {
+    font-size: 2vw !important;
+  }
+}
 
 
 
@@ -762,28 +794,45 @@ progress::-webkit-progress-value {
     max-width: 95%;
   }
 
-  .question-option-left {
-    padding: 6px 0;
+  .question {
+    width: 100%;
+    display: inline-block;
   }
 
-  .question-buttons {
-    margin: 26.6px -100px;
-    width: 220px;
-    left: 50px;
-    position: relative;;
+  .question-option-left {
+    width: calc(45%);
+    padding: 6px 0 6px 10px;
+    display: inline-table;
+  }
+
+  .question-buttons-desktop {
+    display: none;
+  }
+
+  .question-buttons-mobile {
+    width: 100%;
+    left: calc(50% - 110px);
+    position: relative;
+    margin: 15px 0;
+    display: block;
   }
 
   .question-option-right {
     padding: 6px 0px;
+    width: calc(45%);
+    display: inline-table;
+    position: absolute;
+    left: 53.7%;
   }
 
   .question-separator {
     border: 1px solid rgba(200,200,200,0.34);
-    height: 38px;
+    height: 27px;
     position: absolute;
-    left: 49.9%;
+    left: 50%;
     border-radius: 22px;
-  }
+    margin-top: -28px;
+}
 
   .question-form-button {
     max-width: 90%;
@@ -793,4 +842,38 @@ progress::-webkit-progress-value {
     opacity: 0;
   }
 
+  .profile-page-match {
+    width: 98%;
+  }
+
+  .match-box-hover {
+    padding-top: 10.0% !important;
+    padding-bottom: 20.2% !important;
+    width: 55.0% !important;
+    font-size: 6vw !important;
+  }
+
+  .match-rating {
+    padding: 2.2% 4.8% 2.2% 1% !important;
+    font-size: 3.7vw !important;
+    margin: 41.75% !important;
+  }
+
+  .match-box-name {
+    font-size: 4.2vw !important;
+  }
+
+  .user-interest-form {
+    margin: 0px auto;
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px 0 0 0;
+    height: 24.5em;
+  }
+
+  .interest-input-container {
+    padding: 0 0 2% 0;
+    margin: 5% 5%;
+    width: 91%;
+  }
 }

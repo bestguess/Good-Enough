@@ -70,7 +70,7 @@ class QuestionForm extends Component {
     var formButton;
     var progressBar;
     if (this.props.state.signup.viewData.signup.stage0) {
-      formButton = <button onClick={this.props.actions.continueSurvey} className="start-test">Start Test</button>
+      formButton = <button onClick={this.props.actions.continueSurvey} className="start-test">Get Started</button>
     } else if (this.props.state.signup.viewData.signup.stage1) {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalityTest state={this.props.state} actions={this.props.actions} />

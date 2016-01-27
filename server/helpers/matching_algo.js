@@ -151,7 +151,7 @@ module.exports = {
                 result.score += conflicts[type][person_type]-10;
               }
             }
-
+            //if(user_id === "56a6d20c6e4ccfd61d208e5f" && result.id === "56a53c7df7ef1aae05fe3c02") console.log("\n\nScore:",result.score,"\n\n");
             //knocks off points if you're of the opposite gender
             if(user.gender !== list[p].gender) result.score += 8;
 
@@ -161,14 +161,14 @@ module.exports = {
                 user_interests[key].forEach(function(user_interest){
                   if(person_interests[key]){
                     person_interests[key].forEach(function(person_interest){
-                      if(user_interest === person_interest) result.score -= 1.6;
+                      if(user_interest.toUpperCase() === person_interest.toUpperCase()) result.score -= 1.6;
                     });
                   }
                 });
               }
             }
             //sends back an array of information to be saved in matches
-            result.score = Math.round(Math.min((100-((result.score/0.9)-10))),100);
+            result.score = Math.round(Math.min((100-((result.score/0.9)-10)),99));
             if(result.score>0) resultArr.push(result);
           }
         }
