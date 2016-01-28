@@ -36,7 +36,8 @@ var messagesSchema = new Schema({
 var questionsSchema = new Schema({
   id: Number,
   question: String,
-  answers: String
+  answers: String,
+  skip: Boolean
 });
 
 var authSchema = new Schema({
