@@ -9,18 +9,22 @@ class ProfilePageMatchBoxImage extends Component {
   render() {
     const conversationURL = '/' + this.props.data.id
     var boxHover;
+    var img;
     if (this.props.data.connected) {
       boxHover = <Link to={conversationURL}><ConnectionBoxHover actions={this.props.actions} data={this.props.data} /></Link>
+      img = <img className="img-connection" src={this.props.data.picture} />
     } else if (this.props.data.requested) {
       boxHover = <TempBoxHover actions={this.props.actions} data={this.props.data} />
+      img = <img className="img-pending-connection" src={this.props.data.picture} />
     } else {
       boxHover = <MatchBoxHover actions={this.props.actions} data={this.props.data} />
+      img = <img className="img-match" src={this.props.data.picture} />
     }
     return (
       <div className="profile-page-match-image">
         <MatchRating rating={this.props.data.score}/>
         {boxHover}
-        <img src={this.props.data.picture} />
+        {img}
       </div>
     )
   }
@@ -35,7 +39,6 @@ class ProfilePageMatchBox extends Component {
     )
   }
 }
-// <Link to={conversationURL}><button>Conversation</button></Link>
 
 ProfilePageMatchBox.PropTypes = {
   state: PropTypes.object.isRequired,
