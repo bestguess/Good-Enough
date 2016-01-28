@@ -41,7 +41,7 @@ class Profile extends Component {
       }
     })
     var showPolling;
-    if (this.props.state.profile.data.question) showPolling = <PollContainer state={this.props.state} actions={this.props.actions} /> 
+    if (typeof this.props.state.profile.data.question === 'object') showPolling = <PollContainer state={this.props.state} actions={this.props.actions} /> 
     var showConnections;
     if (profileTempDisplay.length > 0 || profileConnectionsDisplay.length > 0) showConnections = <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
     var showMatches;
