@@ -10,7 +10,8 @@ module.exports = {
     var text = {
       user : req.body.from,
       date : date,
-      message : req.body.message
+      message : req.body.message,
+      id : req.body.convoLength + 1
     };
 
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
@@ -50,6 +51,34 @@ module.exports = {
     });
   },
 
+  delete : function(req, res, next){
+    console.log(req.body)
+    Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
+      if(err){
+        res.status(500).send(err);
+        return next();
+      }
+      Messages.findByIdAndUpdate(convo._id, {
+        $pull: { messages : { id: req.body.message_id } }
+      } ,function(err) { 
+        if(err) res.status(400).send(err);
+        else {
+          Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
+            if(err){
+              res.status(500).send(err);
+              return next();
+            }
+            if(!convo){
+              res.status(404).send("Conversation not found")
+              return next();
+            }
+            res.status(200).send(convo);
+         });
+        }
+      }); 
+   });
+  },
+
   getConvo : function(req, res, next){
     Messages.findOne({users: {$all:[req.body.match_id, req.body.id]}}, function(err, convo){
       if(err){
@@ -62,7 +91,6 @@ module.exports = {
         res.status(200).send({messages: []})
         return next();
       }
-
       res.status(200).send(convo);
    });
   }
