@@ -30,7 +30,7 @@ class PollContainer extends Component {
     if (this.props.state.profile.data.question.answers[3]) answer4 = <button className="poll-button" onClick={() => answerPollQuestion(this.props, this.props.state.profile.data.question.answers[3].value)}>{this.props.state.profile.data.question.answers[3].answer}</button>
     return (
       <div className="poll-container-card">
-        <p className="poll-question">Poll Question: {this.props.state.profile.data.question.question}</p>
+        <p className="poll-question">Poll: {this.props.state.profile.data.question.question}</p>
         {answer4}
         {answer3}
         {answer2}
