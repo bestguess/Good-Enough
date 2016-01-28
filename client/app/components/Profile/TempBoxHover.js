@@ -12,7 +12,6 @@ export const connectRequest = function(props, response) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.connectRequest(data)
     }).catch(function(error) {
       console.log('Request failed', error);

@@ -18,7 +18,6 @@ function getMatchInfo(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.saveMatchData(data)
       getAllMessages(props)
     }).catch(function(error) {
@@ -47,7 +46,6 @@ function sendMessage(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.sendMessage(data)
     }).catch(function(error) {
       console.log('Request failed', error);
@@ -68,7 +66,6 @@ function deleteMessage(props, messageID) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.sendMessage(data)
     }).catch(function(error) {
       console.log('Request failed', error);
@@ -86,7 +83,6 @@ function getAllMessages(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.sendMessage(data)
     }).catch(function(error) {
       console.log('Request failed', error);

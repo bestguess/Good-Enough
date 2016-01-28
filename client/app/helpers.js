@@ -47,6 +47,7 @@ export const convertTimeStamp = function(timestamp) {
 	return result;
 }
 
+
 export const status = function(response) {
   console.log("response",response);
   if (response.status >= 200 && response.status < 300) {
@@ -56,8 +57,11 @@ export const status = function(response) {
   }
 }
 
+
 export const json = function(response) { return response.json() }
 
+
+// Only works on profile page
 export const getUserInfo = function(props) {
   var userData = window.localStorage.getItem('GoodEnough')
   fetch('/app/users/info', {
@@ -68,7 +72,6 @@ export const getUserInfo = function(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.profile(data)
     }).catch(function(error) {
       console.log('Request failed', error);
