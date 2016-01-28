@@ -7,13 +7,9 @@ export default function Profile(state = initialState, action) {
     case PROFILE:
       var newState = Object.assign({}, state)
       newState.data = action.data
-      // Parse user interests object
+      // Parse user interests & question object
       newState.data.interests = JSON.parse(newState.data.interests)
-      // Update question object to correct format
-      if (action.data.question.length > 0) {
-        newState.data.question = action.data.question[0]
-        newState.data.question.answers = JSON.parse(newState.data.question.answers)
-      }
+      newState.data.question.answers = JSON.parse(newState.data.question.answers)
       return newState
 
 
@@ -23,10 +19,7 @@ export default function Profile(state = initialState, action) {
       // Parse user interests object
       newState.data.interests = JSON.parse(newState.data.interests)
       // Update question object to correct format
-      if (action.data.question.length > 0) {
-        newState.data.question = action.data.question[0]
-        newState.data.question.answers = JSON.parse(newState.data.question.answers)
-      }
+      newState.data.question.answers = JSON.parse(newState.data.question.answers)
       return newState
 
 
@@ -50,13 +43,9 @@ export default function Profile(state = initialState, action) {
 
     case UPDATE_POLL_QUESTION:
       var newState = Object.assign({}, state)
+      newState.data.question = action.data
       // Update question object to correct format
-      if (action.data.length > 0) {
-        newState.data.question = action.data[0]
-        newState.data.question.answers = JSON.parse(action.data[0].answers)
-      } else {
-        newState.data.question = []
-      }
+      newState.data.question.answers = JSON.parse(newState.data.question.answers)
       return newState
 
 
