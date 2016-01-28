@@ -40,11 +40,8 @@ export function logIn() {
           // After the logIn reducer has updated the state, user gets redirected to the profile
           .then(() => { dispatch(routeActions.push('/profile'))});
         } else {
-          console.log('FAILED YO');
+          console.log('FAILED YO', res);
           dispatch(logInFailed());
-          const error = new Error(res.statusText);
-          error.res = res;
-          throw error;
         }
       })
       .catch(error => { console.log('request failed', error)});

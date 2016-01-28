@@ -6,7 +6,6 @@ var helpers = require("../helpers/helpers.js");
 var bcrypt = require('bcrypt');
 var async = require('async');
 var crypto = require('crypto');
-var flash = require('express-flash');
 var nodemailer = require('nodemailer');
 
 module.exports = {
@@ -19,24 +18,22 @@ module.exports = {
             done(err, token);
           });
         },
+
         function(token, done) {
           User.findOne({ email: req.body.email }, function(err, user) {
-            console.log('USER AFTER User.findOne: ', user);
             if (!user) {
-              req.flash('error', 'No account with that email address exists.');
-              res.status(400).send('error', 'No account with that email address exists.', err);
+              res.status(400).send('No account with that email address exists.');
             } else {
-              console.log('FOUND USER ');
+              console.log('FOUND USER!');
+              user.resetPasswordToken = token;
+              user.resetPasswordExpires = Date.now() + 900000; // 15 minutes
+              user.save(function(err) {
+                done(err, token, user);
+              });
             }
-            console.log('USER: ', user);
-            user.resetPasswordToken = token;
-            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-            user.save(function(err) {
-              done(err, token, user);
-            });
           });
         },
+
         function(token, user, done) {
           var smtpTransport = nodemailer.createTransport('SMTP', {
             service: 'SendGrid',
@@ -45,6 +42,7 @@ module.exports = {
               pass: 'goodenough27'
             }
           });
+
           var mailOptions = {
             to: user.email,
             from: 'support@goodenough.com',
@@ -54,14 +52,15 @@ module.exports = {
               'http://' + req.headers.host + '/reset/' + token + '\n\n' +
               'If you did not request this, please ignore this email and your password will remain unchanged.\n'
           };
+
           smtpTransport.sendMail(mailOptions, function(err) {
-            req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+            console.log('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
             done(err, 'done');
           });
         }
       ], function(err) {
-        if (err) return next(err);
-        res.status(400).send('Error:', err)
+        if (err) res.status(400).send(err);
+        res.status(200).send(JSON.stringify('EMAIL IS GOOD!'));
       });
   }
 }

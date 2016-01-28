@@ -30,8 +30,7 @@ export function recoverPassword() {
           console.log('original: ', res)
           res.json()
           // Set user ID and Session Token to localStorage
-          .then(data => {console.log('jsoned data: ', data);
-            window.localStorage.setItem('GoodEnough', JSON.stringify(data));
+          .then(data => {console.log('Server Response: ', data);
             // Dispatch the optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticRecoverPassword());
           })
