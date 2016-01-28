@@ -1,6 +1,11 @@
 var express = require('express');
 var app = express();
 
+var session = require('express-session');
+var flash = require('express-flash');
+var nodemailer = require('nodemailer');
+var bcrypt = require('bcrypt');
+
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -17,6 +22,8 @@ var port = process.env.PORT || 4000;
   app.use(morgan('dev'));
   app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
+  app.use(session({ secret: 'session secret key' }));
+  app.use(flash());
   app.use(express.static(__dirname + '/../'));
 
   app.use(webpackHotMiddleware(compiler));
