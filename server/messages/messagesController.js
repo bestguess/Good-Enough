@@ -11,7 +11,7 @@ module.exports = {
       user : req.body.from,
       date : date,
       message : req.body.message,
-      id : req.body.convoLength + 1
+      id : req.body.messageID
     };
 
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
