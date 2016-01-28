@@ -14,11 +14,20 @@ class UsernamePasswordResetForm extends Component {
   }
 
   render() {
+    var loginErr;
+
+    if (this.props.state.usernamePasswordReset.userData.foundEmail) {
+      loginErr = <span className="loginError"></span>;
+    } else {
+      loginErr = <span className="loginError">No account with that email exists</span>
+    }
+
     var formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button">Submit</button>
     return (
       <div className="login-box">
         <h1 className="login-logo password-reset">Password Recovery</h1>
         <div className="login-form">
+          {loginErr}
           <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)} />
         </div>
         <div className="question-form-submit-button-login">

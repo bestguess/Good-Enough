@@ -9,6 +9,10 @@ export function optimisticRecoverPassword(newData) {
   return { type: types.RECOVER_PASSWORD, newData }
 }
 
+export function recoverPasswordFailed() {
+  return { type: types.RECOVER_PASSWORD_FAILED }
+}
+
 export function recoverPassword() {
   return function (dispatch, getState) {
     var state = getState();
@@ -39,10 +43,7 @@ export function recoverPassword() {
         } else {
           console.log('FAILED YO');
           // TODO: dispatch a recoverPasswordFailed action if failed
-          // dispatch(recoverPasswordFailed());
-          const error = new Error(res.statusText);
-          error.res = res;
-          throw error;
+          dispatch(recoverPasswordFailed());
         }
       })
       .catch(error => { console.log('request failed', error)});
