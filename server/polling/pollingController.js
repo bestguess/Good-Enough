@@ -40,7 +40,6 @@ module.exports = {
             if(err) console.log(err);
             else getInfo(ques + 1);
           });  
-
         } else res.send(question);
       });    
     })(req.body.question)
@@ -62,10 +61,17 @@ module.exports = {
       User.findByIdAndUpdate(req.body.id,{interests:JSON.stringify(interests),question:question},function(err, changes){
         if(err) console.log(err);
         else{
-          Question.find({id: question}, function (err, question) {
-            if(err) console.log(err);
-            else res.status(201).send(question);
-          });  
+          (function getInfo(ques){
+            Question.findOne({id: ques}, function (err, nextQuestion) {
+              if(err) console.log(err);
+              else if(nextQuestion.skip){
+                User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
+                  if(err) console.log(err);
+                  else getInfo(ques + 1);
+                });  
+              }else res.status(201).send(nextQuestion);
+            });    
+          })(question)
         };
       });  
     });   
