@@ -95,7 +95,6 @@ module.exports = {
                     return next();
                   }
                   else{
-                    console.log(foundUser);
                     res.status(200).send(foundUser);
                     return next();
                   }
