@@ -32,8 +32,13 @@ function sendMessage(props) {
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message = props.state.match.message;
   var convoLength = props.state.match.conversation.length
-  var lastMessageID = props.state.match.conversation[convoLength-1].id
-  messageData.convoLength = lastMessageID + 1;
+  var messageID;
+  if (convoLength < 1) {
+    messageID = 1
+  } else {
+    messageID = props.state.match.conversation[convoLength-1].id + 1
+  }
+  messageData.messageID = messageID;
   fetch('/app/messages/send', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -54,6 +59,7 @@ function deleteMessage(props, messageID) {
   messageData.from = messageData.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message_id = messageID;
+  console.log('deleting this message: ', messageData)
   fetch('/app/messages/delete', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -89,11 +95,11 @@ function getAllMessages(props) {
 
 var messageInterval
 function startMessagesInterval(props) {
-  messageInterval = setInterval(function() { getAllMessages(props) }, 5000)
+  // messageInterval = setInterval(function() { getAllMessages(props) }, 5000)
 }
 
 function clearMessagesInterval(props) {
- messageInterval = clearInterval(messageInterval)
+ // messageInterval = clearInterval(messageInterval)
 }
 
 class DiscussionInterests extends Component {
