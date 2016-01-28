@@ -2,8 +2,6 @@ var express = require('express');
 var app = express();
 
 var session = require('express-session');
-var flash = require('express-flash');
-var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 
 var bodyParser = require('body-parser');
@@ -27,7 +25,6 @@ var port = process.env.PORT || 4000;
     resave: true,
     saveUninitialized: true
   }));
-  app.use(flash());
   app.use(express.static(__dirname + '/../'));
 
   app.use(webpackHotMiddleware(compiler));
