@@ -62,7 +62,6 @@ export default function SignUp(state = initialState, action) {
   		return newState
 
 
-
     case SAVE_INPUT:
       var newState = Object.assign({}, state)
       if(action.input === "DOBMonth") {
@@ -86,6 +85,7 @@ export default function SignUp(state = initialState, action) {
       var bdLength = Object.keys(x.birthday).length
       if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.stage5 = true;
       return state
+
 
     case DELETE_INPUT:
       var newState = Object.assign({}, state)
@@ -112,7 +112,6 @@ export default function SignUp(state = initialState, action) {
       return newState
 
 
-
     case SUBMIT_SURVEY:
       var newState = Object.assign({}, state)
       // Set token data into local storage
@@ -132,7 +131,6 @@ export default function SignUp(state = initialState, action) {
       newState.validationChecks.stage5 = false;
       // newState.validationChecks.clearForSubmit = false;
       return newState
-
 
 
     case CONTINUE_SURVEY:
@@ -161,6 +159,7 @@ export default function SignUp(state = initialState, action) {
 
     default:
     	return state
+      
   }
 }
 

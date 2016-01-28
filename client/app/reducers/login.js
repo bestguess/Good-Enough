@@ -18,17 +18,23 @@ export default function LogIn(state = initialState, action) {
       var newState = Object.assign({}, state)
       newState.userData[action.input] = action.value
       return newState
+
+
     case LOG_IN:
       var newState = Object.assign({}, state)
       console.log('newState: ', newState)
       newState.loggedStatus = true;
       return newState
+
+
     case LOG_IN_FAILED:
       var newState = Object.assign({}, state)
       newState.loggedStatus = false;
       return newState
+
+
     default:
-      console.log('hit default case: returning state')
     	return state
+      
   }
 }
