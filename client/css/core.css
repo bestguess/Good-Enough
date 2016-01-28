@@ -506,8 +506,8 @@ input[type="submit"]{
 }
 
 .personal-info-card-picture {
-  width: 120px;
-  height: 120px;
+  width: 125px;
+  height: 125px;
   float: left;
 }
 
@@ -523,8 +523,9 @@ input[type="submit"]{
 }
 
 .personal-info-card-userdata h4 {
-  margin: 0% 0% 0.75% 0%;
+  margin: 0% 0% 0.5% 0%;
   border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5%;
 }
 
 .personal-info-card-userdata p {
