@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var http = require('http').Server(app);
 
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
@@ -16,7 +15,7 @@ var compiler = webpack(config);
 var port = process.env.PORT || 4000;
 
   app.use(morgan('dev'));
-  app.use(bodyParser.json({limit: '15mb'}));
+  app.use(bodyParser.json({limit: '25mb'}));
   app.use(cookieParser());
   app.use(express.static(__dirname + '/../'));
 
@@ -73,6 +72,7 @@ var port = process.env.PORT || 4000;
   });
 
   app.get('/*',function(req,res,next){
-    res.sendFile(path.join(__dirname + '/../client/index.html'));
+    res.sendFile(path.join(path.resolve(__dirname + '/../client/index.html')));
   });
+
 

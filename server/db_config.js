@@ -25,12 +25,18 @@ var usersSchema = new Schema({
   places: [String],
   connections: [],
   matches: [Schema.Types.Mixed],
-  questions: [Schema.Types.Mixed]
+  question: Number
 });
 
 var messagesSchema = new Schema({
   users: [],
   messages: []
+});
+
+var questionsSchema = new Schema({
+  id: Number,
+  question: String,
+  answers: String
 });
 
 var authSchema = new Schema({
@@ -77,11 +83,13 @@ authSchema.methods.validPassword = function(password){
 
 var Users = mongoose.model('User', usersSchema);
 var Messages = mongoose.model('Message', messagesSchema);
+var Questions = mongoose.model('Questions', questionsSchema);
 var Auth = mongoose.model('Auth', authSchema);
 var Token = mongoose.model('Token', tokenSchema);
 
 module.exports.Users = Users;
 module.exports.Messages = Messages;
+module.exports.Questions = Questions;
 module.exports.Auth = Auth;
 module.exports.Token = Token;
 module.exports.db = db;
