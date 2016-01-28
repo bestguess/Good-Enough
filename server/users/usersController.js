@@ -1,6 +1,7 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
+var Question = db.Questions;
 var Token = db.Token;
 var helpers = require("../helpers/helpers.js");
 var match = require('../helpers/matching_algo.js');
@@ -24,8 +25,15 @@ module.exports = {
             else userObject[key] = user[key];
           }
       }
-      res.status(200).send(userObject);
-      next();
+      Question.find({id: user.question}, function (err, question) {
+        if(err) console.log(err);
+        else{
+          userObject.question = question;
+          res.status(200).send(userObject);
+          next();
+        }
+      });   
+      
     })
   },
 
