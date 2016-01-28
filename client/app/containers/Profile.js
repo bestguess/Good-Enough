@@ -40,11 +40,10 @@ class Profile extends Component {
         profileMatchesDisplay.push(match)
       }
     })
-    console.log('hank: ', profileTempDisplay.length, profileConnectionsDisplay.length)
     var showPolling;
     if (this.props.state.profile.data.question.answers) showPolling = <PollContainer state={this.props.state} actions={this.props.actions} /> 
     var showConnections;
-    if (profileTempDisplay.length > 0 && profileConnectionsDisplay.length > 0) showConnections = <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
+    if (profileTempDisplay.length > 0 || profileConnectionsDisplay.length > 0) showConnections = <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
     var showMatches;
     if (profileMatchesDisplay.length > 0) showMatches = <ProfileMatches state={this.props.state} actions={this.props.actions} matches={profileMatchesDisplay} />
     return (
