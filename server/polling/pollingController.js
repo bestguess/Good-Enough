@@ -53,7 +53,6 @@ module.exports = {
       User.findByIdAndUpdate(req.body.id,{interests:JSON.stringify(interests),question:question},function(err, changes){
         if(err) console.log(err);
         else{
-          console.log(changes);
           Question.find({id: question}, function (err, question) {
             if(err) console.log(err);
             else res.status(201).send(question);
