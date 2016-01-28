@@ -32,16 +32,13 @@ function sendMessage(props) {
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message = props.state.match.message;
   var convoLength = props.state.match.conversation.length
-  console.log('convolength', convoLength)
   var messageID;
   if (convoLength < 1) {
     messageID = 1
   } else {
-    console.log('id: ', props.state.match.conversation[convoLength-1].id)
     messageID = props.state.match.conversation[convoLength-1].id + 1
   }
   messageData.messageID = messageID;
-  console.log(messageData)
   fetch('/app/messages/send', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -62,7 +59,7 @@ function deleteMessage(props, messageID) {
   messageData.from = messageData.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message_id = messageID;
-  console.log(messageData)
+  console.log('deleting this message: ', messageData)
   fetch('/app/messages/delete', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -98,11 +95,11 @@ function getAllMessages(props) {
 
 var messageInterval
 function startMessagesInterval(props) {
-  messageInterval = setInterval(function() { getAllMessages(props) }, 5000)
+  // messageInterval = setInterval(function() { getAllMessages(props) }, 5000)
 }
 
 function clearMessagesInterval(props) {
- messageInterval = clearInterval(messageInterval)
+ // messageInterval = clearInterval(messageInterval)
 }
 
 class DiscussionInterests extends Component {
@@ -212,7 +209,7 @@ class MatchMessage extends Component {
     } else {
       username = this.props.state.profile.data.firstName + ' ' + this.props.state.profile.data.lastName
       picture = this.props.state.profile.data.picture
-      deleteIcon = <i className="delete-message fa fa-times-circle-o" onClick={() => deleteMessage(this.props, this.props.data.messageID)} ></i>
+      deleteIcon = <i className="delete-message fa fa-times-circle-o" onClick={() => deleteMessage(this.props, this.props.data.id)} ></i>
     }
     return (
       <div className="match-conversation-message">
