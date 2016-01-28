@@ -22,7 +22,11 @@ var port = process.env.PORT || 4000;
   app.use(morgan('dev'));
   app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
-  app.use(session({ secret: 'session secret key' }));
+  app.use(session({
+    secret: 'session secret key',
+    resave: true,
+    saveUninitialized: true
+  }));
   app.use(flash());
   app.use(express.static(__dirname + '/../'));
 
