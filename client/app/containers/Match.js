@@ -31,7 +31,30 @@ function sendMessage(props) {
   messageData.from = messageData.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message = props.state.match.message;
+  var convoLength = props.state.match.conversation.length
+  var lastMessageID = props.state.match.conversation[convoLength-1].id
+  messageData.convoLength = lastMessageID + 1;
   fetch('/app/messages/send', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(messageData)
+        })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      console.log('Request succeeded with JSON response', data);
+      props.actions.sendMessage(data)
+    }).catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
+
+function deleteMessage(props, messageID) {
+  var messageData = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  messageData.from = messageData.id;
+  messageData.to = props.state.routing.location.pathname.substring(1);
+  messageData.message_id = messageID;
+  fetch('/app/messages/delete', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify(messageData)
@@ -173,18 +196,21 @@ class MatchMessage extends Component {
   render() {
     var username;
     var picture;
+    var deleteIcon;
     if (this.props.data.user === this.props.state.routing.location.pathname.substring(1)) {
       username = this.props.state.match.data.firstName + ' ' + this.props.state.match.data.lastName
       picture = this.props.state.match.data.picture
     } else {
       username = this.props.state.profile.data.firstName + ' ' + this.props.state.profile.data.lastName
       picture = this.props.state.profile.data.picture
+      deleteIcon = <i className="delete-message fa fa-times-circle-o" onClick={() => deleteMessage(this.props, this.props.data.id)} ></i>
     }
     return (
       <div className="match-conversation-message">
         <MatchMessageImage state={this.props.state} actions={this.props.actions} img={ picture } />
         <span className="match-conversation-username">{ username }</span>
         <span className="match-conversation-timestamp">{ convertTimeStamp(this.props.data.date) }</span>
+        {deleteIcon}
         <p>{this.props.data.message}</p>
       </div>
     );
