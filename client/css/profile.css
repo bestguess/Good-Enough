@@ -213,6 +213,20 @@
   opacity: 1;
 }
 
+.img-connection {
+  border-radius: 50%;
+}
+
+.img-pending-connection {
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px 2px #258bb7;
+  -webkit-box-shadow: 0px 0px 10px 2px #258bb7;
+  -moz-box-shadow: 0px 0px 10px 2px #258bb7;
+}
+
+.img-match {
+  border-radius: 50%;
+}
 
 
 @media only screen and (max-width: 895px) {
