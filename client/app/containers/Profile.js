@@ -8,6 +8,7 @@ import PollContainer from '../components/Profile/PollContainer'
 import ProfileConnections from '../components/Profile/ProfileConnections'
 import ProfileMatches from '../components/ProfileMatches'
 import Footer from '../components/Footer'
+import { getUserInfo } from '../helpers'
 
 class Profile extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    this.props.actions.profile()
-    // getUserInfo(this.props)
+    // this.props.actions.profile()
+    getUserInfo(this.props)
   }
 
   reRoute(props) {
@@ -39,15 +40,20 @@ class Profile extends Component {
         profileMatchesDisplay.push(match)
       }
     })
+    console.log('hank: ', profileTempDisplay.length, profileConnectionsDisplay.length)
     var showPolling;
-    if (this.props.state.profile.data.questions) showPolling = <PollContainer state={this.props.state} actions={this.props.actions} /> 
+    if (this.props.state.profile.data.question.answers) showPolling = <PollContainer state={this.props.state} actions={this.props.actions} /> 
+    var showConnections;
+    if (profileTempDisplay.length > 0 && profileConnectionsDisplay.length > 0) showConnections = <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
+    var showMatches;
+    if (profileMatchesDisplay.length > 0) showMatches = <ProfileMatches state={this.props.state} actions={this.props.actions} matches={profileMatchesDisplay} />
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <ProfileUserData state={this.props.state} actions={this.props.actions} />
         {showPolling}
-        <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
-        <ProfileMatches state={this.props.state} actions={this.props.actions} matches={profileMatchesDisplay} />
+        {showConnections}
+        {showMatches}
         <Footer state={this.props.state} actions={this.props.actions} />
       </div>
     );
