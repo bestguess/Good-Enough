@@ -76,4 +76,3 @@ export const getUserInfo = function(props) {
 }
 
 
-

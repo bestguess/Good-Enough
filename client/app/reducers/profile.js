@@ -1,4 +1,4 @@
-import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT, UPDATE_POLL_QUESTION } from '../constants/Profile_ActionTypes'
 
 const initialState = {
 
@@ -11,6 +11,10 @@ export default function Profile(state = initialState, action) {
       newState.data = action.data
       // Parse user interests object
       newState.data.interests = JSON.parse(newState.data.interests)
+      if (action.data.question.length > 0) {
+        newState.data.question = action.data.question[0]
+        newState.data.question.answers = JSON.parse(newState.data.question.answers)
+      }
       return newState
 
     case CONNECT_REQUEST:
@@ -33,6 +37,16 @@ export default function Profile(state = initialState, action) {
         newState.data.interests.discussion.push(action.value)
       } else if (action.input === "place") {
         newState.data.places.push(action.value)
+      }
+      return newState
+
+    case UPDATE_POLL_QUESTION:
+      var newState = Object.assign({}, state)
+      if (action.data.length > 0) {
+        newState.data.question = action.data[0]
+        newState.data.question.answers = JSON.parse(action.data[0].answers)
+      } else {
+        newState.data.question = []
       }
       return newState
 
