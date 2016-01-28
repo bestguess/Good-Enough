@@ -25,15 +25,22 @@ module.exports = {
             else userObject[key] = user[key];
           }
       }
-      Question.find({id: user.question}, function (err, question) {
-        if(err) console.log(err);
-        else{
-          userObject.question = question;
-          res.status(200).send(userObject);
-          next();
-        }
-      });   
-      
+
+      (function getInfo(ques){
+        Question.findOne({id: ques}, function (err, nextQuestion) {
+          if(err) console.log(err);
+          else if(nextQuestion.skip){
+            User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
+              if(err) console.log(err);
+              else getInfo(ques + 1);
+            });  
+          }else{
+            userObject.question = nextQuestion;
+            res.status(200).send(userObject);
+            next();
+          }
+        });    
+      })(user.question)
     })
   },
 
