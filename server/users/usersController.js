@@ -61,18 +61,17 @@ module.exports = {
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
+        console.log("User already exists");
         res.status(403).send("user already exists");
         return next();
       }
     });
 
     user.birthday = helpers.splitDate(user.birthday);
-
+    console.log("Splitting birthday");
     // To be populated and submitted as a new user
     var userObject = {};
     // Required fields with which to create user
-    // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender', 
-    //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
     var properties = new helpers.UserData;
     var failings = [];
     var failed = false;
@@ -102,6 +101,8 @@ module.exports = {
     }else{
       userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
       bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
+        console.log("BCrypting Password");
+
         if(err){
           res.status(500).send(err);
           return next();
@@ -113,12 +114,15 @@ module.exports = {
         userObject.password = hash;
         var newUser = User(userObject);
         newUser.save(function(err, user){
+
           if(err){
             console.log(err,'err saving user')
             res.status(500).send(err);
             next();
           }else{
+            console.log("User was saved :)");
             User.find({}, function(err, users){
+              if(err) console.log(err);
               users.forEach(function(user){
                 match.user(user, function (data){
                   data.sort(function(a,b){ return b.score-a.score; });
@@ -128,7 +132,7 @@ module.exports = {
                 });
               });
             });
-            
+            console.log("Creating Token");
             helpers.createToken(req, res, next, user, helpers.genToken, "signup");
           }
         });
