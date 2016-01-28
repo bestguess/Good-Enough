@@ -17,7 +17,8 @@ module.exports = {
       var submittedQuestion = {
         id: count,
         question: req.body.question,
-        answers: req.body.answers
+        answers: req.body.answers,
+        skip: false
       };
 
       var newQuestion = Question(submittedQuestion);
@@ -31,10 +32,13 @@ module.exports = {
   },
 
   getQuestion: function(req, res){
-    Question.find({id: req.body.question}, function (err, question) {
-      if(err) console.log(err);
-      else res.send(question);
-    });    
+    function getInfo(){
+      Question.find({id: req.body.question}, function (err, question) {
+        if(err) console.log(err);
+        else if(question.skip) res.send("nope");  
+        else res.send(question);
+      });    
+    }
   },
 
   answer: function(req, res){
