@@ -33,8 +33,7 @@ function submitSurvey(props) {
     personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
     picture: state.userData.picture || "http://e27.co/img/no_image_profile.jpg",
     places: state.userData.places,
-    matches: [],
-    questions: []
+    matches: []
   }
   console.log('data: ', userData)
   fetch('/app/users/signup', {
