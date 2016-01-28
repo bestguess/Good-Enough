@@ -13,7 +13,6 @@ module.exports = {
       message : req.body.message,
       id : req.body.messageID
     };
-    console.log('message object: ' text)
 
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
       if(err){
