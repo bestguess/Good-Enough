@@ -523,7 +523,8 @@ input[type="submit"]{
 }
 
 .personal-info-card-userdata h4 {
-  margin: 0px;
+  margin: 0% 0% 0.75% 0%;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .personal-info-card-userdata p {
@@ -544,9 +545,10 @@ input[type="submit"]{
 .user-interest-container span {
   font-size: 0.7em;
   float: left;
-  margin-bottom: 0.5%;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
+  margin-bottom: 0.25%;
+  margin-top: 0.25%;
+  padding-top: 0.40%;
+  padding-bottom: 0.40%;
 }
 
 .user-interest-container input {
@@ -629,11 +631,6 @@ input[type="submit"]{
   height: 80%;
   width: 80%;
 }
-
-.profile-page-match-image img {
-  border-radius: 50%;
-}
-
 
 .profile-page-connections {
   background-color: #fff;

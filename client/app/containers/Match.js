@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import * as MatchActions from '../actions/match'
 import PrivateNav from '../components/Nav/PrivateNav'
 import { convertTimeStamp, status, json } from '../helpers'
+import Footer from '../components/Footer'
 
 function getMatchInfo(props) {
   props.actions.clearCurrentMatchData()
@@ -259,6 +260,7 @@ class Match extends Component {
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <MatchInfo state={this.props.state} actions={this.props.actions} />
         <MatchConversation state={this.props.state} actions={this.props.actions} />
+        <Footer state={this.props.state} actions={this.props.actions} />
       </div>
     );
   }
