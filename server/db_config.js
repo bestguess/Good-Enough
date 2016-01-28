@@ -25,7 +25,9 @@ var usersSchema = new Schema({
   places: [String],
   connections: [],
   matches: [Schema.Types.Mixed],
-  questions: [Schema.Types.Mixed]
+  questions: [Schema.Types.Mixed],
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 var messagesSchema = new Schema({

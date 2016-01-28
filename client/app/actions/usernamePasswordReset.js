@@ -12,8 +12,9 @@ export function optimisticRecoverPassword(newData) {
 export function recoverPassword() {
   return function (dispatch, getState) {
     var state = getState();
-    var email = state.usernamePasswordReset.userData.email;
+    var email = state.usernamePasswordReset.userData;
     console.log('State inside recoverPassword middleware: ', state);
+    console.log('Email inside recoverPassword middleware: ', email);
     fetch('/app/recoverPassword/recover-password', {
         method: 'post',
         headers: {
@@ -21,7 +22,7 @@ export function recoverPassword() {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(JSON.parse(email))
+        body: JSON.stringify(email)
       })
       .then(res => {
         console.log('res: ', res)
@@ -39,7 +40,7 @@ export function recoverPassword() {
         } else {
           console.log('FAILED YO');
           // TODO: dispatch a recoverPasswordFailed action if failed
-          dispatch(recoverPasswordFailed());
+          // dispatch(recoverPasswordFailed());
           const error = new Error(res.statusText);
           error.res = res;
           throw error;
