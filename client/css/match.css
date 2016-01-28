@@ -47,6 +47,16 @@
   margin: 5px 0px 5px 60px;
 }
 
+.delete-message {
+  float: right;
+  font-size: 1.3em;
+  margin: 3.2% 1% 0%;
+}
+
+.delete-message:hover {
+  color: #25b79a;
+}
+
 .match-conversation-timestamp {
   color: #b3b3b3;
   font-size: 0.8em;
