@@ -21,11 +21,14 @@ module.exports = {
         },
         function(token, done) {
           User.findOne({ email: req.body.email }, function(err, user) {
+            console.log('USER AFTER User.findOne: ', user);
             if (!user) {
               req.flash('error', 'No account with that email address exists.');
               res.status(400).send('error', 'No account with that email address exists.', err);
+            } else {
+              console.log('FOUND USER ');
             }
-
+            console.log('USER: ', user);
             user.resetPasswordToken = token;
             user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 
