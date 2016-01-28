@@ -33,6 +33,7 @@ module.exports = {
   getQuestion: function(req, res){
     Question.find({id: req.body.question}, function (err, question) {
       if(err) console.log(err);
+      else if(!question.length) res.send("nope");  
       else res.send(question);
     });    
   },
