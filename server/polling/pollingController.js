@@ -32,13 +32,18 @@ module.exports = {
   },
 
   getQuestion: function(req, res){
-    function getInfo(){
-      Question.find({id: req.body.question}, function (err, question) {
+    (function getInfo(ques){
+      Question.findOne({id: ques}, function (err, question) {
         if(err) console.log(err);
-        else if(question.skip) res.send("nope");  
-        else res.send(question);
+        else if(question.skip){
+          User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
+            if(err) console.log(err);
+            else getInfo(ques + 1);
+          });  
+
+        } else res.send(question);
       });    
-    }
+    })(req.body.question)
   },
 
   answer: function(req, res){
