@@ -22,6 +22,10 @@ export default function Profile(state = initialState, action) {
       newState.data = action.data
       // Parse user interests object
       newState.data.interests = JSON.parse(newState.data.interests)
+      if (action.data.question.length > 0) {
+        newState.data.question = action.data.question[0]
+        newState.data.question.answers = JSON.parse(newState.data.question.answers)
+      }
       return newState
 
     case EDIT_USER_INFO:
