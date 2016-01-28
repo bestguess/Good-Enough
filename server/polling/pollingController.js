@@ -35,6 +35,7 @@ module.exports = {
     (function getInfo(ques){
       Question.findOne({id: ques}, function (err, question) {
         if(err) console.log(err);
+        else if(!question) res.send(undefined);
         else if(question.skip){
           User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
             if(err) console.log(err);
@@ -64,6 +65,7 @@ module.exports = {
           (function getInfo(ques){
             Question.findOne({id: ques}, function (err, nextQuestion) {
               if(err) console.log(err);
+              else if(!nextQuestion) res.send(undefined);
               else if(nextQuestion.skip){
                 User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
                   if(err) console.log(err);
