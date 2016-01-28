@@ -21,7 +21,7 @@ module.exports = {
       var userObject = {};
         for(var key in properties){
           if(key !== "password") {
-            if(key === "questions") userObject[key] = user[key][0];
+            if(key === "question") userObject[key] = user[key][0];
             else userObject[key] = user[key];
           }
       }
