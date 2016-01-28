@@ -7,6 +7,7 @@ import ProfileUserData from '../components/Profile/ProfileUserData'
 import PollContainer from '../components/Profile/PollContainer'
 import ProfileConnections from '../components/Profile/ProfileConnections'
 import ProfileMatches from '../components/ProfileMatches'
+import Footer from '../components/Footer'
 
 class Profile extends Component {
   constructor(props) {
@@ -47,6 +48,7 @@ class Profile extends Component {
         {showPolling}
         <ProfileConnections state={this.props.state} actions={this.props.actions} connections={profileConnectionsDisplay} temp={profileTempDisplay} />
         <ProfileMatches state={this.props.state} actions={this.props.actions} matches={profileMatchesDisplay} />
+        <Footer state={this.props.state} actions={this.props.actions} />
       </div>
     );
   }
