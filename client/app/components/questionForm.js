@@ -29,7 +29,7 @@ function submitSurvey(props) {
     gender: state.userData.gender,
     city: 'Austin',
     interests: state.userData.interests,
-    type: type,
+    type: "INFJ",
     personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
     picture: state.userData.picture || "http://e27.co/img/no_image_profile.jpg",
     places: state.userData.places,

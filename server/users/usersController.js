@@ -74,6 +74,7 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
+    console.log(user);
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
