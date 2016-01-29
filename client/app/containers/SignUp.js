@@ -15,7 +15,7 @@ class SignUp extends Component {
     const { state, actions } = this.props
     var h1Content;
     if (this.props.state.signup.viewData.signup.stage0) {
-      h1Content = <div className="logo-img"><img src="../client/img/logo.png"/></div>
+      h1Content = <div className="logo-img"><img className="img-full" src="../client/img/logo.png"/></div>
     } else {
       h1Content = "Good Enough"
     }

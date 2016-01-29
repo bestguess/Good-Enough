@@ -31,6 +31,7 @@
     "classnames": "^2.1.2",
     "cookie-parser": "^1.4.1",
     "cors": "^2.7.1",
+    "cron": "^1.1.0",
     "express": "^4.13.3",
     "express-flash": "0.0.2",
     "express-session": "^1.13.0",

@@ -12,13 +12,13 @@ class ProfilePageMatchBoxImage extends Component {
     var img;
     if (this.props.data.connected) {
       boxHover = <Link to={conversationURL}><ConnectionBoxHover actions={this.props.actions} data={this.props.data} /></Link>
-      img = <img className="img-connection" src={this.props.data.picture} />
+      img = <div className="img-connection"><div className="img-holder"><img className="match-image" src={this.props.data.picture} /></div></div>
     } else if (this.props.data.requested) {
       boxHover = <TempBoxHover actions={this.props.actions} data={this.props.data} />
-      img = <img className="img-pending-connection" src={this.props.data.picture} />
+      img = <div className="img-pending-connection"><div className="img-holder"><img className="match-image" src={this.props.data.picture} /></div></div>
     } else {
       boxHover = <MatchBoxHover actions={this.props.actions} data={this.props.data} />
-      img = <img className="img-match" src={this.props.data.picture} />
+      img = <div className="img-match"><div className="img-holder"><img className="match-image" src={this.props.data.picture} /></div></div>
     }
     return (
       <div className="profile-page-match-image">

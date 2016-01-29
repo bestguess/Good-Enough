@@ -16,6 +16,10 @@ class ActivityInterests extends Component {
     if (e.which === 188) this.refs[input].value = '';
   }
 
+  deleteInput(activity) {
+    this.props.actions.deleteInput('activity', activity)
+  }
+
   render() {
     var stateValues;
     if (this.props.state.signup.userData.interests.activity.length > 0) {
@@ -46,6 +50,10 @@ class DiscussionInterests extends Component {
     if (e.which === 188) this.refs[input].value = '';
   }
 
+  deleteInput(discussion) {
+    this.props.actions.deleteInput('discussion', discussion)
+  }
+
   render() {
     var stateValues;
     if (this.props.state.signup.userData.interests.discussion.length > 0) {
@@ -74,6 +82,10 @@ class FavoritePlaces extends Component {
 
   handleKeyUp(e, input) {
     if (e.which === 188) this.refs[input].value = '';
+  }
+
+  deleteInput(place) {
+    this.props.actions.deleteInput('place', place)
   }
 
   render() {
