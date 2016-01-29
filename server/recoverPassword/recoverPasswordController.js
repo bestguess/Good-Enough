@@ -84,20 +84,47 @@ module.exports = {
       function(done) {
         console.log('TOKEN HERE ?: ', req.params)
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+          if (err) {
+            res.status(500).send(err);
+            return next();
+          }
           if (!user) {
             console.log('USER FAILED: ', user)
             res.status(400).send(JSON.stringify('Password reset token is invalid or has expired.'));
-          } else {
-            console.log('user inside submitNewPassword: ', user)
-            console.log('Inside submitNewPassword: ', req.body)
-            user.password = req.body.confirmNewPassword;
-            user.resetPasswordToken = undefined;
-            user.resetPasswordExpires = undefined;
-
-            user.save(function(err) {
-              done(err, user);
-            });
+            return next();
           }
+            console.log('User info before password hash: ', user)
+            console.log('req.body inside submitNewPassword: ', req.body)
+
+            user.password = req.body.confirmNewPassword;
+
+            // user.save(fuction(err, user) {
+            //   if (err) {
+            //     console.log('Error saving new password');
+            //     done(err, user)
+            //   }
+            // })
+
+            bcrypt.hash(user.password, user.password.length, function(err, hash) {
+              if (err) {
+                res.status(500).send(err);
+                return next()
+              }
+              if (!hash) {
+                res.status(500).send('Error producing hash');
+                return next()
+              }
+              user.password = hash;
+              user.resetPasswordToken = undefined;
+              user.resetPasswordExpires = undefined;
+              user.save(function(err) {
+                if (err) console.log('Error saving new password', err);
+                done(err, user)
+              });
+            })
+            console.log('USER festus: ', user);
+
+            console.log('User info after password hash: ', user)
         });
       },
       function(user, done) {
