@@ -75,6 +75,7 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
+    console.log(user);
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
@@ -129,6 +130,7 @@ module.exports = {
           return next();
         }
         userObject.password = hash;
+        userObject.question = 0;
         var newUser = User(userObject);
         newUser.save(function(err, user){
 
