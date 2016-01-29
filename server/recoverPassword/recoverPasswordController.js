@@ -67,9 +67,15 @@ module.exports = {
   resetPassword: function(req, res, next) {
     User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
       if (!user) {
-        res.status(400).send(JSON.stringify('error', 'Password reset token is invalid or has expired.'));
+        console.log('token is bad')
+        // TODO: redirect to new page displaying error message
+        // res.redirect('/badToken')
+        res.status(400).send(JSON.stringify('Password reset token is invalid or has expired.'));
+      } else {
+        console.log('token is good')
+        res.redirect('/logIn')
+        // res.status(200).send(JSON.stringify('GO RESET PASSWORD PLS'));
       }
-      res.status(200).send(JSON.stringify('GO RESET PASSWORD PLS'));
     });
   },
 
