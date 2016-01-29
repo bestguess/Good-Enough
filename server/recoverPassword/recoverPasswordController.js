@@ -24,9 +24,9 @@ module.exports = {
             if (!user) {
               res.status(400).send('No account with that email address exists.');
             } else {
-              console.log('FOUND USER!');
+              console.log('FOUND USER!', user);
               user.resetPasswordToken = token;
-              user.resetPasswordExpires = Date.now() + 900000; // 15 minutes
+              user.resetPasswordExpires = Date.now() + 1800000; // 30 minutes
               user.save(function(err) {
                 done(err, token, user);
               });
@@ -82,20 +82,22 @@ module.exports = {
   submitNewPassword: function(req, res, next) {
     async.waterfall([
       function(done) {
+        console.log('TOKEN HERE ?: ', req.params)
         User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
           if (!user) {
-            res.status(400).send(JSON.stringify('error', 'Password reset token is invalid or has expired.'));
-          }
+            console.log('USER FAILED: ', user)
+            res.status(400).send(JSON.stringify('Password reset token is invalid or has expired.'));
+          } else {
+            console.log('user inside submitNewPassword: ', user)
+            console.log('Inside submitNewPassword: ', req.body)
+            user.password = req.body.confirmNewPassword;
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
 
-          user.password = req.body.password;
-          user.resetPasswordToken = undefined;
-          user.resetPasswordExpires = undefined;
-
-          user.save(function(err) {
-            req.logIn(user, function(err) {
+            user.save(function(err) {
               done(err, user);
             });
-          });
+          }
         });
       },
       function(user, done) {
@@ -114,7 +116,7 @@ module.exports = {
             'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
         };
         smtpTransport.sendMail(mailOptions, function(err) {
-          req.flash('success', 'Success! Your password has been changed.');
+          console.log('Success!, your password has been reset')
           done(err);
         });
       }
