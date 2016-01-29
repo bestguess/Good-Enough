@@ -129,6 +129,7 @@ module.exports = {
           return next();
         }
         userObject.password = hash;
+        userObject.question = 0;
         var newUser = User(userObject);
         newUser.save(function(err, user){
 
