@@ -137,7 +137,7 @@ h1 {
 .question-form-submit-button {
   width: 100%;
   text-align: center;
-  padding: 20px 0px;
+  padding: 0%;
 }
 
 .question-form-button {
@@ -148,7 +148,7 @@ h1 {
   background-color: #25b79a;
   border: none;
   border-radius: 3px;
-  margin: 25px auto;
+  margin: 2% auto 5%;
   outline: none;
   width: 19em;
 }
@@ -203,7 +203,7 @@ h1 {
   font-weight: 500;
   width: 350px;
   color: #25b79a;
-  padding: 14px 0px;
+  padding: 0.8em 0%;
   text-align: center;
   background-color: transparent;
   border: 1px solid #25b79a;
@@ -344,15 +344,15 @@ h1 {
   margin: 0px auto;
   width: 250px;
   border-radius: 3px;
-  padding: 10px;
-  height: 24.5em;
+  padding: 0.80% 1%;
+  height: 24em;
 }
 
 .user-info-form input {
   clear: both;
   font-size: 16px;
   line-height: 20px;
-  margin: 15px auto;
+  margin: 4% auto;
   display: block;
   width: 94%;
   padding: 5px 3%;
@@ -367,8 +367,8 @@ h1 {
   margin: 0px auto;
   width: 600px;
   border-radius: 3px;
-  padding: 10px;
-  height: 24.5em;
+  padding: 0.80% 1%;
+  height: 24em;
 }
 
 .interest-input-container {
