@@ -49,7 +49,7 @@ module.exports = {
             subject: 'Good-Enough Password Reset',
             text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
               'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-              'http://' + req.headers.host + '/reset-password/' + token + '\n\n' +
+              'http://' + req.headers.host + '/app/recoverPassword/reset-password/' + token + '\n\n' +
               'If you did not request this, please ignore this email and your password will remain unchanged.\n'
           };
 
@@ -73,7 +73,7 @@ module.exports = {
         res.status(400).send(JSON.stringify('Password reset token is invalid or has expired.'));
       } else {
         console.log('token is good')
-        res.redirect('/logIn')
+        res.redirect('/reset-password/' + req.params.token)
         // res.status(200).send(JSON.stringify('GO RESET PASSWORD PLS'));
       }
     });
