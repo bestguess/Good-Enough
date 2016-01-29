@@ -17,6 +17,15 @@ img {
   height: 100%;
 }
 
+.recover-password-email-error {
+  margin-left: 10%;
+  color: red;
+}
+
+.recover-password-email {
+  padding-top: 20%;
+}
+
 .forgot-username-password {
   text-align: center;
   font-size: 12px;

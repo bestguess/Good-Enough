@@ -19,7 +19,7 @@ class UsernamePasswordResetForm extends Component {
     if (this.props.state.usernamePasswordReset.userData.foundEmail) {
       loginErr = <span className="loginError"></span>;
     } else {
-      loginErr = <span className="loginError">No account with that email exists</span>
+      loginErr = <span className="recover-password-email-error">No account with that email exists</span>
     }
 
     var formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button">Submit</button>
@@ -27,8 +27,10 @@ class UsernamePasswordResetForm extends Component {
       <div className="login-box">
         <h1 className="login-logo password-reset">Password Recovery</h1>
         <div className="login-form">
-          {loginErr}
-          <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)} />
+        {loginErr}
+        <div>
+          <input className="recover-password-email" placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)} />
+          </div>
         </div>
         <div className="question-form-submit-button-login">
           {formButton}
