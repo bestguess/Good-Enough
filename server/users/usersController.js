@@ -30,7 +30,7 @@ module.exports = {
       (function getInfo(ques){
         Question.findOne({id: ques}, function (err, nextQuestion) {
           if(err) console.log(err);
-          else if(!nextQuestion) res.send(undefined);
+          else if(!nextQuestion) res.send(userObject);
           else if(nextQuestion.skip){
             User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
               if(err) console.log(err);
