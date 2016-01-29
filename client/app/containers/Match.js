@@ -152,7 +152,7 @@ class MatchPicture extends Component {
   render() {
     return (
       <div className="personal-info-card-picture">
-        <img src={this.props.state.match.data.picture} />
+        <img className="img-full" src={this.props.state.match.data.picture} />
       </div>
     );
   }
@@ -187,7 +187,7 @@ class MatchMessageImage extends Component {
   render() {
     return (
       <div className="match-conversation-image">
-        <img src={this.props.img}/>
+        <img className="img-full" src={this.props.img}/>
       </div>
     );
   }
