@@ -17,7 +17,12 @@ img {
   height: 100%;
 }
 
-.ecover-password-email-success {
+.passwordCheck {
+  margin-left: 19%;
+  color: red;
+}
+
+.recover-password-email-success {
   margin-left: 5%;
 }
 

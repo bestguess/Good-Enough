@@ -19,30 +19,33 @@ class NewPasswordForm extends Component {
   }
 
   render() {
-    var loginErr;
+    var thisState = this.props.state.usernamePasswordReset.userData;
+    var passwordCheck;
     var emailAlert;
+    var formButton;
 
-    if (this.props.state.usernamePasswordReset.userData.foundEmail) {
-      loginErr = <span className="loginError"></span>;
+    if (thisState.emailReceived) {
+      emailAlert = <span className="recover-password-email-success">An email has been sent to {thisState.email} with instructions to reset password</span>
+    }
+
+    if (thisState.newPassword === thisState.confirmNewPassword) {
+      passwordCheck = <span className="passwordCheck"></span>;
+      formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button valid">Submit</button>
     } else {
-      loginErr = <span className="recover-password-email-error">No account with that email exists</span>
+      formButton = <button className="question-form-button invalid">Submit</button>
+      passwordCheck = <span className="passwordCheck">Passwords do not match</span>
     }
 
-    if (this.props.state.usernamePasswordReset.userData.emailReceived) {
-      emailAlert = <span className="recover-password-email-success">An email has been sent to {this.props.state.usernamePasswordReset.userData.email} with instructions to reset password</span>
-    }
-
-    var formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button">Submit</button>
     return (
       <div className="login-box">
         <h1 className="login-logo password-reset">Reset your password</h1>
         <div className="login-form">
         {emailAlert}
-        {loginErr}
         <div>
           <input className="recover-password-email" placeholder="Enter new password" ref="newPassword" onKeyUp={() => this.handleKeyUpNewPassword('newPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />
           <input className="recover-password-email" placeholder="Confirm new password" ref="confirmNewPassword" onKeyUp={() => this.handleKeyUpConfirmNewPassword('confirmNewPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />
           </div>
+        {passwordCheck}
         </div>
         <div className="question-form-submit-button-login">
           {formButton}
