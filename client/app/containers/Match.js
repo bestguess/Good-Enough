@@ -226,17 +226,13 @@ class MatchMessageInput extends Component {
   }
 
   handleKeyPress(e) {
-    if (e.which === 13 && this.refs.message.value !== '') {
+    var checkSpaces = this.refs.message.value.replace(/\s+/g, "")
+    if (e.which === 13 && this.refs.message.value !== '' && checkSpaces.length > 0) {
       sendMessage(this.props)
       this.refs.message.value = '';
     }
   }
-
-  sendMessage() {
-    sendMessage(this.props)
-    this.refs.message.value = '';
-  }
-
+  
   render() {
     return (
       <div className="match-conversation-input">
