@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+
 const { Link } = require('react-router');
 
 class LogInForm extends Component {
@@ -34,6 +35,9 @@ class LogInForm extends Component {
         </div>
         <div className="question-form-submit-button-login">
           {formButton}
+        </div>
+        <div className="forgot-username-password">
+          <Link to="/recover-password">Forgot password?</Link>
         </div>
       </div>
       )
