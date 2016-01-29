@@ -146,6 +146,8 @@ class BasicUserInfo extends Component {
   }
 
   render() {
+  var pictureUpload = <div className="dropzone-text">Upload profile picture by dropping a photo here</div>
+  if (this.props.state.signup.userData.picture) pictureUpload = <div className="dropzone-text-success">Success. You look awesome!</div>
     return (
         <div className="user-info-form">
           <input placeholder="Email" ref="email" onKeyUp={() => this.handleKeyUp(null,'email')} />
@@ -163,11 +165,11 @@ class BasicUserInfo extends Component {
               <label>Male</label>
             </li>
           </ul>
-
+          <p className="birthday-header">Select Birthday</p>
           <BirthdayDropdown state={this.props.state} actions={this.props.actions} />
 
           <Dropzone ref="picture" className="dropzone" onDrop={this.onDrop} state={this.props.state} actions={this.props.actions}>
-            <div className="dropzone-text">Upload profile picture by dropping a photo here</div>
+            {pictureUpload}
           </Dropzone>
         </div>
       )
