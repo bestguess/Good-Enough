@@ -120,6 +120,7 @@ module.exports = {
             lastName : list[p].lastName,
             picture : list[p].picture,
             age : calculateAge(matchAge),
+            messages : 0,
             display: true,
             requested: false,
             connected: false,
@@ -139,6 +140,7 @@ module.exports = {
               result.display = match.display;
               result.requested = match.requested;
               result.connected = match.connected;
+              result.messages = match.messages;
             }
           });
 
@@ -154,7 +156,7 @@ module.exports = {
             }
             //if(user_id === "56a6d20c6e4ccfd61d208e5f" && result.id === "56a53c7df7ef1aae05fe3c02") console.log("\n\nScore:",result.score,"\n\n");
             //knocks off points if you're of the opposite gender
-            if(user.gender !== list[p].gender) result.score += 8;
+            if(user.gender !== list[p].gender) result.score += 0;
 
             //adds points if you have similar interests
             for(var key in user_interests){
@@ -164,7 +166,6 @@ module.exports = {
                     person_interests[key].forEach(function(person_interest){
                       if(user_interest.toUpperCase() === person_interest.toUpperCase()){
                         result.common.push(person_interest);
-                        console.log(result.score);
                         result.score -= result.score * 0.03;
                       }
                     });
