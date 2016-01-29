@@ -238,6 +238,10 @@ h1 {
 
 
 /*** Question Buttons for Personality Test ***/
+.question-buttons-mobile {
+  display: none;
+}
+
 .question-buttons {
   list-style-type: none;
   padding: 0px;
@@ -512,8 +516,8 @@ input[type="submit"]{
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 70%;
-  margin: 20px auto;
+  width: 68%;
+  margin: 1% auto;
   padding: 1%;
 }
 
@@ -525,8 +529,8 @@ input[type="submit"]{
 }
 
 .personal-info-card-picture {
-  width: 120px;
-  height: 120px;
+  width: 125px;
+  height: 125px;
   float: left;
 }
 
@@ -542,7 +546,9 @@ input[type="submit"]{
 }
 
 .personal-info-card-userdata h4 {
-  margin: 0px;
+  margin: 0% 0% 0.5% 0%;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5%;
 }
 
 .personal-info-card-userdata p {
@@ -563,9 +569,10 @@ input[type="submit"]{
 .user-interest-container span {
   font-size: 0.7em;
   float: left;
-  margin-bottom: 0.5%;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
+  margin-bottom: 0.25%;
+  margin-top: 0.25%;
+  padding-top: 0.40%;
+  padding-bottom: 0.40%;
 }
 
 .user-interest-container input {
@@ -610,8 +617,8 @@ input[type="submit"]{
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   width: 70%;
-  margin: 20px auto;
-  padding: 10px;
+  margin: 1% auto;
+  padding: 0% 0% 0.75% 0%;
 }
 
 .profile-page-data:after {
@@ -621,11 +628,18 @@ input[type="submit"]{
    clear: both;
 }
 
+.profile-page-boxes {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
 .profile-page-match {
-  padding: 3% 1%;
-  width: 31.33%;
+  padding: 1.5% 0% 0% 0%;
+  width: 33.33%;
   float: left;
   text-align: center;
+  display: block;
 }
 
 .profile-page-match h4 {
@@ -642,27 +656,29 @@ input[type="submit"]{
   width: 80%;
 }
 
-.profile-page-match-image img {
-  border-radius: 50%;
-}
-
-
 .profile-page-connections {
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   width: 70%;
-  margin: 20px auto;
-  padding: 10px;
+  margin: 1% auto;
+  padding: 0% 0% 0.75% 0%;
+}
+
+.profile-page-connections:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
 }
 
 .poll-container-card {
-  background-color: #fff;
+  background-color: #f2f9fc;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
-  width: 70%;
-  margin: 20px auto;
-  padding: 10px;
+  width: 68%;
+  margin: 1% auto;
+  padding: 1%;
 }
 
 .profile-page-picture {
@@ -718,24 +734,29 @@ progress::-webkit-progress-value {
   border-radius: 9px;
 }
 
+.birthday-header {
+  font-size: 0.8em;
+  font-weight: 300;
+  margin: 1% 3%;
+  text-align: center;
+  color: #a5afaf;
+}
 
 .birthday-dropdown {
   text-align: center;
-  margin: 15px auto;
-  border-bottom: 2px solid #e0e0e0;
+  margin: 0% auto 15px;
   height: 30px;
 }
 
 .birthday-dropdown select{
   color: #7f8d8e;
   font-size: 16px;
-  padding: .5em;
+  outline: none;
   margin: 0;
+  height: 100%;
   background-color: transparent;
-  border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  border: 1px solid #e0e0e0;
+  width: 33.33%;
 }
 
 .dropzone{
@@ -745,19 +766,47 @@ progress::-webkit-progress-value {
   border-color: #BBB;
   border-style: dashed;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .dropzone-text{
   width: 100%;
   text-align: center;
   padding: 0.5em 0;
+  cursor: pointer;
+}
+
+.dropzone-text-success {
+  width: 100%;
+  text-align: center;
+  padding: 1.2em 0;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 895px) {
+
+  .match-box-name {
+    font-size: 2vw !important;
+  }
 }
 
 
 
-
-
 @media only screen and (max-width: 600px) {
+
+  .personal-info-card {
+    width: 96%;
+  }
+
+  .profile-page-connections {
+    width: 98%;
+  }
+
+  .profile-page-data {
+    width: 98%;
+  }
 
   .logo-img {
       width: 81vw;
@@ -778,28 +827,45 @@ progress::-webkit-progress-value {
     max-width: 95%;
   }
 
-  .question-option-left {
-    padding: 6px 0;
+  .question {
+    width: 100%;
+    display: inline-block;
   }
 
-  .question-buttons {
-    margin: 26.6px -100px;
-    width: 220px;
-    left: 50px;
-    position: relative;;
+  .question-option-left {
+    width: calc(45%);
+    padding: 6px 0 6px 10px;
+    display: inline-table;
+  }
+
+  .question-buttons-desktop {
+    display: none;
+  }
+
+  .question-buttons-mobile {
+    width: 100%;
+    left: calc(50% - 110px);
+    position: relative;
+    margin: 15px 0;
+    display: block;
   }
 
   .question-option-right {
     padding: 6px 0px;
+    width: calc(45%);
+    display: inline-table;
+    position: absolute;
+    left: 53.7%;
   }
 
   .question-separator {
     border: 1px solid rgba(200,200,200,0.34);
-    height: 38px;
+    height: 27px;
     position: absolute;
-    left: 49.9%;
+    left: 50%;
     border-radius: 22px;
-  }
+    margin-top: -28px;
+}
 
   .question-form-button {
     max-width: 90%;
@@ -810,3 +876,23 @@ progress::-webkit-progress-value {
   }
 
 }
+
+  .match-box-name {
+    font-size: 4.2vw !important;
+  }
+
+  .user-interest-form {
+    margin: 0px auto;
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px 0 0 0;
+    height: 24.5em;
+  }
+
+  .interest-input-container {
+    padding: 0 0 2% 0;
+    margin: 5% 5%;
+    width: 91%;
+  }
+}
+

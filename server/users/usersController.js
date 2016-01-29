@@ -1,6 +1,7 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
+var Question = db.Questions;
 var Token = db.Token;
 var helpers = require("../helpers/helpers.js");
 var match = require('../helpers/matching_algo.js');
@@ -9,6 +10,7 @@ var bcrypt = require('bcrypt');
 module.exports = {
 
   getUser: function(req, res, next){
+    var user = req.body;
     User.findOne({_id: user.id}, function(err, user){
       if(err){
         res.status(404).send(err);
@@ -20,12 +22,27 @@ module.exports = {
       var userObject = {};
         for(var key in properties){
           if(key !== "password") {
-            if(key === "questions") userObject[key] = user[key][0];
+            if(key === "question") userObject[key] = user[key][0];
             else userObject[key] = user[key];
           }
       }
-      res.status(200).send(userObject);
-      next();
+
+      (function getInfo(ques){
+        Question.findOne({id: ques}, function (err, nextQuestion) {
+          if(err) console.log(err);
+          else if(!nextQuestion) res.send(userObject);
+          else if(nextQuestion.skip){
+            User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
+              if(err) console.log(err);
+              else getInfo(ques + 1);
+            });
+          }else{
+            userObject.question = nextQuestion;
+            res.status(200).send(userObject);
+            next();
+          }
+        });
+      })(user.question)
     })
   },
 
@@ -58,19 +75,22 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
+    console.log(user);
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
+        console.log("User already exists");
         res.status(403).send("user already exists");
         return next();
       }
     });
 
     user.birthday = helpers.splitDate(user.birthday);
-
+    console.log("Splitting birthday");
     // To be populated and submitted as a new user
     var userObject = {};
     // Required fields with which to create user
+
     // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender',
     //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
     var properties = new helpers.UserData;
@@ -102,6 +122,8 @@ module.exports = {
     }else{
       userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
       bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
+        console.log("BCrypting Password");
+
         if(err){
           res.status(500).send(err);
           return next();
@@ -111,14 +133,18 @@ module.exports = {
           return next();
         }
         userObject.password = hash;
+        userObject.question = 0;
         var newUser = User(userObject);
         newUser.save(function(err, user){
+
           if(err){
             console.log(err,'err saving user')
             res.status(500).send(err);
             next();
           }else{
+            console.log("User was saved :)");
             User.find({}, function(err, users){
+              if(err) console.log(err);
               users.forEach(function(user){
                 match.user(user, function (data){
                   data.sort(function(a,b){ return b.score-a.score; });
@@ -128,7 +154,7 @@ module.exports = {
                 });
               });
             });
-
+            console.log("Creating Token");
             helpers.createToken(req, res, next, user, helpers.genToken, "signup");
           }
         });

@@ -2,13 +2,17 @@ import React, { Component, PropTypes } from 'react'
 
 class FavoritePlaces extends Component {
 
-  handleKeyPress(e) {
-    if (e.which === 13 && this.refs.place.value !== '') {
-      var val = this.refs.place.value;
-      this.refs.place.value = val.charAt(0).toUpperCase() + val.slice(1);
-      this.props.actions.saveInput('place', this.refs.place.value);
-      this.refs.place.value = '';
+  handleKeyDown(e, input) {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+      var val = this.refs[input].value;
+      this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
+      this.props.actions.saveInput(input, this.refs[input].value);
+      this.refs[input].value = '';
     }
+  }
+
+  handleKeyUp(e, input) {
+    if (e.which === 188) this.refs[input].value = '';
   }
 
   deleteInput(place) {
@@ -17,7 +21,7 @@ class FavoritePlaces extends Component {
 
   render() {
     var editInput;
-    if (this.props.state.profile.editUserInfo) editInput = <input ref="place" onKeyPress={(event) => this.handleKeyPress(event)} placeholder="add place..."/>
+    if (this.props.state.profile.editUserInfo) editInput = <input ref="place" onKeyDown={(event) => this.handleKeyDown(event, 'place')} onKeyUp={(event) => this.handleKeyUp(event, 'place')} placeholder="add place..."/>
     return (
       <div className="user-interest-container">
         <span>Favorite Places: </span>

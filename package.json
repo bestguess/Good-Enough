@@ -4,7 +4,7 @@
   "description": "a place to find friends",
   "main": "server/server.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "test": "./node_modules/jshint/bin/jshint server/*.js && ./node_modules/mocha/bin/mocha server/test/serverAPI.js"
   },
   "engines": {
@@ -30,6 +30,7 @@
     "chai": "^3.4.1",
     "classnames": "^2.1.2",
     "cookie-parser": "^1.4.1",
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "express-flash": "0.0.2",
     "express-session": "^1.13.0",
@@ -65,6 +66,7 @@
     "redux-logger": "^2.0.2",
     "redux-simple-router": "^2.0.3",
     "redux-thunk": "^0.1.0",
+    "socket.io": "^1.4.5",
     "style-loader": "^0.12.3",
     "superagent": "^1.6.1",
     "webpack": "^1.9.11",
