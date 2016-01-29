@@ -19,7 +19,7 @@ function getMatchInfo(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      props.actions.saveMatchData(data)
+      props.actions.saveMatchData(requestData.match_id, data, props.state.profile.data.matches)
       getAllMessages(props)
     }).catch(function(error) {
       console.log('Request failed', error);
@@ -278,11 +278,13 @@ class Match extends Component {
   render() {
     if (!this.props.state.profile.data) this.reRoute(this.props)
     if (!this.props.state.match.data) return <h1><i>Loading match...</i></h1>
+    var similarInterests;
+    if (this.props.state.match.similarInterests.length) similarInterests = <SimilarInterests state={this.props.state} actions={this.props.actions} />
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <MatchInfo state={this.props.state} actions={this.props.actions} />
-        <SimilarInterests state={this.props.state} actions={this.props.actions} />
+        {similarInterests}
         <MatchConversation state={this.props.state} actions={this.props.actions} />
         <Footer state={this.props.state} actions={this.props.actions} />
       </div>
