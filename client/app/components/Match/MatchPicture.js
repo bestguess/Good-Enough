@@ -4,7 +4,7 @@ class MatchPicture extends Component {
   render() {
     return (
       <div className="personal-info-card-picture">
-        <img src={this.props.state.match.data.picture} />
+        <img className="img-full" src={this.props.state.match.data.picture} />
       </div>
     );
   }

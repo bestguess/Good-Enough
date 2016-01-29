@@ -4,7 +4,7 @@ class ProfileUserPicture extends Component {
   render() {
     return (
       <div className="personal-info-card-picture">
-        <img src={this.props.state.profile.data.picture} />
+        <img className="img-full" src={this.props.state.profile.data.picture} />
       </div>
     );
   }
