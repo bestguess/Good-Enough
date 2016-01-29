@@ -6,9 +6,9 @@
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   color: #4c5455;
-  width: 68%;
+  width: 70%;
   margin: 1% auto;
-  padding: 0.75% 1%; 
+  padding: 0% 0% 1%; 
 }
 
 .similar-interests-card:after {
@@ -16,6 +16,18 @@
    display: block;
    height: 0;
    clear: both;
+}
+
+.similar-interests-header {
+  width: 98%;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-align: center;
+  color: #2d95c2;
+  padding: 0.5% 1%;
+  border-bottom: 2px solid #2d95c2;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #f2f9fc;
 }
 
 .similar-interest {
@@ -26,7 +38,7 @@
   font-weight: 300;
   border-radius: 8%;
   cursor: pointer;
-  margin: 0.5% 0.75% 0.5% 0%;
+  margin: 0.75% 0% 0% 1%;
   padding: 0.5% 1.5%;
 }
 
