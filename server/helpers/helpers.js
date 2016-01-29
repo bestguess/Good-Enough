@@ -76,6 +76,5 @@ module.exports = {
     this.picture = 'picture';
     this.places = 'places';
     this.matches = 'matches';
-    this.question = 'question';
   }
 };
