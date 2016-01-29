@@ -9,7 +9,7 @@ export default function Profile(state = initialState, action) {
       newState.data = action.data
       // Parse user interests & question object
       newState.data.interests = JSON.parse(newState.data.interests)
-      if (newState.data.question.answers) newState.data.question.answers = JSON.parse(newState.data.question.answers)
+      if (newState.data.question) newState.data.question.answers = JSON.parse(newState.data.question.answers)
       return newState
 
 
