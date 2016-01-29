@@ -16,7 +16,6 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    // this.props.actions.profile()
     getUserInfo(this.props)
   }
 
