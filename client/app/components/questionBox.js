@@ -15,11 +15,14 @@ class QuestionBox extends Component {
             <span className="question-option-left-text" style={{textAlign:'right',float:'right'}}>{this.props.data.option1}</span>
           </div>
           <div className="question-separator"></div>
-          <div className="question-buttons">
+          <div className="question-buttons-desktop">
             <QuestionButtons state={this.props.state} actions={this.props.actions} id={this.props.data.id} choices={[1, 2, 3, 4, 5]} answer={this.submitAnswer.bind(this)}/>
           </div>
           <div className="question-option-right">
             <span className="question-option-right-text" style={{textAlign:'left',float:'left'}}>{this.props.data.option2}</span>
+          </div>
+          <div className="question-buttons-mobile">
+            <QuestionButtons state={this.props.state} actions={this.props.actions} id={this.props.data.id} choices={[1, 2, 3, 4, 5]} answer={this.submitAnswer.bind(this)}/>
           </div>
         </div>
       </div>

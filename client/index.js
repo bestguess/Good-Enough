@@ -25,10 +25,6 @@ import './css/core.css'
 import './css/profile.css'
 import './css/match.css'
 
-// Commented out for a day when we will refactor
-// import configureStore from './app/store/configureStore'
-// const store = configureStore()
-
 // Middleware for Redux Router & Logger
 const history = createHistory();
 const routerMiddleware = syncHistory(history);

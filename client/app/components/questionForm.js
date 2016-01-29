@@ -29,12 +29,11 @@ function submitSurvey(props) {
     gender: state.userData.gender,
     city: 'Austin',
     interests: state.userData.interests,
-    type: type,
+    type: "INFJ",
     personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
     picture: state.userData.picture || "http://e27.co/img/no_image_profile.jpg",
     places: state.userData.places,
-    matches: [],
-    questions: []
+    matches: []
   }
   console.log('data: ', userData)
   fetch('/app/users/signup', {
@@ -70,7 +69,7 @@ class QuestionForm extends Component {
     var formButton;
     var progressBar;
     if (this.props.state.signup.viewData.signup.stage0) {
-      formButton = <button onClick={this.props.actions.continueSurvey} className="start-test">Start Test</button>
+      formButton = <button onClick={this.props.actions.continueSurvey} className="start-test">Get Started</button>
     } else if (this.props.state.signup.viewData.signup.stage1) {
       progressBar = <ProgressBar state={this.props.state} actions={this.props.actions} />
       content = <PersonalityTest state={this.props.state} actions={this.props.actions} />

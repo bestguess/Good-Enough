@@ -11,20 +11,19 @@ class BirthdayDropdown extends Component {
 	        <div className="birthday-dropdown">
 				<select style={{float: "left"}} id="DOBMonth" onChange={() => this.submitDate("DOBMonth")}>
 					<option>Month</option>
-					<option value="0">January</option>
-					<option value="1">Febuary</option>
-					<option value="2">March</option>
-					<option value="3">April</option>
+					<option value="0">Jan</option>
+					<option value="1">Feb</option>
+					<option value="2">Mar</option>
+					<option value="3">Apr</option>
 					<option value="4">May</option>
-					<option value="5">June</option>
-					<option value="6">July</option>
-					<option value="7">August</option>
-					<option value="8">September</option>
-					<option value="9">October</option>
-					<option value="10">November</option>
-					<option value="11">December</option>
+					<option value="5">Jun</option>
+					<option value="6">Jul</option>
+					<option value="7">Aug</option>
+					<option value="8">Sep</option>
+					<option value="9">Oct</option>
+					<option value="10">Nov</option>
+					<option value="11">Dec</option>
 				</select>
-
 				<select id="DOBDay" onChange={() => this.submitDate("DOBDay")}>
 					<option>Day</option>
 					<option value="1">1</option>
@@ -59,7 +58,6 @@ class BirthdayDropdown extends Component {
 					<option value="30">30</option>
 					<option value="31">31</option>
 				</select>
-
 				<select style={{float: "right"}} id="DOBYear" onChange={() => this.submitDate("DOBYear")}>
 					<option>Year</option>
 					<option value="2002">2002</option>
@@ -118,13 +116,13 @@ class BirthdayDropdown extends Component {
 					<option value="1949">1949</option>
 					<option value="1948">1948</option>
 					<option value="1947">1947</option>
-					<option value="1946">1947</option>
-					<option value="1945">1947</option>
-					<option value="1944">1947</option>
-					<option value="1943">1947</option>
-					<option value="1942">1947</option>
-					<option value="1941">1947</option>
-					<option value="1940">1947</option>
+					<option value="1946">1946</option>
+					<option value="1945">1945</option>
+					<option value="1944">1944</option>
+					<option value="1943">1943</option>
+					<option value="1942">1942</option>
+					<option value="1941">1941</option>
+					<option value="1940">1940</option>
 				</select>
 	        </div>
     	)

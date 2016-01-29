@@ -51,6 +51,7 @@ module.exports = {
         return next();
       }
       // If no save error then send the user's new id and token
+      //console.log(res);
       if(form === "signup") res.status(201).send({id: user._id, token: token.token});
       else res.status(200).send({id: user._id, token: token.token});
 
@@ -76,6 +77,5 @@ module.exports = {
     this.picture = 'picture';
     this.places = 'places';
     this.matches = 'matches';
-    this.questions = 'questions';
   }
 };

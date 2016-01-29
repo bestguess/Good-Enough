@@ -1,29 +1,34 @@
-import { PROFILE, LOGOUT, CONNECT, EDIT_USER_INFO, SAVE_INPUT, DELETE_INPUT } from '../constants/Profile_ActionTypes'
+import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT, UPDATE_POLL_QUESTION } from '../constants/Profile_ActionTypes'
 
-const initialState = {
-
-}
+const initialState = {}
 
 export default function Profile(state = initialState, action) {
   switch (action.type) {
     case PROFILE:
       var newState = Object.assign({}, state)
       newState.data = action.data
-      // Parse user interests object
+      // Parse user interests & question object
       newState.data.interests = JSON.parse(newState.data.interests)
+      if (newState.data.question) newState.data.question.answers = JSON.parse(newState.data.question.answers)
       return newState
 
-    case CONNECT:
+
+    case CONNECT_REQUEST:
       var newState = Object.assign({}, state)
-      newData.data = action.newData
+      newState.data = action.data
+      // Parse user interests & question object
+      newState.data.interests = JSON.parse(newState.data.interests)
+      if (newState.data.question.answers) newState.data.question.answers = JSON.parse(newState.data.question.answers)
       return newState
+
 
     case EDIT_USER_INFO:
       var newState = Object.assign({}, state)
       newState.editUserInfo = (!newState.editUserInfo) ? true : false
       return newState
 
-    case SAVE_INPUT:
+
+    case SAVE_PROFILE_INPUT:
       var newState = Object.assign({}, state)
       if (action.input === "activity") {
         newState.data.interests.activity.push(action.value)
@@ -34,7 +39,19 @@ export default function Profile(state = initialState, action) {
       }
       return newState
 
-    case DELETE_INPUT:
+
+    case UPDATE_POLL_QUESTION:
+      var newState = Object.assign({}, state)
+      if (action.data.answers) {
+        newState.data.question = action.data
+        newState.data.question.answers = JSON.parse(newState.data.question.answers)
+      } else {
+        delete newState.data.question
+      }
+      return newState
+
+
+    case DELETE_PROFILE_INPUT:
       var newState = Object.assign({}, state)
       if (action.input === "activity") {
         var arr = []
@@ -57,25 +74,19 @@ export default function Profile(state = initialState, action) {
       }
       return newState
 
+
     case LOGOUT:
       var newState = Object.assign({}, state)
-
       // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')
       // Make server request to delete token storage on server side
       fetch('/app/users/logout', {
         method: 'post',
-        headers: {
-          'mode': 'no-cors',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
+        headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: userData
       })
-
       // Remove local storage ID and Token
       window.localStorage.removeItem('GoodEnough');
-
       // Reset Initial Profile State (for if a different user logs on right after logout)
       newState = {};
       return newState
@@ -83,5 +94,6 @@ export default function Profile(state = initialState, action) {
 
     default:
     	return state
+      
   }
 }

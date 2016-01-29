@@ -1,6 +1,7 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var Messages = db.Messages;
+var Users = db.Users;
 
 module.exports = {
 
@@ -10,7 +11,8 @@ module.exports = {
     var text = {
       user : req.body.from,
       date : date,
-      message : req.body.message
+      message : req.body.message,
+      id : req.body.messageID
     };
 
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
@@ -43,11 +45,69 @@ module.exports = {
                 return next();
               }
               res.status(200).send(convo);
+              Users.findOne({_id:req.body.to}, function(err, foundUser){
+                if(err) return next();
+                if(!foundUser) return next();
+                for(var i = 0; i < foundUser.matches.length; i++){
+                  if(foundUser.matches[i].id === req.body.from){
+                    if(!foundUser.matches[i].messages) foundUser.matches[i].messages = 0;
+                    foundUser.matches[i].messages ++;
+                    Users.findByIdAndUpdate(req.body.to, {matches:foundUser.matches}, function(err){
+                      if(err) return next();
+                    })
+                    return next();
+                  }
+                };
+              });
            });
           }
         }); 
       }
     });
+  },
+
+  delete : function(req, res, next){
+    console.log(req.body)
+    Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
+      if(err){
+        res.status(500).send(err);
+        return next();
+      }
+      Messages.findByIdAndUpdate(convo._id, {
+        $pull: { messages : { id: req.body.message_id } }
+      } ,function(err) { 
+        if(err) res.status(400).send(err);
+        else {
+          Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
+            if(err){
+              res.status(500).send(err);
+              return next();
+            }
+            if(!convo){
+              res.status(404).send("Conversation not found")
+              return next();
+            }
+            res.status(200).send(convo);
+            // // Decrements the message count. Not implemented for now.
+            // Users.findOne({_id:req.body.to}, function(err, foundUser){
+            //   if(err) return next();
+            //   if(!foundUser) return next();
+            //   for(var i = 0; i < foundUser.matches.length; i++){
+            //     if(foundUser.matches[i].id === req.body.from){
+            //       if(foundUser.matches[i].messages < 1) return next();
+            //       foundUser.matches[i].messages --;
+            //       Users.findByIdAndUpdate(req.body.to, {matches:foundUser.matches}, function(err){
+            //         if(err) return next();
+            //         return next();
+            //       });
+            //       break;
+            //     }
+            //   }
+            // })
+         });
+        }
+      }); 
+   });
   },
 
   getConvo : function(req, res, next){
@@ -62,8 +122,18 @@ module.exports = {
         res.status(200).send({messages: []})
         return next();
       }
-
       res.status(200).send(convo);
+      Users.findOne({_id:req.body.id}, function(err, foundUser){
+        for(var i = 0; i < foundUser.matches.length; i++){
+          if(foundUser.matches[i].id === req.body.match_id){
+            foundUser.matches[i].messages = 0;
+            Users.findByIdAndUpdate(req.body.id, {matches: foundUser.matches}, function(err){
+              if(err) return next();
+              return next();
+            })
+          }
+        }
+      })
    });
   }
 

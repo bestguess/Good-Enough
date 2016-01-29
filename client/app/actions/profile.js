@@ -1,16 +1,7 @@
 import * as types from '../constants/Profile_ActionTypes'
 
-export function optimisticProfile(data) {
-  console.log('newData: ', data);
+export function profile(data) {
 	return { type: types.PROFILE, data }
-}
-
-// export function profile(data) {
-// 	return { type: types.PROFILE, data }
-// }
-
-export function optimisticConnect(newData) {
-  return { type: types.CONNECT, newData }
 }
 
 export function logout() {
@@ -22,68 +13,18 @@ export function editUserInfo() {
 }
 
 export function saveInput(input, value) {
-  return { type: types.SAVE_INPUT, input, value };
+  return { type: types.SAVE_PROFILE_INPUT, input, value };
 }
 
 export function deleteInput(input, value) {
-  return { type: types.DELETE_INPUT, input, value };
+  return { type: types.DELETE_PROFILE_INPUT, input, value };
 }
 
-export function connect(friend) {
-  return function (dispatch, getState) {
-    var state = getState();
-    console.log('state inside connect: ', state)
-    console.log('friend to connect to: ', friend);
-    fetch('/app/matches/request', {
-        method: 'post',
-        headers: {
-          'mode': 'no-cors',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(friend)
-      })
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {
-          res.json().then(data => {console.log('Server Response after connect: ', data);
-            dispatch(optimisticConnect(data));
-          });
-        } else {
-          const error = new Error(res.statusText);
-          error.res = res;
-          throw error;
-        }
-      })
-      .catch(error => { console.log('request failed', error)});
-  }
-  return null;
+export function connectRequest(data) {
+  return { type: types.CONNECT_REQUEST, data };
 }
 
-export function profile() {
-  return function (dispatch, getState) {
-    // Gather User ID and Session Token from Local Storage
-    var userData = window.localStorage.getItem('GoodEnough')
-    fetch('/app/users/info', {
-        method: 'post',
-        headers: {
-          'mode': 'no-cors',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(JSON.parse(userData))
-      })
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {
-          res.json().then(data => {console.log('Server Response: ', data);
-            dispatch(optimisticProfile(data));
-          });
-        } else {
-          const error = new Error(res.statusText);
-          error.res = res;
-          throw error;
-        }
-      })
-      .catch(error => { console.log('request failed', error)});
-  }
-  return null;
+export function updatePollQuestion(data) {
+  return { type: types.UPDATE_POLL_QUESTION, data };
 }
+

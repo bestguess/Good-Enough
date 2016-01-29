@@ -1,32 +1,55 @@
 var db = require('../db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
+var Question = db.Questions;
 var helpers = require("../helpers/helpers.js");
 
 module.exports = {
 
   postQuestion: function(req, res){
-    var submittedQuestion = req.body.question;
-    var submittedAnswers = JSON.parse(req.body.answers);
+    var count;
 
-    User.find({}, '_id questions' ,function (err, list) {
-      list.forEach(function(user){
-        var userid = user._id;
-        var questions = user.questions;
-        questions.push({question: submittedQuestion, answers: submittedAnswers });
+    Question.count({}, function(err, num) {
+      count = num;
+      console.log('Count is ' + num);
+    }).then(function(){
 
-        User.findByIdAndUpdate(userid,{questions:questions},function(err, changes){
-          if(err) console.log(err);
-          else res.send(changes);
-        });
-      })
-    });    
+      var submittedQuestion = {
+        id: count,
+        question: req.body.question,
+        answers: req.body.answers,
+        skip: false
+      };
+
+      var newQuestion = Question(submittedQuestion);
+      newQuestion.save(function(err, ques){
+        if(err) res.status(500).send(err);
+        else{
+          res.status(201).send(ques);
+        }
+      });
+    }); 
+  },
+
+  getQuestion: function(req, res){
+    (function getInfo(ques){
+      Question.findOne({id: ques}, function (err, question) {
+        if(err) console.log(err);
+        else if(!question) res.send({});
+        else if(question.skip){
+          User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
+            if(err) console.log(err);
+            else getInfo(ques + 1);
+          });  
+        } else res.send(question);
+      });    
+    })(req.body.question)
   },
 
   answer: function(req, res){
-    User.findById(req.body._id, 'interests questions', function (err, user) {
+    User.findById(req.body.id, 'interests question', function (err, user) {
       var interests = JSON.parse(user.interests);
-      var questions = user.questions.slice(1);
+      var question = user.question + 1;
 
       if(req.body.answer !== "skip" && req.body.answer !== "no"){
         if(interests.polled){
@@ -34,11 +57,27 @@ module.exports = {
         }
         else interests.polled = [req.body.answer];
       }
-      User.findByIdAndUpdate(req.body._id,{interests:JSON.stringify(interests),questions:questions},function(err, changes){
-          if(err) console.log(err);
-          else res.status(201).send(questions[0]);
-      });
-    });    
+
+
+      User.findByIdAndUpdate(req.body.id,{interests:JSON.stringify(interests),question:question},function(err, changes){
+        if(err) console.log(err);
+        else{
+          (function getInfo(ques){
+            Question.findOne({id: ques}, function (err, nextQuestion) {
+              var obj = { 'questions': 'none' }
+              if(err) console.log(err);
+              else if(!nextQuestion) res.send({});
+              else if(nextQuestion.skip){
+                User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
+                  if(err) console.log(err);
+                  else getInfo(ques + 1);
+                });  
+              }else res.status(201).send(nextQuestion);
+            });    
+          })(question)
+        };
+      });  
+    });   
   }
 
 

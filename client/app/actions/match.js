@@ -1,7 +1,7 @@
 import * as types from '../constants/Match_ActionTypes'
 
-export function saveMatchData(data) {
-  return { type: types.SAVE_MATCH_DATA, data }
+export function saveMatchData(match_id, data, profile_matches) {
+  return { type: types.SAVE_MATCH_DATA, match_id, data, profile_matches }
 }
 
 export function sendMessage(convo) {
