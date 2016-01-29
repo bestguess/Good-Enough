@@ -12,9 +12,9 @@ nav {
   text-align: center;
 }
 
-img {
+.img-full {
   width: 100%;
-  height: 100%;
+  height: 100%; 
 }
 
 .loginError {
@@ -163,7 +163,7 @@ h1 {
 
 .question {
 	display: flex;
-  width: 87%;
+  width: 95%;
 }
 
 .question-container {

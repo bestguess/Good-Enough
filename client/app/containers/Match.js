@@ -105,7 +105,7 @@ class MatchMessageImage extends Component {
   render() {
     return (
       <div className="match-conversation-image">
-        <img src={this.props.img}/>
+        <img className="img-full" src={this.props.img}/>
       </div>
     );
   }
