@@ -11,6 +11,10 @@ export default function Match(state = initialState, action) {
     	newState.data = action.data
       newState.data.interests = JSON.parse(newState.data.interests)
       newState.conversation = []
+      newState.similarInterests = []
+      action.profile_matches.forEach(function(match) {
+        if (match.id === action.match_id) newState.similarInterests = match.common
+      })
      	return newState
 
 
