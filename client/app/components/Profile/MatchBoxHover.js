@@ -22,7 +22,7 @@ class MatchBoxHover extends Component {
   render() {
     return (
         <div className="match-box-hover" onClick={() => {connectRequest(this.props)}}>
-        	<p className="match-box-name">{this.props.data.firstName} {this.props.data.lastName}</p>
+        	<p className="match-box-name">{this.props.data.firstName} {this.props.data.lastName.charAt(0)}.</p>
         	<span>Connect</span>
         </div>
       )
