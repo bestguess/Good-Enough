@@ -5,6 +5,8 @@ var Messages = db.Messages;
 var helpers = require("../helpers/helpers.js");
 var match = require('../helpers/matching_algo.js');
 
+// The cron job code is at the bottom of this file
+
 module.exports = {
 
   getMatch: function(req, res, next){
@@ -212,7 +214,10 @@ module.exports = {
           data.sort(function(a,b){ return b.score-a.score; });
           User.update({_id: user._id},{matches:data},function(err, user){
             if(err) console.log(err);
-            else res.end(`
+          });
+        });
+      });
+      res.end(`
 ╥━━━━━━━━╭━━╮━━┳
 ╢╭╮╭━━━━━┫┃▋▋━▅┣
 ╢┃╰┫┈┈┈┈┈┃┃┈┈╰┫┣
@@ -220,10 +225,32 @@ module.exports = {
 ╢┊┊┃┏┳┳━━┓┏┳┫┊┊┣
 ╨━━┗┛┗┛━━┗┛┗┛━━┻
             `);
-          });
-        });
-      });
     });
   }
 
 };
+
+var CronJob = require('cron').CronJob;
+var job = new CronJob('00 00 0-23/2 1-31 0-11 0-6', function() {
+  console.log('recalculating matches via cron');
+  User.find({}, function(err, users){
+      users.forEach(function(user){
+        match.user(user, function (data){
+          data.sort(function(a,b){ return b.score-a.score; });
+          User.update({_id: user._id},{matches:data},function(err, user){
+            if(err) console.log(err);
+          });
+        });
+      });
+      console.log(`
+╥━━━━━━━━╭━━╮━━┳
+╢╭╮╭━━━━━┫┃▋▋━▅┣
+╢┃╰┫┈┈┈┈┈┃┃┈┈╰┫┣
+╢╰━┫┈┈┈┈┈╰╯╰┳━╯┣
+╢┊┊┃┏┳┳━━┓┏┳┫┊┊┣
+╨━━┗┛┗┛━━┗┛┗┛━━┻
+            `);
+    });
+}, console.log('match recalculations completed via cron'), true, 'America/Chicago');
+job.start();
+
