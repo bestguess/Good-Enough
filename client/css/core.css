@@ -17,6 +17,10 @@ img {
   height: 100%;
 }
 
+.ecover-password-email-success {
+  margin-left: 5%;
+}
+
 .recover-password-email-error {
   margin-left: 10%;
   color: red;

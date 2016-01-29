@@ -4,7 +4,8 @@ const initialState = {
   userData: {
     email: undefined,
     isFetching: false,
-    foundEmail: true
+    foundEmail: true,
+    emailReceived: false
   }
 }
 
@@ -19,6 +20,7 @@ export default function RecoverPassword(state = initialState, action) {
       var newState = Object.assign({}, state)
       newState.userData.foundEmail = true;
       newState.userData.isFetching = false;
+      newState.userData.emailReceived = true;
       return newState
 
     case RECOVER_PASSWORD_FAILED:

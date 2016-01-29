@@ -39,7 +39,7 @@ export function recoverPassword() {
             dispatch(optimisticRecoverPassword());
           })
           // TODO: inform the user to check his/her email for further instructions
-          .then(() => { dispatch(routeActions.push('/recoverPassword'))});
+          .then(() => { dispatch(routeActions.push('/recover-password'))});
         } else {
           console.log('FAILED YO');
           // TODO: dispatch a recoverPasswordFailed action if failed
