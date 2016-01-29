@@ -81,7 +81,7 @@ footer {
   position: absolute;
   height: 30px;
   z-index: -1;
-  opacity: 1;
+  opacity: 0;
   transition: opacity .5s ease-in-out;
   -moz-transition: opacity .5s ease-in-out;
   -webkit-transition: opacity .5s ease-in-out;
