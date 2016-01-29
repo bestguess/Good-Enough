@@ -30,7 +30,7 @@ class NewPasswordForm extends Component {
 
     if (thisState.newPassword === thisState.confirmNewPassword) {
       passwordCheck = <span className="passwordCheck"></span>;
-      formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button valid">Submit</button>
+      formButton = <button onClick={this.props.actions.submitNewPassword} className="question-form-button valid">Submit</button>
     } else {
       formButton = <button className="question-form-button invalid">Submit</button>
       passwordCheck = <span className="passwordCheck">Passwords do not match</span>

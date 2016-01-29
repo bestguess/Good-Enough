@@ -98,13 +98,6 @@ module.exports = {
 
             user.password = req.body.confirmNewPassword;
 
-            // user.save(fuction(err, user) {
-            //   if (err) {
-            //     console.log('Error saving new password');
-            //     done(err, user)
-            //   }
-            // })
-
             bcrypt.hash(user.password, user.password.length, function(err, hash) {
               if (err) {
                 res.status(500).send(err);
@@ -122,8 +115,6 @@ module.exports = {
                 done(err, user)
               });
             })
-            console.log('USER festus: ', user);
-
             console.log('User info after password hash: ', user)
         });
       },
