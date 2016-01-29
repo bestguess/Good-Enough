@@ -5,6 +5,14 @@ export function saveRecoverPasswordInput(input, value) {
   return { type: types.SAVE_RECOVER_PASSWORD_INPUT, input, value }
 }
 
+export function saveNewPasswordInput(input, value) {
+  return { type: types.SAVE_NEW_PASSWORD_INPUT, input, value }
+}
+
+export function saveConfirmNewPasswordInput(input, value) {
+  return { type: types.SAVE_CONFIRM_NEW_PASSWORD_INPUT, input, value }
+}
+
 export function optimisticRecoverPassword(newData) {
   return { type: types.RECOVER_PASSWORD, newData }
 }

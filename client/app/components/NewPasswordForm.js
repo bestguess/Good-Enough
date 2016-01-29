@@ -2,14 +2,19 @@ import React, { Component, PropTypes } from 'react';
 const { Link } = require('react-router');
 
 class NewPasswordForm extends Component {
-  handleKeyUp(input) {
+  handleKeyUpNewPassword(input) {
     console.log('input YO: ', this.refs[input].value)
-    this.props.actions.saveRecoverPasswordInput(input, this.refs[input].value)
+    this.props.actions.saveNewPasswordInput(input, this.refs[input].value)
+  }
+
+  handleKeyUpConfirmNewPassword(input) {
+    console.log('input YO: ', this.refs[input].value)
+    this.props.actions.saveConfirmNewPasswordInput(input, this.refs[input].value)
   }
 
   handleKeyPress(e) {
     if (e.which === 13) {
-      this.props.actions.recoverPassword()
+      this.props.actions.submitNewPassword()
     }
   }
 
@@ -35,8 +40,8 @@ class NewPasswordForm extends Component {
         {emailAlert}
         {loginErr}
         <div>
-          <input className="recover-password-email" placeholder="Enter new password" ref="password" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)} />
-          <input className="recover-password-email" placeholder="Confirm new password" ref="password" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)} />
+          <input className="recover-password-email" placeholder="Enter new password" ref="newPassword" onKeyUp={() => this.handleKeyUpNewPassword('newPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />
+          <input className="recover-password-email" placeholder="Confirm new password" ref="confirmNewPassword" onKeyUp={() => this.handleKeyUpConfirmNewPassword('confirmNewPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />
           </div>
         </div>
         <div className="question-form-submit-button-login">
