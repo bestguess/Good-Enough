@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import * as MatchActions from '../actions/match'
 import PrivateNav from '../components/Nav/PrivateNav'
 import SimilarInterests from '../components/Match/SimilarInterests'
+import MatchInfo from '../components/Match/MatchInfo'
 import { convertTimeStamp, status, json } from '../helpers'
 import Footer from '../components/Footer'
 
@@ -19,7 +20,7 @@ function getMatchInfo(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      props.actions.saveMatchData(data)
+      props.actions.saveMatchData(requestData.match_id, data, props.state.profile.data.matches)
       getAllMessages(props)
     }).catch(function(error) {
       console.log('Request failed', error);
@@ -99,89 +100,6 @@ function clearMessagesInterval(props) {
  // messageInterval = clearInterval(messageInterval)
 }
 
-class DiscussionInterests extends Component {
-  render() {
-    var values;
-    if (this.props.state.match.data.interests.discussion.length > 0) {
-      values = this.props.state.match.data.interests.discussion.map(topic =>
-        <span key={topic} className="user-interest discussion">{topic}</span> )
-    }
-    return (
-      <div className="user-interest-container">
-        <span>Likes to talk about: </span>
-        {values}
-      </div>
-    );
-  }
-}
-
-class ActivityInterests extends Component {
-  render() {
-    var values;
-    if (this.props.state.match.data.interests.activity.length > 0) {
-      values = this.props.state.match.data.interests.activity.map(activity =>
-        <span key={activity} className="user-interest activity">{activity}</span> )
-    }
-    return (
-      <div className="user-interest-container">
-        <span>Likes to do: </span>
-        {values}
-      </div>
-    );
-  }
-}
-
-class FavoritePlaces extends Component {
-  render() {
-    var values;
-    if (this.props.state.match.data.places.length > 0) {
-      values = this.props.state.match.data.places.map(place =>
-            <span key={place} className="user-interest place">{place}</span> )
-    }
-    return (
-      <div className="user-interest-container">
-        <span>Favorite Places: </span>
-        {values}
-      </div>
-    );
-  }
-}
-
-
-class MatchPicture extends Component {
-  render() {
-    return (
-      <div className="personal-info-card-picture">
-        <img className="img-full" src={this.props.state.match.data.picture} />
-      </div>
-    );
-  }
-}
-
-class MatchUserData extends Component {
-  render() {
-    return (
-      <div className="personal-info-card-userdata">
-        <h4>{this.props.state.match.data.firstName} {this.props.state.match.data.lastName}</h4>
-        <ActivityInterests state={this.props.state} actions={this.props.actions} />
-        <DiscussionInterests state={this.props.state} actions={this.props.actions} />
-        <FavoritePlaces state={this.props.state} actions={this.props.actions} />
-      </div>
-    );
-  }
-}
-
-
-class MatchInfo extends Component {
-  render() {
-    return (
-      <div className="personal-info-card">
-        <MatchPicture state={this.props.state} actions={this.props.actions} />
-        <MatchUserData state={this.props.state} actions={this.props.actions} />
-      </div>
-    );
-  }
-}
 
 class MatchMessageImage extends Component {
   render() {
@@ -278,11 +196,13 @@ class Match extends Component {
   render() {
     if (!this.props.state.profile.data) this.reRoute(this.props)
     if (!this.props.state.match.data) return <h1><i>Loading match...</i></h1>
+    var similarInterests;
+    if (this.props.state.match.similarInterests.length) similarInterests = <SimilarInterests state={this.props.state} actions={this.props.actions} />
     return (
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <MatchInfo state={this.props.state} actions={this.props.actions} />
-        <SimilarInterests state={this.props.state} actions={this.props.actions} />
+        {similarInterests}
         <MatchConversation state={this.props.state} actions={this.props.actions} />
         <Footer state={this.props.state} actions={this.props.actions} />
       </div>

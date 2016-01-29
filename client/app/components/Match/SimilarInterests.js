@@ -4,10 +4,10 @@ class SimilarInterests extends Component {
   render() {
     return (
       <div className="similar-interests-card">
-        <span className="similar-interest">Biking</span>
-        <span className="similar-interest">JavaScript</span>
-        <span className="similar-interest">Hiking</span>
-        <span className="similar-interest">Wine</span>
+        <div className="similar-interests-header">Similar Interests</div>
+        {this.props.state.match.similarInterests.map(interest =>
+            <span key={interest} className="similar-interest">{interest}</span>
+        )}
       </div>
     );
   }  
