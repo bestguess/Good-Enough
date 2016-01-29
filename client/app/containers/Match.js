@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as MatchActions from '../actions/match'
 import PrivateNav from '../components/Nav/PrivateNav'
+import SimilarInterests from '../components/Match/SimilarInterests'
 import { convertTimeStamp, status, json } from '../helpers'
 import Footer from '../components/Footer'
 
@@ -147,8 +148,6 @@ class FavoritePlaces extends Component {
 }
 
 
-
-
 class MatchPicture extends Component {
   render() {
     return (
@@ -283,6 +282,7 @@ class Match extends Component {
       <div>
         <PrivateNav state={this.props.state} actions={this.props.actions} />
         <MatchInfo state={this.props.state} actions={this.props.actions} />
+        <SimilarInterests state={this.props.state} actions={this.props.actions} />
         <MatchConversation state={this.props.state} actions={this.props.actions} />
         <Footer state={this.props.state} actions={this.props.actions} />
       </div>
