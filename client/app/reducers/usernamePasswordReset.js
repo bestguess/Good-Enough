@@ -49,6 +49,10 @@ export default function RecoverPassword(state = initialState, action) {
       var newState = Object.assign({}, state)
       return newState
 
+    case SUBMIT_NEW_PASSWORD:
+      var newState = Object.assign({}, state)
+      return newState
+
     default:
       console.log('hit default case: returning state in RecoverPassword')
       return state
