@@ -30,7 +30,7 @@ var port = process.env.PORT || 4000;
   app.use(webpackHotMiddleware(compiler));
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
 
-   server = app.listen(port, function(error){
+  server = app.listen(port, function(error){
     return (error) ? console.error(error) : console.log('Listening on port %s', port);
   });
   var io = require('socket.io')(server);
@@ -61,6 +61,27 @@ var port = process.env.PORT || 4000;
   app.get('/picture/:pic',function(req,res,next){
     res.sendFile(path.join(__dirname + '/uploads/' + req.params.pic));
   });
+
+  app.get('/modules/*',function(req,res,next){
+    res.sendFile(path.join(__dirname + '/../node_modules/' + req.url.substring(8)));
+  });
+
+   // app.post('/socket',function(req,res,next){
+   //   io.sockets.emit("socket", req.body);
+   //   res.send({});
+   // });
+
+   io.on('connection', function (socket) {
+     console.log('New client connected!');
+
+     socket.on('fetchComments', function () {
+       console.log('New client connected!');
+     });
+
+     socket.on('newComment', function (comment, callback) {
+       console.log('New comment!');
+     });
+   });
 
   app.get('/*',function(req,res,next){
     res.sendFile(path.join(__dirname + '/../client/index.html'));
