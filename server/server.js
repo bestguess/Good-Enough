@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
-var cors = require('cors');
+
+var session = require('express-session');
+var bcrypt = require('bcrypt');
 
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
@@ -16,10 +18,14 @@ var compiler = webpack(config);
 var port = process.env.PORT || 4000;
 
   app.use(morgan('dev'));
-  app.use(bodyParser.json({limit: '25mb'}));
+  app.use(bodyParser.json({limit: '15mb'}));
   app.use(cookieParser());
+  app.use(session({
+    secret: 'session secret key',
+    resave: true,
+    saveUninitialized: true
+  }));
   app.use(express.static(__dirname + '/../'));
-  app.use(cors());
 
   app.use(webpackHotMiddleware(compiler));
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
@@ -29,20 +35,24 @@ var port = process.env.PORT || 4000;
   });
   var io = require('socket.io')(server);
 
+
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
   var matchesRouter = express.Router();
   var pollingRouter = express.Router();
+  var recoverPasswordRouter = express.Router();
 
   require('./users/usersRoutes.js')(usersRouter);
   require('./messages/messagesRoutes.js')(messagesRouter);
   require('./matches/matchesRoutes.js')(matchesRouter);
   require('./polling/pollingRoutes.js')(pollingRouter);
+  require('./recoverPassword/recoverPasswordRoutes.js')(recoverPasswordRouter);
 
   app.use('/app/users', usersRouter);
   app.use('/app/messages', messagesRouter);
   app.use('/app/matches', matchesRouter);
   app.use('/app/polling', pollingRouter);
+  app.use('/app/recoverPassword', recoverPasswordRouter);
 
   app.get('/client',function(req,res,next){
     res.sendFile(path.join(__dirname + req.url));
@@ -56,25 +66,24 @@ var port = process.env.PORT || 4000;
     res.sendFile(path.join(__dirname + '/../node_modules/' + req.url.substring(8)));
   });
 
-  // app.post('/socket',function(req,res,next){
-  //   io.sockets.emit("socket", req.body);
-  //   res.send({});
-  // });
+   // app.post('/socket',function(req,res,next){
+   //   io.sockets.emit("socket", req.body);
+   //   res.send({});
+   // });
 
-  io.on('connection', function (socket) {
-    console.log('New client connected!');
-    
-    socket.on('fetchComments', function () {
-      console.log('New client connected!');
-    });
+   io.on('connection', function (socket) {
+     console.log('New client connected!');
 
-    socket.on('newComment', function (comment, callback) {
-      console.log('New comment!');
-    });
-  });
+     socket.on('fetchComments', function () {
+       console.log('New client connected!');
+     });
+
+     socket.on('newComment', function (comment, callback) {
+       console.log('New comment!');
+     });
+   });
 
   app.get('/*',function(req,res,next){
-    res.sendFile(path.join(path.resolve(__dirname + '/../client/index.html')));
+    res.sendFile(path.join(__dirname + '/../client/index.html'));
   });
-
 
