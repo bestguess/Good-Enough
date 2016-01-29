@@ -122,7 +122,8 @@ module.exports = {
             age : calculateAge(matchAge),
             display: true,
             requested: false,
-            connected: false
+            connected: false,
+            common : []
           };
 
           var person_scores = JSON.parse(list[p].personality);
@@ -161,7 +162,11 @@ module.exports = {
                 user_interests[key].forEach(function(user_interest){
                   if(person_interests[key]){
                     person_interests[key].forEach(function(person_interest){
-                      if(user_interest.toUpperCase() === person_interest.toUpperCase()) result.score -= 1.6;
+                      if(user_interest.toUpperCase() === person_interest.toUpperCase()){
+                        result.common.push(person_interest);
+                        console.log(result.score);
+                        result.score -= result.score * 0.03;
+                      }
                     });
                   }
                 });
