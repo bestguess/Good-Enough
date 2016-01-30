@@ -13,7 +13,7 @@ export function saveInput(value) {
 }
 
 export function logout() {
-	return { type: types.LOGOUT }
+	return { type: types.MATCH_LOGOUT }
 }
 
 export function clearCurrentMatchData() {
