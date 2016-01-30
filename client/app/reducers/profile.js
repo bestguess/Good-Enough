@@ -1,4 +1,4 @@
-import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT, UPDATE_POLL_QUESTION } from '../constants/Profile_ActionTypes'
+import { PROFILE, PROFILE_LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT, UPDATE_POLL_QUESTION } from '../constants/Profile_ActionTypes'
 
 const initialState = {}
 
@@ -75,7 +75,7 @@ export default function Profile(state = initialState, action) {
       return newState
 
 
-    case LOGOUT:
+    case PROFILE_LOGOUT:
       var newState = Object.assign({}, state)
       // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')

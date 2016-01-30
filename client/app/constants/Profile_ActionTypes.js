@@ -1,5 +1,5 @@
 export const PROFILE = 'PROFILE'
-export const LOGOUT = 'LOGOUT'
+export const PROFILE_LOGOUT = 'PROFILE_LOGOUT'
 export const CONNECT_REQUEST = 'CONNECT_REQUEST'
 export const EDIT_USER_INFO = 'EDIT_USER_INFO'
 export const SAVE_PROFILE_INPUT = 'SAVE_PROFILE_INPUT'
