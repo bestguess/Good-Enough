@@ -34,10 +34,10 @@ class LogInForm extends Component {
           <input type="password" placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} onKeyPress={(event) => this.handleKeyPress(event)} />
         </div>
         <div className="question-form-submit-button-login">
-          {formButton}
+          <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
         </div>
         <div className="forgot-username-password">
-          <Link to="/recover-password">Forgot password?</Link>
+          <Link to="/recover-password"><button>Forgot password?</button></Link>
         </div>
       </div>
       )

@@ -87,6 +87,43 @@
 
 
 
+/*** Notifications ***/
+
+.notification {
+  border: 2px solid #25b79a;
+  border-radius: 50%;
+  height: auto;
+  padding-top: 0.30%;
+  padding-bottom: 0.70%;
+  font-size: 1.8vw;
+  font-weight: 600;
+  width: 3.5%;
+  color: #25b79a;
+  background-color: #e0e0e0;
+  z-index: 2;
+  position: absolute;
+  margin: 14.25%;
+  text-align: center;
+}
+
+.notification-count {
+  border-radius: 50%;
+  height: auto;
+  padding-top: 0.25%;
+  padding-bottom: 0.25%;
+  font-size: 0.8vw;
+  font-weight: 600;
+  width: 1.6%;
+  color: #fff;
+  background-color: red;
+  z-index: 2;
+  position: absolute;
+  margin: 14% 17%;
+  z-index: 4;
+  text-align: center;  
+}
+
+
 /*** Match Box & Rating ***/
 
 .match-box-hover {
