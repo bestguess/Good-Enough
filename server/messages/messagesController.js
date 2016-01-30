@@ -50,8 +50,8 @@ module.exports = {
                 if(!foundUser) return next();
                 for(var i = 0; i < foundUser.matches.length; i++){
                   if(foundUser.matches[i].id === req.body.from){
-                    if(!foundUser.matches[i].messages) foundUser.matches[i].messages = 0;
-                    foundUser.matches[i].messages ++;
+                    if(!foundUser.matches[i].messages) foundUser.matches[i].messages = {};
+                    foundUser.matches[i].messages[req.body.messageID] = req.body.messageID;
                     Users.findByIdAndUpdate(req.body.to, {matches:foundUser.matches}, function(err){
                       if(err) return next();
                     })
@@ -89,21 +89,21 @@ module.exports = {
             }
             res.status(200).send(convo);
             // // Decrements the message count. Not implemented for now.
-            // Users.findOne({_id:req.body.to}, function(err, foundUser){
-            //   if(err) return next();
-            //   if(!foundUser) return next();
-            //   for(var i = 0; i < foundUser.matches.length; i++){
-            //     if(foundUser.matches[i].id === req.body.from){
-            //       if(foundUser.matches[i].messages < 1) return next();
-            //       foundUser.matches[i].messages --;
-            //       Users.findByIdAndUpdate(req.body.to, {matches:foundUser.matches}, function(err){
-            //         if(err) return next();
-            //         return next();
-            //       });
-            //       break;
-            //     }
-            //   }
-            // })
+            Users.findOne({_id:req.body.to}, function(err, foundUser){
+              if(err) return next();
+              if(!foundUser) return next();
+              for(var i = 0; i < foundUser.matches.length; i++){
+                if(foundUser.matches[i].id === req.body.from){
+                  if(foundUser.matches[i].messages.length < 1) return next();
+                  delete foundUser.matches[i].messages[req.body.message_id];
+                  Users.findByIdAndUpdate(req.body.to, {matches:foundUser.matches}, function(err){
+                    if(err) return next();
+                    return next();
+                  });
+                  break;
+                }
+              }
+            })
          });
         }
       }); 
@@ -126,7 +126,7 @@ module.exports = {
       Users.findOne({_id:req.body.id}, function(err, foundUser){
         for(var i = 0; i < foundUser.matches.length; i++){
           if(foundUser.matches[i].id === req.body.match_id){
-            foundUser.matches[i].messages = 0;
+            foundUser.matches[i].messages = {};
             Users.findByIdAndUpdate(req.body.id, {matches: foundUser.matches}, function(err){
               if(err) return next();
               return next();

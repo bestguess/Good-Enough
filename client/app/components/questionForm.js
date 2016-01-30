@@ -41,13 +41,13 @@ function submitSurvey(props) {
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify(userData)
   })
-    .then(status)  
-    .then(json)  
-    .then(function(data) {  
+    .then(status)
+    .then(json)
+    .then(function(data) {
       console.log('Request succeeded with JSON response', data);
       props.actions.submitSurvey(data)
-    }).catch(function(error) {  
-      console.log('Request failed', error);  
+    }).catch(function(error) {
+      console.log('Request failed', error);
     });
 }
 

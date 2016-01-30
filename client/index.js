@@ -15,7 +15,7 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
 // Importing React Components
-import { SiteRouter, SignUp, LogIn, Profile, Match } from './app/containers'
+import { SiteRouter, SignUp, LogIn, Profile, Match, UsernamePasswordReset, PasswordResetForm } from './app/containers'
 
 // Importing Redux Reducer
 import rootReducer from './app/reducers'
@@ -61,6 +61,8 @@ render(
         	<Route path="/" component={SiteRouter}>
         		<IndexRoute component={SignUp}/>
           		<Route path="logIn" component={LogIn}/>
+              <Route path="recover-password" component={UsernamePasswordReset}/>
+              <Route path="/reset-password/:token" component={PasswordResetForm}/>
               <Route path="profile" component={Profile}/>
               <Route path="/:match_id" component={Match}/>
         	</Route>
