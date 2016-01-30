@@ -90,11 +90,11 @@
 /*** Notifications ***/
 
 .notification {
-  border: 2px solid #fff;
+  border: 2px solid #25b79a;
   border-radius: 50%;
   height: auto;
-  padding-top: 0.25%;
-  padding-bottom: 0.75%;
+  padding-top: 0.30%;
+  padding-bottom: 0.70%;
   font-size: 1.8vw;
   font-weight: 600;
   width: 3.5%;
