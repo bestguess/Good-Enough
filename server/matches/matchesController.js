@@ -149,9 +149,11 @@ module.exports = {
                   if(foundMatch.matches[i].id === "" + foundUser._id){
                     foundMatch.matches[i].connected = true;
                     foundMatch.matches[i].display = true;
+                    foundMatch.matches[i].accepted = true;
                     break;
                   }
                 }
+                foundMatch.newAccept.push(foundUser._id);
                 User.findByIdAndUpdate(match, {matches: foundMatch.matches}, function(err){
                   if(err){
                     res.status(500).send(err);
@@ -209,15 +211,26 @@ module.exports = {
   reMatch: function(req, res, next){
 
     User.find({}, function(err, users){
+      if(err){
+        res.status(500).send(err);
+        return next();
+      }
+      if(!users){
+        res.status(403).send('Could not find any users to rematch');
+        return next();
+      }
       users.forEach(function(user){
         match.user(user, function (data){
           data.sort(function(a,b){ return b.score-a.score; });
           User.update({_id: user._id},{matches:data},function(err, user){
-            if(err) console.log(err);
+            if(err){
+              res.status(500).send(err);
+              return next();
+            }
           });
         });
       });
-      res.end(`
+      res.status(200).end(`
 ╥━━━━━━━━╭━━╮━━┳
 ╢╭╮╭━━━━━┫┃▋▋━▅┣
 ╢┃╰┫┈┈┈┈┈┃┃┈┈╰┫┣
@@ -225,6 +238,7 @@ module.exports = {
 ╢┊┊┃┏┳┳━━┓┏┳┫┊┊┣
 ╨━━┗┛┗┛━━┗┛┗┛━━┻
             `);
+      return next();
     });
   }
 
