@@ -224,8 +224,9 @@ module.exports = {
           data.sort(function(a,b){ return b.score-a.score; });
           User.update({_id: user._id},{matches:data},function(err, user){
             if(err){
-              res.status(500).send(err);
-              return next();
+              // res.status(500).send(err);
+              // return next();
+              console.log("Could not update user " + user._id + " during rematch");
             }
           });
         });
@@ -265,6 +266,6 @@ var job = new CronJob('00 00 0-23/2 1-31 0-11 0-6', function() {
 ╨━━┗┛┗┛━━┗┛┗┛━━┻
             `);
     });
-}, console.log('match recalculations completed via cron'), true, 'America/Chicago');
+}, function(){console.log('match recalculations completed via cron')}, true, 'America/Chicago');
 job.start();
 
