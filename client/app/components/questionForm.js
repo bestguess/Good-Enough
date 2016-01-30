@@ -21,7 +21,7 @@ function submitSurvey(props) {
 
   // Organize SignUp data to send to server
   var userData = {
-    email: state.userData.email,
+    email: state.userData.email.toLowerCase(),
     password: state.userData.password,
     firstName: state.userData.firstname,
     lastName: state.userData.lastname,
