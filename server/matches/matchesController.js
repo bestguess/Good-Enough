@@ -149,9 +149,11 @@ module.exports = {
                   if(foundMatch.matches[i].id === "" + foundUser._id){
                     foundMatch.matches[i].connected = true;
                     foundMatch.matches[i].display = true;
+                    foundMatch.matches[i].accepted = true;
                     break;
                   }
                 }
+                foundMatch.newAccept.push(foundUser._id);
                 User.findByIdAndUpdate(match, {matches: foundMatch.matches}, function(err){
                   if(err){
                     res.status(500).send(err);
