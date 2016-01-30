@@ -120,7 +120,7 @@ module.exports = {
             lastName : list[p].lastName,
             picture : list[p].picture,
             age : calculateAge(matchAge),
-            messages : 0,
+            messages : {},
             display: true,
             requested: false,
             connected: false,
