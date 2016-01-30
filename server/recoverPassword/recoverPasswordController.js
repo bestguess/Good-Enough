@@ -93,8 +93,6 @@ module.exports = {
             res.status(400).send(JSON.stringify('Password reset token is invalid or has expired.'));
             return next();
           }
-            console.log('User info before password hash: ', user)
-            console.log('req.body inside submitNewPassword: ', req.body)
 
             user.password = req.body.confirmNewPassword;
 
