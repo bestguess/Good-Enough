@@ -212,13 +212,18 @@ module.exports = {
 
   logout: function(req, res){
     user = req.body;
-    Token.findOne({token: user.token, user_id: user.id}, function(err, token){
+    Token.find({user_id: user.id}, function(err, token){
       if(err){
         res.status(500).send();
       }else if(!token){
         res.status(401).send();
       }else{
-        token.remove();
+        for(var i = 0; i < token.length; i++){
+        Token.findOne({user_id: user.id, token: token[i].token}, function(err, foundToken){
+          if(err) console.log('could not remove session');
+          foundToken.remove();
+        });
+        }
         res.status(200).send();
         return
       }
