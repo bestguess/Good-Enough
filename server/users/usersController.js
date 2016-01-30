@@ -150,10 +150,10 @@ module.exports = {
                   data.sort(function(a,b){ return b.score-a.score; });
                   User.update({_id: user._id},{matches:data},function(err, user){
                     if(err) console.log(err);
-                    else helpers.createToken(req, res, next, user, helpers.genToken, "signup");
                   });
                 });
               });
+              helpers.createToken(req, res, next, user, helpers.genToken, "signup");
             });
           }
         });
