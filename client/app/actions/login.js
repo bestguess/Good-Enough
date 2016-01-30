@@ -16,7 +16,8 @@ export function logInFailed() {
 export function logIn() {
   return function (dispatch, getState) {
     var state = getState();
-    console.log('State inside login middleware: ', state);
+    state.login.userData.email = state.login.userData.email.toLowerCase();
+    console.log('State inside login middleware: ', state.login.userData);
     fetch('/app/users/signin', {
         method: 'post',
         headers: {
