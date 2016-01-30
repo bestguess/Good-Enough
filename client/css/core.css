@@ -36,8 +36,22 @@ nav {
 }
 
 .forgot-username-password {
+  width: 100%;
   text-align: center;
-  font-size: 12px;
+  padding: 0%;
+}
+
+.forgot-username-password button {
+  font-size: 16px;
+  color: #25b79a;
+  padding: 8px 12px;
+  text-align: center;
+  background-color: #eef3f4;
+  border: none;
+  border-radius: 3px;
+  margin: 2% auto 5%;
+  outline: none;
+  width: 19em;
 }
 
 .loginError {
@@ -153,7 +167,7 @@ h1 {
 .question-form-submit-button-login {
   width: 100%;
   text-align: center;
-  padding: 20px 0px;
+  padding: 3% 0px;
   margin-top: 10px;
 }
 
@@ -171,7 +185,7 @@ h1 {
   background-color: #25b79a;
   border: none;
   border-radius: 3px;
-  margin: 2% auto 5%;
+  margin: 2% auto 0%;
   outline: none;
   width: 19em;
 }
