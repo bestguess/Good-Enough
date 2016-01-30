@@ -5,7 +5,7 @@ export function profile(data) {
 }
 
 export function logout() {
-  return { type: types.LOGOUT }
+  return { type: types.PROFILE_LOGOUT }
 }
 
 export function editUserInfo() {
