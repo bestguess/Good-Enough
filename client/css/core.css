@@ -14,7 +14,30 @@ nav {
 
 .img-full {
   width: 100%;
-  height: 100%; 
+  height: 100%;
+}
+
+.passwordCheck {
+  margin-left: 19%;
+  color: red;
+}
+
+.recover-password-email-success {
+  margin-left: 5%;
+}
+
+.recover-password-email-error {
+  margin-left: 10%;
+  color: red;
+}
+
+.recover-password-email {
+  padding-top: 20%;
+}
+
+.forgot-username-password {
+  text-align: center;
+  font-size: 12px;
 }
 
 .loginError {
@@ -81,7 +104,7 @@ footer {
   position: absolute;
   height: 30px;
   z-index: -1;
-  opacity: 1;
+  opacity: 0;
   transition: opacity .5s ease-in-out;
   -moz-transition: opacity .5s ease-in-out;
   -webkit-transition: opacity .5s ease-in-out;
@@ -655,7 +678,7 @@ input[type="submit"]{
   border-radius: 5px;
   width: 68%;
   margin: 1% auto;
-  padding: 1%; 
+  padding: 1%;
 }
 
 .profile-page-picture {
@@ -756,7 +779,7 @@ progress::-webkit-progress-value {
 .dropzone-text-success {
   width: 100%;
   text-align: center;
-  padding: 1.2em 0;  
+  padding: 1.2em 0;
   font-size: 1em;
   font-weight: 600;
   cursor: pointer;
@@ -769,10 +792,8 @@ progress::-webkit-progress-value {
   }
 }
 
-
-
 @media only screen and (max-width: 600px) {
- 
+
   .personal-info-card {
     width: 96%;
   }
@@ -788,7 +809,7 @@ progress::-webkit-progress-value {
   .logo-img {
       width: 81vw;
   }
-  
+
   .start-test {
     width: 270px;
   }

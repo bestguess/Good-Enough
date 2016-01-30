@@ -29,7 +29,7 @@ function submitSurvey(props) {
     gender: state.userData.gender,
     city: 'Austin',
     interests: state.userData.interests,
-    type: "INFJ",
+    type: type,
     personality:{"ie": newObj.IE,"sn": newObj.SN,"ft": newObj.FT,"jp": newObj.JP},
     picture: state.userData.picture || "http://e27.co/img/no_image_profile.jpg",
     places: state.userData.places,
@@ -41,13 +41,13 @@ function submitSurvey(props) {
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify(userData)
   })
-    .then(status)  
-    .then(json)  
-    .then(function(data) {  
+    .then(status)
+    .then(json)
+    .then(function(data) {
       console.log('Request succeeded with JSON response', data);
       props.actions.submitSurvey(data)
-    }).catch(function(error) {  
-      console.log('Request failed', error);  
+    }).catch(function(error) {
+      console.log('Request failed', error);
     });
 }
 
