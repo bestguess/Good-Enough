@@ -26,7 +26,6 @@ module.exports = {
             else userObject[key] = user[key];
           }
       }
-
       (function getInfo(ques){
         Question.findOne({id: ques}, function (err, nextQuestion) {
           if(err) console.log(err);
@@ -43,6 +42,13 @@ module.exports = {
           }
         });
       })(user.question)
+      for(var i = 0; i < user.matches.length; i++){
+        user.matches[i].accepted = false;
+      }
+      User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
+        if(err) return next();
+      })
+
     })
   },
 
@@ -83,7 +89,6 @@ module.exports = {
         res.status(403).send("user already exists");
         return next();
       }
-    });
 
     user.birthday = helpers.splitDate(user.birthday);
     console.log("Splitting birthday");
@@ -159,6 +164,7 @@ module.exports = {
         });
       });
     }
+    });
 
   },
 
