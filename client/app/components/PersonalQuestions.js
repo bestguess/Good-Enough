@@ -170,7 +170,7 @@ class BasicUserInfo extends Component {
         <div className="user-info-form">
           <input placeholder="Email" ref="email" onKeyUp={() => this.handleKeyUp(null,'email')} />
           <input type="password" placeholder="Password" ref="password" onKeyUp={() => this.handleKeyUp(null,'password')} />
-          <input type="password" placeholder="Please Confirm Password" />
+          <input type="password" placeholder="Please Confirm Password" ref="passwordConfirmation" onKeyUp={() => this.handleKeyUp(null,'passwordConfirmation')} />
           <input placeholder="First Name" ref="firstname" onKeyUp={(event) => this.handleKeyUp(event,'firstname')} />
           <input placeholder="Last Name" ref="lastname" onKeyUp={(event) => this.handleKeyUp(event,'lastname')} />
           <ul className="gender-buttons">
