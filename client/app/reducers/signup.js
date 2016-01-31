@@ -1,4 +1,5 @@
 import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, SURVEY_ERROR } from '../constants/SignUp_ActionTypes'
+import { validateEmail } from '../helpers'
 
 const initialState = {
   viewData: {
@@ -41,6 +42,7 @@ const initialState = {
     stage3error: false,
     stage4error: false,
     stage5error: false,
+    emailCheck: false,
     passwordCheck: false,
   }
 }
@@ -98,8 +100,9 @@ export default function SignUp(state = initialState, action) {
       var x = newState.userData
       var y = newState.validationChecks
       var bdLength = Object.keys(x.birthday).length
+      y.emailCheck = (validateEmail(x.email)) ? true : false
       y.passwordCheck = (x.password === x.passwordConfirmation) ? true : false
-      y.stage5 = (x.email && x.password && x.passwordConfirmation && y.passwordCheck && x.firstname && x.lastname && x.gender && bdLength === 3) ? true: false;
+      y.stage5 = (x.email && y.emailCheck && x.password && x.passwordConfirmation && y.passwordCheck && x.firstname && x.lastname && x.gender && bdLength === 3) ? true: false;
       return newState
 
 
