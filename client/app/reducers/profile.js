@@ -15,10 +15,9 @@ export default function Profile(state = initialState, action) {
 
     case CONNECT_REQUEST:
       var newState = Object.assign({}, state)
-      newState.data = action.data
-      // Parse user interests & question object
-      newState.data.interests = JSON.parse(newState.data.interests)
-      if (newState.data.question.answers) newState.data.question.answers = JSON.parse(newState.data.question.answers)
+      newState.data.matches.forEach(function(match) {
+        if (match.id === action.match_id) match.requestSent = true;
+      })
       return newState
 
 
