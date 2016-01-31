@@ -3,18 +3,19 @@ import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURV
 const initialState = {
   viewData: {
     signup: {
-      stage0: true,
+      stage0: false,
       stage1: false,
       stage2: false,
       stage3: false,
       stage4: false,
-      stage5: false,
+      stage5: true,
       stage6: false
     }
   },
   userData: {
     email: undefined,
     password: undefined,
+    passwordConfirmation: undefined,
     firstname: undefined,
     lastname: undefined,
     gender: undefined,
@@ -39,7 +40,8 @@ const initialState = {
     stage2error: false,
     stage3error: false,
     stage4error: false,
-    stage5error: false
+    stage5error: false,
+    passwordCheck: false,
   }
 }
 
@@ -96,7 +98,8 @@ export default function SignUp(state = initialState, action) {
       var x = newState.userData
       var y = newState.validationChecks
       var bdLength = Object.keys(x.birthday).length
-      if (x.email && x.password && x.firstname && x.lastname && x.gender && bdLength === 3) y.stage5 = true;
+      y.passwordCheck = (x.password === x.passwordConfirmation) ? true : false
+      y.stage5 = (x.email && x.password && x.passwordConfirmation && y.passwordCheck && x.firstname && x.lastname && x.gender && bdLength === 3) ? true: false;
       return newState
 
 

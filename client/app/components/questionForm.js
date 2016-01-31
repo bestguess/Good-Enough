@@ -119,7 +119,11 @@ class QuestionForm extends Component {
       if (this.props.state.signup.validationChecks.stage5) {
         formButton = <button onClick={this.props.actions.continueSurvey} className="question-form-button valid">Continue</button>
       } else if (this.props.state.signup.validationChecks.stage5error) {
-        formButton = <button onClick={() => {this.surveyError(this.props)}} className="question-form-button invalid signup-error">Please Answer All Questions</button>
+        if (!this.props.state.signup.validationChecks.passwordCheck) {
+          formButton = <button onClick={() => {this.surveyError(this.props)}} className="question-form-button invalid signup-error">Passwords Dont Match</button>
+        } else {
+          formButton = <button onClick={() => {this.surveyError(this.props)}} className="question-form-button invalid signup-error">Please Answer All Questions</button>
+        }
       } else {
         formButton = <button onClick={() => {this.surveyError(this.props)}} className="question-form-button invalid">Continue</button>
       }
