@@ -3,13 +3,13 @@ import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURV
 const initialState = {
   viewData: {
     signup: {
-      stage0: false,
+      stage0: true,
       stage1: false,
       stage2: false,
       stage3: false,
       stage4: false,
       stage5: false,
-      stage6: true
+      stage6: false
     }
   },
   userData: {
