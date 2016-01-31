@@ -3,13 +3,13 @@ import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURV
 const initialState = {
   viewData: {
     signup: {
-      stage0: true,
+      stage0: false,
       stage1: false,
       stage2: false,
       stage3: false,
       stage4: false,
       stage5: false,
-      stage6: false
+      stage6: true
     }
   },
   userData: {
@@ -108,18 +108,21 @@ export default function SignUp(state = initialState, action) {
         newState.userData.interests.activity.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.userData.interests.activity = arr
       } else if (action.input === "discussion") {
         var arr = []
         newState.userData.interests.discussion.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.userData.interests.discussion = arr
       } else if (action.input === "place") {
         var arr = []
         newState.userData.places.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.userData.places = arr
       }
       return newState
