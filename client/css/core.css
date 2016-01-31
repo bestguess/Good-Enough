@@ -215,7 +215,7 @@ h1 {
 
 .question-option-left {
   width: calc(50%);
-  padding: 13px 0px;
+  padding: 11px 0px;
   position: relative;
 }
 
@@ -226,7 +226,7 @@ h1 {
 
 .question-option-right {
   width: calc(50%);
-  padding: 13px 0px;
+  padding: 11px 0px;
   position: relative;
 }
 
@@ -250,6 +250,12 @@ h1 {
 
 
 
+.signup-error {
+  background-color: red;
+  color: #fff;
+}
+
+
 
 /*** Question Buttons for Personality Test ***/
 .question-buttons-mobile {
@@ -259,7 +265,14 @@ h1 {
 .question-buttons {
   list-style-type: none;
   padding: 0px;
-  margin: 4.6px 0px;
+  margin: 2.5% 0%;
+}
+
+.question-buttons:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
 }
 
 .question-buttons li {
@@ -299,7 +312,7 @@ h1 {
 .question-button-large {
   height: 32px;
   width: 11%;
-  margin: 0px 0% 8px 8%;
+  margin: 0px 0% 0% 8%;
 }
 
 .question-button-large label {
@@ -309,7 +322,7 @@ h1 {
 .question-button-medium {
   height: 28px;
   width: 9.5%;
-  margin: 2px 0% 8px 8%;
+  margin: 2px 0% 0% 8%;
 }
 
 .question-button-medium label {
@@ -319,7 +332,7 @@ h1 {
 .question-button-small {
   height: 24px;
   width: 1em;
-  margin: 4px 0% 8px 8%;
+  margin: 4px 0% 0% 8%;
 }
 
 .question-button-small label {
