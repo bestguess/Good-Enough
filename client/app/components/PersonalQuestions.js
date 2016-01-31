@@ -4,16 +4,18 @@ import Dropzone from 'react-dropzone'
 
 class ActivityInterests extends Component {
   handleKeyDown(e, input) {
-    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '' || e.which === 186 && this.refs[input].value !== '') {
       var val = this.refs[input].value;
       this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput(input, this.refs[input].value);
       this.refs[input].value = '';
+    } else if (e.which === 8) {
+      this.props.actions.deleteInput(input, 'last')
     }
   }
 
   handleKeyUp(e, input) {
-    if (e.which === 188) this.refs[input].value = '';
+    if (e.which === 188 || e.which === 186) this.refs[input].value = '';
   }
 
   deleteInput(activity) {
@@ -38,16 +40,18 @@ class ActivityInterests extends Component {
 
 class DiscussionInterests extends Component {
   handleKeyDown(e, input) {
-    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '' || e.which === 186 && this.refs[input].value !== '') {
       var val = this.refs[input].value;
       this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput(input, this.refs[input].value);
       this.refs[input].value = '';
+    } else if (e.which === 8) {
+      this.props.actions.deleteInput(input, 'last')
     }
   }
 
   handleKeyUp(e, input) {
-    if (e.which === 188) this.refs[input].value = '';
+    if (e.which === 188 || e.which === 186) this.refs[input].value = '';
   }
 
   deleteInput(discussion) {
@@ -72,16 +76,18 @@ class DiscussionInterests extends Component {
 
 class FavoritePlaces extends Component {
   handleKeyDown(e, input) {
-    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '') {
+    if (e.which === 13 && this.refs[input].value !== '' || e.which === 188 && this.refs[input].value !== '' || e.which === 9 && this.refs[input].value !== '' || e.which === 186 && this.refs[input].value !== '') {
       var val = this.refs[input].value;
       this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput(input, this.refs[input].value);
       this.refs[input].value = '';
+    } else if (e.which === 8) {
+      this.props.actions.deleteInput(input, 'last')
     }
   }
 
   handleKeyUp(e, input) {
-    if (e.which === 188) this.refs[input].value = '';
+    if (e.which === 188 || e.which === 186) this.refs[input].value = '';
   }
 
   deleteInput(place) {
