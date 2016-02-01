@@ -9,6 +9,11 @@ var match = require('../helpers/matching_algo.js');
 
 module.exports = {
 
+  savePhoto: function(req,res,next){
+    userObject = req.body;
+    userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
+  },
+
   getMatch: function(req, res, next){
     match = req.body.match_id;
     User.findOne({_id: match}, function(err, match){
