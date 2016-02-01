@@ -20,3 +20,7 @@ export function submitSurvey(tokenData) {
 export function continueSurvey() {
 	return { type: types.CONTINUE_SURVEY };
 }
+
+export function surveyError() {
+	return { type: types.SURVEY_ERROR };
+}

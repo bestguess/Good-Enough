@@ -20,8 +20,8 @@ export function deleteInput(input, value) {
   return { type: types.DELETE_PROFILE_INPUT, input, value };
 }
 
-export function connectRequest(data) {
-  return { type: types.CONNECT_REQUEST, data };
+export function connectRequest(match_id) {
+  return { type: types.CONNECT_REQUEST, match_id };
 }
 
 export function updatePollQuestion(data) {

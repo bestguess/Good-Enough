@@ -149,6 +149,11 @@
   opacity: 1;
 }
 
+.requestSent {
+  background-color: rgba(0, 0, 0, 0.60);
+  opacity: 1;
+}
+
 .match-box-name {
   font-size: 1.2vw;
   padding-top: 12%;
