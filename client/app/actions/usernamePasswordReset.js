@@ -17,6 +17,10 @@ export function optimisticSubmitNewPassword() {
   return { type: types.SUBMIT_NEW_PASSWORD }
 }
 
+export function recoverPasswordIsFetching() {
+  return { type: types.RECOVER_PASSWORD_IS_FETCHING }
+}
+
 export function optimisticRecoverPassword(newData) {
   return { type: types.RECOVER_PASSWORD, newData }
 }
@@ -27,6 +31,9 @@ export function recoverPasswordFailed() {
 
 export function recoverPassword() {
   return function (dispatch, getState) {
+    // Dispatch recoverIsFetching to load spinner
+    dispatch(recoverPasswordIsFetching());
+
     var state = getState();
     var email = state.usernamePasswordReset.userData;
     console.log('State inside recoverPassword middleware: ', state);
@@ -66,6 +73,9 @@ export function recoverPassword() {
 
 export function submitNewPassword() {
   return function (dispatch, getState) {
+    // Dispatch recoverIsFetching to load spinner
+    dispatch(recoverPasswordIsFetching());
+
     var state = getState();
     var email = state.usernamePasswordReset.userData;
     console.log('State inside recoverPassword middleware: ', state);
