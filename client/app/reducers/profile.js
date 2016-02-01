@@ -1,4 +1,5 @@
-import { PROFILE, LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT, UPDATE_POLL_QUESTION } from '../constants/Profile_ActionTypes'
+import { PROFILE, PROFILE_LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT, UPDATE_POLL_QUESTION } from '../constants/Profile_ActionTypes'
+import { deleteAuthToken } from '../helpers'
 
 const initialState = {}
 
@@ -15,10 +16,9 @@ export default function Profile(state = initialState, action) {
 
     case CONNECT_REQUEST:
       var newState = Object.assign({}, state)
-      newState.data = action.data
-      // Parse user interests & question object
-      newState.data.interests = JSON.parse(newState.data.interests)
-      if (newState.data.question.answers) newState.data.question.answers = JSON.parse(newState.data.question.answers)
+      newState.data.matches.forEach(function(match) {
+        if (match.id === action.match_id) match.requestSent = true;
+      })
       return newState
 
 
@@ -58,24 +58,27 @@ export default function Profile(state = initialState, action) {
         newState.data.interests.activity.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.data.interests.activity = arr
       } else if (action.input === "discussion") {
         var arr = []
         newState.data.interests.discussion.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.data.interests.discussion = arr
       } else if (action.input === "place") {
         var arr = []
         newState.data.places.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.data.places = arr
       }
       return newState
 
 
-    case LOGOUT:
+    case PROFILE_LOGOUT:
       var newState = Object.assign({}, state)
       // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')
@@ -85,8 +88,7 @@ export default function Profile(state = initialState, action) {
         headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: userData
       })
-      // Remove local storage ID and Token
-      window.localStorage.removeItem('GoodEnough');
+      deleteAuthToken()
       // Reset Initial Profile State (for if a different user logs on right after logout)
       newState = {};
       return newState

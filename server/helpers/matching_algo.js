@@ -123,6 +123,7 @@ module.exports = {
             messages : {},
             display: true,
             requested: false,
+            accepted: false,
             connected: false,
             common : []
           };
@@ -140,6 +141,7 @@ module.exports = {
               result.display = match.display;
               result.requested = match.requested;
               result.connected = match.connected;
+              result.accepted = match.accepted;
               result.messages = match.messages;
             }
           });

@@ -47,9 +47,21 @@ export const convertTimeStamp = function(timestamp) {
 	return result;
 }
 
+export const addAuthToken = function(token) {
+	// Set token data into local storage
+	window.localStorage.setItem('GoodEnough', token)
+}
+
+export const deleteAuthToken = function() {
+	// Remove local storage ID and Token
+  	window.localStorage.removeItem('GoodEnough');
+}
 
 export const status = function(response) {
-  console.log("response",response);
+  if (response.status === 401) {
+  	deleteAuthToken()
+  	window.location.href = '/login';
+  }
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
   } else {
@@ -76,6 +88,11 @@ export const getUserInfo = function(props) {
     }).catch(function(error) {
       console.log('Request failed', error);
     });
+}
+
+export const validateEmail = function(email) {
+	var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
 

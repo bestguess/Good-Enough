@@ -1,5 +1,4 @@
-
-/*** Similar Interests Card ***/
+/** Similar Interests Card ** */
 
 .similar-interests-card {
   background-color: #f2f9fc;
@@ -8,14 +7,13 @@
   color: #4c5455;
   width: 70%;
   margin: 1% auto;
-  padding: 0% 0% 1%; 
-}
-
-.similar-interests-card:after {
-   content: " ";
-   display: block;
-   height: 0;
-   clear: both;
+  padding: 0% 0% 1%;
+  &:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+  }
 }
 
 .similar-interests-header {
@@ -32,7 +30,7 @@
 
 .similar-interest {
   float: left;
-  background-color: #fff;
+  background-color: white;
   color: #4c5455;
   font-size: 0.8em;
   font-weight: 300;
@@ -42,11 +40,10 @@
   padding: 0.5% 1.5%;
 }
 
-
-/*** Messages Container ***/
+/** Messages Container ** */
 
 .match-conversation-container {
-  background-color: #fff;
+  background-color: white;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   width: 70%;
@@ -77,28 +74,37 @@
   width: 50px;
   height: 50px;
   float: left;
-}
-
-.match-conversation-image img {
-  border-radius: 5px;
+  img {
+    border-radius: 5px;
+  }
 }
 
 .match-conversation-message {
   padding: 1.5% 2% 0.5%;
+  &:hover .delete-message {
+    opacity: 1;
+  }
+}
+
+.delete-message {
+  opacity: 0;
+  float: right;
+  border: 1px solid #7f8d8e;
+  border-radius: 3px;
+  color: #7f8d8e;
+  background-color: white;
+  font-size: 0.8em;
+  padding: 0.25% 1%;
+  margin: 3.2% 1% 0%;
+  &:hover {
+    border: 1px solid white;
+    background-color: #25b79a;
+    color: white;
+  }
 }
 
 .match-conversation-message p {
   margin: 5px 0px 5px 60px;
-}
-
-.delete-message {
-  float: right;
-  font-size: 1.3em;
-  margin: 3.2% 1% 0%;
-}
-
-.delete-message:hover {
-  color: #25b79a;
 }
 
 .match-conversation-timestamp {
@@ -117,14 +123,13 @@
   padding: 1px;
   border-radius: 5px;
   margin: 1%;
-}
-
-.match-conversation-input input {
-  outline: none;
-  padding: 1%;
-  margin: 0px;
-  border: none;
-  font-size: 16px;
-  line-height: 20px;
-  width: 98%;
+  input {
+    outline: none;
+    padding: 1%;
+    margin: 0px;
+    border: none;
+    font-size: 16px;
+    line-height: 20px;
+    width: 98%;
+  }
 }

@@ -122,7 +122,7 @@ class MatchMessage extends Component {
     } else {
       username = this.props.state.profile.data.firstName + ' ' + this.props.state.profile.data.lastName
       picture = this.props.state.profile.data.picture
-      deleteIcon = <i className="delete-message fa fa-times-circle-o" onClick={() => deleteMessage(this.props, this.props.data.id)} ></i>
+      deleteIcon = <button className="delete-message" onClick={() => deleteMessage(this.props, this.props.data.id)} >Delete</button>
     }
     return (
       <div className="match-conversation-message">

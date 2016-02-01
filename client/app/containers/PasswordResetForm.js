@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as UsernamePasswordResetActions from '../actions/usernamePasswordReset'
-
 import PublicNav from '../components/Nav/PublicNav'
 import Footer from '../components/Footer'
 import NewPasswordForm from '../components/NewPasswordForm'
