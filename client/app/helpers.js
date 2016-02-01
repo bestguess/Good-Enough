@@ -58,10 +58,9 @@ export const deleteAuthToken = function() {
 }
 
 export const status = function(response) {
-  if (response.status === 403) {
+  if (response.status === 401) {
   	deleteAuthToken()
-  	console.log('unauthorized token...logging out')
-  	return
+  	window.location.href = '/login';
   }
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response)
