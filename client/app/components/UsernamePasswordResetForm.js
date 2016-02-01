@@ -24,10 +24,10 @@ class UsernamePasswordResetForm extends Component {
     var status;
 
     if (thisComp.isFetching) {
-      status = <div></div>;
+      status = <span className="recover-password-email-error"></span>;
       spinner = <span>Checking this email account...</span>
     } else {
-      spinner = <div></div>;
+      spinner = <span className="recover-password-email-error"></span>;
       if (!thisComp.foundEmail) {
         status = <span className="recover-password-email-error">No account with that email exists</span>
       } else if (thisComp.emailReceived) {
@@ -40,15 +40,11 @@ class UsernamePasswordResetForm extends Component {
     }
 
     return (
-      <div className="login-box">
+      <div className="recover-password-box">
         <h1 className="login-logo password-reset">Password Recovery</h1>
-        <div className='notification-spot-recover-password'>
-          <span>
-            {status}
-            {spinner}
-          </span>
-        </div>
         <div className="login-form-recover-password">
+          {status}
+          {spinner}
           <div>
             <input className="recover-password-email" placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)} />
           </div>
