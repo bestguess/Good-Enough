@@ -25,6 +25,10 @@ class SignUp extends Component {
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
         <Footer state={state} actions={actions} />
+      
+        <div className="banner">
+          <img className="img-full" src="../client/img/banner.jpg"/>
+        </div>
       </div>
     );
   }

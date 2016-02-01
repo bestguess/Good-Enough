@@ -37,7 +37,9 @@ nav {
 
 .forgot-username-password {
   text-align: center;
-  font-size: 12px;
+  font-size: 1em;
+  color: #25b79a;
+  text-decoration: none;
 }
 
 .loginError {
