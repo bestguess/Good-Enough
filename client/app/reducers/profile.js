@@ -1,4 +1,5 @@
 import { PROFILE, PROFILE_LOGOUT, CONNECT_REQUEST, EDIT_USER_INFO, SAVE_PROFILE_INPUT, DELETE_PROFILE_INPUT, UPDATE_POLL_QUESTION } from '../constants/Profile_ActionTypes'
+import { deleteAuthToken } from '../helpers'
 
 const initialState = {}
 
@@ -87,8 +88,7 @@ export default function Profile(state = initialState, action) {
         headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: userData
       })
-      // Remove local storage ID and Token
-      window.localStorage.removeItem('GoodEnough');
+      deleteAuthToken()
       // Reset Initial Profile State (for if a different user logs on right after logout)
       newState = {};
       return newState
