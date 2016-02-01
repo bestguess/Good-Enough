@@ -15,10 +15,9 @@ export default function Profile(state = initialState, action) {
 
     case CONNECT_REQUEST:
       var newState = Object.assign({}, state)
-      newState.data = action.data
-      // Parse user interests & question object
-      newState.data.interests = JSON.parse(newState.data.interests)
-      if (newState.data.question.answers) newState.data.question.answers = JSON.parse(newState.data.question.answers)
+      newState.data.matches.forEach(function(match) {
+        if (match.id === action.match_id) match.requestSent = true;
+      })
       return newState
 
 
@@ -58,18 +57,21 @@ export default function Profile(state = initialState, action) {
         newState.data.interests.activity.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.data.interests.activity = arr
       } else if (action.input === "discussion") {
         var arr = []
         newState.data.interests.discussion.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.data.interests.discussion = arr
       } else if (action.input === "place") {
         var arr = []
         newState.data.places.forEach(function(value) {
           if (value !== action.value) arr.push(value)
         })
+        if (action.value === 'last') arr.pop()
         newState.data.places = arr
       }
       return newState
