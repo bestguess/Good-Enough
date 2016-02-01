@@ -15,13 +15,13 @@ module.exports = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({minimize: true}),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin({hot: true}),
     new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: [ 'babel' ],
+      loaders: [ 'react-hot', 'babel' ],
       exclude: /node_modules/,
       include: __dirname
     }, {
