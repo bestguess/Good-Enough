@@ -19,16 +19,16 @@ class NewPasswordForm extends Component {
   }
 
   render() {
-    var thisState = this.props.state.usernamePasswordReset.userData;
+    var thisComp = this.props.state.usernamePasswordReset.userData;
     var passwordCheck;
     var emailAlert;
     var formButton;
 
-    if (thisState.emailReceived) {
-      emailAlert = <span className="recover-password-email-success">An email has been sent to {thisState.email} with instructions to reset password</span>
+    if (thisComp.emailReceived) {
+      emailAlert = <span className="recover-password-email-success">An email has been sent to {thisComp.email} with instructions to reset password</span>
     }
 
-    if (thisState.newPassword === thisState.confirmNewPassword) {
+    if (thisComp.newPassword === thisComp.confirmNewPassword) {
       passwordCheck = <span className="passwordCheck"></span>;
       formButton = <button onClick={this.props.actions.submitNewPassword} className="question-form-button valid">Submit</button>
     } else {

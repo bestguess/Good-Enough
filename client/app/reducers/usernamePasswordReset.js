@@ -1,4 +1,4 @@
-import { SAVE_RECOVER_PASSWORD_INPUT, RECOVER_PASSWORD, RECOVER_PASSWORD_FAILED, RESET_PASSWORD, RESET_PASSWORD_FAILED, SAVE_NEW_PASSWORD_INPUT, SAVE_CONFIRM_NEW_PASSWORD_INPUT, SUBMIT_NEW_PASSWORD } from '../constants/UsernamePasswordReset_ActionTypes'
+import { SAVE_RECOVER_PASSWORD_INPUT, RECOVER_PASSWORD, RECOVER_PASSWORD_FAILED, RESET_PASSWORD, RESET_PASSWORD_FAILED, SAVE_NEW_PASSWORD_INPUT, SAVE_CONFIRM_NEW_PASSWORD_INPUT, SUBMIT_NEW_PASSWORD, RECOVER_PASSWORD_IS_FETCHING } from '../constants/UsernamePasswordReset_ActionTypes'
 
 const initialState = {
   userData: {
@@ -28,6 +28,11 @@ export default function RecoverPassword(state = initialState, action) {
       newState.userData[action.input] = action.value
       return newState
 
+    case RECOVER_PASSWORD_IS_FETCHING:
+      var newState = Object.assign({}, state)
+      newState.userData.isFetching = true;
+      return newState
+
     case RECOVER_PASSWORD:
       var newState = Object.assign({}, state)
       newState.userData.foundEmail = true;
@@ -55,6 +60,6 @@ export default function RecoverPassword(state = initialState, action) {
 
     default:
       console.log('hit default case: returning state in RecoverPassword')
-      return state
+      return {...state}
   }
 }
