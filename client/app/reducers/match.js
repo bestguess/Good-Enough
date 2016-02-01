@@ -1,4 +1,4 @@
-import { SAVE_MATCH_DATA, SAVE_INPUT, SEND_MESSAGE, LOGOUT, CLEAR_CURRENT_MATCH_DATA } from '../constants/Match_ActionTypes'
+import { SAVE_MATCH_DATA, SAVE_INPUT, SEND_MESSAGE, MATCH_LOGOUT, CLEAR_CURRENT_MATCH_DATA } from '../constants/Match_ActionTypes'
 
 const initialState = {
   conversation: []
@@ -36,7 +36,7 @@ export default function Match(state = initialState, action) {
       return newState
 
 
-    case LOGOUT:
+    case MATCH_LOGOUT:
       var newState = Object.assign({}, state)
       // Gather User ID and Session Token from Local Storage
       var userData = window.localStorage.getItem('GoodEnough')

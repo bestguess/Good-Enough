@@ -26,7 +26,6 @@ module.exports = {
             else userObject[key] = user[key];
           }
       }
-
       (function getInfo(ques){
         Question.findOne({id: ques}, function (err, nextQuestion) {
           if(err) console.log(err);
@@ -38,11 +37,20 @@ module.exports = {
             });
           }else{
             userObject.question = nextQuestion;
+            console.log("data being sent should say accpeted true", userObject);
             res.status(200).send(userObject);
+            console.log("now resetting accepted status")
+            for(var i = 0; i < user.matches.length; i++){
+              user.matches[i].accepted = false;
+            }
+            User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
+              if(err) return next();
+            })
             next();
           }
         });
       })(user.question)
+
     })
   },
 
@@ -83,7 +91,6 @@ module.exports = {
         res.status(403).send("user already exists");
         return next();
       }
-    });
 
     user.birthday = helpers.splitDate(user.birthday);
     console.log("Splitting birthday");
@@ -159,6 +166,7 @@ module.exports = {
         });
       });
     }
+    });
 
   },
 
@@ -206,13 +214,18 @@ module.exports = {
 
   logout: function(req, res){
     user = req.body;
-    Token.findOne({token: user.token, user_id: user.id}, function(err, token){
+    Token.find({user_id: user.id}, function(err, token){
       if(err){
         res.status(500).send();
       }else if(!token){
         res.status(401).send();
       }else{
-        token.remove();
+        for(var i = 0; i < token.length; i++){
+        Token.findOne({user_id: user.id, token: token[i].token}, function(err, foundToken){
+          if(err) console.log('could not remove session');
+          foundToken.remove();
+        });
+        }
         res.status(200).send();
         return
       }

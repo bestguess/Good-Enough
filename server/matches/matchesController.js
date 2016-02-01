@@ -149,6 +149,7 @@ module.exports = {
                   if(foundMatch.matches[i].id === "" + foundUser._id){
                     foundMatch.matches[i].connected = true;
                     foundMatch.matches[i].display = true;
+                    foundMatch.matches[i].accepted = true;
                     break;
                   }
                 }
@@ -209,15 +210,27 @@ module.exports = {
   reMatch: function(req, res, next){
 
     User.find({}, function(err, users){
+      if(err){
+        res.status(500).send(err);
+        return next();
+      }
+      if(!users){
+        res.status(403).send('Could not find any users to rematch');
+        return next();
+      }
       users.forEach(function(user){
         match.user(user, function (data){
           data.sort(function(a,b){ return b.score-a.score; });
           User.update({_id: user._id},{matches:data},function(err, user){
-            if(err) console.log(err);
+            if(err){
+              // res.status(500).send(err);
+              // return next();
+              console.log("Could not update user " + user._id + " during rematch");
+            }
           });
         });
       });
-      res.end(`
+      res.status(200).end(`
 ╥━━━━━━━━╭━━╮━━┳
 ╢╭╮╭━━━━━┫┃▋▋━▅┣
 ╢┃╰┫┈┈┈┈┈┃┃┈┈╰┫┣
@@ -225,6 +238,7 @@ module.exports = {
 ╢┊┊┃┏┳┳━━┓┏┳┫┊┊┣
 ╨━━┗┛┗┛━━┗┛┗┛━━┻
             `);
+      return next();
     });
   }
 
@@ -251,6 +265,6 @@ var job = new CronJob('00 00 0-23/2 1-31 0-11 0-6', function() {
 ╨━━┗┛┗┛━━┗┛┗┛━━┻
             `);
     });
-}, console.log('match recalculations completed via cron'), true, 'America/Chicago');
+}, function(){console.log('match recalculations completed via cron')}, true, 'America/Chicago');
 job.start();
 

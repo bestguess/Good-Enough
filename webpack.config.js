@@ -13,6 +13,7 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
@@ -24,8 +25,8 @@ module.exports = {
       exclude: /node_modules/,
       include: __dirname
     }, {
-      test: /\.css?$/,
-      loaders: [ 'style', 'raw' ],
+      test: /\.scss$/,
+      loaders: "css-loader!sass-loader",
       include: __dirname
     }]
   }

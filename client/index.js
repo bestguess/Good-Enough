@@ -21,9 +21,9 @@ import { SiteRouter, SignUp, LogIn, Profile, Match, UsernamePasswordReset, Passw
 import rootReducer from './app/reducers'
 
 // Loading CSS Files
-import './css/core.css'
-import './css/profile.css'
-import './css/match.css'
+import '!style!css!sass!./css/core.scss'
+import '!style!css!sass!./css/profile.scss'
+import '!style!css!sass!./css/match.scss'
 
 // Middleware for Redux Router & Logger
 const history = createHistory();
