@@ -16,9 +16,22 @@ export default function Profile(state = initialState, action) {
 
     case CONNECT_REQUEST:
       var newState = Object.assign({}, state)
-      newState.data.matches.forEach(function(match) {
-        if (match.id === action.match_id) match.requestSent = true;
-      })
+      if (action.action === 'request') {
+        newState.data.matches.forEach(function(match) {
+          if (match.id === action.match_id) match.requestSent = true;
+        })
+      } else if (action.action === 'accept') {
+        newState.data.matches.forEach(function(match) {
+          if (match.id === action.match_id) match.connected = true;
+        })
+      } else if (action.action === 'decline') {
+        newState.data.matches.forEach(function(match) {
+          if (match.id === action.match_id) {
+            match.requested = false;
+            match.display = false;
+          }
+        })
+      }
       return newState
 
 
