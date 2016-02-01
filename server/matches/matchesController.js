@@ -153,7 +153,6 @@ module.exports = {
                     break;
                   }
                 }
-                foundMatch.newAccept.push(foundUser._id);
                 User.findByIdAndUpdate(match, {matches: foundMatch.matches}, function(err){
                   if(err){
                     res.status(500).send(err);
