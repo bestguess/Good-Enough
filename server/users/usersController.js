@@ -37,17 +37,19 @@ module.exports = {
             });
           }else{
             userObject.question = nextQuestion;
+            console.log("data being sent should say accpeted true", userObject);
             res.status(200).send(userObject);
+            console.log("now resetting accepted status")
+            for(var i = 0; i < user.matches.length; i++){
+              user.matches[i].accepted = false;
+            }
+            User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
+              if(err) return next();
+            })
             next();
           }
         });
       })(user.question)
-      for(var i = 0; i < user.matches.length; i++){
-        user.matches[i].accepted = false;
-      }
-      User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
-        if(err) return next();
-      })
 
     })
   },
