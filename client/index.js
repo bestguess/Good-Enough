@@ -41,7 +41,7 @@ const finalCreateStore = compose(
 
 const store = finalCreateStore(rootReducer);
 
-// Unsure if the importance of these
+// Enables Hot Reload for Redux
 if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./app/reducers', () => {
@@ -49,6 +49,7 @@ if (module.hot) {
       store.replaceReducer(nextReducer)
     })
   }
+  
 routerMiddleware.listenForReplays(store);
 
 

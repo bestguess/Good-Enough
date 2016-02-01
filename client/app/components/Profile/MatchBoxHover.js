@@ -15,7 +15,7 @@ const connectRequest = function(props) {
     }).catch(function(error) {
       console.log('Request failed', error);
     });
-  props.actions.connectRequest(connectData.match_id)
+  props.actions.connectRequest(connectData.match_id, 'request')
 }
 
 class MatchBoxHover extends Component {
