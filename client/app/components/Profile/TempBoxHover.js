@@ -12,10 +12,10 @@ export const connectRequest = function(props, response) {
     .then(status)
     .then(json)
     .then(function(data) {
-      props.actions.connectRequest(data)
     }).catch(function(error) {
       console.log('Request failed', error);
     });
+  props.actions.connectRequest(connectData.match_id, response)
 }
 
 class TempBoxHover extends Component {

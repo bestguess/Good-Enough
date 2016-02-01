@@ -27,8 +27,8 @@ var port = process.env.PORT || 4000;
   app.use(express.static(__dirname + '/../'));
   app.use(cors());
 
-  app.use(webpackHotMiddleware(compiler));
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackHotMiddleware(compiler));
 
   server = app.listen(port, function(error){
     return (error) ? console.error(error) : console.log('Listening on port %s', port);
