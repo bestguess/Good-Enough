@@ -1,5 +1,5 @@
 import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, SURVEY_ERROR } from '../constants/SignUp_ActionTypes'
-import { validateEmail } from '../helpers'
+import { validateEmail, addAuthToken } from '../helpers'
 
 const initialState = {
   viewData: {
@@ -136,8 +136,7 @@ export default function SignUp(state = initialState, action) {
 
     case SUBMIT_SURVEY:
       var newState = Object.assign({}, state)
-      // Set token data into local storage
-      window.localStorage.setItem('GoodEnough', JSON.stringify(action.tokenData))
+      addAuthToken(JSON.stringify(action.tokenData))
       // Reset signup stages & validation checks for if user logs out in current session
       newState.viewData.signup.stage0 = true;
       newState.viewData.signup.stage1 = false;
