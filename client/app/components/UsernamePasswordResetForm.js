@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+// const Spinner = require('react-spinkit');
 const { Link } = require('react-router');
 
 class UsernamePasswordResetForm extends Component {
@@ -22,27 +23,32 @@ class UsernamePasswordResetForm extends Component {
     var spinner;
     var status;
 
-    thisComp.isFetching ? status = <span>Spinner goes here</span> : status = undefined;
-    !thisComp.foundEmail ? status = <span className="recover-password-email-error">No account with that email exists</span>
-    : status = undefined;
-
-    if (thisComp.emailReceived) {
-      return (
-        <div className="login-box">
-          <span className="recover-password-email-success">An email has been sent to {thisComp.email} with further instructions</span>
-        </div>
-      )
+    if (thisComp.isFetching) {
+      status = <div></div>;
+      spinner = <span>Checking this email account...</span>
+    } else {
+      spinner = <div></div>;
+      if (!thisComp.foundEmail) {
+        status = <span className="recover-password-email-error">No account with that email exists</span>
+      } else if (thisComp.emailReceived) {
+        return (
+          <div className="login-box">
+            <span className="recover-password-email-success">An email has been sent to {thisComp.email} with further instructions</span>
+          </div>
+        )
+      }
     }
 
     return (
       <div className="login-box">
         <h1 className="login-logo password-reset">Password Recovery</h1>
         <div className='notification-spot-recover-password'>
-        <span>
-          {status}
+          <span>
+            {status}
+            {spinner}
           </span>
         </div>
-        <div className="login-form">
+        <div className="login-form-recover-password">
           <div>
             <input className="recover-password-email" placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)} />
           </div>
