@@ -5,7 +5,6 @@ import QuestionForm from '../components/questionForm'
 import * as QuestionActions from '../actions/signup'
 import PublicNav from '../components/Nav/PublicNav'
 import Footer from '../components/Footer'
-import Banner from '../components/SignupBanner'
 
 class SignUp extends Component {
   constructor(props) {
