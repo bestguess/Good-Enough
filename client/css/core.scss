@@ -12,6 +12,11 @@ nav {
   text-align: center;
 }
 
+.fade-out {
+  opacity: 0 !important;
+  transition: opacity 0.3s;
+}
+
 .img-full {
   width: 100%;
   height: 100%;
@@ -38,7 +43,11 @@ nav {
 .forgot-username-password {
   width: 100%;
   text-align: center;
+  font-size: 1em;
+  color: #25b79a;
+  text-decoration: none;
   padding: 0%;
+  margin-top:12px;
   button {
     font-size: 16px;
     color: #25b79a;
@@ -150,6 +159,7 @@ h1 {
   color: #25b79a;
   margin: 0px auto;
   font-size: 2.4em;
+  background-color: #eef3f4;
 }
 
 .logo-img {
@@ -171,9 +181,12 @@ h1 {
 }
 
 .question-form-submit-button {
-  width: 100%;
-  text-align: center;
-  padding: 0%;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    height: 73px;
+    z-index: 90;
+    background-color: #EEF3F4;
 }
 
 .question-form-button {
@@ -249,6 +262,14 @@ h1 {
 .signup-error {
   background-color: red;
   color: white;
+}
+
+.banner-img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: -20;
+  opacity: 1;
 }
 
 /** Question Buttons for Personality Test ** */

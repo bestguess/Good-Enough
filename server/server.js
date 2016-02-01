@@ -1,9 +1,8 @@
 var express = require('express');
 var app = express();
+var cors = require('cors');
 
 var session = require('express-session');
-var bcrypt = require('bcrypt');
-
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -18,7 +17,7 @@ var compiler = webpack(config);
 var port = process.env.PORT || 4000;
 
   app.use(morgan('dev'));
-  app.use(bodyParser.json({limit: '15mb'}));
+  app.use(bodyParser.json({limit: '25mb'}));
   app.use(cookieParser());
   app.use(session({
     secret: 'session secret key',
@@ -26,6 +25,7 @@ var port = process.env.PORT || 4000;
     saveUninitialized: true
   }));
   app.use(express.static(__dirname + '/../'));
+  app.use(cors());
 
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));

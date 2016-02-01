@@ -37,7 +37,7 @@ class LogInForm extends Component {
           <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
         </div>
         <div className="forgot-username-password">
-          <Link to="/recover-password"><button>Forgot password?</button></Link>
+          <Link to="/recover-password" className="forgot-username-password">Forgot password</Link>
         </div>
       </div>
       )
