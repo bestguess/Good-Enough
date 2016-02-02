@@ -26,7 +26,14 @@ module.exports = {
       gravity: 'Center'
     }, function(err, stdout, stderr){
       if (err) console.log(err);
+
+      fs.unlink(fileLocation, function(err) {
+         if (err) return console.error(err);
+         console.log("File deleted successfully!");
+      });
+
     });
+
     console.log("picture/cropped" + fileName);
     return "picture/cropped" + fileName;
   },
