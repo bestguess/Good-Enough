@@ -130,16 +130,10 @@ class BasicUserInfo extends Component {
   handleKeyUp(event,input) {
     this.props.actions.saveInput(input, this.refs[input].value);
     if(event){
-      if(event.which < 91 && event.which > 59 || event.which === 16 || event.which === 32){
-        if(input === "firstname" || input === "lastname"){
-          var val = this.refs[input].value || "";
-          this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1)
-        }
-        this.props.actions.saveInput(input, this.refs[input].value)
-      }else if(event.which !== 91 && event.which !== 8){
+      if(input === "firstname" || input === "lastname"){
         var val = this.refs[input].value || "";
-        this.refs[input].value = val.slice(0,val.length-1);
-        this.props.actions.saveInput(input, this.refs[input].value)
+        this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
+        this.props.actions.saveInput(input, this.refs[input].value);
       }
     }
   }
