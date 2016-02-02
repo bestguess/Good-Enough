@@ -247,7 +247,7 @@
 .img-connection {
   border-radius: 50%;
   overflow: hidden;
-  height: calc(18.5vw);
+  height: calc(18.3vw);
   position: relative;
   width: 100%;
 }
@@ -268,6 +268,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  height: 18.3vw;
   border-radius: 50%;
   &:after {
     content: '';
@@ -286,15 +287,23 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 895px) {
+@media only screen and (max-width: 895px) and (min-width: 600px) {
   .personal-info-card, .poll-container-card {
     width: 92%;
   }
+  .personal-info-card-userdata {
+    width: 73%;
+  }
   .profile-page-connections, .profile-page-data {
     width: 94%;
+    padding: 0 0 3.75% 0;
   }
   .profile-page-match {
     width: 48%;
+    margin-top: 25px;
+  }
+  .accept-connect-icon {
+    padding-right: 5%;
   }
   .match-box-hover {
     padding-top: 5.1% !important;
@@ -303,10 +312,91 @@
     font-size: 3vw !important;
   }
   .match-rating {
-    padding: 1.4% 0.70% !important;
-    font-size: 2.2vw !important;
-    margin: 28.25% !important;
+    padding: 1.8% 2% 2.0% 1.1% !important;
+    font-size: 2.8vw!important;
+    margin: 22% 30%!important;
     width: 4.5%;
+  }
+  .img-connection {
+    height: calc(34.5vw);
+  }
+
+  .img-connection, .img-pending-connection {
+    height: 34.5vw;
+  }
+
+  .img-match {
+    height: 34.5vw;
+  }
+  .match-box-hover {
+    width: 36% !important;
+    padding-top: 0% !important;
+    padding-bottom: 16px !important;
+    height: auto;
+    font-size: 2.4vw !important;
+    font-weight: 800;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: rgba(50, 50, 50, 0.8);
+    opacity: 1;
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0%;
+    margin: 26vw 0 0 0;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+  }
+  .match-box-name {
+    padding: 6px 0px 0 0;
+    font-size: 0.8em !important;
+  }
+  .connection-box-hover {
+    width: 36% !important;
+    padding-top: 0% !important;
+    padding-bottom: 16px !important;
+    height: auto;
+    font-size: 2.4vw !important;
+    font-weight: 800;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: rgba(50, 50, 50, 0.8);
+    opacity: 1;
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0%;
+    margin: 26vw 0 0 0;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+  }
+  .temp-box-hover {
+    width: 36% !important;
+    padding-top: 0% !important;
+    padding-bottom: 16px !important;
+    height: auto;
+    font-size: 2.4vw !important;
+    font-weight: 800;
+    background-color: rgba(255, 255, 255, 0.98);
+    color: rgba(50, 50, 50, 0.8);
+    opacity: 1;
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0%;
+    margin: 26vw 0 0 0;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.98);
+    }
+  }
+  .similar-interests-card {
+    width: 94% !important;
+  }
+  .match-conversation-container {
+    width: 94% !important;
   }
 }
 
@@ -316,6 +406,7 @@
   }
   .profile-page-match {
     width: 98%;
+    margin-top: 25px;
   }
   .match-box-hover {
     padding-top: 10.0% !important;
@@ -324,8 +415,145 @@
     font-size: 6vw !important;
   }
   .match-rating {
-    padding: 2.2% 4.8% 2.2% 1% !important;
-    font-size: 3.7vw !important;
-    margin: 60.75% !important;
+    padding: 3.2% 6.8% 3.2% 1.6%!important;
+    font-size: 4.7vw!important;
+    margin: 46.75% 65%!important;
+    width: 4.6%;
   }
+  .img-connection, .img-pending-connection {
+    height: 71vw;
+  }
+  .img-match {
+    height: 71vw;
+  }
+  .personal-info-card, .poll-container-card {
+    width: 100%;
+    padding: 0;
+    margin: 0px;
+    border: 0px solid #e0e0e0;
+  }
+  .personal-info-card-userdata {
+      float: left;
+      margin-left: 16px;
+      font-size: 1.2em;
+      width: 59%;
+  }
+  .personal-info-card-picture img {
+    border-radius: 0px;
+  }
+  .profile-page-connections, .profile-page-data {
+    width: 100%;
+    margin: 0;
+    padding: 0 0 30px 0;
+    border: 0px solid #e0e0e0;
+  }
+  .user-interest-container {
+    padding: 0.25% 0;
+    overflow: hidden;
+    height: 20px;
+    margin-top: 6px;
+  }
+  .edit-user-info {
+    display: none;
+  }
+  .nav-middle {
+    font-size: 17px;
+    font-weight: 800;
+    padding-top: 10px;
+  }
+  .match-box-hover {
+width: 81%!important;
+    padding-top: 0!important;
+    padding-bottom: 18px!important;
+    height: auto;
+    font-size: 6.1vw!important;
+    font-weight: 800;
+    color: rgba(50,50,50,.8);
+    opacity: 1;
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0;
+    margin: 51vw 0 0;
+    background-color: rgba(255, 255, 255, 0.75);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+  }
+  .match-box-name {
+    padding: 6px 0 0;
+    font-size: 0.8em!important;
+  }
+  .connection-box-hover {
+width: 81%!important;
+    padding-top: 0!important;
+    padding-bottom: 18px!important;
+    height: auto;
+    font-size: 6.1vw!important;
+    font-weight: 800;
+    color: rgba(50,50,50,.8);
+    opacity: 1;
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0;
+    margin: 51vw 0 0;
+    background-color: rgba(255, 255, 255, 0.75);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+  }
+  .temp-box-hover {
+width: 81%!important;
+    padding-top: 0!important;
+    padding-bottom: 18px!important;
+    height: auto;
+    font-size: 6.1vw!important;
+    font-weight: 800;
+    color: rgba(50,50,50,.8);
+    opacity: 1;
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0;
+    margin: 51vw 0 0;
+    background-color: rgba(255, 255, 255, 0.75);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.75);
+    }
+  }
+  .accept-connect-icon {
+    color: green;
+    padding-right: 4%;
+    font-size: 1.8em;
+  }
+  .reject-connect-icon {
+    color: red;
+    font-size: 1.8em;
+  }
+  .similar-interests-card {
+    border: 0px solid #e0e0e0 !important;
+    width: 100% !important;
+    margin: 0% auto !important;
+  }
+  .match-conversation-container {
+    border: 1px solid #D0D0D0;
+    width: 100% !important;
+    margin: 0 auto !important;
+  }
+  .similar-interest {
+    font-size: 0.9em !important;
+    margin: 1.25% 0 0 2% !important;
+  }
+  .question-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .user-info-form {
+    height: 26em;
+  }
+
 }
