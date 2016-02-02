@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-class Notifications extends Component {
+class MessageNotifications extends Component {
   render() {
   	var count
   	if (this.props.data) count = Object.keys(this.props.data).length
@@ -15,9 +15,9 @@ class Notifications extends Component {
   }
 }
 
-Notifications.PropTypes = {
+MessageNotifications.PropTypes = {
   state: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
 }
 
-export default Notifications
+export default MessageNotifications
