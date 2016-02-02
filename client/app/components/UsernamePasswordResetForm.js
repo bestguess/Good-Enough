@@ -33,7 +33,7 @@ class UsernamePasswordResetForm extends Component {
       } else if (thisComp.emailReceived) {
         return (
           <div className="login-box">
-            <span className="recover-password-email-success">An email has been sent to {thisComp.email} with further instructions</span>
+            <span className="recover-password-email-success">An email has been sent to {thisComp.email} with further instructions.</span>
           </div>
         )
       }

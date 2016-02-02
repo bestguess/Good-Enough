@@ -21,11 +21,29 @@ class NewPasswordForm extends Component {
   render() {
     var thisComp = this.props.state.usernamePasswordReset.userData;
     var passwordCheck;
-    var emailAlert;
+    var newPasswordReceived;
     var formButton;
+    var spinner;
+
+    if (thisComp.newPasswordReceived) {
+      return (
+        <div className="login-box password-reset">
+          <h1 className="login-logo password-reset">Success! You're password has been reset.</h1>
+          <span>If you are not redirected in 5 seconds, please click <Link to='/logIn'>here</Link></span>
+        </div>
+      )
+    }
+
+    if (thisComp.isFetching) {
+      return (
+        <div className="login-box password-reset">
+          <h1 className="login-logo password-reset">Reseting your password...</h1>
+        </div>
+      )
+    }
 
     if (thisComp.emailReceived) {
-      emailAlert = <span className="recover-password-email-success">An email has been sent to {thisComp.email} with instructions to reset password</span>
+      newPasswordReceived = <span className="recover-password-email-success">An email has been sent to {thisComp.email} with instructions to reset password</span>
     }
 
     if (thisComp.newPassword === thisComp.confirmNewPassword) {
@@ -40,7 +58,7 @@ class NewPasswordForm extends Component {
       <div className="login-box">
         <h1 className="login-logo password-reset">Reset your password</h1>
         <div className="login-form">
-        {emailAlert}
+        {newPasswordReceived}
         <div>
           <input type="password" className="recover-password-email" placeholder="Enter new password" ref="newPassword" onKeyUp={() => this.handleKeyUpNewPassword('newPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />
           <input type="password" className="recover-password-email" placeholder="Confirm new password" ref="confirmNewPassword" onKeyUp={() => this.handleKeyUpConfirmNewPassword('confirmNewPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />
