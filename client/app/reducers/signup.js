@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, SURVEY_ERROR } from '../constants/SignUp_ActionTypes'
+import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, SURVEY_ERROR, DEMO_USER } from '../constants/SignUp_ActionTypes'
 import { validateEmail, addAuthToken } from '../helpers'
 
 const initialState = {
@@ -197,6 +197,10 @@ export default function SignUp(state = initialState, action) {
         newState.validationChecks.stage5error = true;
       }
       return newState
+
+    case DEMO_USER:
+      console.log('demo user')
+      return state
 
     default:
     	return state
