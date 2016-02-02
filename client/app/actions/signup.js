@@ -24,3 +24,8 @@ export function continueSurvey() {
 export function surveyError() {
 	return { type: types.SURVEY_ERROR };
 }
+
+export function demoUser() {
+	return { type: types.DEMO_USER };
+}
+
