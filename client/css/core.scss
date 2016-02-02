@@ -28,11 +28,11 @@ nav {
 }
 
 .recover-password-email-success {
-  margin-left: 5%;
+
 }
 
 .recover-password-email-error {
-  margin-left: 10%;
+  margin-left: 1.5em;
   color: red;
 }
 
@@ -508,6 +508,32 @@ h1 {
   font-size: 2.4em;
 }
 
+.password-reset-success {
+  padding: 15px;
+}
+
+.login-form-recover-password {
+  margin: 0px auto;
+  width: 19em;
+  border-radius: 3px;
+  padding: 19px 0 10px 0;
+  height: 3.5em;
+  input {
+    clear: both;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 15px auto;
+    display: block;
+    padding: 5px 3%;
+    width: 94%;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1.5px solid #e0e0e0;
+    color: #7d7d7d;
+  }
+}
+
 .login-form {
   margin: 0px auto;
   width: 19em;
@@ -543,6 +569,19 @@ input[type="submit"] {
   outline: none;
   width: 19em;
   display: block;
+}
+
+.notification-spot-recover-password {
+  padding: 15px;
+}
+
+.recover-password-box {
+  margin-top: 7%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 47px 35px 35px 35px;
+  width: 25em;
+  border-radius: 3px;
+  box-shadow: rgba(225, 229, 225, 0.7) 1px 1px 5px;
 }
 
 .login-box {
