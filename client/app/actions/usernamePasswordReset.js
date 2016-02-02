@@ -75,10 +75,10 @@ export function recoverPassword() {
 }
 
 export function submitNewPassword() {
+  var count = 0;
   return function (dispatch, getState) {
     // Dispatch recoverIsFetching to load spinner/fetching.
     dispatch(recoverPasswordIsFetching());
-
     var state = getState();
     var email = state.usernamePasswordReset.userData;
     console.log('State inside recoverPassword middleware: ', state);
@@ -95,19 +95,19 @@ export function submitNewPassword() {
       .then(res => {
         console.log('res: ', res)
         if (res.status >= 200 && res.status < 400) {
-          // Dispatch the optimisticRecoverPassword so the reducer can update the state.
-          dispatch(optimisticSubmitNewPassword());
+          var start = new Date().getTime()/1000;
           console.log('original: ', res)
           res.json()
-          // Set user ID and Session Token to localStorage
-          .then(data => {console.log('Server Response: ', data);
-            console.log('dispatched..........')
+          .then(data => {
+            console.log('Server Response: ', data);
+            // Dispatch the optimisticRecoverPassword so the reducer can update the state.
+            dispatch(optimisticSubmitNewPassword());
+            // Redirect user to /logIn after 5 seconds.
+            setTimeout(() => {dispatch(routeActions.push('/logIn'))}, 5000)
           })
-          // TODO: inform the user to check his/her email for further instructions
-          .then(() => { dispatch(routeActions.push('/logIn')) });
         } else {
-            // Dispatch submitNewPasswordFailed to stop spinner/fetching.
-            dispatch(submitNewPasswordFailed());
+          // Dispatch submitNewPasswordFailed to stop spinner/fetching.
+          dispatch(submitNewPasswordFailed());
         }
       })
       .catch(error => { console.log('request failed', error)});

@@ -28,8 +28,10 @@ class NewPasswordForm extends Component {
     if (thisComp.newPasswordReceived) {
       return (
         <div className="login-box password-reset">
-          <h1 className="login-logo password-reset">Success! You're password has been reset.</h1>
-          <span>If you are not redirected in 5 seconds, please click <Link to='/logIn'>here</Link></span>
+          <h1 className="login-logo password-reset">Success!</h1>
+          <div className='password-reset-success'>
+            <span>Your password has been reset. If you are not redirected in 5 seconds, please click <Link to='/logIn'>here</Link> to login.</span>
+          </div>
         </div>
       )
     }
