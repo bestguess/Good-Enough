@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
+import { demoLogin } from '../../helpers'
 
 class PublicNav extends Component {
   render() {
@@ -12,7 +13,7 @@ class PublicNav extends Component {
     const { state, actions } = this.props
     return (
       <nav className="public-nav">
-        <li className='nav-left'><button className="demo-button" onClick={this.props.actions.demoUser}>Demo</button></li>
+        <li className='nav-left'><button className="demo-button" onClick={() => demoLogin(this.props)}>Demo</button></li>
         <li className='nav-right'>{button}</li>
         <li className='nav-middle'></li>
       </nav>
