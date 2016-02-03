@@ -71,8 +71,8 @@ nav {
 }
 
 .public-nav {
-  background-color: transparent;
-  color: #7f8d8e;
+  background-color: #25b79a;
+  color: white;
 }
 
 .private-nav {
@@ -93,9 +93,13 @@ nav {
   width: 30%;
   font-size: 24px;
   font-weight: 800;
-  padding-top: 5px;
+  padding-top: 0%;
   float: right;
   list-style-type: none;
+}
+
+.title {
+  padding-top: 5px;
 }
 
 .nav-right {
@@ -118,21 +122,56 @@ nav a {
 }
 
 .public-nav a {
-  color: $primary-green;
+  color: white;
 }
 
 .demo-button {
-  border: 1px solid $primary-green;
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: $primary-green;
   border-radius: 3px;
-  color: $primary-green;
-  background-color: transparent;
+  font-size: 0.75em;
+  cursor: pointer;
+  margin: 7px 10px;
+  padding: 4px 5%;
+  &:hover {
+    border: 1px solid transparent;
+    background-color: #fff;
+    color: $primary-green;
+  }
+}
+
+.demo-icon {
+  margin-right: 10px;
+}
+
+.demo-left {
+  color: #fff;
+  border: 1px solid #fff;
+  background-color: $primary-green;
+  border-radius: 3px;
   font-size: 1em;
   cursor: pointer;
-  padding: 1% 4%;
+  margin: -3px 10px 0px 0px;
+  padding: 4px 5%;
   &:hover {
-    color: #fff;
-    background-color: $primary-green;
+    border: 1px solid transparent;
+    background-color: #fff;
+    color: $primary-green;
   }
+  display: none;
+}
+
+.fa-desktop {
+  font-size: 0.8em;
+}
+
+@media only screen and (max-width: 850px) {
+
+  .github { 
+    display: none; 
+  }
+
 }
 
 footer {
@@ -158,6 +197,7 @@ footer {
 }
 
 @media screen and (max-height: 750px) {
+
   footer {
     opacity: 0;
   }
@@ -173,6 +213,7 @@ h1 {
 
 .logo {
   font-weight: 700;
+  padding-top: 0.5em;
   color: $primary-green;
   margin: 0px auto;
   font-size: 2.4em;
@@ -181,7 +222,7 @@ h1 {
 
 .logo-img {
   width: 12em;
-  padding: 2em 0 1.2em 0;
+  padding: 2em 0 1em 0;
 }
 
 .question-form {
@@ -284,14 +325,6 @@ h1 {
 .signup-error {
   background-color: red;
   color: white;
-}
-
-.banner-img {
-  position: absolute;
-  bottom: -160px;
-  width: 100%;
-  z-index: -20;
-  opacity: 1;
 }
 
 /** Question Buttons for Personality Test ** */
