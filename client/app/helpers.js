@@ -96,3 +96,19 @@ export const validateEmail = function(email) {
 }
 
 
+
+// Only works on login/signup page
+export const demoLogin = function(props) {
+  fetch('/app/users/demo', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      props.actions.demoUser(data)
+    }).catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
