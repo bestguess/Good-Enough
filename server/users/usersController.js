@@ -37,7 +37,6 @@ module.exports = {
             });
           }else{
             userObject.question = nextQuestion;
-            console.log("data being sent should say accpeted true", userObject);
             res.status(200).send(userObject);
             console.log("now resetting accepted status")
             for(var i = 0; i < user.matches.length; i++){
@@ -83,7 +82,6 @@ module.exports = {
 
   signUp: function(req, res, next){
     var user = req.body;
-    console.log(user);
     // If user already exists, interrupt chain
     User.findOne({email: user.email}, function(err, user){
       if(user){
