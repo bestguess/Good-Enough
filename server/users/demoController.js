@@ -36,8 +36,11 @@ module.exports = {
     ]
 
     // Find Mark
-    User.findOne({id:"56a26ce4396710e14d67c299"}, function(err, foundMark){
-      if(err || !foundMark) console.log('error finding demo user Mark for demo reset');
+    User.findById("56a26ce4396710e14d67c299", function(err, foundMark){
+      if(err || !foundMark){
+        console.log('error finding demo user Mark for demo reset');
+        return next();
+      }
       // Find Ivan in Mark's matches and return him to a requesting connection
       // and reset new messages data from Hank
       else{
@@ -57,49 +60,52 @@ module.exports = {
             resetHank = true;
           }
         }
-      }
-      // Update Mark's data
-      User.findByIdAndUpdate("56a26ce4396710e14d67c299", {matches: foundMark.matches, question: 0}, function(err){
-        if(err) console.log('error resetting demo user Mark');
-        // Find Ivan
-        User.findOne({id:"56a25f7c9f4fae594a8620bd"}, function(err, foundIvan){
-          if(err || !foundIvan) console.log('error finding Ivan for demo reset');
-          // Find Mark in Ivan's matches and return him to a requestee
-          else{
-            for(var i = 0; i < foundIvan.matches.length; i++){
-              if(foundIvan.matches[i].id === "56a26ce4396710e14d67c299"){
-                foundIvan.matches[i].display = false;
-                foundIvan.matches[i].connected = false;
-                foundIvan.matches[i].requested = false;
-                foundIvan.matches[i].accepted = false;
-                break;
+        // Update Mark's data
+        User.findByIdAndUpdate("56a26ce4396710e14d67c299", {matches: foundMark.matches, question: 0}, function(err){
+          if(err) console.log('error resetting demo user Mark');
+          // Find Ivan
+          User.findById("56a25f7c9f4fae594a8620bd", function(err, foundIvan){
+            if(err || !foundIvan){
+              console.log('error finding Ivan for demo reset');
+              return next();
+            }
+            // Find Mark in Ivan's matches and return him to a requestee
+            else{
+              for(var i = 0; i < foundIvan.matches.length; i++){
+                if(foundIvan.matches[i].id === "56a26ce4396710e14d67c299"){
+                  foundIvan.matches[i].display = false;
+                  foundIvan.matches[i].connected = false;
+                  foundIvan.matches[i].requested = false;
+                  foundIvan.matches[i].accepted = false;
+                  break;
+                }
               }
             }
-          }
-          // Update Ivan's data
-          User.findByIdAndUpdate("56a25f7c9f4fae594a8620bd", {matches:foundIvan.matches}, function(err){
-            if(err) console.log('error resetting demo data for Ivan');
-            // Reset conversation between Mark and Ivan
-            Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a25f7c9f4fae594a8620bd"]}}, function(err){
-              if(err) console.log('error finding conversation between Mark and Ivan for demo reset');
-              // Reset conversation between Mark and Josh
-              Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}}, function(err){
-                if(err) console.log('error finding conversation between Mark and Josh for demo reset');
-                // Reset conversation between Mark and Hank
-                Messages.findOneAndUpdate({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}},{messages:hankMessages}, function(err){
-                  if(err) console.log('error finding conversation between Mark and Hank for demo reset');
-                  // Provide Mark's email and password for authentication check
-                  if(req.body !== {}) req.body = {};
-                  req.body.email = 'mark';
-                  req.body.password = '1234';
-                  return next();
-                });
+            // Update Ivan's data
+            User.findByIdAndUpdate("56a25f7c9f4fae594a8620bd", {matches:foundIvan.matches}, function(err){
+              if(err) console.log('error resetting demo data for Ivan');
+              // Reset conversation between Mark and Ivan
+              Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a25f7c9f4fae594a8620bd"]}}, function(err){
+                if(err) console.log('error finding conversation between Mark and Ivan for demo reset');
+                // Reset conversation between Mark and Josh
+                Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}}, function(err){
+                  if(err) console.log('error finding conversation between Mark and Josh for demo reset');
+                  // Reset conversation between Mark and Hank
+                  Messages.findOneAndUpdate({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}},{messages:hankMessages}, function(err){
+                    if(err) console.log('error finding conversation between Mark and Hank for demo reset');
+                    // Provide Mark's email and password for authentication check
+                    if(req.body !== {}) req.body = {};
+                    req.body.email = 'mark';
+                    req.body.password = '1234';
+                    return next();
+                  });
 
+                });
               });
-            });
-          })
+            })
+          });
         });
-      });
+      }
     })
 
   }
