@@ -83,12 +83,12 @@ module.exports = {
   signUp: function(req, res, next){
     var user = req.body;
     // If user already exists, interrupt chain
-    User.findOne({email: user.email}, function(err, user){
-      if(user){
+    User.findOne({email: user.email}, function(err, founduser){
+      if(founduser){
         console.log("User already exists");
         res.status(403).send("user already exists");
         return next();
-      }
+      }else{
 
     user.birthday = helpers.splitDate(user.birthday);
     console.log("Splitting birthday");
@@ -96,8 +96,6 @@ module.exports = {
     var userObject = {};
     // Required fields with which to create user
 
-    // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender',
-    //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
     var properties = new helpers.UserData;
     var failings = [];
     var failed = false;
@@ -163,6 +161,7 @@ module.exports = {
           }
         });
       });
+     }
     }
     });
 
