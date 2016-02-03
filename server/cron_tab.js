@@ -1,7 +1,7 @@
-var db = require('../db_config.js');
+var db = require('./db_config.js');
 var mongoose = require('mongoose');
 var User = db.Users;
-var match = require('../helpers/matching_algo.js');
+var match = require('./helpers/matching_algo.js');
 
 var CronJob = require('cron').CronJob;
 
