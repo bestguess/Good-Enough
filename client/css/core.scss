@@ -1,3 +1,6 @@
+$primary-green: #25b79a;
+
+
 body {
   background-color: #eef3f4;
   font-family: "Open Sans", sans-serif;
@@ -28,11 +31,11 @@ nav {
 }
 
 .recover-password-email-success {
-  margin-left: 5%;
+
 }
 
 .recover-password-email-error {
-  margin-left: 10%;
+  margin-left: 1.5em;
   color: red;
 }
 
@@ -44,13 +47,13 @@ nav {
   width: 100%;
   text-align: center;
   font-size: 1em;
-  color: #25b79a;
+  color: $primary-green;
   text-decoration: none;
   padding: 0%;
   margin-top:12px;
   button {
     font-size: 16px;
-    color: #25b79a;
+    color: $primary-green;
     padding: 8px 12px;
     text-align: center;
     background-color: #eef3f4;
@@ -83,7 +86,7 @@ nav {
   margin-left: 5%;
   list-style-type: none;
   text-align: left;
-  padding-top: 10px;
+  padding-top: 11px;
 }
 
 .nav-middle {
@@ -102,7 +105,7 @@ nav {
   list-style-type: none;
   color: white;
   text-align: right;
-  padding-top: 10px;
+  padding-top: 11px;
 }
 
 nav a {
@@ -115,7 +118,21 @@ nav a {
 }
 
 .public-nav a {
-  color: #25b79a;
+  color: $primary-green;
+}
+
+.demo-button {
+  border: 1px solid $primary-green;
+  border-radius: 3px;
+  color: $primary-green;
+  background-color: transparent;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 1% 4%;
+  &:hover {
+    color: #fff;
+    background-color: $primary-green;
+  }
 }
 
 footer {
@@ -156,7 +173,7 @@ h1 {
 
 .logo {
   font-weight: 700;
-  color: #25b79a;
+  color: $primary-green;
   margin: 0px auto;
   font-size: 2.4em;
   background-color: #eef3f4;
@@ -181,12 +198,12 @@ h1 {
 }
 
 .question-form-submit-button {
-    width: 100%;
-    text-align: center;
-    padding: 0;
-    height: 73px;
-    z-index: 90;
-    background-color: #EEF3F4;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+  height: 73px;
+  z-index: 90;
+  background-color: #EEF3F4;
 }
 
 .question-form-button {
@@ -194,7 +211,7 @@ h1 {
   color: white;
   padding: 8px 12px;
   text-align: center;
-  background-color: #25b79a;
+  background-color: $primary-green;
   border: none;
   border-radius: 3px;
   margin: 2% auto 0%;
@@ -250,13 +267,18 @@ h1 {
   font-size: 20px;
   font-weight: 500;
   width: 350px;
-  color: #25b79a;
+  color: $primary-green;
   padding: 0.8em 0%;
   text-align: center;
   background-color: transparent;
-  border: 1px solid #25b79a;
+  border: 1px solid $primary-green;
   border-radius: 3px;
+  cursor: pointer;
   margin: 0px auto;
+  &:hover {
+    color: #fff;
+    background-color: $primary-green;
+  }
 }
 
 .signup-error {
@@ -266,7 +288,7 @@ h1 {
 
 .banner-img {
   position: absolute;
-  bottom: 0;
+  bottom: -160px;
   width: 100%;
   z-index: -20;
   opacity: 1;
@@ -314,18 +336,18 @@ h1 {
       height: 100%;
       z-index: 1;
       &:checked + label {
-        background: #25b79a;
+        background: $primary-green;
         color: white;
-        border: 4px solid #25b79a;
+        border: 4px solid $primary-green;
       }
     }
   }
 }
 
 .Checked + label {
-  background: #25b79a;
+  background: $primary-green;
   color: white;
-  border: 4px solid #25b79a;
+  border: 4px solid $primary-green;
 }
 
 .question-buttons label {
@@ -408,7 +430,7 @@ h1 {
       margin: 0px;
       &:checked + label {
         background: #e0e0e0;
-        color: #25b79a;
+        color: $primary-green;
       }
     }
   }
@@ -503,9 +525,35 @@ h1 {
 
 .login-logo {
   font-weight: 700;
-  color: #25b79a;
+  color: $primary-green;
   margin: 0px auto;
   font-size: 2.4em;
+}
+
+.password-reset-success {
+  padding: 15px;
+}
+
+.login-form-recover-password {
+  margin: 0px auto;
+  width: 19em;
+  border-radius: 3px;
+  padding: 19px 0 10px 0;
+  height: 3.5em;
+  input {
+    clear: both;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 15px auto;
+    display: block;
+    padding: 5px 3%;
+    width: 94%;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1.5px solid #e0e0e0;
+    color: #7d7d7d;
+  }
 }
 
 .login-form {
@@ -535,7 +583,7 @@ input[type="submit"] {
   color: white;
   padding: 8px 12px;
   text-align: center;
-  background-color: #25b79a;
+  background-color: $primary-green;
   border: none;
   border-radius: 3px;
   margin: 20px auto 30px auto;
@@ -543,6 +591,19 @@ input[type="submit"] {
   outline: none;
   width: 19em;
   display: block;
+}
+
+.notification-spot-recover-password {
+  padding: 15px;
+}
+
+.recover-password-box {
+  margin-top: 7%;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 47px 35px 35px 35px;
+  width: 25em;
+  border-radius: 3px;
+  box-shadow: rgba(225, 229, 225, 0.7) 1px 1px 5px;
 }
 
 .login-box {
@@ -755,7 +816,7 @@ progress {
     border-radius: 9px;
   }
   &::-webkit-progress-value {
-    background-color: #25b79a;
+    background-color: $primary-green;
     border-radius: 9px;
   }
 }

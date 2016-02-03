@@ -24,7 +24,6 @@ class LogInForm extends Component {
       loginErr = <span className="loginError">Invalid username/password</span>
     }
 
-
     return (
       <div className="login-box">
         <h1 className="login-logo">Login</h1>

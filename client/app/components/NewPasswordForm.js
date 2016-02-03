@@ -19,16 +19,36 @@ class NewPasswordForm extends Component {
   }
 
   render() {
-    var thisState = this.props.state.usernamePasswordReset.userData;
+    var thisComp = this.props.state.usernamePasswordReset.userData;
     var passwordCheck;
-    var emailAlert;
+    var newPasswordReceived;
     var formButton;
+    var spinner;
 
-    if (thisState.emailReceived) {
-      emailAlert = <span className="recover-password-email-success">An email has been sent to {thisState.email} with instructions to reset password</span>
+    if (thisComp.newPasswordReceived) {
+      return (
+        <div className="login-box password-reset">
+          <h1 className="login-logo password-reset">Success!</h1>
+          <div className='password-reset-success'>
+            <span>Your password has been reset. If you are not redirected in 5 seconds, please click <Link to='/logIn'>here</Link> to login.</span>
+          </div>
+        </div>
+      )
     }
 
-    if (thisState.newPassword === thisState.confirmNewPassword) {
+    if (thisComp.isFetching) {
+      return (
+        <div className="login-box password-reset">
+          <h1 className="login-logo password-reset">Reseting your password...</h1>
+        </div>
+      )
+    }
+
+    if (thisComp.emailReceived) {
+      newPasswordReceived = <span className="recover-password-email-success">An email has been sent to {thisComp.email} with instructions to reset password</span>
+    }
+
+    if (thisComp.newPassword === thisComp.confirmNewPassword) {
       passwordCheck = <span className="passwordCheck"></span>;
       formButton = <button onClick={this.props.actions.submitNewPassword} className="question-form-button valid">Submit</button>
     } else {
@@ -40,7 +60,7 @@ class NewPasswordForm extends Component {
       <div className="login-box">
         <h1 className="login-logo password-reset">Reset your password</h1>
         <div className="login-form">
-        {emailAlert}
+        {newPasswordReceived}
         <div>
           <input type="password" className="recover-password-email" placeholder="Enter new password" ref="newPassword" onKeyUp={() => this.handleKeyUpNewPassword('newPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />
           <input type="password" className="recover-password-email" placeholder="Confirm new password" ref="confirmNewPassword" onKeyUp={() => this.handleKeyUpConfirmNewPassword('confirmNewPassword')} onKeyPress={(event) => this.handleKeyPress(event)} />

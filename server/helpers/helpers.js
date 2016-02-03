@@ -1,13 +1,15 @@
 var fs = require('fs');
 var db = require('../db_config.js');
 var Token = db.Token;
+var im = require('imagemagick');
+var path = require('path');
 
 module.exports = {
   convertPhoto : function(photo,email){
     if(photo.slice(0,4) === "http") return photo;
     var decodedImage = new Buffer(photo
     .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
-    var fileName = email.replace("@","").replace(".","") + ".jpeg";
+    var fileName = email.replace("@","").replace(".","") + "." + photo.match(/\/(.*?)\;/)[1];
     var fileLocation = "./server/uploads/" + fileName;
 
     if (!fs.existsSync('./server/uploads/')) fs.mkdirSync('./server/uploads/');
@@ -15,7 +17,25 @@ module.exports = {
     fs.writeFile(fileLocation, decodedImage, function(err) {
       if (err) console.error(err);
     });
-    return "picture/" + fileName;
+    im.crop({
+      srcPath: path.join(__dirname + "/../uploads/" + fileName),
+      dstPath: path.join(__dirname + "/../uploads/cropped" + fileName),
+      width: 400,
+      height: 400,
+      quality: 1,
+      gravity: 'Center'
+    }, function(err, stdout, stderr){
+      if (err) console.log(err);
+
+      fs.unlink(fileLocation, function(err) {
+         if (err) return console.error(err);
+         console.log("File deleted successfully!");
+      });
+
+    });
+
+    console.log("picture/cropped" + fileName);
+    return "picture/cropped" + fileName;
   },
 
   // Authentication check
