@@ -156,7 +156,7 @@ module.exports = {
                 result.score += conflicts[type][person_type]-10;
               }
             }
-            //if(user_id === "56a6d20c6e4ccfd61d208e5f" && result.id === "56a53c7df7ef1aae05fe3c02") console.log("\n\nScore:",result.score,"\n\n");
+            
             //knocks off points if you're of the opposite gender
             if(user.gender !== list[p].gender) result.score += 0;
 
@@ -177,7 +177,7 @@ module.exports = {
             }
             //sends back an array of information to be saved in matches
             result.score = Math.round(Math.min((100-((result.score/0.9)-10)),99));
-            if(result.score>0) resultArr.push(result);
+            if(result.score>60) resultArr.push(result);
           }
         }
         callback(resultArr);
