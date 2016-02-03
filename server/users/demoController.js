@@ -91,7 +91,7 @@ module.exports = {
                 Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}}, function(err){
                   if(err) console.log('error finding conversation between Mark and Josh for demo reset');
                   // Reset conversation between Mark and Hank
-                  Messages.findOneAndUpdate({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}},{messages:hankMessages}, function(err){
+                  Messages.findByIdAndUpdate("56b22b4c6f5ba80853405724",{messages:hankMessages}, function(err){
                     if(err) console.log('error finding conversation between Mark and Hank for demo reset');
                     // Provide Mark's email and password for authentication check
                     if(req.body !== {}) req.body = {};
