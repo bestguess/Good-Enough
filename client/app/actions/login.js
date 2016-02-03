@@ -50,3 +50,7 @@ export function logIn() {
   }
   return null;
 }
+
+export function demoUser(data) {
+  return { type: types.DEMO_USER, data };
+}
