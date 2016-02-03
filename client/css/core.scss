@@ -300,6 +300,7 @@ h1 {
   width: calc(50%);
   padding: 11px 0px;
   position: relative;
+  margin-right: 0;
 }
 
 .question-option-right-text {
@@ -482,7 +483,7 @@ h1 {
   width: 250px;
   border-radius: 3px;
   padding: 0.8% 1%;
-  height: 24em;
+  height: 25em;
   input {
     clear: both;
     font-size: 16px;
@@ -948,7 +949,7 @@ progress {
     display: none;
   }
   .question-buttons-mobile {
-    width: 100%;
+    width: 0%;
     left: calc(50% - 110px);
     position: relative;
     margin: 15px 0;

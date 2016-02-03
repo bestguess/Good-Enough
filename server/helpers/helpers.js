@@ -29,7 +29,7 @@ module.exports = {
 
       fs.unlink(fileLocation, function(err) {
          if (err) return console.error(err);
-         console.log("File deleted successfully!");
+         else console.log("File deleted successfully!");
       });
 
     });

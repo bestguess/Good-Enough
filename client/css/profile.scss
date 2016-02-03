@@ -453,6 +453,7 @@
   }
   .img-connection, .img-pending-connection {
     height: 71vw;
+    width: 95%;
   }
   .img-match {
     height: 71vw;
@@ -467,7 +468,7 @@
       float: left;
       margin-left: 16px;
       font-size: 1.2em;
-      width: 59%;
+      width: 55%;
   }
   .personal-info-card-picture img {
     border-radius: 0px;
@@ -488,9 +489,9 @@
     display: none;
   }
   .nav-middle {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 800;
-    padding-top: 10px;
+    padding-top: 13px;
   }
   .demo-button {
     display: none;
@@ -613,5 +614,21 @@ width: 81%!important;
     background-color: red;
     margin: 44% 72.5%;
     z-index: 4;
+  }
+  .delete-message {
+    opacity: 1;
+  }
+  .banner-img {
+    display: none;
+  }
+  .login-box, .recover-password-box {
+    padding: 48px 0;
+    width: 100%;
+  }
+  .login-form-recover-password {
+    width: 82%;
+  }
+  .question-form-submit-button-login {
+    width: 90%;
   }
 }
