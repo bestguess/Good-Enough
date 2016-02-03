@@ -13,9 +13,12 @@ class PublicNav extends Component {
     const { state, actions } = this.props
     return (
       <nav className="public-nav">
-        <li className='nav-left'><button className="demo-button" onClick={() => demoLogin(this.props)}>Demo</button></li>
+        <li className='nav-left'><button className="demo-left" onClick={() => demoLogin(this.props)}><i className="fa fa-desktop demo-icon"></i>Demo</button></li>
         <li className='nav-right'>{button}</li>
-        <li className='nav-middle'></li>
+        <li className='nav-middle'>
+        <button className="demo-button" onClick={() => demoLogin(this.props)}><i className="fa fa-desktop demo-icon"></i>Demo</button>
+        <a href="https://github.com/bestguess/Good-Enough"><button className="demo-button github"><i className="fa fa-github demo-icon"></i>Github</button></a>
+        </li>
       </nav>
     )
   }

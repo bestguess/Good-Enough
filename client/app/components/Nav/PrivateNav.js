@@ -12,7 +12,7 @@ class PrivateNav extends Component {
         <li className='nav-right'>
           <Link to="/"><span onClick={this.props.actions.logout}>Log Out</span></Link>
         </li>
-        <li className='nav-middle'>
+        <li className='nav-middle title'>
           <Link to="/profile" style={{fontWeight: '800'}}>Good Enough</Link>
         </li>
       </nav>
