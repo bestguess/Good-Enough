@@ -287,6 +287,10 @@
   width: 100%;
 }
 
+/* --------------------------------------------------------------------------------
+-------------------------------------- tablet screens------------------------------
+-----------------------------------------------------------------------------------*/
+
 @media only screen and (max-width: 895px) and (min-width: 600px) {
   .personal-info-card, .poll-container-card {
     width: 92%;
@@ -398,7 +402,34 @@
   .match-conversation-container {
     width: 94% !important;
   }
+  .notification-count {
+    border-radius: 50%;
+    padding-top: .25%;
+    padding-bottom: .25%;
+    font-size: 1.8vw;
+    width: 2.6%;
+    color: #fff;
+    background-color: red;
+    margin: 21% 32%;
+    z-index: 4;
+  }
+  .notification {
+    border: 2px solid #25b79a;
+    border-radius: 50%;
+    padding-top: .3%;
+    padding-bottom: 0.9%;
+    font-size: 4vw;
+    width: 6.7%;
+    color: #25b79a;
+    background-color: #e0e0e0;
+    margin: 22.25% 29.5%;
+  }
 }
+
+/* --------------------------------------------------------------------------------
+-------------------------------------- phone screens------------------------------
+-----------------------------------------------------------------------------------*/
+
 
 @media only screen and (max-width: 600px) {
   .poll-container-card {
@@ -427,10 +458,10 @@
     height: 71vw;
   }
   .personal-info-card, .poll-container-card {
-    width: 100%;
-    padding: 0;
-    margin: 0px;
-    border: 0px solid #e0e0e0;
+    width: 99%;
+    padding: 4px 0px 4px 4px;
+    margin: 0 0;
+    border: 0 solid #e0e0e0;
   }
   .personal-info-card-userdata {
       float: left;
@@ -475,7 +506,7 @@ width: 81%!important;
     text-align: center;
     cursor: pointer;
     border-radius: 0;
-    margin: 51vw 0 0;
+    margin: 52vw 0 0;
     background-color: rgba(255, 255, 255, 0.75);
     &:hover {
       background-color: rgba(255, 255, 255, 0.75);
@@ -499,7 +530,7 @@ width: 81%!important;
     text-align: center;
     cursor: pointer;
     border-radius: 0;
-    margin: 51vw 0 0;
+    margin: 52vw 0 0;
     background-color: rgba(255, 255, 255, 0.75);
     &:hover {
       background-color: rgba(255, 255, 255, 0.75);
@@ -519,7 +550,7 @@ width: 81%!important;
     text-align: center;
     cursor: pointer;
     border-radius: 0;
-    margin: 51vw 0 0;
+    margin: 52vw 0 0;
     background-color: rgba(255, 255, 255, 0.75);
     &:hover {
       background-color: rgba(255, 255, 255, 0.75);
@@ -555,5 +586,26 @@ width: 81%!important;
   .user-info-form {
     height: 26em;
   }
-
+  .notification {
+    border: 2px solid #25b79a;
+    border-radius: 50%;
+    padding-top: 0.9%;
+    padding-bottom: 1.7%;
+    font-size: 6vw;
+    width: 11.0%;
+    color: #25b79a;
+    background-color: #e0e0e0;
+    margin: 46.25% 68.5%;
+  }
+  .notification-count {
+    border-radius: 50%;
+    padding-top: .25%;
+    padding-bottom: .25%;
+    font-size: 2.8vw;
+    width: 4.6%;
+    color: #fff;
+    background-color: red;
+    margin: 44% 72.5%;
+    z-index: 4;
+  }
 }
