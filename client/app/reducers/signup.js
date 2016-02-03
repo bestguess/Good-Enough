@@ -10,7 +10,8 @@ const initialState = {
       stage3: false,
       stage4: false,
       stage5: false,
-      stage6: false
+      stage6: false,
+      stage7: false
     }
   },
   userData: {
@@ -43,7 +44,7 @@ const initialState = {
     stage4error: false,
     stage5error: false,
     emailCheck: false,
-    passwordCheck: false,
+    passwordCheck: false
   }
 }
 
@@ -145,6 +146,7 @@ export default function SignUp(state = initialState, action) {
       newState.viewData.signup.stage4 = false;
       newState.viewData.signup.stage5 = false;
       newState.viewData.signup.stage6 = false;
+      newState.viewData.signup.stage7 = false;
       newState.validationChecks.stage1 = false;
       newState.validationChecks.stage2 = false;
       newState.validationChecks.stage3 = false;
@@ -179,6 +181,9 @@ export default function SignUp(state = initialState, action) {
         newState.viewData.signup.stage5 = false;
         newState.validationChecks.stage5error = false;
         newState.viewData.signup.stage6 = true;
+      } else if (state.viewData.signup.stage6) {
+        newState.viewData.signup.stage6 = false;
+        newState.viewData.signup.stage7 = true;
       }
       return newState
 

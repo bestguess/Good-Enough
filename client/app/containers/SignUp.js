@@ -13,15 +13,18 @@ class SignUp extends Component {
 
   render() {
     const { state, actions } = this.props
+    var nav;
     var h1Content;
     if (this.props.state.signup.viewData.signup.stage0) {
+      nav = <PublicNav state={this.props.state} actions={this.props.actions} />
       h1Content = <div className="logo-img"><img className="img-full" src="../client/img/logo.png"/></div>
-    } else {
+    } else if (!this.props.state.signup.viewData.signup.stage7) {
+      nav = <PublicNav state={this.props.state} actions={this.props.actions} />
       h1Content = "Good Enough"
     }
     return (
       <div>
-        <PublicNav state={this.props.state} actions={this.props.actions} />
+        {nav}
         <h1 className="logo">{h1Content}</h1>
         <QuestionForm state={state} actions={actions} history={this.props.history}/>
       </div>
