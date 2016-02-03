@@ -134,7 +134,7 @@ module.exports = {
 
 
           //prevents scoring against yourself
-          if(user_id !== result.id){
+          if(user_id !== result.id && result.id !== "56a26ce4396710e14d67c299"){
 
           user_matches.forEach(function(match){
             if(match.id === list[p]._id.toString()){
@@ -156,7 +156,7 @@ module.exports = {
                 result.score += conflicts[type][person_type]-10;
               }
             }
-            
+
             //knocks off points if you're of the opposite gender
             if(user.gender !== list[p].gender) result.score += 0;
 
