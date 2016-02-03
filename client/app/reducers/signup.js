@@ -4,13 +4,13 @@ import { validateEmail, addAuthToken } from '../helpers'
 const initialState = {
   viewData: {
     signup: {
-      stage0: true,
+      stage0: false,
       stage1: false,
       stage2: false,
       stage3: false,
       stage4: false,
       stage5: false,
-      stage6: false,
+      stage6: true,
       stage7: false
     }
   },
@@ -206,6 +206,21 @@ export default function SignUp(state = initialState, action) {
     case DEMO_USER:
       var newState = Object.assign({}, state)
       addAuthToken(JSON.stringify(action.data))
+      // Reset signup stages & validation checks for if user logs out in current session
+      newState.viewData.signup.stage0 = true;
+      newState.viewData.signup.stage1 = false;
+      newState.viewData.signup.stage2 = false;
+      newState.viewData.signup.stage3 = false;
+      newState.viewData.signup.stage4 = false;
+      newState.viewData.signup.stage5 = false;
+      newState.viewData.signup.stage6 = false;
+      newState.viewData.signup.stage7 = false;
+      newState.validationChecks.stage1 = false;
+      newState.validationChecks.stage2 = false;
+      newState.validationChecks.stage3 = false;
+      newState.validationChecks.stage4 = false;
+      newState.validationChecks.stage5 = false;
+      // newState.validationChecks.clearForSubmit = false;
       return newState
 
     default:
