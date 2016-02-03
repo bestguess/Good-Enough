@@ -91,14 +91,26 @@ module.exports = {
                 // Reset conversation between Mark and Josh
                 Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}}, function(err){
                   if(err) console.log('error finding conversation between Mark and Josh for demo reset');
-                  // Reset conversation between Mark and Hank
-                  Messages.findByIdAndUpdate("56b22b4c6f5ba80853405724",{messages:hankMessages}, function(err){
-                    if(err) console.log('error finding conversation between Mark and Hank for demo reset');
-                    // Provide Mark's email and password for authentication check
-                    if(req.body !== {}) req.body = {};
-                    req.body.email = 'mark';
-                    req.body.password = '1234';
-                    return next();
+                  // Reset conversation between Mark and Kayla
+                  Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a7a1b6801fe4110081ee8f"]}}, function(err){
+                    if(err) console.log('error finding conversation between Mark and Kayla for demo reset');
+                    // Reset conversation between Mark and Festus
+                    Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a7f7f7ad6c801100fb81f7"]}}, function(err){
+                      if(err) console.log('error finding conversation between Mark and Festus for demo reset');
+                      // Reset conversation between Mark and Paolinni
+                      Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a6433a33014754090a5868"]}}, function(err){
+                        if(err) console.log('error finding conversation between Mark and Paolinni for demo reset');
+                        // Reset conversation between Mark and Hank
+                        Messages.findByIdAndUpdate("56b22b4c6f5ba80853405724",{messages:hankMessages}, function(err){
+                          if(err) console.log('error finding conversation between Mark and Hank for demo reset');
+                          // Provide Mark's email and password for authentication check
+                          if(req.body !== {}) req.body = {};
+                          req.body.email = 'mark';
+                          req.body.password = '1234';
+                          return next();
+                        });
+                      });
+                    });
                   });
 
                 });
