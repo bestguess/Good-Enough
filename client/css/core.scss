@@ -65,9 +65,9 @@ nav {
   }
 }
 
-.loginError {
-  margin-left: 50px;
-  color: red;
+.login-error {
+  background-color: red;
+  color: #fff;
 }
 
 .public-nav {
@@ -249,15 +249,18 @@ h1 {
 
 .question-form-button {
   font-size: 16px;
-  color: white;
   padding: 8px 12px;
   text-align: center;
-  background-color: $primary-green;
   border: none;
   border-radius: 3px;
   margin: 2% auto 0%;
   outline: none;
   width: 19em;
+  color: white;
+}
+
+.login-normal {
+  background-color: $primary-green;
 }
 
 .valid:hover {
@@ -593,8 +596,7 @@ h1 {
   margin: 0px auto;
   width: 19em;
   border-radius: 3px;
-  padding: 19px 0 10px 0;
-  height: 6em;
+  padding: 5px 0px 0px;
   input {
     clear: both;
     font-size: 16px;
@@ -618,6 +620,7 @@ input[type="submit"] {
   text-align: center;
   background-color: $primary-green;
   border: none;
+  border-bottom: 1.5px solid #e0e0e0;
   border-radius: 3px;
   margin: 20px auto 30px auto;
   height: 40px;
@@ -929,7 +932,7 @@ progress {
     max-width: 80%;
   }
   .login-form {
-    padding: 0px 0 10px 0;
+    padding: 0px 0px 0px 0;
     max-width: 95%;
   }
   .question {
