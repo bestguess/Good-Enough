@@ -27,7 +27,20 @@ module.exports = {
         newConvo.save(function(err, text){
         if(err) res.status(400).send(err);
         else res.status(201).send(newConvo);
-        return next();
+        Users.findOne({_id:req.body.to}, function(err, foundUser){
+                if(err) return next();
+                if(!foundUser) return next();
+                for(var i = 0; i < foundUser.matches.length; i++){
+                  if(foundUser.matches[i].id === req.body.from){
+                    if(!foundUser.matches[i].messages) foundUser.matches[i].messages = {};
+                    foundUser.matches[i].messages[req.body.messageID] = req.body.messageID;
+                    Users.findByIdAndUpdate(req.body.to, {matches:foundUser.matches}, function(err){
+                      if(err) return next();
+                    })
+                    return next();
+                  }
+                };
+              });
         });
       } else {
         Messages.findByIdAndUpdate(convo._id, {
@@ -123,6 +136,7 @@ module.exports = {
         return next();
       }
       res.status(200).send(convo);
+      // Reset messages property on user data to empty messages notifications
       Users.findOne({_id:req.body.id}, function(err, foundUser){
         for(var i = 0; i < foundUser.matches.length; i++){
           if(foundUser.matches[i].id === req.body.match_id){
