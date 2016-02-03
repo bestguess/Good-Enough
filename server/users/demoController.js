@@ -33,7 +33,8 @@ module.exports = {
             "date": "Wed Feb 03 2016 10:33:58 GMT-0600 (CST)",
             "user": "56a3ae3384d30acd5a59e5eb"
         }
-    ]
+    ];
+    var markInterests = "{\"discussion\":[\"Politics\",\"Technology\"],\"activity\":[\"Beer\",\"Javascript\"],\"polled\":[\"Watching Movies\",\"Going to Concerts\",\"Playing Board Games\",\"Exploring Cities\",\"Cheese\",\"Winter\",\"Republican\",\"Tea\"]}";
 
     // Find Mark
     User.findById("56a26ce4396710e14d67c299", function(err, foundMark){
@@ -61,7 +62,7 @@ module.exports = {
           }
         }
         // Update Mark's data
-        User.findByIdAndUpdate("56a26ce4396710e14d67c299", {matches: foundMark.matches, question: 0}, function(err){
+        User.findByIdAndUpdate("56a26ce4396710e14d67c299", {matches: foundMark.matches, question: 0, interests: markInterests}, function(err){
           if(err) console.log('error resetting demo user Mark');
           // Find Ivan
           User.findById("56a25f7c9f4fae594a8620bd", function(err, foundIvan){
