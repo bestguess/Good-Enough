@@ -19,21 +19,20 @@ class LogInForm extends Component {
     var formButton = <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
 
     if (this.props.state.login.loggedStatus) {
-      loginErr = <span className="loginError"></span>;
+      formButton = <button onClick={this.props.actions.logIn} className="question-form-button login-normal">Submit</button>
     } else {
-      loginErr = <span className="loginError">Invalid username/password</span>
+      formButton = <button onClick={this.props.actions.logIn} className="question-form-button login-error invalid">Invalid Username/Password</button>
     }
 
     return (
       <div className="login-box">
         <h1 className="login-logo">Login</h1>
         <div className="login-form">
-          {loginErr}
           <input placeholder="Enter Email" ref="email" onKeyUp={() => this.handleKeyUp('email')} onKeyPress={(event) => this.handleKeyPress(event)}  />
           <input type="password" placeholder="Enter Password" ref="password" onKeyUp={() => this.handleKeyUp('password')} onKeyPress={(event) => this.handleKeyPress(event)} />
         </div>
         <div className="question-form-submit-button-login">
-          <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
+          {formButton}
         </div>
         <div className="forgot-username-password">
           <Link to="/recover-password" className="forgot-username-password">Forgot password</Link>
