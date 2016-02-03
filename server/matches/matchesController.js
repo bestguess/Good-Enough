@@ -56,6 +56,12 @@ module.exports = {
     var user = req.body.id;
     var match = req.body.match_id;
 
+    // Silently reject match requests to and from demo user
+    if(user === "56a26ce4396710e14d67c299" || match === "56a26ce4396710e14d67c299"){
+      res.status(200);
+      return next();
+    }
+
     User.findOne({_id:match}, function(err, foundMatch){
       if(err){
         res.status(500).send(err);
