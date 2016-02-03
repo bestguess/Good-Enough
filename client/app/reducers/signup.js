@@ -199,8 +199,9 @@ export default function SignUp(state = initialState, action) {
       return newState
 
     case DEMO_USER:
-      console.log('demo user')
-      return state
+      var newState = Object.assign({}, state)
+      addAuthToken(JSON.stringify(action.data))
+      return newState
 
     default:
     	return state
