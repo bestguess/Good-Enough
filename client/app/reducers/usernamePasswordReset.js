@@ -9,7 +9,7 @@ const initialState = {
     newPassword: undefined,
     confirmNewPassword: undefined,
     newPasswordReceived: false,
-    redirectCount: 5
+    redirectCount: undefined
   }
 }
 
@@ -17,7 +17,7 @@ export default function RecoverPassword(state = initialState, action) {
   switch (action.type) {
     case DECREMENT_REDIRECT_TO_LOGIN_COUNT:
       var newState = Object.assign({}, state)
-      newState.redirectCount = action.count
+      newState.userData.redirectCount = action.count
       return newState
 
     case SAVE_NEW_PASSWORD_INPUT:
