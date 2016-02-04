@@ -2,7 +2,7 @@ import * as types from '../constants/UsernamePasswordReset_ActionTypes'
 import { routeActions } from 'redux-simple-router'
 
 export function decrementRedirectToLoginCount(count) {
-  return { type: types.DECREMENT_REDIRECT_TO_LOGIN_COUNT, count: count-- }
+  return { type: types.DECREMENT_REDIRECT_TO_LOGIN_COUNT, count }
 }
 
 export function saveRecoverPasswordInput(input, value) {
@@ -106,10 +106,13 @@ export function submitNewPassword() {
             console.log('Server Response: ', data);
             // Dispatch the optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticSubmitNewPassword());
+            // We don't want to mutate the state so we use a seperate counter to decrement then pass it into the reducer.
+            var newCount = 5;
             // Show countdown to user.
             var counter = setInterval(() => {
-              dispatch(decrementRedirectToLoginCount(userState.redirectCount));
+              newCount--;
               console.log('redirectCount: ', userState.redirectCount);
+              dispatch(decrementRedirectToLoginCount(newCount));
             }, 1000);
             // Redirect user to /logIn after 5 seconds.
             setTimeout(() => {
