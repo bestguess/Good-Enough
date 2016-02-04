@@ -37,7 +37,6 @@ module.exports = {
         });
       });
     });
-    c
   },
 
   // Authentication check
