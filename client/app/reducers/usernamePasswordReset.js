@@ -1,4 +1,4 @@
-import { SAVE_RECOVER_PASSWORD_INPUT, RECOVER_PASSWORD, RECOVER_PASSWORD_FAILED, SAVE_NEW_PASSWORD_INPUT, SAVE_CONFIRM_NEW_PASSWORD_INPUT, SUBMIT_NEW_PASSWORD, SUBMIT_NEW_PASSWORD_FAILED, RECOVER_PASSWORD_IS_FETCHING } from '../constants/UsernamePasswordReset_ActionTypes'
+import { SAVE_RECOVER_PASSWORD_INPUT, RECOVER_PASSWORD, RECOVER_PASSWORD_FAILED, SAVE_NEW_PASSWORD_INPUT, SAVE_CONFIRM_NEW_PASSWORD_INPUT, SUBMIT_NEW_PASSWORD, SUBMIT_NEW_PASSWORD_FAILED, RECOVER_PASSWORD_IS_FETCHING, REDIRECT_TO_LOGIN_COUNTER } from '../constants/UsernamePasswordReset_ActionTypes'
 
 const initialState = {
   userData: {
@@ -8,7 +8,8 @@ const initialState = {
     emailReceived: false,
     newPassword: undefined,
     confirmNewPassword: undefined,
-    newPasswordReceived: false
+    newPasswordReceived: false,
+    redirectCount: 5;
   }
 }
 

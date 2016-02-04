@@ -1,6 +1,10 @@
 import * as types from '../constants/UsernamePasswordReset_ActionTypes'
 import { routeActions } from 'redux-simple-router'
 
+export function counter() {
+  return { type: types.REDIRECT_TO_LOGIN_COUNTER }
+}
+
 export function saveRecoverPasswordInput(input, value) {
   return { type: types.SAVE_RECOVER_PASSWORD_INPUT, input, value }
 }
@@ -103,7 +107,9 @@ export function submitNewPassword() {
             // Dispatch the optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticSubmitNewPassword());
             // Redirect user to /logIn after 5 seconds.
-            setTimeout(() => {dispatch(routeActions.push('/logIn'))}, 5000)
+            setTimeout(() => {dispatch(routeActions.push('/logIn'))}, 5000);
+            // Show countdown to user.
+            setInterval(counter(), 1000);
           })
         } else {
           // Dispatch submitNewPasswordFailed to stop spinner/fetching.
