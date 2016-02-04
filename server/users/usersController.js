@@ -30,6 +30,14 @@ module.exports = {
       }
       (function getInfo(ques){
         Question.findOne({id: ques}, function (err, nextQuestion) {
+          // Reset all accepted notifications
+          console.log("now resetting accepted status")
+            for(var i = 0; i < user.matches.length; i++){
+              user.matches[i].accepted = false;
+            }
+            User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
+              if(err) return next();
+            })
           if(err) console.log(err);
           else if(!nextQuestion) res.send(userObject);
           else if(nextQuestion.skip){
@@ -40,13 +48,6 @@ module.exports = {
           }else{
             userObject.question = nextQuestion;
             res.status(200).send(userObject);
-            console.log("now resetting accepted status")
-            for(var i = 0; i < user.matches.length; i++){
-              user.matches[i].accepted = false;
-            }
-            User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
-              if(err) return next();
-            })
             next();
           }
         });
