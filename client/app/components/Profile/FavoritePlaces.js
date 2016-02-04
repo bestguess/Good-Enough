@@ -8,7 +8,7 @@ class FavoritePlaces extends Component {
       this.refs[input].value = val.charAt(0).toUpperCase() + val.slice(1);
       this.props.actions.saveInput(input, this.refs[input].value);
       this.refs[input].value = '';
-    } else if (e.which === 8) {
+    } else if (e.which === 8 && this.refs[input].value === '') {
       this.props.actions.deleteInput(input, 'last')
     }
   }

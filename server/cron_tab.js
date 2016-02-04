@@ -17,21 +17,14 @@ var reMatch = new CronJob('00 00 0-23/2 1-31 0-11 0-6', function() {
           });
         });
       });
-      console.log(`
-╥━━━━━━━━╭━━╮━━┳
-╢╭╮╭━━━━━┫┃▋▋━▅┣
-╢┃╰┫┈┈┈┈┈┃┃┈┈╰┫┣
-╢╰━┫┈┈┈┈┈╰╯╰┳━╯┣
-╢┊┊┃┏┳┳━━┓┏┳┫┊┊┣
-╨━━┗┛┗┛━━┗┛┗┛━━┻
-            `);
+      console.log("Rematched all Users");
     });
-}, function(){console.log('match recalculations completed via cron')}, true, 'America/Chicago');
+}, function(){console.log('match recalculations completed via cron');}, true, 'America/Chicago');
 
 var demoReset = new CronJob('00 00 0-23 1-31 0-11 0-6', function(){
   console.log('resetting demo user data via cron');
-  User.find({})
-})
+  User.find({});
+});
 
 // Run the reMatch cron job
 reMatch.start();
