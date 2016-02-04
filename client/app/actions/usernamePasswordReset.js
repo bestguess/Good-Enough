@@ -1,8 +1,8 @@
 import * as types from '../constants/UsernamePasswordReset_ActionTypes'
 import { routeActions } from 'redux-simple-router'
 
-export function decrementRedirectToLoginCount() {
-  return { type: types.DECREMENT_REDIRECT_TO_LOGIN_COUNT }
+export function decrementRedirectToLoginCount(count) {
+  return { type: types.DECREMENT_REDIRECT_TO_LOGIN_COUNT, count: count-- }
 }
 
 export function saveRecoverPasswordInput(input, value) {
@@ -84,9 +84,9 @@ export function submitNewPassword() {
     // Dispatch recoverIsFetching to load spinner/fetching.
     dispatch(recoverPasswordIsFetching());
     var state = getState();
-    var email = state.usernamePasswordReset.userData;
+    var userState = state.usernamePasswordReset.userData;
     console.log('State inside recoverPassword middleware: ', state);
-    console.log('Email inside recoverPassword middleware: ', email);
+    console.log('userState inside recoverPassword middleware: ', userState);
     fetch('/app/recoverPassword' + state.routing.location.pathname, {
         method: 'post',
         headers: {
@@ -94,7 +94,7 @@ export function submitNewPassword() {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(email)
+        body: JSON.stringify(userState)
       })
       .then(res => {
         console.log('res: ', res)
@@ -106,10 +106,16 @@ export function submitNewPassword() {
             console.log('Server Response: ', data);
             // Dispatch the optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticSubmitNewPassword());
-            // Redirect user to /logIn after 5 seconds.
-            setTimeout(() => {dispatch(routeActions.push('/logIn'))}, 5000);
             // Show countdown to user.
-            setInterval(decrementRedirectToLoginCount(), 1000);
+            var counter = setInterval(() => {
+              dispatch(decrementRedirectToLoginCount(userState.redirectCount));
+              console.log('redirectCount: ', userState.redirectCount);
+            }, 1000);
+            // Redirect user to /logIn after 5 seconds.
+            setTimeout(() => {
+              dispatch(routeActions.push('/logIn'));
+              clearInterval(counter);
+            }, 5000);
           })
         } else {
           // Dispatch submitNewPasswordFailed to stop spinner/fetching.
