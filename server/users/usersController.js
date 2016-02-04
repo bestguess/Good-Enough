@@ -195,6 +195,7 @@ module.exports = {
         }else if(!foundUser){
           res.status(400).send("User does not exist");
         }else{
+          // Compare hash of provided password with the hashed password in the database
           bcrypt.compare(user.password, foundUser.password, function(err, result) {
             if(err){
               res.status(500).send(err);
@@ -227,12 +228,14 @@ module.exports = {
 
   logout: function(req, res){
     user = req.body;
+    // Find session
     Token.find({user_id: user.id}, function(err, token){
       if(err){
         res.status(500).send();
       }else if(!token){
         res.status(401).send();
       }else{
+        // Clear all session tokens for this user in order to log out of all devices
         for(var i = 0; i < token.length; i++){
         Token.findOne({user_id: user.id, token: token[i].token}, function(err, foundToken){
           if(err) console.log('could not remove session');
@@ -244,7 +247,5 @@ module.exports = {
       }
     })
   },
-
-  // ToDo: changePicture function
 
 };
