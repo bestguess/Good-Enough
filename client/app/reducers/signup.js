@@ -203,9 +203,10 @@ export default function SignUp(state = initialState, action) {
       }
       return newState
 
+
     case DEMO_USER:
       var newState = Object.assign({}, state)
-      addAuthToken(JSON.stringify(action.data))
+      addAuthToken(JSON.stringify(action.tokenData))
       // Reset signup stages & validation checks for if user logs out in current session
       newState.viewData.signup.stage0 = true;
       newState.viewData.signup.stage1 = false;
@@ -222,6 +223,7 @@ export default function SignUp(state = initialState, action) {
       newState.validationChecks.stage5 = false;
       // newState.validationChecks.clearForSubmit = false;
       return newState
+
 
     default:
     	return state
