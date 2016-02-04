@@ -9,7 +9,7 @@ const initialState = {
     newPassword: undefined,
     confirmNewPassword: undefined,
     newPasswordReceived: false,
-    redirectCount: undefined
+    redirectCount: 5
   }
 }
 
