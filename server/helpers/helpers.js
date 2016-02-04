@@ -5,43 +5,40 @@ var im = require('imagemagick');
 var path = require('path');
 
 module.exports = {
-  convertPhoto : function(photo,email){
+  convertPhoto : function(photo,email,callback){
     // If photo is already on the web, Let's use their hosting instead :)
     if(photo.slice(0,4) === "http") return photo;
-    // -------------------------------------------------------------------------------------------------------------------
+    // if uploads folder doesn't exist, create it
+    if (!fs.existsSync('./server/uploads/')) fs.mkdirSync('./server/uploads/');
+
     // decodes the base64 image sent from the client, sets the filename to the user's email address, and the file location
-    // -------------------------------------------------------------------------------------------------------------------
     var decodedImage = new Buffer(photo
     .replace(/^data:image\/(png|gif|jpeg);base64,/,''), 'base64');
     var fileName = email.replace("@","").replace(".","") + "." + photo.match(/\/(.*?)\;/)[1];
     var fileLocation = "./server/uploads/" + fileName;
 
-    // if uploads folder doesn't exist, create it
-    if (!fs.existsSync('./server/uploads/')) fs.mkdirSync('./server/uploads/');
     // write the decoded image to the uploads folder
     fs.writeFile(fileLocation, decodedImage, function(err) {
-      if (err) console.error(err);
-    });
-    // --------------------------------------------------------
-    // Crops and centers the image to play better with our css.
-    // --------------------------------------------------------
-    im.crop({
-      srcPath: path.join(__dirname + "/../uploads/" + fileName),
-      dstPath: path.join(__dirname + "/../uploads/cropped" + fileName),
-      width: 400,
-      height: 400,
-      quality: 1,
-      gravity: 'Center'
-    }, function(err, stdout, stderr){
-      if (err) console.log(err);
-      // Deletes the original file sent over to save space
-      fs.unlink(fileLocation, function(err) {
-         if (err) return console.error(err);
-         else console.log("File deleted successfully!");
+      if (err) return console.error(err);
+      // Crops and centers the image to play better with our css
+      im.crop({
+        srcPath: path.join(__dirname + "/../uploads/" + fileName),
+        dstPath: path.join(__dirname + "/../uploads/cropped" + fileName),
+        width: 400,
+        height: 400,
+        quality: 1,
+        gravity: 'Center'
+      }, function(err, stdout, stderr){
+        if (err) return console.log(err);
+        // Deletes the original file sent over to save space
+        fs.unlink(fileLocation, function(err) {
+           if (err) return console.error(err);
+           else console.log("File deleted successfully!");
+        });
       });
     });
     console.log("picture/cropped" + fileName);
-    return "picture/cropped" + fileName;
+    callback("picture/cropped" + fileName);
   },
 
   // Authentication check
