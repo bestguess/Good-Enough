@@ -27,7 +27,7 @@ export default function Match(state = initialState, action) {
 
     case UPDATE_CONVO:
       var newState = Object.assign({}, state)
-      // updating convo in the state
+      // Updating convo in the state
       newState.conversation = action.convo.messages
     	return newState
 
@@ -43,13 +43,9 @@ export default function Match(state = initialState, action) {
       var userData = window.localStorage.getItem('GoodEnough')
       // Make server request to delete token storage on server side
       fetch('/app/users/logout', {
-        method: 'post',
-        headers: {
-          'mode': 'no-cors',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(JSON.parse(userData))
+        method: 'POST',
+        headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: userData
       })
       clearMessagesInterval()
       deleteAuthToken()

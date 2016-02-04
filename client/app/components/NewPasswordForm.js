@@ -30,7 +30,7 @@ class NewPasswordForm extends Component {
         <div className="login-box password-reset">
           <h1 className="login-logo password-reset">Success!</h1>
           <div className='password-reset-success'>
-            <span>Your password has been reset. If you are not redirected in 5 seconds, please click <Link to='/logIn'>here</Link> to login.</span>
+            <span>Your password has been reset. If you are not redirected in {thisComp.redirectCount} seconds, please click <Link to='/logIn'>here</Link> to login.</span>
           </div>
         </div>
       )
