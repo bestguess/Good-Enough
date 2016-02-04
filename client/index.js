@@ -43,7 +43,7 @@ const store = finalCreateStore(rootReducer);
 
 // Enables Hot Reload for Redux
 if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
+    // Enable Webpack Hot Module Replacement for Reducers
     module.hot.accept('./app/reducers', () => {
       const nextReducer = require('./app/reducers')
       store.replaceReducer(nextReducer)

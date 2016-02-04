@@ -25,7 +25,7 @@ export function surveyError() {
 	return { type: types.SURVEY_ERROR };
 }
 
-export function demoUser(data) {
-	return { type: types.DEMO_USER, data };
+export function demoUser(tokenData) {
+	return { type: types.DEMO_USER, tokenData };
 }
 
