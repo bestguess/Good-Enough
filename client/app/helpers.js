@@ -112,3 +112,31 @@ export const demoLogin = function(props) {
       console.log('Request failed', error);
     });
 }
+
+
+// Only works on match page
+export const getAllMessages = function(props) {
+  var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
+  requestData.match_id = props.state.routing.location.pathname.substring(1)
+  fetch('/app/messages/get', {
+          method: 'POST',
+          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData)
+        })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      props.actions.updateConvo(data)
+    }).catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
+
+var messageInterval
+export const startMessagesInterval = function(props) {
+  messageInterval = setInterval(function() { getAllMessages(props) }, 2000)
+}
+
+export const clearMessagesInterval = function(props) {
+ messageInterval = clearInterval(messageInterval)
+}

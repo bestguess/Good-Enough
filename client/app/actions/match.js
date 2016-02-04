@@ -4,8 +4,8 @@ export function saveMatchData(match_id, data, profile_matches) {
   return { type: types.SAVE_MATCH_DATA, match_id, data, profile_matches }
 }
 
-export function sendMessage(convo) {
-  return { type: types.SEND_MESSAGE, convo }
+export function updateConvo(convo) {
+  return { type: types.UPDATE_CONVO, convo }
 }
 
 export function saveInput(value) {

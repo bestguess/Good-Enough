@@ -5,7 +5,7 @@ import * as MatchActions from '../actions/match'
 import PrivateNav from '../components/Nav/PrivateNav'
 import SimilarInterests from '../components/Match/SimilarInterests'
 import MatchInfo from '../components/Match/MatchInfo'
-import { convertTimeStamp, status, json } from '../helpers'
+import { convertTimeStamp, status, json, getAllMessages, startMessagesInterval, clearMessagesInterval } from '../helpers'
 import Footer from '../components/Footer'
 
 function getMatchInfo(props) {
@@ -48,7 +48,7 @@ function sendMessage(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      props.actions.sendMessage(data)
+      props.actions.updateConvo(data)
     }).catch(function(error) {
       console.log('Request failed', error);
     });
@@ -68,36 +68,10 @@ function deleteMessage(props, messageID) {
     .then(status)
     .then(json)
     .then(function(data) {
-      props.actions.sendMessage(data)
+      props.actions.updateConvo(data)
     }).catch(function(error) {
       console.log('Request failed', error);
     });
-}
-
-function getAllMessages(props) {
-  var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
-  requestData.match_id = props.state.routing.location.pathname.substring(1)
-  fetch('/app/messages/get', {
-          method: 'POST',
-          headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(requestData)
-        })
-    .then(status)
-    .then(json)
-    .then(function(data) {
-      props.actions.sendMessage(data)
-    }).catch(function(error) {
-      console.log('Request failed', error);
-    });
-}
-
-var messageInterval
-function startMessagesInterval(props) {
-  // messageInterval = setInterval(function() { getAllMessages(props) }, 5000)
-}
-
-function clearMessagesInterval(props) {
- // messageInterval = clearInterval(messageInterval)
 }
 
 
@@ -181,12 +155,7 @@ class Match extends Component {
 
   componentWillMount() {
     getMatchInfo(this.props)
-    if (!messageInterval) {
-      startMessagesInterval(this.props)
-    } else {
-      clearMessagesInterval()
-      startMessagesInterval(this.props)
-    }
+    startMessagesInterval(this.props)
   }
 
   reRoute(props) {
