@@ -1,4 +1,5 @@
 import { LOG_IN, SAVE_LOGIN_INPUT, LOG_IN_FAILED } from '../constants/Login_ActionTypes'
+import { addAuthToken } from '../helpers'
 
 const initialState = {
   loggedStatus: true,
@@ -23,7 +24,7 @@ export default function LogIn(state = initialState, action) {
 
     case LOG_IN:
       var newState = Object.assign({}, state)
-      console.log('newState: ', newState)
+      addAuthToken(JSON.stringify(action.tokenData))
       newState.loggedStatus = true;
       return newState
 
