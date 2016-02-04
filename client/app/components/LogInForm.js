@@ -19,7 +19,7 @@ class LogInForm extends Component {
     var formButton = <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
 
     if (this.props.state.login.loggedStatus) {
-      formButton = <button onClick={this.props.actions.logIn} className="question-form-button login-normal">Submit</button>
+      formButton = <button onClick={this.props.actions.logIn} className="question-form-button normal">Submit</button>
     } else {
       formButton = <button onClick={this.props.actions.logIn} className="question-form-button login-error invalid">Invalid Username/Password</button>
     }
