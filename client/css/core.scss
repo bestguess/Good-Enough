@@ -933,12 +933,12 @@ progress {
     width: 270px;
   }
   .login-box {
-    padding: 39px 35px 15px 35px;
+    padding: 39px 35px 15px 35px !important;
     width: 19em;
     max-width: 80%;
   }
   .login-form {
-    padding: 0px 0px 0px 0;
+    padding: 0;
     max-width: 95%;
   }
   .question {
