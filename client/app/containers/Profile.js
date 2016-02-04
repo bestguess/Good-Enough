@@ -8,7 +8,7 @@ import PollContainer from '../components/Profile/PollContainer'
 import ProfileConnections from '../components/Profile/ProfileConnections'
 import ProfileMatches from '../components/ProfileMatches'
 import Footer from '../components/Footer'
-import { getUserInfo } from '../helpers'
+import { getUserInfo, clearMessagesInterval } from '../helpers'
 
 class Profile extends Component {
   constructor(props) {
@@ -16,7 +16,8 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    getUserInfo(this.props)
+    getUserInfo(this.props);
+    clearMessagesInterval();
   }
 
   reRoute(props) {
