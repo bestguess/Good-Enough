@@ -11,13 +11,15 @@ module.exports = {
 
   getUser: function(req, res, next){
     var user = req.body;
+    // Find the requested user's information
     User.findOne({_id: user.id}, function(err, user){
       if(err){
         res.status(404).send(err);
         return next();
       }
 
-      // purge password info from user object before sending
+      // Make a dictionary of the needed user information,
+      // which excludes password
       var properties = new helpers.UserData;
       var userObject = {};
         for(var key in properties){
@@ -95,9 +97,6 @@ module.exports = {
     // To be populated and submitted as a new user
     var userObject = {};
     // Required fields with which to create user
-
-    // var properties = {firstName:'firstName', lastName:'lastName', email:'email', password:'password', birthday:'birthday', gender:'gender',
-    //     interests:'interests', type:'type', personality:'personality', picture:'picture', places:'places', matches:'matches'};
     var properties = new helpers.UserData;
     var failings = [];
     var failed = false;
@@ -108,6 +107,7 @@ module.exports = {
       return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
 
+    // Make sure that all required fields have been sent with the request
     for(var key in properties){
       if(!user[key]){
         failings.push(properties[key]);
