@@ -1,8 +1,30 @@
 import React, { Component, PropTypes } from 'react'
-
 const { Link } = require('react-router');
+import { status, json } from '../helpers'
+
+function login(props) {
+  var userData = props.state.login.userData;
+  userData.email = userData.email.toLowerCase();
+  fetch('/app/users/signin', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData)
+  })
+    .then(status)
+    .then(json)
+    .then(function(data) {
+      console.log('Request succeeded with JSON response', data);
+      props.actions.login(data)
+    }).catch(function(error) {
+      console.log('Request failed', error);
+    });
+}
 
 class LogInForm extends Component {
+
+  reRoute() {
+    this.props.history.push({ pathname: '/profile' })
+  }
 
   handleKeyUp(input) {
     this.props.actions.saveLogInInput(input, this.refs[input].value)
@@ -10,18 +32,20 @@ class LogInForm extends Component {
 
   handleKeyPress(e) {
     if (e.which === 13) {
-      this.props.actions.logIn()
+      login(this.props)
     }
   }
 
   render() {
+    if (window.localStorage.getItem('GoodEnough')) this.reRoute()
+
     var loginErr;
-    var formButton = <button onClick={this.props.actions.logIn} className="question-form-button">Submit</button>
+    var formButton = <button onClick={() => login(this.props)} className="question-form-button">Submit</button>
 
     if (this.props.state.login.loggedStatus) {
-      formButton = <button onClick={this.props.actions.logIn} className="question-form-button normal">Submit</button>
+      formButton = <button onClick={() => login(this.props)} className="question-form-button normal">Submit</button>
     } else {
-      formButton = <button onClick={this.props.actions.logIn} className="question-form-button login-error invalid">Invalid Username/Password</button>
+      formButton = <button onClick={() => login(this.props)} className="question-form-button login-error invalid">Invalid Username/Password</button>
     }
 
     return (
