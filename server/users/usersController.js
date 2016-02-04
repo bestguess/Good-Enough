@@ -90,81 +90,79 @@ module.exports = {
         return next();
       }else{
 
-    user.birthday = helpers.splitDate(user.birthday);
-    console.log("Splitting birthday");
-    // To be populated and submitted as a new user
-    var userObject = {};
-    // Required fields with which to create user
+      user.birthday = helpers.splitDate(user.birthday);
+      console.log("Splitting birthday");
+      // To be populated and submitted as a new user
+      var userObject = {};
+      // Required fields with which to create user
 
-    var properties = new helpers.UserData;
-    var failings = [];
-    var failed = false;
+      var properties = new helpers.UserData;
+      var failings = [];
+      var failed = false;
 
-    function calculateAge(birthday) { // birthday is a date
-      var ageDifMs = Date.now() - birthday.getTime();
-      var ageDate = new Date(ageDifMs); // miliseconds from epoch
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-
-    for(var key in properties){
-      if(!user[key]){
-        failings.push(properties[key]);
-        failed = true;
-      }else{
-        if(key === 'interests' || key === 'personality') user[key] = JSON.stringify(user[key]);
-        userObject[key] = user[key];
+      function calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - birthday.getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
       }
-    }
 
-    // If any of the fields are not submitted then send 400
-    // and list of missing fields
-    if(failed){
-      console.log('signup failed: ', failings)
-      res.status(400).send(failings);
-      next();
-    }else{
-      userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
-      bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
-        console.log("BCrypting Password");
-
-        if(err){
-          res.status(500).send(err);
-          return next();
+      for(var key in properties){
+        if(!user[key]){
+          failings.push(properties[key]);
+          failed = true;
+        }else{
+          if(key === 'interests' || key === 'personality') user[key] = JSON.stringify(user[key]);
+          userObject[key] = user[key];
         }
-        if(!hash){
-          res.status(500).send("Error producing hash");
-          return next();
-        }
-        userObject.password = hash;
-        userObject.question = 0;
-        var newUser = User(userObject);
-        newUser.save(function(err, user){
+      }
 
-          if(err){
-            console.log(err,'err saving user')
-            res.status(500).send(err);
-            next();
-          }else{
-            console.log("User was saved :)");
-            User.find({}, function(err, users){
-              if(err) console.log(err);
-              users.forEach(function(user){
-                match.user(user, function (data){
-                  data.sort(function(a,b){ return b.score-a.score; });
-                  User.update({_id: user._id},{matches:data},function(err, user){
-                    if(err) console.log(err);
+      // If any of the fields are not submitted then send 400
+      // and list of missing fields
+      if(failed){
+        console.log('signup failed: ', failings)
+        res.status(400).send(failings);
+        next();
+      }else{
+        helpers.convertPhoto(userObject.picture, userObject.email, function(photoLoc){
+          userObject.picture = photoLoc;
+          bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
+            if(err){
+              res.status(500).send(err);
+              return next();
+            }
+            if(!hash){
+              res.status(500).send("Error producing hash");
+              return next();
+            }
+            userObject.password = hash;
+            userObject.question = 0;
+            var newUser = User(userObject);
+            newUser.save(function(err, user){
+              if(err){
+                console.log(err,'err saving user')
+                res.status(500).send(err);
+                next();
+              }else{
+                console.log("User was saved :)");
+                User.find({}, function(err, users){
+                  if(err) console.log(err);
+                  users.forEach(function(user){
+                    match.user(user, function (data){
+                      data.sort(function(a,b){ return b.score-a.score;});
+                      User.update({_id: user._id},{matches:data},function(err, user){
+                        if(err) console.log(err);
+                      });
+                    });
                   });
+                  helpers.createToken(req, res, next, user, helpers.genToken, "signup");
                 });
-              });
-              helpers.createToken(req, res, next, user, helpers.genToken, "signup");
+              }
             });
-          }
+          });
         });
-      });
-     }
-    }
+       }
+      }
     });
-
   },
 
   signIn: function(req, res, next){
