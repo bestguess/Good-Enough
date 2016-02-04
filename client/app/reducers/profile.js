@@ -97,7 +97,7 @@ export default function Profile(state = initialState, action) {
       var userData = window.localStorage.getItem('GoodEnough')
       // Make server request to delete token storage on server side
       fetch('/app/users/logout', {
-        method: 'post',
+        method: 'POST',
         headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: userData
       })

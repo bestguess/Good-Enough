@@ -17,7 +17,8 @@ var compiler = webpack(config);
 var port = process.env.PORT || 4000;
 
   app.use(morgan('dev'));
-  app.use(bodyParser.json({limit: '25mb'}));
+  app.use(bodyParser({limit: '50mb'}));
+  app.use(bodyParser.json());
   app.use(cookieParser());
   app.use(session({
     secret: 'session secret key',
@@ -29,12 +30,6 @@ var port = process.env.PORT || 4000;
 
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
-
-  server = app.listen(port, function(error){
-    return (error) ? console.error(error) : console.log('Listening on port %s', port);
-  });
-  var io = require('socket.io')(server);
-
 
   var usersRouter = express.Router();
   var messagesRouter = express.Router();
@@ -66,24 +61,10 @@ var port = process.env.PORT || 4000;
     res.sendFile(path.join(__dirname + '/../node_modules/' + req.url.substring(8)));
   });
 
-   // app.post('/socket',function(req,res,next){
-   //   io.sockets.emit("socket", req.body);
-   //   res.send({});
-   // });
-
-   io.on('connection', function (socket) {
-     console.log('New client connected!');
-
-     socket.on('fetchComments', function () {
-       console.log('New client connected!');
-     });
-
-     socket.on('newComment', function (comment, callback) {
-       console.log('New comment!');
-     });
-   });
-
   app.get('/*',function(req,res,next){
     res.sendFile(path.join(__dirname + '/../client/index.html'));
   });
 
+  app.listen(port, function(error){
+    return (error) ? console.error(error) : console.log('Listening on port %s', port);
+  });

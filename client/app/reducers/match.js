@@ -1,4 +1,5 @@
-import { SAVE_MATCH_DATA, SAVE_INPUT, SEND_MESSAGE, MATCH_LOGOUT, CLEAR_CURRENT_MATCH_DATA } from '../constants/Match_ActionTypes'
+import { SAVE_MATCH_DATA, SAVE_INPUT, UPDATE_CONVO, MATCH_LOGOUT, CLEAR_CURRENT_MATCH_DATA } from '../constants/Match_ActionTypes'
+import { deleteAuthToken, clearMessagesInterval } from '../helpers'
 
 const initialState = {
   conversation: []
@@ -24,9 +25,9 @@ export default function Match(state = initialState, action) {
   		return newState
 
 
-    case SEND_MESSAGE:
+    case UPDATE_CONVO:
       var newState = Object.assign({}, state)
-      // updating convo in the state
+      // Updating convo in the state
       newState.conversation = action.convo.messages
     	return newState
 
@@ -42,16 +43,12 @@ export default function Match(state = initialState, action) {
       var userData = window.localStorage.getItem('GoodEnough')
       // Make server request to delete token storage on server side
       fetch('/app/users/logout', {
-        method: 'post',
-        headers: {
-          'mode': 'no-cors',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(JSON.parse(userData))
+        method: 'POST',
+        headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: userData
       })
-      // Remove local storage ID and Token
-      window.localStorage.removeItem('GoodEnough');
+      clearMessagesInterval()
+      deleteAuthToken()
       // Reset Initial Profile State (for if a different user logs on right after logout)
       newState = {};
       return newState
