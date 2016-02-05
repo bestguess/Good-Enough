@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// const Spinner = require('react-spinkit');
 const { Link } = require('react-router');
 
 class UsernamePasswordResetForm extends Component {
@@ -17,23 +16,24 @@ class UsernamePasswordResetForm extends Component {
   }
 
   render() {
-    var thisComp = this.props.state.usernamePasswordReset.userData;
-    var loginErr;
-    var emailAlert;
+    var currState = this.props.state.usernamePasswordReset.userData;
     var spinner;
     var status;
 
-    if (thisComp.isFetching) {
+    // If fetching, let the user know we're checking the email.
+    if (currState.isFetching) {
       status = <span className="recover-password-email-error"></span>;
       spinner = <span>Checking this email account...</span>
     } else {
       spinner = <span className="recover-password-email-error"></span>;
-      if (!thisComp.foundEmail) {
+      // If no email found, notify the user.
+      if (!currState.foundEmail) {
         status = <span className="recover-password-email-error">No account with that email exists</span>
-      } else if (thisComp.emailReceived) {
+        // If found, notify that the user to check his/her email.
+      } else if (currState.emailReceived) {
         return (
           <div className="login-box">
-            <span className="recover-password-email-success">An email has been sent to {thisComp.email} with further instructions.</span>
+            <span className="recover-password-email-success">An email has been sent to {currState.email} with further instructions.</span>
           </div>
         )
       }

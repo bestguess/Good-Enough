@@ -82,7 +82,6 @@ export default function RecoverPassword(state = initialState, action) {
       newState.userData.isFetching = false;
       return newState
 
-
     default:
       return state
   }

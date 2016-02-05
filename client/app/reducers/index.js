@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
 	login,
 	profile,
 	match,
-  	usernamePasswordReset,
+  usernamePasswordReset,
 	routing: routeReducer
 })
 
