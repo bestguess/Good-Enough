@@ -38,7 +38,6 @@ module.exports = {
           }else{
             userObject.question = nextQuestion;
             res.status(200).send(userObject);
-            console.log("now resetting accepted status")
             for(var i = 0; i < user.matches.length; i++){
               user.matches[i].accepted = false;
             }
@@ -91,7 +90,6 @@ module.exports = {
       }else{
 
       user.birthday = helpers.splitDate(user.birthday);
-      console.log("Splitting birthday");
       // To be populated and submitted as a new user
       var userObject = {};
       // Required fields with which to create user
@@ -115,14 +113,12 @@ module.exports = {
           userObject[key] = user[key];
         }
       }
-
       // If any of the fields are not submitted then send 400
       // and list of missing fields
       if(failed){
-        console.log('signup failed: ', failings)
         res.status(400).send(failings);
         next();
-      }else{
+      }else{        
         helpers.convertPhoto(userObject.picture, userObject.email, function(photoLoc){
           userObject.picture = photoLoc;
           bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
@@ -136,14 +132,13 @@ module.exports = {
             }
             userObject.password = hash;
             userObject.question = 0;
-            var newUser = User(userObject);
+            var newUser = User(userObject);            
             newUser.save(function(err, user){
               if(err){
                 console.log(err,'err saving user')
                 res.status(500).send(err);
                 next();
               }else{
-                console.log("User was saved :)");
                 User.find({}, function(err, users){
                   if(err) console.log(err);
                   users.forEach(function(user){
