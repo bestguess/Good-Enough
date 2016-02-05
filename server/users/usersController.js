@@ -11,13 +11,15 @@ module.exports = {
 
   getUser: function(req, res, next){
     var user = req.body;
+    // Find the requested user's information
     User.findOne({_id: user.id}, function(err, user){
       if(err){
         res.status(404).send(err);
         return next();
       }
 
-      // purge password info from user object before sending
+      // Make a dictionary of the needed user information,
+      // which excludes password
       var properties = new helpers.UserData;
       var userObject = {};
         for(var key in properties){
@@ -28,6 +30,14 @@ module.exports = {
       }
       (function getInfo(ques){
         Question.findOne({id: ques}, function (err, nextQuestion) {
+          // Reset all accepted notifications
+          console.log("now resetting accepted status")
+            for(var i = 0; i < user.matches.length; i++){
+              user.matches[i].accepted = false;
+            }
+            User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
+              if(err) return next();
+            })
           if(err) console.log(err);
           else if(!nextQuestion) res.send(userObject);
           else if(nextQuestion.skip){
@@ -38,12 +48,15 @@ module.exports = {
           }else{
             userObject.question = nextQuestion;
             res.status(200).send(userObject);
+<<<<<<< HEAD
             for(var i = 0; i < user.matches.length; i++){
               user.matches[i].accepted = false;
             }
             User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
               if(err) return next();
             })
+=======
+>>>>>>> master
             next();
           }
         });
@@ -89,11 +102,11 @@ module.exports = {
         return next();
       }else{
 
+
       user.birthday = helpers.splitDate(user.birthday);
       // To be populated and submitted as a new user
       var userObject = {};
       // Required fields with which to create user
-
       var properties = new helpers.UserData;
       var failings = [];
       var failed = false;
@@ -104,6 +117,7 @@ module.exports = {
         return Math.abs(ageDate.getUTCFullYear() - 1970);
       }
 
+      // Make sure that all required fields have been sent with the request
       for(var key in properties){
         if(!user[key]){
           failings.push(properties[key]);
@@ -113,6 +127,7 @@ module.exports = {
           userObject[key] = user[key];
         }
       }
+
       // If any of the fields are not submitted then send 400
       // and list of missing fields
       if(failed){
@@ -172,6 +187,7 @@ module.exports = {
         }else if(!foundUser){
           res.status(400).send("User does not exist");
         }else{
+          // Compare hash of provided password with the hashed password in the database
           bcrypt.compare(user.password, foundUser.password, function(err, result) {
             if(err){
               res.status(500).send(err);
@@ -204,12 +220,14 @@ module.exports = {
 
   logout: function(req, res){
     user = req.body;
+    // Find session
     Token.find({user_id: user.id}, function(err, token){
       if(err){
         res.status(500).send();
       }else if(!token){
         res.status(401).send();
       }else{
+        // Clear all session tokens for this user in order to log out of all devices
         for(var i = 0; i < token.length; i++){
         Token.findOne({user_id: user.id, token: token[i].token}, function(err, foundToken){
           if(err) console.log('could not remove session');
@@ -221,7 +239,5 @@ module.exports = {
       }
     })
   },
-
-  // ToDo: changePicture function
 
 };
