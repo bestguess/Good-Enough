@@ -54,7 +54,7 @@ function submitSurvey(props) {
 
 class QuestionForm extends Component {
 
-  reRoute(props) {
+  reRoute() {
     this.props.history.push({ pathname: '/profile' })
   }
 
@@ -67,7 +67,7 @@ class QuestionForm extends Component {
   }
 
   render() {
-    if (window.localStorage.getItem('GoodEnough')) this.reRoute(this.props)
+    if (window.localStorage.getItem('GoodEnough')) this.reRoute()
     var content;
     var formButton;
     var progressBar;
@@ -139,7 +139,7 @@ class QuestionForm extends Component {
       }
     } else if (this.props.state.signup.viewData.signup.stage7) {
       this.submitUserInfo(this.props)
-      content = <div className="loading-gif"><img src="./client/img/match.gif" /></div>
+      content = <div className="loading-gif"><img className="img-full" src="./client/img/match.gif" /></div>
     }
 
     return (

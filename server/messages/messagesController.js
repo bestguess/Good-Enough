@@ -6,8 +6,9 @@ var Users = db.Users;
 module.exports = {
 
   send : function(req, res, next){
-    console.log(req.body)    
     var date = new Date().toString();
+
+    // set up structure for message
     var text = {
       user : req.body.from,
       date : date,
@@ -15,11 +16,13 @@ module.exports = {
       id : req.body.messageID
     };
 
+    // find the conversation to add the new message to
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
       if(err){
         res.status(500).send(err);
         return next();
       }
+      // if no conversation exist, create one with the new message
       if(convo === null){
         var newConvo = new Messages;
         newConvo.users.push( req.body.to , req.body.from );
@@ -43,6 +46,7 @@ module.exports = {
               });
         });
       } else {
+        // else, add the new message to the existing conversation
         Messages.findByIdAndUpdate(convo._id, {
           $push: { messages : text}
         } ,function(err) { 
@@ -80,7 +84,6 @@ module.exports = {
   },
 
   delete : function(req, res, next){
-    console.log(req.body)
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
       if(err){
         res.status(500).send(err);

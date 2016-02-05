@@ -1,4 +1,5 @@
 
+// Converts time stamp on messages for 'user-friendly' reading
 export const convertTimeStamp = function(timestamp) {
 	var monthObj = {
 		'Jan': "January",
@@ -43,22 +44,12 @@ export const convertTimeStamp = function(timestamp) {
 	} else {
 		zone = ' AM'
 	}
-	var result = hour + ':' + minute + zone + ' - ' + month + ' ' + day + ', ' + year
-	return result;
+	return hour + ':' + minute + zone + ' - ' + month + ' ' + day + ', ' + year
 }
 
-export const addAuthToken = function(token) {
-	// Set token data into local storage
-	window.localStorage.setItem('GoodEnough', token)
-}
-
-export const deleteAuthToken = function() {
-	// Remove local storage ID and Token
-  	window.localStorage.removeItem('GoodEnough');
-}
-
+// Helper functions on all server requests
 export const status = function(response) {
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
   	deleteAuthToken()
   	window.location.href = '/login';
   }
@@ -69,11 +60,24 @@ export const status = function(response) {
   }
 }
 
-
 export const json = function(response) { return response.json() }
 
 
-// Only works on profile page
+// Adds Token to Local Storage on Signup/Login/Demo
+export const addAuthToken = function(tokenData) {
+  // Set token data into local storage
+  window.localStorage.setItem('GoodEnough', tokenData)
+}
+
+// Removes Token on Logout
+export const deleteAuthToken = function() {
+  // Remove local storage ID and Token
+    window.localStorage.removeItem('GoodEnough');
+}
+
+
+
+// Function only works on profile page
 export const getUserInfo = function(props) {
   var userData = window.localStorage.getItem('GoodEnough')
   fetch('/app/users/info', {
@@ -92,12 +96,12 @@ export const getUserInfo = function(props) {
 
 export const validateEmail = function(email) {
 	var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+  return re.test(email);
 }
 
 
 
-// Only works on login/signup page
+// Function only works on login/signup page
 export const demoLogin = function(props) {
   fetch('/app/users/demo', {
           method: 'POST',
@@ -114,7 +118,8 @@ export const demoLogin = function(props) {
 }
 
 
-// Only works on match page
+
+// Function only works on match page to update live messaging
 export const getAllMessages = function(props) {
   var requestData = JSON.parse(window.localStorage.getItem('GoodEnough'))
   requestData.match_id = props.state.routing.location.pathname.substring(1)
@@ -132,11 +137,17 @@ export const getAllMessages = function(props) {
     });
 }
 
+
+
+// Triggers starting and stopping of live messaging on match page
 var messageInterval
 export const startMessagesInterval = function(props) {
   messageInterval = setInterval(function() { getAllMessages(props) }, 2000)
 }
-
 export const clearMessagesInterval = function(props) {
  messageInterval = clearInterval(messageInterval)
 }
+
+
+
+

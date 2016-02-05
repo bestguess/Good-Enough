@@ -46,7 +46,7 @@ nav {
 .forgot-username-password {
   width: 100%;
   text-align: center;
-  font-size: 1em;
+  font-size: 0.95em;
   color: $primary-green;
   text-decoration: none;
   padding: 0%;
@@ -917,9 +917,15 @@ progress {
   .match-box-name {
     font-size: 2vw !important;
   }
+  .loading-gif {
+    width: 100%
+  }
 }
 
 @media only screen and (max-width: 600px) {
+  .loading-gif {
+    width: 100%
+  }
   .personal-info-card {
     width: 96%;
   }
@@ -933,12 +939,12 @@ progress {
     width: 270px;
   }
   .login-box {
-    padding: 39px 35px 15px 35px;
+    padding: 39px 35px 15px 35px !important;
     width: 19em;
     max-width: 80%;
   }
   .login-form {
-    padding: 0px 0px 0px 0;
+    padding: 0;
     max-width: 95%;
   }
   .question {
