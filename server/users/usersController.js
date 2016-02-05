@@ -30,7 +30,6 @@ module.exports = {
       }
       (function getInfo(ques){
         Question.findOne({id: ques}, function (err, nextQuestion) {
-          if(err) console.log(err);
 
           // Reset all accepted notifications
           for(var i = 0; i < user.matches.length; i++){
@@ -40,6 +39,7 @@ module.exports = {
             if(err) return next();
           })
 
+          if(err) console.log(err);
           // if the user has answered all polling questions, just send back their basic data
           else if(!nextQuestion) res.send(userObject);
           // if the next question is supposed to be skipped, increase the number on the users data and give back the next question
