@@ -109,6 +109,6 @@ export default function Profile(state = initialState, action) {
 
     default:
     	return state
-      
+
   }
 }

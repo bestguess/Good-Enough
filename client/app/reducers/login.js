@@ -37,6 +37,6 @@ export default function LogIn(state = initialState, action) {
 
     default:
     	return state
-      
+
   }
 }
