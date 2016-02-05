@@ -37,15 +37,15 @@ export function recoverPasswordFailed() {
   return { type: types.RECOVER_PASSWORD_FAILED }
 }
 
+// This action creator returns a function instead of an action so we can wait for the promise to complete before we update our store.
 export function recoverPassword() {
+  // Even though we're returning a function, we can still dispatch actions as shown below.
   return function (dispatch, getState) {
-    // Dispatch recoverIsFetching to load spinner
+    // Dispatch recoverIsFetching to load spinner/fetching.
     dispatch(recoverPasswordIsFetching());
-
     var state = getState();
-    var email = state.usernamePasswordReset.userData;
-    console.log('State inside recoverPassword middleware: ', state);
-    console.log('Email inside recoverPassword middleware: ', email);
+    var currState = state.usernamePasswordReset.userData;
+    console.log('Current State inside recoverPassword middleware: ', currState);
     fetch('/app/recoverPassword/recover-password', {
         method: 'post',
         headers: {
@@ -53,23 +53,22 @@ export function recoverPassword() {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(email)
+        body: JSON.stringify(currState)
       })
       .then(res => {
-        console.log('res: ', res)
+        console.log('res: ', res);
         if (res.status >= 200 && res.status < 400) {
-          console.log('original: ', res)
           res.json()
-          // Set user ID and Session Token to localStorage
-          .then(data => {console.log('Server Response: ', data);
+          .then(data => {
+            console.log('Server Response: ', data);
             // Dispatch the optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticRecoverPassword());
           })
-          // TODO: inform the user to check his/her email for further instructions
+          // Redirect user to check his/her email for further instructions.
           .then(() => { dispatch(routeActions.push('/recover-password')) });
         } else {
           console.log('FAILED YO');
-          // TODO: dispatch a recoverPasswordFailed action if failed
+          // Dispatch a recoverPasswordFailed action if failed.
           dispatch(recoverPasswordFailed());
         }
       })
@@ -78,15 +77,15 @@ export function recoverPassword() {
   return null;
 }
 
+// This action creator returns a function instead of an action so we can wait for the promise to complete before we update our store.
 export function submitNewPassword() {
-  var count = 0;
+  // Even though we're returning a function, we can still dispatch actions as shown below.
   return function (dispatch, getState) {
     // Dispatch recoverIsFetching to load spinner/fetching.
     dispatch(recoverPasswordIsFetching());
     var state = getState();
-    var userState = state.usernamePasswordReset.userData;
-    console.log('State inside recoverPassword middleware: ', state);
-    console.log('userState inside recoverPassword middleware: ', userState);
+    var currState = state.usernamePasswordReset.userData;
+    console.log('currState inside recoverPassword middleware: ', currState);
     fetch('/app/recoverPassword' + state.routing.location.pathname, {
         method: 'post',
         headers: {
@@ -94,24 +93,23 @@ export function submitNewPassword() {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userState)
+        body: JSON.stringify(currState)
       })
       .then(res => {
-        console.log('res: ', res)
+        console.log('res: ', res);
         if (res.status >= 200 && res.status < 400) {
-          var start = new Date().getTime()/1000;
-          console.log('original: ', res)
           res.json()
           .then(data => {
             console.log('Server Response: ', data);
             // Dispatch the optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticSubmitNewPassword());
-            // We don't want to mutate the state so we use a seperate counter to decrement then pass it into the reducer.
+            // We use a seperate counter to decrement to avoid mutating the state then pass it into the reducer.
             var newCount = 5;
-            // Show countdown to user.
+            // Show redirect counter to user.
             var counter = setInterval(() => {
               newCount--;
-              console.log('redirectCount: ', userState.redirectCount);
+              console.log('redirectCount: ', currState.redirectCount);
+              // Dispatch decrement action to update the state every second so user can see the countdown.
               dispatch(decrementRedirectToLoginCount(newCount));
             }, 1000);
             // Redirect user to /logIn after 5 seconds.
@@ -125,7 +123,7 @@ export function submitNewPassword() {
           dispatch(submitNewPasswordFailed());
         }
       })
-      .catch(error => { console.log('request failed', error)});
+      .catch(error => { console.log('request failed', error) });
   }
   return null;
 }

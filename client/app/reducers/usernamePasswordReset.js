@@ -1,4 +1,14 @@
-import { SAVE_RECOVER_PASSWORD_INPUT, RECOVER_PASSWORD, RECOVER_PASSWORD_FAILED, SAVE_NEW_PASSWORD_INPUT, SAVE_CONFIRM_NEW_PASSWORD_INPUT, SUBMIT_NEW_PASSWORD, SUBMIT_NEW_PASSWORD_FAILED, RECOVER_PASSWORD_IS_FETCHING, DECREMENT_REDIRECT_TO_LOGIN_COUNT } from '../constants/UsernamePasswordReset_ActionTypes'
+import {
+  SAVE_RECOVER_PASSWORD_INPUT,
+  RECOVER_PASSWORD,
+  RECOVER_PASSWORD_FAILED,
+  SAVE_NEW_PASSWORD_INPUT,
+  SAVE_CONFIRM_NEW_PASSWORD_INPUT,
+  SUBMIT_NEW_PASSWORD,
+  SUBMIT_NEW_PASSWORD_FAILED,
+  RECOVER_PASSWORD_IS_FETCHING,
+  DECREMENT_REDIRECT_TO_LOGIN_COUNT
+ } from '../constants/UsernamePasswordReset_ActionTypes'
 
 const initialState = {
   userData: {
@@ -71,7 +81,6 @@ export default function RecoverPassword(state = initialState, action) {
       newState.userData.newPasswordReceived = false;
       newState.userData.isFetching = false;
       return newState
-
 
     default:
       return state
