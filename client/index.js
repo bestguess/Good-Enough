@@ -5,6 +5,10 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
 
+// ES6 Promises and Isomorphic Fetch
+require('es6-promise').polyfill();
+import 'isomorphic-fetch'
+
 // React/Redux Router
 import { Router, Route, IndexRoute } from 'react-router'
 import { syncHistory, routeReducer } from 'redux-simple-router'
