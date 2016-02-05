@@ -31,10 +31,12 @@ class PollContainer extends Component {
     return (
       <div className="poll-container-card">
         <p className="poll-question">Poll: {this.props.state.profile.data.question.question}</p>
-        {answer4}
-        {answer3}
-        {answer2}
-        {answer1}
+        <div className="poll-buttons">
+          {answer4}
+          {answer3}
+          {answer2}
+          {answer1}
+        </div>
       </div>
     )
   }
