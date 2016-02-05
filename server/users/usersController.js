@@ -30,33 +30,34 @@ module.exports = {
       }
       (function getInfo(ques){
         Question.findOne({id: ques}, function (err, nextQuestion) {
-          // Reset all accepted notifications
-          console.log("now resetting accepted status")
-            for(var i = 0; i < user.matches.length; i++){
-              user.matches[i].accepted = false;
-            }
-            User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
-              if(err) return next();
-            })
           if(err) console.log(err);
+
+          // Reset all accepted notifications
+          for(var i = 0; i < user.matches.length; i++){
+            user.matches[i].accepted = false;
+          }
+          User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
+            if(err) return next();
+          })
+
+          // if the user has answered all polling questions, just send back their basic data
           else if(!nextQuestion) res.send(userObject);
+          // if the next question is supposed to be skipped, increase the number on the users data and give back the next question
           else if(nextQuestion.skip){
             User.findByIdAndUpdate(req.body.id,{question:ques + 1},function(err, changes){
               if(err) console.log(err);
               else getInfo(ques + 1);
             });
+          // send the user data with the polling question to be asked
           }else{
             userObject.question = nextQuestion;
             res.status(200).send(userObject);
-<<<<<<< HEAD
             for(var i = 0; i < user.matches.length; i++){
               user.matches[i].accepted = false;
             }
             User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
               if(err) return next();
             })
-=======
->>>>>>> master
             next();
           }
         });
@@ -68,12 +69,15 @@ module.exports = {
   updateUser: function(req, res){
     var data = req.body;
 
+    // if request body includes a password or interest, hash it or stringify it.
     if(data.password) data.password = bcrypt.hashSync(data.password, data.password.length);
     if(data.interests) data.interests = JSON.stringify(data.interests);
 
+    //finds the user and replaces the changes
     User.findByIdAndUpdate(req.body.id, data,function(err, changes){
       if(err) console.log(err);
       else{
+        // if the interests were updated, rematch all of the users to reflect their new scores
         if(data.interests){
           User.find({}, function(err, users){
             users.forEach(function(user){
@@ -111,12 +115,6 @@ module.exports = {
       var failings = [];
       var failed = false;
 
-      function calculateAge(birthday) { // birthday is a date
-        var ageDifMs = Date.now() - birthday.getTime();
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-      }
-
       // Make sure that all required fields have been sent with the request
       for(var key in properties){
         if(!user[key]){
@@ -134,8 +132,10 @@ module.exports = {
         res.status(400).send(failings);
         next();
       }else{        
+        // decodes the base64 image
         helpers.convertPhoto(userObject.picture, userObject.email, function(photoLoc){
           userObject.picture = photoLoc;
+          // hash password for storage
           bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
             if(err){
               res.status(500).send(err);
@@ -147,6 +147,7 @@ module.exports = {
             }
             userObject.password = hash;
             userObject.question = 0;
+            // save user to mongoDB
             var newUser = User(userObject);            
             newUser.save(function(err, user){
               if(err){
@@ -154,6 +155,7 @@ module.exports = {
                 res.status(500).send(err);
                 next();
               }else{
+                //Once saved, rematch all of the users to reflect the new user.
                 User.find({}, function(err, users){
                   if(err) console.log(err);
                   users.forEach(function(user){
