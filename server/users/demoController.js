@@ -34,6 +34,32 @@ module.exports = {
             "user": "56a3ae3384d30acd5a59e5eb"
         }
     ];
+    var joshMessages =  [
+        {
+            "id": 1,
+            "message": "Oh, how weird. I'm pretty sure I saw you at the Family of the Year concert at The Parish",
+            "date": "Fri Feb 05 2016 15:48:19 GMT+0000 (UTC)",
+            "user": "56a4ed679023cefc895d035c"
+        },
+        {
+            "id": 2,
+            "message": "I was there with my wife. We really only went to hear one song. Ha.",
+            "date": "Fri Feb 05 2016 16:56:14 GMT+0000 (UTC)",
+            "user": "56a26ce4396710e14d67c299"
+        },
+        {
+            "id": 3,
+            "message": "If you're down, I have an extra SXSW pass if you'd like to join my friends and I. By looking at your interests, I think you'd fit right in.",
+            "date": "Fri Feb 06 2016 10:58:15 GMT+0000 (UTC)",
+            "user": "56a4ed679023cefc895d035c"
+        },
+        {
+            "id": 4,
+            "message": "I tried to buy a ticket and they were out, so that'd be great!",
+            "date": "Fri Feb 06 2016 11:00:01 GMT-0600 (CST)",
+            "user": "56a26ce4396710e14d67c299"
+        }
+    ];
     var markInterests = "{\"discussion\":[\"Politics\",\"Technology\"],\"activity\":[\"Beer\",\"Javascript\"],\"polled\":[\"Watching Movies\",\"Going to Concerts\",\"Playing Board Games\",\"Exploring Cities\",\"Cheese\",\"Winter\",\"Republican\",\"Tea\"]}";
 
     // Find Mark
@@ -89,7 +115,7 @@ module.exports = {
               Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a25f7c9f4fae594a8620bd"]}}, function(err){
                 if(err) console.log('error finding conversation between Mark and Ivan for demo reset');
                 // Reset conversation between Mark and Josh
-                Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}}, function(err){
+                Messages.findOneAndUpdate({users: {$all:["56a26ce4396710e14d67c299", "56a4ed679023cefc895d035c"]}}, {messages:joshMessages}, function(err){
                   if(err) console.log('error finding conversation between Mark and Josh for demo reset');
                   // Reset conversation between Mark and Kayla
                   Messages.findOneAndRemove({users: {$all:["56a26ce4396710e14d67c299", "56a7a1b6801fe4110081ee8f"]}}, function(err){
