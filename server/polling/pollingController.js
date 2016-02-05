@@ -42,7 +42,7 @@ module.exports = {
             if(err) console.log(err);
             else getInfo(ques + 1);
           });  
-        } else res.send(question);
+        }else res.send(question);
       });    
     })(req.body.question)
   },
