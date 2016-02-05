@@ -26,6 +26,10 @@ class Profile extends Component {
 
   render() {
     if (!window.localStorage.getItem('GoodEnough')) this.reRoute(this.props)
+      // For Demo: Checks if it is the Demo User and then loads Demo gif
+    const tokenData = JSON.parse(window.localStorage.getItem('GoodEnough'))
+    if (tokenData.id === '56a26ce4396710e14d67c299' && !this.props.state.profile.data) return <div className="loading-gif"><img className="img-full" src="./client/img/demo.gif" /></div>
+      // End Demo
     if (!this.props.state.profile.data) return <h1><i>Loading profile...</i></h1>
     const { state, actions } = this.props
     var profileMatchesDisplay = [];
