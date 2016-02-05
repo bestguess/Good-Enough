@@ -13,6 +13,6 @@ export function logInFailed() {
   return { type: types.LOG_IN_FAILED }
 }
 
-export function demoUser(data) {
-  return { type: types.DEMO_USER, data };
+export function demoUser(tokenData) {
+  return { type: types.DEMO_USER, tokenData };
 }
