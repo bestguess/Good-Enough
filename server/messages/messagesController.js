@@ -6,7 +6,6 @@ var Users = db.Users;
 module.exports = {
 
   send : function(req, res, next){
-    console.log(req.body)    
     var date = new Date().toString();
     var text = {
       user : req.body.from,
@@ -80,7 +79,6 @@ module.exports = {
   },
 
   delete : function(req, res, next){
-    console.log(req.body)
     Messages.findOne({users: {$all:[req.body.to, req.body.from]}}, function(err, convo){
       if(err){
         res.status(500).send(err);

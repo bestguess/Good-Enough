@@ -7,7 +7,7 @@ var path = require('path');
 module.exports = {
   convertPhoto : function(photo,email,callback){
     // If photo is already on the web, Let's use their hosting instead :)
-    if(photo.slice(0,4) === "http") return photo;
+    if(photo.slice(0,4) === "http") return callback(photo);
     // if uploads folder doesn't exist, create it
     if (!fs.existsSync('./server/uploads/')) fs.mkdirSync('./server/uploads/');
 
@@ -33,12 +33,10 @@ module.exports = {
         // Deletes the original file sent over to save space
         fs.unlink(fileLocation, function(err) {
            if (err) return console.error(err);
-           else console.log("File deleted successfully!");
+           else callback("picture/cropped" + fileName);
         });
       });
     });
-    console.log("picture/cropped" + fileName);
-    callback("picture/cropped" + fileName);
   },
 
   // Authentication check
@@ -48,7 +46,6 @@ module.exports = {
       if(err){
         res.status(500).send();
       }else if(!token){
-        console.log('failed to find token during isLoggedIn');
         res.status(401).send();
       }else{
         return next();

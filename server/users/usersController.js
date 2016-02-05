@@ -48,6 +48,15 @@ module.exports = {
           }else{
             userObject.question = nextQuestion;
             res.status(200).send(userObject);
+<<<<<<< HEAD
+            for(var i = 0; i < user.matches.length; i++){
+              user.matches[i].accepted = false;
+            }
+            User.findByIdAndUpdate(req.body.id, {matches: user.matches}, function(err){
+              if(err) return next();
+            })
+=======
+>>>>>>> master
             next();
           }
         });
@@ -93,31 +102,14 @@ module.exports = {
         return next();
       }else{
 
-    user.birthday = helpers.splitDate(user.birthday);
-    console.log("Splitting birthday");
-    // To be populated and submitted as a new user
-    var userObject = {};
-    // Required fields with which to create user
-    var properties = new helpers.UserData;
-    var failings = [];
-    var failed = false;
 
-    function calculateAge(birthday) { // birthday is a date
-      var ageDifMs = Date.now() - birthday.getTime();
-      var ageDate = new Date(ageDifMs); // miliseconds from epoch
-      return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-
-    // Make sure that all required fields have been sent with the request
-    for(var key in properties){
-      if(!user[key]){
-        failings.push(properties[key]);
-        failed = true;
-      }else{
-        if(key === 'interests' || key === 'personality') user[key] = JSON.stringify(user[key]);
-        userObject[key] = user[key];
-      }
-    }
+      user.birthday = helpers.splitDate(user.birthday);
+      // To be populated and submitted as a new user
+      var userObject = {};
+      // Required fields with which to create user
+      var properties = new helpers.UserData;
+      var failings = [];
+      var failed = false;
 
       function calculateAge(birthday) { // birthday is a date
         var ageDifMs = Date.now() - birthday.getTime();
@@ -125,6 +117,7 @@ module.exports = {
         return Math.abs(ageDate.getUTCFullYear() - 1970);
       }
 
+      // Make sure that all required fields have been sent with the request
       for(var key in properties){
         if(!user[key]){
           failings.push(properties[key]);
@@ -138,10 +131,9 @@ module.exports = {
       // If any of the fields are not submitted then send 400
       // and list of missing fields
       if(failed){
-        console.log('signup failed: ', failings)
         res.status(400).send(failings);
         next();
-      }else{
+      }else{        
         helpers.convertPhoto(userObject.picture, userObject.email, function(photoLoc){
           userObject.picture = photoLoc;
           bcrypt.hash(userObject.password, userObject.password.length, function(err, hash) {
@@ -155,14 +147,13 @@ module.exports = {
             }
             userObject.password = hash;
             userObject.question = 0;
-            var newUser = User(userObject);
+            var newUser = User(userObject);            
             newUser.save(function(err, user){
               if(err){
                 console.log(err,'err saving user')
                 res.status(500).send(err);
                 next();
               }else{
-                console.log("User was saved :)");
                 User.find({}, function(err, users){
                   if(err) console.log(err);
                   users.forEach(function(user){
