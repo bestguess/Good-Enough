@@ -37,7 +37,9 @@ export function recoverPasswordFailed() {
   return { type: types.RECOVER_PASSWORD_FAILED }
 }
 
+// This action creator returns a function instead of an action so we can wait for the promise to complete before we update our store.
 export function recoverPassword() {
+  // Even though we're returning a function, we can still dispatch actions as shown below.
   return function (dispatch, getState) {
     // Dispatch recoverIsFetching to load spinner/fetching.
     dispatch(recoverPasswordIsFetching());
@@ -75,8 +77,9 @@ export function recoverPassword() {
   return null;
 }
 
+// This action creator returns a function instead of an action so we can wait for the promise to complete before we update our store.
 export function submitNewPassword() {
-  var count = 0;
+  // Even though we're returning a function, we can still dispatch actions as shown below.
   return function (dispatch, getState) {
     // Dispatch recoverIsFetching to load spinner/fetching.
     dispatch(recoverPasswordIsFetching());
