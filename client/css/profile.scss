@@ -124,7 +124,7 @@
   border-radius: 50%;
   height: auto;
   padding-top: 3.25%;
-  padding-bottom: 7.5%;
+  padding-bottom: 7.25%;
   font-size: 2vw;
   font-weight: 800;
   width: 18.75%;
@@ -193,7 +193,7 @@
   border-radius: 50%;
   height: auto;
   padding-top: 3.25%;
-  padding-bottom: 5.25%;
+  padding-bottom: 5.00%;
   font-size: 2vw;
   font-weight: 800;
   width: 18.75%;
@@ -226,7 +226,7 @@
   border-radius: 50%;
   height: auto;
   padding-top: 3.25%;
-  padding-bottom: 7.5%;
+  padding-bottom: 7.25%;
   font-size: 2vw;
   font-weight: 800;
   width: 18.75%;
@@ -623,7 +623,7 @@ width: 81%!important;
   }
   .login-box, .recover-password-box {
     padding: 48px 0;
-    width: 100%;
+    width: 100% !important;
   }
   .login-form-recover-password {
     width: 82%;

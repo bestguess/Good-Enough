@@ -17,8 +17,7 @@ var compiler = webpack(config);
 var port = process.env.PORT || 4000;
 
   app.use(morgan('dev'));
-  app.use(bodyParser({limit: '50mb'}));
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({limit: '50mb'}));
   app.use(cookieParser());
   app.use(session({
     secret: 'session secret key',

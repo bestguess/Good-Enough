@@ -4,6 +4,11 @@ var User = db.Users;
 
 module.exports = {
   user : function(user, callback){
+
+    // -------------------------------------------------------------------------
+    // This dictionary is used to see which personalities a user conflicts with.
+    // The higher the number, the least likely they'd get along.
+    // -------------------------------------------------------------------------
     var conflicts = {
       ISTJ: {
         ESTJ: 0, ISTJ: 0, INTJ: 0, ISTP: 0, ESTP: 0,
@@ -87,13 +92,14 @@ module.exports = {
       }
     };
 
+    // -------------------------------------------------------------------------------------------------
+    // These next few lines calculate the user's age, then sets the age range for your possible friends.
+    // -------------------------------------------------------------------------------------------------
     var birthTime = new Date(user.birthday[0],user.birthday[1],user.birthday[2]);
     var age = calculateAge(birthTime);
 
     var ageLow = user.birthday[0] - (age - Math.round( age - (age/6) + (age/25)) )-2;
     var ageHigh = user.birthday[0] + (Math.round( age + ( (age/4) * (age/65) ) ) - age)+1 ;
-
-    //console.log("\nAge:",age,"\nLow:",ageHigh,2016-ageHigh,"\nHigh:",ageLow,2016-ageLow,"\n");
 
     function calculateAge(birthday) { // birthday is a date
       var ageDifMs = Date.now() - birthday.getTime();
@@ -101,6 +107,9 @@ module.exports = {
       return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
 
+    // -------------------------------------------------
+    // Now we search for people in the user's age range
+    // -------------------------------------------------
     User.find({birthday: { $gt: ageLow, $lt: ageHigh }}, function(err, list){
       function findMatch(user) {
         var user_id = user._id.toString();
@@ -111,8 +120,10 @@ module.exports = {
         var result = {};
         var resultArr = [];
 
+        // -----------------------------------------------------------
+        // Iterates over all of your matches and parses any JSON info.
+        // -----------------------------------------------------------
         for(var p=0;p<list.length;p++){
-        
           var matchAge = new Date(list[p].birthday[0],list[p].birthday[1],list[p].birthday[2]);
           var result = {
             id : list[p]._id.toString(),
@@ -132,10 +143,14 @@ module.exports = {
           var person_type = list[p].type;
           var person_interests = JSON.parse(list[p].interests);
 
-
-          //prevents scoring against yourself
+          // ---------------------------------------------------------------------
+          // prevents scoring against yourself and hides our demo user from people
+          // ---------------------------------------------------------------------
           if(user_id !== result.id && result.id !== "56a26ce4396710e14d67c299"){
 
+          // ----------------------------------------------------------------------------------------------------
+          // During rematch, we don't want to lose connections and requests. We protect overwriting to those here
+          // ----------------------------------------------------------------------------------------------------
           user_matches.forEach(function(match){
             if(match.id === list[p]._id.toString()){
               result.display = match.display;
@@ -146,21 +161,27 @@ module.exports = {
             }
           });
 
-            //creates your original score based off of personality conflicts
+            // --------------------------------------------------------------
+            // creates your original score based off of personality conflicts
+            // --------------------------------------------------------------
             for(var pair in scores){
               if(result.score){
-                if(pair === "ft") result.score += Math.abs(scores[pair]-person_scores[pair]/2+5);
-                else result.score += Math.abs(scores[pair]-person_scores[pair]+9);
+                if(pair === "ft") result.score += Math.abs(scores[pair]-person_scores[pair]/2+5);   //---- FT ---- //
+                else result.score += Math.abs(scores[pair]-person_scores[pair]+9);   //---- NS & JP ---- //
               }else{
-                result.score = Math.abs(scores[pair]-person_scores[pair]);
-                result.score += conflicts[type][person_type]-10;
+                result.score = Math.abs(scores[pair]-person_scores[pair]);   //---- IE ---- //
+                result.score += conflicts[type][person_type]-10;   //---- Conflicts ---- //
               }
             }
 
-            //knocks off points if you're of the opposite gender
-            if(user.gender !== list[p].gender) result.score += 0;
+            // --------------------------------------------------
+            // knocks off points if you're of the opposite gender
+            // --------------------------------------------------
+            if(user.gender !== list[p].gender) result.score += 8;
 
-            //adds points if you have similar interests
+            // -----------------------------------------
+            // adds points if you have similar interests
+            // -----------------------------------------
             for(var key in user_interests){
               if(user_interests[key]){
                 user_interests[key].forEach(function(user_interest){
@@ -175,7 +196,9 @@ module.exports = {
                 });
               }
             }
-            //sends back an array of information to be saved in matches
+            // ---------------------------------------------------------
+            // sends back an array of information to be saved in matches
+            // ---------------------------------------------------------
             result.score = Math.round(Math.min((100-((result.score/0.9)-10)),99));
             if(result.score>60) resultArr.push(result);
           }

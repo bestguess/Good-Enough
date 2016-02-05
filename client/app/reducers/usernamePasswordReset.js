@@ -35,20 +35,24 @@ export default function RecoverPassword(state = initialState, action) {
       newState.userData[action.input] = action.value
       return newState
 
+
     case SAVE_CONFIRM_NEW_PASSWORD_INPUT:
       var newState = Object.assign({}, state)
       newState.userData[action.input] = action.value
       return newState
+
 
     case SAVE_RECOVER_PASSWORD_INPUT:
       var newState = Object.assign({}, state)
       newState.userData[action.input] = action.value
       return newState
 
+
     case RECOVER_PASSWORD_IS_FETCHING:
       var newState = Object.assign({}, state)
       newState.userData.isFetching = true;
       return newState
+
 
     case RECOVER_PASSWORD:
       var newState = Object.assign({}, state)
@@ -57,11 +61,13 @@ export default function RecoverPassword(state = initialState, action) {
       newState.userData.emailReceived = true;
       return newState
 
+
     case RECOVER_PASSWORD_FAILED:
       var newState = Object.assign({}, state)
       newState.userData.foundEmail = false;
       newState.userData.isFetching = false;
       return newState
+
 
     case SUBMIT_NEW_PASSWORD:
       var newState = Object.assign({}, state)
@@ -69,14 +75,15 @@ export default function RecoverPassword(state = initialState, action) {
       newState.userData.newPasswordReceived = true;
       return newState
 
+
     case SUBMIT_NEW_PASSWORD_FAILED:
       var newState = Object.assign({}, state)
       newState.userData.newPasswordReceived = false;
       newState.userData.isFetching = false;
       return newState
 
+
     default:
-      console.log('hit default case: returning state in RecoverPassword')
       return state
   }
 }
