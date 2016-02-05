@@ -44,13 +44,12 @@ export const convertTimeStamp = function(timestamp) {
 	} else {
 		zone = ' AM'
 	}
-	var result = hour + ':' + minute + zone + ' - ' + month + ' ' + day + ', ' + year
-	return result;
+	return hour + ':' + minute + zone + ' - ' + month + ' ' + day + ', ' + year
 }
 
 // Helper functions on all server requests
 export const status = function(response) {
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
   	deleteAuthToken()
   	window.location.href = '/login';
   }

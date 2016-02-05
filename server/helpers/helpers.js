@@ -33,11 +33,10 @@ module.exports = {
         // Deletes the original file sent over to save space
         fs.unlink(fileLocation, function(err) {
            if (err) return console.error(err);
-           else console.log("File deleted successfully!");
+           else callback("picture/cropped" + fileName);
         });
       });
     });
-    callback("picture/cropped" + fileName);
   },
 
   // Authentication check
