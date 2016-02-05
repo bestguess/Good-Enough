@@ -39,7 +39,7 @@ export function recoverPasswordFailed() {
 
 export function recoverPassword() {
   return function (dispatch, getState) {
-    // Dispatch recoverIsFetching to load spinner.
+    // Dispatch recoverIsFetching to load spinner/fetching.
     dispatch(recoverPasswordIsFetching());
     var state = getState();
     var currState = state.usernamePasswordReset.userData;
@@ -56,10 +56,9 @@ export function recoverPassword() {
       .then(res => {
         console.log('res: ', res);
         if (res.status >= 200 && res.status < 400) {
-          console.log('original: ', res);
           res.json()
-          // Set user ID and Session Token to localStorage.
-          .then(data => {console.log('Server Response: ', data);
+          .then(data => {
+            console.log('Server Response: ', data);
             // Dispatch the optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticRecoverPassword());
           })
@@ -96,8 +95,6 @@ export function submitNewPassword() {
       .then(res => {
         console.log('res: ', res);
         if (res.status >= 200 && res.status < 400) {
-          var start = new Date().getTime()/1000;
-          console.log('original: ', res);
           res.json()
           .then(data => {
             console.log('Server Response: ', data);
@@ -109,6 +106,7 @@ export function submitNewPassword() {
             var counter = setInterval(() => {
               newCount--;
               console.log('redirectCount: ', currState.redirectCount);
+              // Dispatch decrement action to update the state every second so user can see the countdown.
               dispatch(decrementRedirectToLoginCount(newCount));
             }, 1000);
             // Redirect user to /logIn after 5 seconds.
