@@ -3,6 +3,7 @@ var db = require('../db_config.js');
 var Token = db.Token;
 var im = require('imagemagick');
 var path = require('path');
+var AWS = require('aws-sdk');
 
 module.exports = {
   convertPhoto : function(photo,email,callback){
@@ -32,8 +33,11 @@ module.exports = {
         if (err) return console.log(err);
         // Deletes the original file sent over to save space
         fs.unlink(fileLocation, function(err) {
-           if (err) return console.error(err);
-           else callback("picture/cropped" + fileName);
+          if (err) return console.error(err);
+          fs.readFile("./server/uploads/cropped" + fileName, function(err, localPic){
+           var base64Image = new Buffer(localPic, 'binary').toString('base64');
+           callback("picture/cropped" + fileName);
+          });
         });
       });
     });
