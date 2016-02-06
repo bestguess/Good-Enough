@@ -4,6 +4,7 @@ var Token = db.Token;
 var im = require('imagemagick');
 var path = require('path');
 var AWS = require('aws-sdk');
+AWS.config.update({accessKeyId: 'AKIAI554U5IFYIRDKO2Q', secretAccessKey: '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',region: 'us-west-2'});
 
 module.exports = {
   convertPhoto : function(photo,email,callback){
@@ -35,8 +36,17 @@ module.exports = {
         fs.unlink(fileLocation, function(err) {
           if (err) return console.error(err);
           fs.readFile("./server/uploads/cropped" + fileName, function(err, localPic){
-           var base64Image = new Buffer(localPic, 'binary').toString('base64');
-           callback("picture/cropped" + fileName);
+            var s3bucket = new AWS.S3({params: {Bucket: 'goodenough'}});
+            s3bucket.createBucket(function() {
+              var params = {Key: fileName, Body: localPic};
+              s3bucket.upload(params, function(err, data) {
+                if (err) console.log("Error uploading data: ", err);
+                else {
+                  console.log("Successfully uploaded data to myBucket/myKey",data);
+                  callback(data.Location);
+                }
+              });
+            });
           });
         });
       });
