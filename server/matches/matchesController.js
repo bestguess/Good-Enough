@@ -9,7 +9,9 @@ module.exports = {
 
   savePhoto: function(req,res,next){
     userObject = req.body;
-    userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email);
+    userObject.picture = helpers.convertPhoto(userObject.picture, userObject.email, function(location){
+      res.status(200).send(location);
+    });
   },
 
   getMatch: function(req, res, next){
