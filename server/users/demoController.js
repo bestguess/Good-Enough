@@ -73,8 +73,9 @@ module.exports = {
       else{
         var resetIvan = false;
         var resetHank = false;
+        var resetJosh = false;
         for(var i = 0; i < foundMark.matches.length; i++){
-          if(resetIvan && resetHank) break;
+          if(resetIvan && resetHank && resetJosh) break;
           if(foundMark.matches[i].id === "56a25f7c9f4fae594a8620bd"){
             foundMark.matches[i].display = true;
             foundMark.matches[i].connected = false;
@@ -86,6 +87,14 @@ module.exports = {
             foundMark.matches[i].messages = newMessages;
             resetHank = true;
           }
+          if(foundMark.matches[i].id === "56a4ed679023cefc895d035c"){
+            foundMark.matches[i].display = true;
+            foundMark.matches[i].connected = true;
+            foundMark.matches[i].requested = false;
+            foundMark.matches[i].accepted = false;
+            resetJosh = true;
+          }
+          
         }
         // Update Mark's data
         User.findByIdAndUpdate("56a26ce4396710e14d67c299", {matches: foundMark.matches, question: 0, interests: markInterests}, function(err){
