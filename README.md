@@ -1,8 +1,8 @@
 # Good Enough
-because friend finding is not an exact science
+A matchmaking app to help users find compatible friendships.
 
 ## Demo
-
+http://www.goodenough.xyz/
 
 ## Installation
     npm start
