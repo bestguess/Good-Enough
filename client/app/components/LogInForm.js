@@ -17,6 +17,7 @@ function login(props) {
       props.actions.login(data)
     }).catch(function(error) {
       console.log('Request failed', error);
+      props.actions.logInFailed();
     });
 }
 

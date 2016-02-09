@@ -18,7 +18,6 @@ export default function LogIn(state = initialState, action) {
     case SAVE_LOGIN_INPUT:
       var newState = Object.assign({}, state)
       newState.userData[action.input] = action.value
-      if (!newState.loggedStatus) newState.loggedStatus = true
       return newState
 
 
