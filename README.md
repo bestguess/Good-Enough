@@ -7,6 +7,6 @@ http://www.goodenough.xyz/
 ## Installation
     npm start
 
-## Stack
+## Tech Stack
 ![alt tag](http://joshuagish.com/other/dev/stacks/mern.png)
 
