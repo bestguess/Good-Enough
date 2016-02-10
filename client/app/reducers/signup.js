@@ -1,4 +1,4 @@
-import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, SURVEY_ERROR, DEMO_USER } from '../constants/SignUp_ActionTypes'
+import { ANSWER_QUESTION, SAVE_INPUT, DELETE_INPUT, SUBMIT_SURVEY, CONTINUE_SURVEY, SURVEY_ERROR, DEMO_USER, DEMO_VIDEO } from '../constants/SignUp_ActionTypes'
 import { validateEmail, addAuthToken } from '../helpers'
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
       stage5: false,
       stage6: false,
       stage7: false
-    }
+    },
+    demoVideo: false
   },
   userData: {
     email: undefined,
@@ -224,6 +225,11 @@ export default function SignUp(state = initialState, action) {
       // newState.validationChecks.clearForSubmit = false;
       return newState
 
+
+    case DEMO_VIDEO:
+      var newState = Object.assign({}, state)
+      newState.viewData.demoVideo = (newState.viewData.demoVideo) ? false : true
+      return newState
 
     default:
     	return state
