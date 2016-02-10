@@ -15,6 +15,48 @@ nav {
   text-align: center;
 }
 
+.demo-video-container {
+  position: fixed;
+  text-align: center;
+  background-color: rgba(50,50,50, 0.8);
+  width: 100%;
+  height: 100%;
+}
+
+.demo-video {
+  margin: 9vw auto 0%;
+  border: none;
+  width: 63vw;
+  height: 36vw;
+}
+
+.signup-container {
+  text-align: center;
+}
+
+.close-demo-video {
+  cursor: pointer;
+  margin: 2% 0% 0% 68%;
+  position: fixed;
+  color: #fff;
+  font-size: 6vw;
+  &:hover {
+    color: $primary-green;
+  }
+}
+
+.demo-video-button {
+  margin: 0% auto;
+  border: 1px solid $primary-green;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 2% 5%;
+  font-size: 1em;
+  &:hover {
+    background-color: $primary-green;
+  }
+}
+
 .fade-out {
   opacity: 0 !important;
   transition: opacity 0.3s;
@@ -222,7 +264,7 @@ h1 {
 
 .logo-img {
   width: 12em;
-  padding: 2em 0 1em 0;
+  padding: 1.5em 0 1em 0;
 }
 
 .question-form {
@@ -316,7 +358,7 @@ h1 {
 .start-test {
   font-size: 20px;
   font-weight: 500;
-  width: 350px;
+  width: 400px;
   color: $primary-green;
   padding: 0.8em 0%;
   text-align: center;
@@ -926,6 +968,18 @@ progress {
 }
 
 @media only screen and (max-width: 600px) {
+
+  .demo-video {
+    width: 100%;
+    height: 35%;
+    padding-top: 15%;
+  }
+
+  .close-demo-video {
+    margin: 6% 0 0 87%;
+    font-size: 12vw;
+  }
+
   .loading-gif {
     width: 100%
   }

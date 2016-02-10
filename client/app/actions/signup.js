@@ -29,3 +29,7 @@ export function demoUser(tokenData) {
 	return { type: types.DEMO_USER, tokenData };
 }
 
+export function demoVideo() {
+	return { type: types.DEMO_VIDEO };
+}
+
