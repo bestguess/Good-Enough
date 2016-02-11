@@ -38,8 +38,7 @@ const loggerMiddleware = createLogger()
 const finalCreateStore = compose(
   applyMiddleware(
   	routerMiddleware,
-  	thunkMiddleware,
-  	loggerMiddleware
+  	thunkMiddleware
   )
 )(createStore);
 
