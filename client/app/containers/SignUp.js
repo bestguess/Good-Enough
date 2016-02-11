@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import QuestionForm from '../components/questionForm'
+import DemoVideo from '../components/DemoVideo'
 import * as QuestionActions from '../actions/signup'
 import PublicNav from '../components/Nav/PublicNav'
 import Footer from '../components/Footer'
@@ -22,11 +23,17 @@ class SignUp extends Component {
       nav = <PublicNav state={this.props.state} actions={this.props.actions} />
       h1Content = "Good Enough"
     }
+    var demoVideo;
+    var demoVideoButton;
+    if (this.props.state.signup.viewData.demoVideo) demoVideo = <DemoVideo state={state} actions={actions} />
+    if (this.props.state.signup.viewData.signup.stage0) demoVideoButton = <button className="start-test" onClick={this.props.actions.demoVideo}>Watch Video</button>
     return (
-      <div>
+      <div className="signup-container">
+        {demoVideo}
         {nav}
         <h1 className="logo">{h1Content}</h1>
-        <QuestionForm state={state} actions={actions} history={this.props.history}/>
+        <QuestionForm state={state} actions={actions} history={this.props.history} />
+        {demoVideoButton}
       </div>
     );
   }
