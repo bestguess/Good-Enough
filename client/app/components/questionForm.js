@@ -44,7 +44,6 @@ function submitSurvey(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.submitSurvey(data)
     }).catch(function(error) {
       console.log('Request failed', error);
