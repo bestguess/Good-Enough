@@ -13,6 +13,10 @@ export function logInFailed() {
   return { type: types.LOG_IN_FAILED }
 }
 
+export function logInRestart() {
+  return { type: types.LOG_IN_RESTART }
+}
+
 export function demoUser(tokenData) {
   return { type: types.DEMO_USER, tokenData };
 }
