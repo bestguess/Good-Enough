@@ -29,3 +29,6 @@ server/uploads
 
 # Webpack Dist Folder
 dist/
+
+# Access keys
+goodies.js

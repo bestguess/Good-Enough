@@ -7,6 +7,7 @@ var bcrypt = require('bcrypt');
 var async = require('async');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+var goodies = require('../goodies.js');
 
 module.exports = {
 
@@ -36,10 +37,7 @@ module.exports = {
         function(token, user, done) {
           var smtpTransport = nodemailer.createTransport('SMTP', {
             service: 'SendGrid',
-            auth: {
-              user: 'paolinni',
-              pass: 'goodenough27'
-            }
+            auth: goodies.sendGridAuth
           });
 
           var mailOptions = {

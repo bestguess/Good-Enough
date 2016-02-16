@@ -59,7 +59,7 @@ function deleteMessage(props, messageID) {
   messageData.from = messageData.id;
   messageData.to = props.state.routing.location.pathname.substring(1);
   messageData.message_id = messageID;
-  console.log('deleting this message: ', messageData)
+  //console.log('deleting this message: ', messageData)
   fetch('/app/messages/delete', {
           method: 'POST',
           headers: { 'mode': 'no-cors', 'Accept': 'application/json', 'Content-Type': 'application/json' },

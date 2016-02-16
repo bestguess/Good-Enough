@@ -28,6 +28,7 @@ class LogInForm extends Component {
 
   handleKeyUp(input) {
     this.props.actions.saveLogInInput(input, this.refs[input].value)
+    this.props.actions.logInRestart();
   }
 
   handleKeyPress(e) {
