@@ -95,7 +95,7 @@ class FavoritePlaces extends Component {
   }
 
   render() {
-    console.log('places length: ', this.props.state.signup.userData.places.length)
+    //console.log('places length: ', this.props.state.signup.userData.places.length)
     var stateValues;
     if (this.props.state.signup.userData.places.length > 0) {
       stateValues = this.props.state.signup.userData.places.map(place =>
