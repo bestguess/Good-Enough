@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
+var goodies = require('./goodies.js');
 
-mongoose.connect('mongodb://test:test@ds043615.mongolab.com:43615/guessts');
+mongoose.connect(goodies.mongoURL);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

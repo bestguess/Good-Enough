@@ -13,7 +13,6 @@ function login(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.login(data)
     }).catch(function(error) {
       console.log('Request failed', error);
@@ -29,6 +28,7 @@ class LogInForm extends Component {
 
   handleKeyUp(input) {
     this.props.actions.saveLogInInput(input, this.refs[input].value)
+    this.props.actions.logInRestart();
   }
 
   handleKeyPress(e) {

@@ -4,7 +4,8 @@ var Token = db.Token;
 var im = require('imagemagick');
 var path = require('path');
 var AWS = require('aws-sdk');
-AWS.config.update({accessKeyId: 'AKIAI554U5IFYIRDKO2Q', secretAccessKey: '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',region: 'us-west-2'});
+var goodies = require('../goodies.js');
+AWS.config.update(goodies.amazonConfig);
 
 module.exports = {
   convertPhoto : function(photo,email,callback){

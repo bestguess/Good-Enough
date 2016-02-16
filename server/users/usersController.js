@@ -147,6 +147,9 @@ module.exports = {
             }
             userObject.password = hash;
             userObject.question = 0;
+            var origInterests = JSON.parse(userObject.interests);
+            origInterests.polled = [];
+            userObject.interests = JSON.stringify(origInterests);
             // save user to mongoDB
             var newUser = User(userObject);            
             newUser.save(function(err, user){
