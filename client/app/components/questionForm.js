@@ -35,7 +35,7 @@ function submitSurvey(props) {
     places: state.userData.places,
     matches: []
   }
-  console.log('data: ', userData)
+  //console.log('data: ', userData)
   fetch('/app/users/signup', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
@@ -44,7 +44,6 @@ function submitSurvey(props) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('Request succeeded with JSON response', data);
       props.actions.submitSurvey(data)
     }).catch(function(error) {
       console.log('Request failed', error);

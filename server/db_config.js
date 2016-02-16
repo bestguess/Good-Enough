@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
+var goodies = require('./goodies.js');
 
-mongoose.connect(***REMOVED***);
+mongoose.connect(goodies.mongoURL);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

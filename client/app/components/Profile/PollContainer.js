@@ -14,7 +14,7 @@ const answerPollQuestion = function(props, answer) {
     .then(status)
     .then(json)
     .then(function(data) {
-      console.log('New Poll Question', data);
+      //console.log('New Poll Question', data);
       props.actions.updatePollQuestion(data);
     }).catch(function(error) {
       console.log('Request failed', error);
