@@ -3,11 +3,7 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 var goodies = require('./goodies.js');
 
-<<<<<<< HEAD
-mongoose.connect(***REMOVED***);
-=======
 mongoose.connect(goodies.mongoURL);
->>>>>>> master
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
