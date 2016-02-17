@@ -437,6 +437,22 @@
   .poll-container-card {
     width: 92%;
   }
+  .poll-question {
+    width: 100%;
+    text-align: center;
+    float: none;
+    font-size: 0.8em;
+  }
+  .poll-buttons {
+    text-align: center;
+    margin-left: -1.5%;
+    padding: 1% 0%;
+  }
+  .poll-button {
+    float: none;
+    font-size: 0.8em;
+    padding: 1.5% 3%;
+  }
   .profile-page-match {
     width: 98%;
     margin-top: 25px;
@@ -460,26 +476,36 @@
   .img-match {
     height: 71vw;
   }
-  .personal-info-card, .poll-container-card {
-    width: 95%;
-    padding: 4px 0px 4px 4px;
+  .personal-info-card {
+    width: 92%;
+    padding: 2%;
     margin: 2%;
-    border: 0 solid #e0e0e0;
+    border: 0px solid #e0e0e0 !important;
+  }
+  .poll-container-card {
+    width: 92%;
+    padding: 1% 2%;
+    margin: 2%;
+    border: 0px solid #e0e0e0 !important;
   }
   .personal-info-card-userdata {
       float: left;
-      margin-left: 16px;
+      margin-left: -40px;
       font-size: 1.2em;
-      width: 55%;
+      width: 98%;
   }
-  .personal-info-card-picture img {
-    border-radius: 0px;
+  .personal-info-card-userdata h4 {
+    margin: 1% 0% 4% 56px;
+  }
+  .personal-info-card-picture {
+    height: 40px;
+    width: 40px;
   }
   .profile-page-connections, .profile-page-data {
     width: 96%;
     margin: 2%;
     padding: 0 0 30px 0;
-    border: 0px solid #e0e0e0;
+    border: 0px solid #e0e0e0 !important;
   }
   .user-interest-container {
     padding: 0.25% 0;
@@ -490,11 +516,6 @@
   .edit-user-info {
     display: none;
   }
-  .nav-middle {
-    font-size: 14px;
-    font-weight: 800;
-    padding-top: 13px;
-  }
   .demo-button {
     display: none;
   }
@@ -502,7 +523,7 @@
     display: block;
   }
   .match-box-hover {
-width: 81%!important;
+    width: 76%!important;
     padding-top: 0!important;
     padding-bottom: 18px!important;
     height: auto;
@@ -526,7 +547,7 @@ width: 81%!important;
     font-size: 0.8em!important;
   }
   .connection-box-hover {
-width: 81%!important;
+    width: 76%!important;
     padding-top: 0!important;
     padding-bottom: 18px!important;
     height: auto;
@@ -546,7 +567,7 @@ width: 81%!important;
     }
   }
   .temp-box-hover {
-width: 81%!important;
+    width: 76%!important;
     padding-top: 0!important;
     padding-bottom: 18px!important;
     height: auto;
@@ -568,21 +589,31 @@ width: 81%!important;
   .accept-connect-icon {
     color: green;
     padding-right: 4%;
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
   .reject-connect-icon {
     color: red;
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
   .similar-interests-card {
     border: 0px solid #e0e0e0 !important;
-    width: 100% !important;
-    margin: 0% auto !important;
+    width: 96% !important;
   }
   .match-conversation-container {
-    border: 1px solid #D0D0D0;
-    width: 100% !important;
-    margin: 0 auto !important;
+    border: 0px solid #e0e0e0 !important;
+    width: 96% !important;
+    padding-bottom: 1% !important;
+  }
+  .match-conversation-image {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  .match-conversation-message p {
+    font-size: 0.9em !important;
+    margin: 2px 0px 5px 45px !important;
+  }
+  .match-conversation-timestamp {
+    display: none;
   }
   .similar-interest {
     font-size: 0.9em !important;
@@ -598,23 +629,23 @@ width: 81%!important;
   .notification {
     border: 2px solid #25b79a;
     border-radius: 50%;
-    padding-top: 0.9%;
-    padding-bottom: 1.7%;
-    font-size: 6vw;
-    width: 11.0%;
+    padding-top: 1.3%;
+    padding-bottom: 2.2%;
+    font-size: 6.75vw;
+    width: 12.5%;
     color: #25b79a;
     background-color: #e0e0e0;
-    margin: 46.25% 68.5%;
+    margin: 46.25% 65%;
   }
   .notification-count {
     border-radius: 50%;
-    padding-top: .25%;
-    padding-bottom: .25%;
-    font-size: 2.8vw;
+    padding-top: .30%;
+    padding-bottom: .30%;
+    font-size: 3vw;
     width: 4.6%;
     color: #fff;
     background-color: red;
-    margin: 44% 72.5%;
+    margin: 44% 69.7%;
     z-index: 4;
   }
   .delete-message {

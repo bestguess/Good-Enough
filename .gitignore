@@ -30,5 +30,5 @@ server/uploads
 # Webpack Dist Folder
 dist/
 
-# Access keys
+# Secret Goodies
 goodies.js
