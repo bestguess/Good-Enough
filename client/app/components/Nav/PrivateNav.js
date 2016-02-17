@@ -7,10 +7,12 @@ class PrivateNav extends Component {
     return (
       <nav className="private-nav">
         <li className='nav-left'>
-          <Link to="/profile">{this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</Link>
+          <Link to="/profile" className="mobile-nav"><i className="fa fa-angle-double-left"></i></Link>
+          <Link to="/profile" className="desktop-nav">{this.props.state.profile.data.firstName} {this.props.state.profile.data.lastName}</Link>
         </li>
         <li className='nav-right'>
-          <Link to="/"><span onClick={this.props.actions.logout}>Log Out</span></Link>
+          <Link to="/" className="desktop-nav"><span onClick={this.props.actions.logout}>Log Out</span></Link>
+          <Link to="/" className="mobile-nav"><i onClick={this.props.actions.logout} className="fa fa-sign-out"></i></Link>
         </li>
         <li className='nav-middle title'>
           <Link to="/profile" style={{fontWeight: '800'}}>Good Enough</Link>
