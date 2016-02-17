@@ -131,6 +131,10 @@ nav {
   padding-top: 11px;
 }
 
+.mobile-nav {
+  display: none;
+}
+
 .nav-middle {
   width: 30%;
   font-size: 24px;
@@ -969,6 +973,29 @@ progress {
 
 @media only screen and (max-width: 600px) {
 
+  .nav-middle {
+    font-size: 14px;
+    font-weight: 800;
+    padding-top: 13px;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .fa-angle-double-left {
+    font-size: 1.5em;
+  }
+
+  .fa-sign-out {
+    padding-top: 3px;
+    font-size: 1.2em;
+  }
+
   .demo-video {
     width: 100%;
     height: 35%;
@@ -982,9 +1009,6 @@ progress {
 
   .loading-gif {
     width: 100%
-  }
-  .personal-info-card {
-    width: 96%;
   }
   .profile-page-connections, .profile-page-data {
     width: 98%;
