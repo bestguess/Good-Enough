@@ -5,7 +5,7 @@ class DemoVideo extends Component {
     return (
       <div className="demo-video-container">
         <i onClick={this.props.actions.demoVideo} className="fa fa-times close-demo-video"></i>
-        <iframe className="demo-video" src="https://player.vimeo.com/video/154797930" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe className="demo-video" src="https://player.vimeo.com/video/154797930" width="800" height="450" frameBorder="0" webkitAllowFullScreen mozAllowFullScreen allowFullScreen></iframe>
       </div>
       )
   }
