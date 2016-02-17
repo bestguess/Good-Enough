@@ -476,9 +476,15 @@
   .img-match {
     height: 71vw;
   }
-  .personal-info-card, .poll-container-card {
+  .personal-info-card {
     width: 92%;
     padding: 2%;
+    margin: 2%;
+    border: 0px solid #e0e0e0 !important;
+  }
+  .poll-container-card {
+    width: 92%;
+    padding: 1% 2%;
     margin: 2%;
     border: 0px solid #e0e0e0 !important;
   }
@@ -489,7 +495,7 @@
       width: 98%;
   }
   .personal-info-card-userdata h4 {
-    margin: 1.5% 0% 4% 56px;
+    margin: 1% 0% 4% 56px;
   }
   .personal-info-card-picture {
     height: 40px;
@@ -623,23 +629,23 @@
   .notification {
     border: 2px solid #25b79a;
     border-radius: 50%;
-    padding-top: 0.9%;
-    padding-bottom: 1.7%;
-    font-size: 6vw;
-    width: 11.0%;
+    padding-top: 1.3%;
+    padding-bottom: 2.2%;
+    font-size: 6.75vw;
+    width: 12.5%;
     color: #25b79a;
     background-color: #e0e0e0;
-    margin: 46.25% 68.5%;
+    margin: 46.25% 65%;
   }
   .notification-count {
     border-radius: 50%;
-    padding-top: .25%;
-    padding-bottom: .25%;
-    font-size: 2.8vw;
+    padding-top: .30%;
+    padding-bottom: .30%;
+    font-size: 3vw;
     width: 4.6%;
     color: #fff;
     background-color: red;
-    margin: 44% 72.5%;
+    margin: 44% 69.7%;
     z-index: 4;
   }
   .delete-message {
