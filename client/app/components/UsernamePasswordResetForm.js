@@ -16,18 +16,20 @@ class UsernamePasswordResetForm extends Component {
 
   render() {
     var currState = this.props.state.usernamePasswordReset.userData;
+    var formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button normal">Submit</button>;
     var spinner;
     var status;
 
     // If fetching, let the user know we're checking the email.
     if (currState.isFetching) {
       status = <span className="recover-password-email-error"></span>;
-      spinner = <span>Checking this email account...</span>
+      formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button">Checking this email account...</button>
     } else {
       spinner = <span className="recover-password-email-error"></span>;
       // If no email found, notify the user.
       if (!currState.foundEmail) {
-        status = <span className="recover-password-email-error">No account with that email exists</span>
+        status = <span className="recover-password-email-error"></span>
+        formButton = <button onClick={this.props.actions.recoverPassword} className="question-form-button login-error invalid">No account with this email exists</button>
         // If found, notify that the user to check his/her email.
       } else if (currState.emailReceived) {
         return (
@@ -49,7 +51,7 @@ class UsernamePasswordResetForm extends Component {
           </div>
         </div>
         <div className="question-form-submit-button-login">
-          <button onClick={this.props.actions.recoverPassword} className="question-form-button normal">Submit</button>
+          {formButton}
         </div>
       </div>
     )
