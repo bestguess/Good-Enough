@@ -5,7 +5,6 @@ class UsernamePasswordResetForm extends Component {
 
 
   handleKeyUp(input) {
-    console.log('input YO: ', this.refs[input].value)
     this.props.actions.saveRecoverPasswordInput(input, this.refs[input].value)
   }
 

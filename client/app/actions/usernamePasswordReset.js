@@ -50,7 +50,6 @@ export function recoverPassword() {
     dispatch(recoverPasswordIsFetching());
     var state = getState();
     var currState = state.usernamePasswordReset.userData;
-    console.log('Current State inside recoverPassword middleware: ', currState);
 
     // Isomorphic fetch request to our API
     fetch('/app/recoverPassword/recover-password', {
@@ -67,14 +66,12 @@ export function recoverPassword() {
           res.json()
           // Set user ID and Session Token to localStorage
           .then(data => {
-            console.log('Server Response: ', data);
             // Dispatch the optimisticRecoverPassword so the reducer can update the stores state.
             dispatch(optimisticRecoverPassword());
           })
           // Inform the user to check his/her email for further instructions
           .then(() => { dispatch(routeActions.push('/recover-password')) });
         } else {
-          console.log('recover password failed: ', res.status, res.statusText);
           // Dispatch a recoverPasswordFailed if failed.
           dispatch(recoverPasswordFailed());
         }
@@ -91,7 +88,6 @@ export function submitNewPassword() {
     dispatch(recoverPasswordIsFetching());
     var state = getState();
     var currState = state.usernamePasswordReset.userData;
-    console.log('currState inside recoverPassword middleware: ', currState);
 
     // Post request to the recoverPassword API using the clients unique token in their url.
     fetch('/app/recoverPassword' + state.routing.location.pathname, {
@@ -107,12 +103,10 @@ export function submitNewPassword() {
         if (res.status >= 200 && res.status < 400) {
           res.json()
           .then(data => {
-            console.log('Server Response: ', data);
             // Dispatch optimisticRecoverPassword so the reducer can update the state.
             dispatch(optimisticSubmitNewPassword());
             // Display the redirect counter to the user every second for 5 seconds.
             var counter = setInterval(() => {
-              console.log('redirectCount: ', currState.redirectCount);
               dispatch(decrementRedirectToLoginCount());
             }, 1000);
             // Redirect user to /logIn after 5 seconds.
@@ -122,7 +116,6 @@ export function submitNewPassword() {
             }, 5000);
           })
         } else {
-          console.log('submit new password failed: ', res.status, res.statusText);
           // Dispatch submitNewPasswordFailed if failed.
           dispatch(submitNewPasswordFailed());
         }
