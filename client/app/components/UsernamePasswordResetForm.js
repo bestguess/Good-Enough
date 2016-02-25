@@ -49,7 +49,7 @@ class UsernamePasswordResetForm extends Component {
           </div>
         </div>
         <div className="question-form-submit-button-login">
-          <button onClick={this.props.actions.recoverPassword} className="question-form-button">Submit</button>
+          <button onClick={this.props.actions.recoverPassword} className="question-form-button normal">Submit</button>
         </div>
       </div>
     )

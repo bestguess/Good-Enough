@@ -2,18 +2,17 @@ import React, { Component, PropTypes } from 'react';
 const { Link } = require('react-router');
 
 class NewPasswordForm extends Component {
+
   handleKeyUpNewPassword(input) {
-    console.log('input YO: ', this.refs[input].value)
     this.props.actions.saveNewPasswordInput(input, this.refs[input].value)
   }
 
   handleKeyUpConfirmNewPassword(input) {
-    console.log('input YO: ', this.refs[input].value)
     this.props.actions.saveConfirmNewPasswordInput(input, this.refs[input].value)
   }
 
   handleKeyPress(e) {
-    if (e.which === 13) {
+    if (e.which === 13 && this.props.state.usernamePasswordReset.userData.newPassword === this.props.state.usernamePasswordReset.userData.confirmNewPassword) {
       this.props.actions.submitNewPassword()
     }
   }
